@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gdiot.mapper.KTNBEMDataMapper">
+
+    <sql id="Base_Column_Sql">
+		id,dev_id,orig_value,time,e_num,e_kwh_all,e_kwh1,e_kwh2,e_voltage_a,e_current_a,e_kw,e_factor_all,e_status,e_seq,e_switch,source
+	</sql>
+
+    <sql id="Cmd_Read_Column_Sql">
+		id,dev_id,orig_value,time,e_num,e_fac,read_type,read_value,data_seq,source
+	</sql>
+
+    <insert id="insertKTData" parameterType="com.gdiot.model.ktEmDataPo">
+        insert into em_data_kt (
+        <include refid="Base_Column_Sql"></include>
+        ) values (default,#{devId,jdbcType=VARCHAR},#{origValue,jdbcType=VARCHAR},#{time,jdbcType=BIGINT},#{eNum,jdbcType=VARCHAR},#{eKwAll},#{eKw1,jdbcType=VARCHAR},#{eKw2,jdbcType=VARCHAR},#{eVoltage,jdbcType=VARCHAR},#{eCurrent,jdbcType=VARCHAR},#{ekw,jdbcType=VARCHAR},#{eFactorAll,jdbcType=VARCHAR},#{eStatus,jdbcType=VARCHAR},#{eSeq,jdbcType=VARCHAR},#{eSwitch},#{eSource})
+    </insert>
+    <select id="selectEnumById" resultType="java.lang.String">
+        SELECT e_num FROM em_data_kt WHERE 1=1
+        <if test="devId != null">
+            and dev_id = #{devId,jdbcType=VARCHAR}
+        </if>
+        LIMIT 1
+    </select>
+
+    <insert id="insertCmdReadData" parameterType="com.gdiot.model.KTREMReadPo">
+        insert into em_read_kt (
+        <include refid="Cmd_Read_Column_Sql"></include>
+        ) values (default,#{devId,jdbcType=VARCHAR},#{eOrigValue,jdbcType=VARCHAR},#{time,jdbcType=BIGINT},#{eNum,jdbcType=VARCHAR},#{eFac,jdbcType=VARCHAR},#{eReadType,jdbcType=VARCHAR},#{eReadValue,jdbcType=VARCHAR},#{eDataSeq,jdbcType=VARCHAR},#{eSource,jdbcType=VARCHAR})
+    </insert>
+
+
+</mapper>

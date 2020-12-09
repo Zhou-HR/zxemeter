@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gdiot.mapper.SmokeDataMapper">
+	
+	<insert id="insertOne">
+		insert into smoke_data (
+			id,dev_id,orig_value,time,source,data_status
+		) values (default,#{devId,jdbcType=VARCHAR},#{origValue,jdbcType=VARCHAR},#{time,jdbcType=BIGINT},
+		#{source,jdbcType=VARCHAR},#{dataStatus,jdbcType=VARCHAR})
+	</insert>
+	
+	<select id="selectbyDevId" resultType="com.gdiot.model.SmokeDataPo">
+		select * from smoke_data
+		where 1 = 1		
+		<if test="dev_id != null">
+			and dev_id = #{dev_id,jdbcType=VARCHAR}
+		</if>
+		order by id desc
+		limit #{offset} ,#{limit}
+	</select>
+	<select id="countbyDevId" resultType="java.lang.Integer">
+		select count(*) from smoke_data
+		where  1 = 1	
+		<if test="dev_id != null">
+			and dev_id = #{dev_id,jdbcType=VARCHAR}
+		</if>
+		order by id desc
+	</select>
+	
+	<select id="selectAlarmList" resultType="com.gdiot.model.SmokeDevicePo">
+		select * from smoke_device
+		where 1 = 1		
+		<if test="deviceId != null">
+			and deviceId = #{deviceId,jdbcType=VARCHAR}
+		</if>
+		<if test="deviceType != null">
+			and deviceType = #{deviceType,jdbcType=VARCHAR}
+		</if>
+		order by id desc
+	</select>
+	
+	<insert id="insertAlarmDown">
+		insert into smoke_down (
+			id,deviceId,sendData,result
+		) values (default,#{deviceId,jdbcType=VARCHAR},#{sendData,jdbcType=VARCHAR},#{result,jdbcType=VARCHAR})
+	</insert>
+	
+</mapper>

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gdiot.mapper.AKREMDataMapper">
+	<insert id="insertOne" parameterType="com.gdiot.model.AKREMDataPo">
+		insert into em_data_akr (
+			dev_id,orig_value,time,source,e_num,e_kwh1,e_kwh2,e_kw1_all,e_kw2_all,
+			e_voltage_a,e_voltage_b,e_voltage_c,e_current_a,e_current_b,e_current_c,e_factor_all
+		) values (
+			#{devId,jdbcType=VARCHAR},#{origValue,jdbcType=VARCHAR},#{time,jdbcType=BIGINT},#{source,jdbcType=VARCHAR},#{eNum,jdbcType=VARCHAR},
+			#{eKwh1,jdbcType=VARCHAR},#{eKwh2,jdbcType=VARCHAR},#{eKw1All,jdbcType=VARCHAR},#{eKw2All,jdbcType=VARCHAR},
+			#{eVoltageA,jdbcType=VARCHAR},#{eVoltageB,jdbcType=VARCHAR},#{eVoltageC,jdbcType=VARCHAR},
+			#{eCurrentA,jdbcType=VARCHAR},#{eCurrentB,jdbcType=VARCHAR},#{eCurrentC,jdbcType=VARCHAR},#{eFactorAll,jdbcType=VARCHAR})
+	</insert>
+	
+	<select id="selectList" resultType="com.gdiot.model.AKREMDataPo">
+		select * from em_data_akr
+		where 1 = 1	
+		<if test="dev_id != null">
+			and dev_id = #{dev_id,jdbcType=VARCHAR}
+		</if>
+		<if test="e_num != null">
+			and e_num = #{e_num,jdbcType=VARCHAR}
+		</if>
+		<if test="beginTime != null">
+			and time &gt; #{beginTime,jdbcType=BIGINT}
+		</if>
+		<if test="endTime != null">
+			and time &lt;= #{endTime,jdbcType=BIGINT}
+		</if>
+		<if test="source != null">
+			and source = #{source,jdbcType=VARCHAR}
+		</if>		
+		order by id desc
+		limit #{offset} ,#{limit}
+	</select>
+	
+	<select id="countByCondition" resultType="java.lang.Integer">
+		select count(*) from em_data_akr
+		where 1 = 1
+		<if test="dev_id != null">
+			and dev_id = #{dev_id,jdbcType=VARCHAR}
+		</if>
+		<if test="e_num != null">
+			and e_num = #{e_num,jdbcType=VARCHAR}
+		</if>
+		<if test="beginTime != null">
+			and time &gt; #{beginTime,jdbcType=BIGINT}
+		</if>
+		<if test="endTime != null">
+			and time &lt;= #{endTime,jdbcType=BIGINT}
+		</if>
+		<if test="source != null">
+			and source = #{source,jdbcType=VARCHAR}
+		</if>
+	</select>
+	
+	<select id="selectOne" resultType="com.gdiot.model.AKREMDataPo">
+		select * from em_data_akr
+		where  1 = 1	
+		<if test="dev_id != null">
+			and dev_id = #{dev_id,jdbcType=VARCHAR}
+		</if>
+		order by id desc
+	</select>
+	
+	<insert id="insertReadData" parameterType="com.gdiot.model.AKREMReadPo">
+		insert into em_read_akr (
+			dev_id,imei,orig_value,time,e_num,read_type,read_value,data_seq,source
+		) values (#{devId,jdbcType=VARCHAR},#{imei,jdbcType=VARCHAR},#{origValue,jdbcType=VARCHAR},
+		#{time,jdbcType=BIGINT},#{eNum,jdbcType=VARCHAR},#{readType,jdbcType=VARCHAR},
+		#{readValue,jdbcType=VARCHAR},#{dataSeq,jdbcType=VARCHAR},#{source,jdbcType=VARCHAR})
+	</insert>
+	
+	<select id="selectRead" resultType="com.gdiot.model.AKREMReadPo">
+		select * from em_read_akr
+				where 1 = 1	
+				<if test="imei != null">
+					and imei = #{imei,jdbcType=VARCHAR}
+				</if>
+				<if test="e_num != null">
+					and e_num = #{e_num,jdbcType=VARCHAR}
+				</if>
+				<if test="type != null">
+					and read_type = #{type,jdbcType=VARCHAR}
+				</if>		
+				order by id desc
+	</select>
+	
+</mapper>

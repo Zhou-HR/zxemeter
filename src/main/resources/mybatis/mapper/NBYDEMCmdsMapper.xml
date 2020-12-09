@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gdiot.mapper.NBYDEMCmdsMapper">
+	<resultMap type="com.gdiot.model.EMCmdsSEQPo" id="BaseResultMap">
+		<id property="id" column="id" jdbcType="INTEGER"/>
+		<result property="imei" column="imei" jdbcType="VARCHAR"/>
+		<result property="e_num" column="e_num" jdbcType="VARCHAR"/>
+		<result property="cmd_seq" column="cmd_seq" jdbcType="VARCHAR"/>
+		<result property="data_seq" column="data_seq" jdbcType="VARCHAR"/>
+		<result property="create_time" column="create_time" jdbcType="DATE"/>
+	</resultMap>
+			
+	<sql id="Base_Column_Sql">
+		id,imei,e_num,cmd_seq,data_seq,create_time
+	</sql>
+	
+	<insert id="insertcmdseq" parameterType="com.gdiot.model.EMCmdsSEQPo">
+		insert into em_cmds_seq (
+			<include refid="Base_Column_Sql"></include>
+		) values (default,#{imei},#{e_num},#{cmd_seq},#{data_seq},#{create_time})
+	</insert>
+	
+	<update id="updatecmdseq" parameterType="com.gdiot.model.EMCmdsSEQPo" > 
+	  UPDATE em_cmds_seq SET cmd_seq=#{cmd_seq},data_seq=#{data_seq},create_time=#{create_time} WHERE imei=#{imei}
+	  <!-- 属性字段名区分大小写   UPDATE em_cmds_seq SET cmd_seq='56',data_seq='D6' WHERE imei='866971032563111' -->
+	</update>
+	
+	<select id="selectcmdseq" resultMap="BaseResultMap" >
+		 select * from em_cmds_seq
+		where  1 = 1	
+		<if test="imei != null">
+			and imei = #{imei}
+		</if>
+		order by id desc
+	</select>
+	
+</mapper>

@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gdiot.mapper.XBEMDataMapper">
+	<resultMap type="com.gdiot.model.XBEMDataPo" id="BaseResultMap">
+		<id property="id" column="id" jdbcType="INTEGER"/>
+		<result property="dev_id" column="dev_id" jdbcType="VARCHAR"/>
+		<result property="orig_value" column="orig_value" jdbcType="VARCHAR"/>
+		<result property="time" column="time" jdbcType="BIGINT"/>
+		<result property="source" column="source" jdbcType="VARCHAR"/>
+		
+		<result property="e_num" column="e_num" jdbcType="VARCHAR"/>
+		<result property="e_fac" column="e_fac" jdbcType="VARCHAR"/>
+		<result property="e_time" column="e_time" jdbcType="VARCHAR"/>
+		<result property="e_seq" column="e_seq" jdbcType="BIGINT"/>
+		<result property="e_signal" column="e_signal" jdbcType="VARCHAR"/>
+		<result property="seq_type" column="seq_type" jdbcType="VARCHAR"/>
+		<result property="flag_reload" column="flag_reload" jdbcType="INTEGER" />
+		<result property="data_type" column="data_type" jdbcType="VARCHAR"/>
+		
+		<result property="e_kwh1" column="e_kwh1" jdbcType="VARCHAR"/>
+		<result property="e_kwh2" column="e_kwh2" jdbcType="VARCHAR"/>
+		<result property="e_kw1_all" column="e_kw1_all" jdbcType="VARCHAR"/>
+		<result property="e_kw2_all" column="e_kw2_all" jdbcType="VARCHAR"/>
+		<result property="e_voltage_a" column="e_voltage_a" jdbcType="VARCHAR"/>
+		<result property="e_voltage_b" column="e_voltage_b" jdbcType="VARCHAR"/>
+		<result property="e_voltage_c" column="e_voltage_c" jdbcType="VARCHAR"/>
+		<result property="e_current_a" column="e_current_a" jdbcType="VARCHAR"/>
+		<result property="e_current_b" column="e_current_b" jdbcType="VARCHAR"/>
+		<result property="e_current_c" column="e_current_c" jdbcType="VARCHAR"/>
+		<result property="e_factor_all" column="e_factor_all" jdbcType="VARCHAR"/>
+		<result property="e_statu1" column="e_statu1" jdbcType="VARCHAR"/>
+		<result property="e_statu2" column="e_statu2" jdbcType="VARCHAR"/>
+		<result property="e_switch" column="e_switch" jdbcType="VARCHAR"/>
+	</resultMap>
+	
+	<sql id="Base_Column_Sql">
+		id,dev_id,orig_value,time,source,
+		e_num,e_fac,e_time,e_seq,e_signal,seq_type,flag_reload,data_type,
+		e_kwh1,e_kwh2,e_kw1_all,e_kw2_all,
+		e_voltage_a,e_voltage_b,e_voltage_c,e_current_a,e_current_b,e_current_c,
+  		e_factor_all,e_statu1,e_statu2,e_switch
+	</sql>
+	
+	<insert id="insertOne" parameterType="com.gdiot.model.XBEMDataPo">
+		insert into em_data_xb (
+			<include refid="Base_Column_Sql"></include>
+		) values (
+		default,#{dev_id},#{orig_value},#{time},#{source},
+		#{e_num},#{e_fac},#{e_time},#{e_seq},#{e_signal},#{seq_type},#{flag_reload},#{data_type},
+		#{e_kwh1},#{e_kwh2},#{e_kw1_all},#{e_kw2_all},
+		#{e_voltage_a},#{e_voltage_b},#{e_voltage_c},#{e_current_a},#{e_current_b},#{e_current_c},
+  		#{e_factor_all},#{e_statu1},#{e_statu2},#{e_switch})
+	</insert>
+	
+	<select id="selectList" resultMap="BaseResultMap">
+		select * 
+		from(select r.* ,ROWNUM  rn
+				from(
+				select * from em_data_xb
+				where 1 = 1		
+				<if test="dev_id != null">
+					and dev_id = #{dev_id}
+				</if>
+				<if test="e_num != null">
+					and e_num = #{e_num}
+				</if>
+				<if test="beginTime != null">
+					and time &gt; #{beginTime}
+				</if>
+				<if test="endTime != null">
+					and time &lt;= #{endTime}
+				</if>
+				<if test="source != null">
+					and source = #{source}
+				</if>		
+				order by id desc
+			) r
+			 where ROWNUM &lt;= #{offset} + #{limit}
+		) table_alias
+		where table_alias.rn &gt; #{offset}
+	</select>
+	
+	<select id="countByCondition" resultType="java.lang.Integer">
+		select count(*) from em_data_xb
+		where 1 = 1
+		<if test="dev_id != null">
+			and dev_id = #{dev_id}
+		</if>
+		<if test="e_num != null">
+			and e_num = #{e_num}
+		</if>
+		<if test="beginTime != null">
+			and time &gt; #{beginTime}
+		</if>
+		<if test="endTime != null">
+			and time &lt;= #{endTime}
+		</if>
+		<if test="source != null">
+			and source = #{source}
+		</if>
+	</select>
+	
+	<select id="selectOne" resultMap="BaseResultMap">
+		select * from em_data_xb
+		where  1 = 1	
+		<if test="dev_id != null">
+			and dev_id = #{dev_id}
+		</if>
+		<if test="e_seq != -1">
+			and e_seq = #{e_seq}
+		</if>
+		<if test="source_type != null">
+			and source = #{source_type}
+		</if>
+		order by id desc
+	</select>
+	
+	<select id="selectbySeq" resultMap="BaseResultMap">
+		select * from em_data_xb
+		where  1 = 1	
+		<if test="dev_id != null">
+			and dev_id = #{dev_id}
+		</if>
+		<if test="type != null">
+			and seq_type = #{type}
+		</if>
+		<if test="flag_reload != null">
+			and flag_reload = #{flag_reload}
+		</if>
+		<if test="value != null">
+			and e_seq = #{value}
+		</if>
+		order by time desc
+	</select>
+</mapper>

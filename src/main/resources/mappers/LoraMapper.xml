@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gd.mapper.LoraMapper">
+
+	<select id="countLoraByCondition" parameterType="java.util.Map"
+		resultType="int">
+		SELECT COUNT(*)  
+		from em_lora_data t,em_meter t1 
+		where t1.company_Id in <include refid="com.gd.mapper.AShareMapper.companyIdTable"/>
+		and t.e_num=t1.meter_no
+		<if test="deviceNo != null">
+			and t.device_no = #{deviceNo}
+		</if>
+		<if test="meterNo != null">
+			and t.e_num = #{meterNo}
+		</if>
+		
+		<if test="companyId != null and companyId.length()==2 ">
+			and t1.company_Id like #{companyId}||'%'
+		</if>
+		<if test="companyId != null and companyId.length()==4 ">
+			and t1.company_Id = #{companyId}
+		</if>
+		<if test="projectNo != null">
+			and t1.project_no = #{projectNo}
+		</if>
+		<if test="installDate1 != null">
+			 and TO_CHAR(t.time / (60 * 60 * 24*1000) +     
+      			TO_DATE('1970-01-01 08:00:00', 'YYYY-MM-DD HH:MI:SS'), 'YYYY-MM-DD')=#{installDate1}
+		</if>
+		<if test='source == "lora"'>
+			and t.e_current_b is null
+		</if> 
+		<if test='source == "lora3"'>
+			and t.e_current_b is not null
+		</if> 
+	</select>
+	
+	<select id="selectLoraList" parameterType="java.util.Map" resultType="NBValue">
+		select * 
+		from(select r.* ,ROWNUM  rn
+				from(
+				select t.id,dev_id as device_no,dev_id imei,orig_value,trunc(time/1000,0) as collect_time,'lora' as source,
+				e_readings as e_value,
+				e_voltage,e_current,e_signal,t.flag_reload reload,E_SWITCH,SEQ_TYPE,
+				e_num as meter_no,e_seq,'国动物联' as platform,t1.project_no,t1.company_id,
+				e_voltage_a,e_voltage_b,e_voltage_c,e_current_a,e_current_b,e_current_c
+				from em_lora_data t,em_meter t1
+		 		where exists <include refid="com.gd.mapper.AShareMapper.companyIdTableExist"/>
+		 		and t.e_num=t1.meter_no
+				<if test="deviceNo != null">
+					and t.device_no = #{deviceNo}
+				</if>
+				<if test="meterNo != null">
+					and t.e_num = #{meterNo}
+				</if>
+				
+				<if test="companyId != null and companyId.length()==2 ">
+					and t1.company_Id like #{companyId}||'%'
+				</if>
+				<if test="companyId != null and companyId.length()==4 ">
+					and t1.company_Id = #{companyId}
+				</if>
+				<if test="projectNo != null">
+					and t1.project_no = #{projectNo}
+				</if>
+				<if test="installDate1 != null">
+					 and TO_CHAR(t.time / (60 * 60 * 24*1000) +     
+        			TO_DATE('1970-01-01 08:00:00', 'YYYY-MM-DD HH:MI:SS'), 'YYYY-MM-DD')=#{installDate1}
+				</if>
+				<if test='source == "lora"'>
+					and t.e_current_b is null
+				</if> 
+				<if test='source == "lora3"'>
+					and t.e_current_b is not null
+				</if> 
+				order by t.time desc
+			) r
+			 where ROWNUM &lt;= #{p2} 
+			
+		) table_alias
+		where table_alias.rn &gt; #{p1}
+	</select>
+
+	
+
+</mapper>

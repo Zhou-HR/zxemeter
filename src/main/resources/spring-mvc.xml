@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+    <mvc:annotation-driven validator="validatorFactoryBean">
+        <mvc:path-matching suffix-pattern="false"/>
+        <mvc:message-converters>
+            <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+                <property name="objectMapper">
+                    <bean class="org.springframework.http.converter.json.Jackson2ObjectMapperFactoryBean"
+                          p:simpleDateFormat="yyyy-MM-dd HH:mm:ss"
+                          p:indentOutput="true"/>
+                </property>
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+    
+    <!-- 访问下载的二维码图片 -->
+    <mvc:resources location="/down/" mapping="/down/**"/>
+    <!-- 访问上传的logo图片 -->
+    <mvc:resources location="/upload/" mapping="/upload/**"/>
+    
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
+
+
+
+
+    <mvc:view-resolvers>
+        <mvc:jsp prefix="/" suffix=".jsp"/>
+    </mvc:view-resolvers>
+
+    <!--配置默认访问-->
+    <mvc:view-controller path="/" view-name="login"/>
+
+    <bean id="validatorFactoryBean" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+        <property name="providerClass" value="org.hibernate.validator.HibernateValidator"/>
+    </bean>
+    
+    <mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/**"/>
+			<mvc:exclude-mapping path="/wx/*"/>
+			<bean class="com.gd.basic.interceptor.UserAuthInterceptor"/>
+		</mvc:interceptor>
+
+		<bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor"/>
+	</mvc:interceptors>
+</beans>

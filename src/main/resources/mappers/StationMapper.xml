@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gd.mapper.StationMapper">
+
+	<select id="countByCondition" parameterType="java.util.Map"
+		resultType="int">
+		SELECT COUNT(*) from em_project_all t,em_meter t3
+		where t.unitcode in <include refid="com.gd.mapper.AShareMapper.companyIdTable"/>
+		and t.project_no=t3.project_no(+)
+		<if test="projectNo != null">
+				and t.project_no = #{projectNo}
+			</if>
+			<if test="projectName != null">
+				and t.project_name like '%'||#{projectName}||'%'
+			</if>
+			<if test="city != null">
+				and t.cityname = #{city}
+			</if>
+			<if test="city == null and province!=null ">
+				and t.cityname = #{province}
+			</if>
+			<if test="companyId != null and companyId.length()==2 ">
+				and t.corpcode = #{companyId}
+			</if>
+			<if test="companyId != null and companyId.length()==4 ">
+				and t.unitcode = #{companyId}
+			</if>
+			<if test="projectNoStatus == 0">
+				and t3.status is null
+			</if>
+			<if test="projectNoStatus == 1">
+				and t3.status is not null
+			</if>
+			<if test="status == 0">
+				and t3.status!=1
+			</if>
+			<if test="status == 1">
+				and t3.status=1
+			</if>
+	</select>
+	
+	<select id="selectList" parameterType="java.util.Map" resultType="Station">
+		select * 
+		from(select r.* ,ROWNUM  rn
+				from(
+				select t.*,t3.meter_no meter_no1,t3.status meter_status1  from em_project_all t,em_meter t3
+				where t.unitcode in <include refid="com.gd.mapper.AShareMapper.companyIdTable"/>
+				and t.project_no=t3.project_no(+)
+				<if test="projectNo != null">
+					and t.project_no = #{projectNo}
+				</if>
+				<if test="projectName != null">
+					and t.project_name like '%'||#{projectName}||'%'
+				</if>
+				<if test="city != null">
+					and t.cityname = #{city}
+				</if>
+				<if test="city == null and province!=null ">
+					and t.cityname = #{province}
+				</if>
+				<if test="companyId != null and companyId.length()==2 ">
+					and t.corpcode = #{companyId}
+				</if>
+				<if test="companyId != null and companyId.length()==4 ">
+					and t.unitcode = #{companyId}
+				</if>
+				<if test="projectNoStatus == 0">
+					and t3.status is null
+				</if>
+				<if test="projectNoStatus == 1">
+					and t3.status is not null
+				</if>
+				<if test="status == 0">
+					and t3.status!=1
+				</if>
+				<if test="status == 1">
+					and t3.status=1
+				</if>
+				order by t3.status desc nulls last ,t.unitcode,t3.meter_no,t.project_no
+			) r
+			 where ROWNUM &lt;= #{p2}
+		) table_alias
+		where table_alias.rn &gt; #{p1}
+	</select>
+	
+	<select id="getCompanyNum" resultType="Company">
+		select t1.*,(select t2.company_name from em_company t2 where t1.company_id=t2.company_id) company_name   
+		from (
+			select count(*) num,corpcode company_id from em_project_all t group by t.corpcode order by num desc 
+		) t1
+	</select>
+	
+	<update id="updateCarrier">
+		update em_project_all set yd_part=${ydPart},dx_part=${dxPart},lt_part=${ltPart},
+		yd_price=${ydPrice},dx_price=${dxPrice},lt_price=${ltPrice}
+		where 1=1
+		<if test="companyId != null and companyId.length()==2 ">
+			and corpcode = #{companyId}
+		</if>
+		<if test="companyId != null and companyId.length()==4 ">
+			and unitcode = #{companyId}
+		</if>
+		<if test="projectNo != null and projectNo.length()>0">
+			and project_no = #{projectNo}
+		</if>
+	</update>
+	
+	<update id="updateCarrier1">
+		update em_project_all set CARRIER_NAME=#{carrierName},CARRIER_PART=#{carrierPart},CARRIER_PRICE=#{carrierPrice}
+		where unitcode in <include refid="com.gd.mapper.AShareMapper.companyIdTable"/>
+		<if test="companyId != null and companyId.length()==2 ">
+			and corpcode = #{companyId}
+		</if>
+		<if test="companyId != null and companyId.length()==4 ">
+			and unitcode = #{companyId}
+		</if>
+		<if test="projectNo != null and projectNo.length()>0">
+			and project_no = #{projectNo}
+		</if>
+	</update>
+	
+	<update id="restoreDefault">
+		update em_project_all set 
+    CARRIER_NAME=substr(PROJECT_NO,-2,2)
+    ,CARRIER_PART='100',CARRIER_PRICE='100'
+    where unitcode in <include refid="com.gd.mapper.AShareMapper.companyIdTable"/>
+		<if test="companyId != null and companyId.length()==2 ">
+			and corpcode = #{companyId}
+		</if>
+		<if test="companyId != null and companyId.length()==4 ">
+			and unitcode = #{companyId}
+		</if>
+		<if test="projectNo != null and projectNo.length()>0">
+			and project_no = #{projectNo}
+		</if>
+	</update>
+	
+	
+	
+	<select id="getCarrier" resultType="TextValue">
+		select t.doccode value,t.docname text from v_erp_client t
+	</select>
+
+</mapper>

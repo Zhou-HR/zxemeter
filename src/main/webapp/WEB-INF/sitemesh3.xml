@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sitemesh>
+    <mapping decorator="/decorators/basic-theme.jsp"/>
+
+    <mapping>
+        <path>/**/*list*.jsp</path>
+		<path>/**/toList*</path>
+        <decorator>/decorators/basic-theme.jsp</decorator>
+        <decorator>/decorators/list-theme.jsp</decorator>
+    </mapping>
+
+    <mapping>
+		<path>/**/*edit*/*</path>
+        <path>/**/*edit*.jsp</path>
+        <path>/**/detail/*</path>
+        <path>/jsp/security/role-editMenu.jsp</path>
+        <decorator>/decorators/edit-theme.jsp</decorator>
+    </mapping>
+
+    <!--排除以‘-ex’结尾的jsp文件-->
+    <mapping path="/jsp/**/*-ex.jsp" exclue="true"/>
+    <!-- 
+	<mapping path="/index" exclue="true"/> -->
+	<mapping path="/wechat/*" exclue="true"/>
+	<mapping path="/activity/hipage1" exclue="true"/>
+	<mapping path="/jsp/statistics/detaillist_cust_history.jsp" exclue="true"/>
+	<mapping path="/jsp/statistics/detaillist_cust_relation.jsp" exclue="true"/>
+	<mapping path="/jsp/member/orderBind.jsp" exclue="true"/>
+	<mapping path="/jsp/member/couponBind.jsp" exclue="true"/>
+	<mapping path="/jsp/member/couponBindDetail.jsp" exclue="true"/>
+	
+</sitemesh>

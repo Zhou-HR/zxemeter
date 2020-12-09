@@ -1,0 +1,86 @@
+<web-app xmlns="http://java.sun.com/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+	      http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+         version="3.0">
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>
+            classpath:spring-context.xml,classpath:spring-security.xml,classpath:spring-mvc.xml
+        </param-value>
+    </context-param>
+    <context-param>
+        <param-name/>
+        <param-value/>
+    </context-param>
+
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+
+    <filter>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <url-pattern>/*</url-pattern>
+        <dispatcher>FORWARD</dispatcher>
+        <dispatcher>INCLUDE</dispatcher>
+        <dispatcher>REQUEST</dispatcher>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>sitemesh</filter-name>
+        <filter-class>org.sitemesh.config.ConfigurableSiteMeshFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>sitemesh</filter-name>
+        <url-pattern>/jsp/*</url-pattern>
+        <dispatcher>FORWARD</dispatcher>
+        <dispatcher>REQUEST</dispatcher>
+    </filter-mapping>
+    
+    <!--配置静态资源js、css、png等交予默认容器处理-->
+     <servlet-mapping>
+        <servlet-name>default</servlet-name>
+        <url-pattern>/assets/*</url-pattern>
+        <url-pattern>/css/*</url-pattern>
+        <url-pattern>/js/*</url-pattern>        
+       
+        <url-pattern>/images/*</url-pattern>
+       
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>dispatcherServlet</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value></param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>dispatcherServlet</servlet-name>
+        <!--不拦截jsp(jsp后缀的交给web容器隐式的Jsp Servlet处理)和下面default配置的扩展名-->
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+
+    
+    
+    <welcome-file-list>
+        
+        <welcome-file>login.jsp</welcome-file>
+    </welcome-file-list> 
+    
+    <!-- 设置Session超时时间 -->
+	<session-config>
+	    <!-- 分钟 -->
+	        <session-timeout>300</session-timeout>
+	        <!-- 去除URL上显示的jsessionid, 防止打开Tab页时出现JS错误 -->
+	        <tracking-mode>COOKIE</tracking-mode>
+	</session-config>
+
+    
+</web-app>

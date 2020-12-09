@@ -1,0 +1,10 @@
+﻿
+.clear{clear: both;height: 1px;}
+
+/*////////侧边*/
+.theSide{ float: right; margin-right: 20px; width: 215px; border-left: 1px solid #202020;border-bottom: 1px solid #d1d1d1; background: #fff;}
+
+/*////////联系我们*/
+.theContert{ background: #fff; box-shadow: 0 0 5px #ddd;}
+.theContert_map{ padding: 30px 30px 15px;}
+.theMap{ padding: 5px; background: #fff; box-shadow: 0 0 5px #ddd; margin-left: 20px;}

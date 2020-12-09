@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gd.mapper.MeterWarningMapper">
+
+	<select id="countByCondition" parameterType="java.util.Map" resultType="int">
+		select count(*) from em_meter_warning t
+		where company_Id in <include refid="com.gd.mapper.AShareMapper.companyIdTable"/>
+		
+		<if test="meterNo != null">
+			and t.METER_NO = #{meterNo}
+		</if>
+		<if test="date1 != null">
+			and to_char(t.create_time,'YYYY-MM-DD') =#{date1}
+		</if>
+		<if test="projectNo != null">
+			and t.project_no = #{projectNo}
+		</if>
+		<if test="companyId != null and companyId.length()==2 ">
+			and t.company_id like #{companyId}||'%'
+		</if>
+		<if test="companyId != null and companyId.length()==4 ">
+			and t.company_id = #{companyId}
+		</if>
+		<if test="type==0 ">
+			and t.description='超时未上报'
+		</if>
+		<if test="type==1 ">
+			and t.description='断电'
+		</if>
+		<if test="type==2 ">
+			and t.description='过压'
+		</if>
+		<if test="type==3 ">
+			and t.description='过流'
+		</if>
+		<if test="type==4 ">
+			and t.description='欠压'
+		</if>
+		<if test="type==5 ">
+			and t.description='拉合闸'
+		</if>
+	</select>
+	
+	<select id="selectList" parameterType="java.util.Map" resultType="MeterWarning">
+		select * 
+		from(select r.* ,ROWNUM  rn
+				from(
+				
+		select meter_no, last_send_time, level1, create_time, collect_time, project_no, yearmonth||'' yearmonth,
+		 company_id, description,e_start_time,e_end_time,
+		 (select t2.company_name from em_company t2 where t2.company_id=substr(t.company_id,0,2)) company,
+        (select t2.company_name from em_company t2 where t2.company_id=t.company_id) unit
+		  from em_meter_warning t
+		where company_Id in <include refid="com.gd.mapper.AShareMapper.companyIdTable"/>
+
+		<if test="meterNo != null">
+			and t.METER_NO = #{meterNo}
+		</if>
+		<if test="date1 != null">
+			and to_char(t.create_time,'YYYY-MM-DD') =#{date1}
+		</if>
+		<if test="projectNo != null">
+			and t.project_no = #{projectNo}
+		</if>
+		<if test="companyId != null and companyId.length()==2 ">
+			and t.company_id like #{companyId}||'%'
+		</if>
+		<if test="companyId != null and companyId.length()==4 ">
+			and t.company_id = #{companyId}
+		</if>
+		<if test="type==0 ">
+			and t.description='超时未上报'
+		</if>
+		<if test="type==1 ">
+			and t.description='断电'
+		</if>
+		<if test="type==2 ">
+			and t.description='过压'
+		</if>
+		<if test="type==3 ">
+			and t.description='过流'
+		</if>
+		<if test="type==4 ">
+			and t.description='欠压'
+		</if>
+		<if test="type==5 ">
+			and t.description='拉合闸'
+		</if>
+				order by t.create_time desc,t.meter_no
+			) r
+			 where ROWNUM &lt;= #{p2}
+		) table_alias
+		where table_alias.rn &gt; #{p1}
+	</select>
+	
+	<select id="selectMeterWarning" resultType="MeterWarning">
+		select * from em_meter_warning t 
+		where t.company_Id in <include refid="com.gd.mapper.AShareMapper.companyIdTable"/> 
+		and t.create_time&gt;=sysdate-#{hour}/24 order by id 
+	</select>
+	
+	<select id="getMeterProperty"  resultType="MeterProperty">
+		select * from em_meter_property t
+	</select>
+	
+	<update id="setMeterProperty">
+		update em_meter_property set value=#{value} where id=${id}
+	</update>
+	
+	<select id="get24hrWarningNum"  resultType="int">
+	select count(*) from 
+		(
+		select meter_no, last_send_time, level1, create_time, collect_time, project_no, yearmonth||'' yearmonth, company_id, description from em_meter_warning
+		where create_time&gt;=sysdate-1
+		union all
+		select t2.e_num meter_no,'' last_send_time,2 level1,t2.create_time,t2.time/1000 collect_time,
+		t22.project_no,
+		to_char(t2.create_time,'yyyyMM') yearmonth,
+		t22.company_id,t2.event_type description
+		 from em_nb_event t2,em_meter t22 where t2.e_num=t22.meter_no and t22.project_no is not null
+		 and t2.create_time&gt;=sysdate-1
+		 ) t
+		
+	</select>
+	
+	<select id="select10Warning" parameterType="java.util.Map" resultType="MeterWarning">
+	select * from (
+  	select
+    to_char(t.create_time,'yyyy-mm-dd HH24:mi:ss') checkTime,t.* ,
+    (select t2.company_name from em_company t2 where t2.company_id=substr(t.company_id,0,2)) company,
+    (select t2.company_name from em_company t2 where t2.company_id=t.company_id) unit
+    from em_meter_warning t,em_meter t4
+    where  t.meter_no=t4.meter_no     
+    order by t.create_time desc) where rownum&lt;20
+	</select>
+	
+	<select id="selectExportList" parameterType="java.util.Map" resultType="MeterWarning">
+				
+select meter_no, last_send_time, level1, create_time, collect_time, project_no, yearmonth||'' yearmonth, company_id, description,e_start_time,e_end_time from em_meter_warning t
+where company_Id in <include refid="com.gd.mapper.AShareMapper.companyIdTable"/>
+		and (description='断电' or description='拉合闸' or description='过流' or description='过压' or description='欠压')
+		<if test="meterNo != null">
+			and t.METER_NO = #{meterNo}
+		</if>
+		<if test="date1 != null">
+			and to_char(t.create_time,'YYYY-MM-DD') =#{date1}
+		</if>
+		<if test="projectNo != null">
+			and t.project_no = #{projectNo}
+		</if>
+		<if test="companyId != null and companyId.length()==2 ">
+			and t.company_id like #{companyId}||'%'
+		</if>
+		<if test="companyId != null and companyId.length()==4 ">
+			and t.company_id = #{companyId}
+		</if>
+				order by t.create_time desc,t.meter_no
+			
+	</select>
+	
+	<select id="offlineReport" parameterType="java.util.Map" resultType="OfflineReport">
+	<!-- 
+		select t3.company_name company,t2.unitname unit,t2.project_name,to_char(t4.install_time,'yyyy-mm-dd HH24:mi:ss') install_time,
+    to_char(t.create_time,'yyyy-mm-dd HH24:mi:ss') checkTime,t.* 
+    from em_meter_warning t,em_project_all t2,em_company t3,em_meter t4
+    where t.project_no=t2.project_no and t2.corpcode=t3.company_id and t.meter_no=t4.meter_no and t.level1&gt;1
+		and to_char(t.create_time,'yyyymmdd HH24')=
+		to_char((select max(t6.create_time) from em_meter_warning t6 where t6.description='超时未上报'),'yyyymmdd HH24')
+		 and t.description='超时未上报'
+		order by t2.unitcode,t.last_send_time desc
+	 -->
+		select t3.company_name company,t2.unitname unit,t2.project_name,t4.company_id,
+		to_char(t4.install_time,'yyyy-mm-dd HH24:mi:ss') install_time,t4.meter_no,t4.project_no,
+		(select max(t5.last_send_time) from em_meter_warning t5 
+		where t4.meter_no=t5.meter_no and to_date(t5.last_send_time,'yyyy-mm-dd HH24:mi:ss')&gt;t4.install_time) last_send_time
+		 from em_meter t4,em_project_all t2,em_company t3 
+		 where t4.project_no=t2.project_no and t2.unitcode=t3.company_id and
+		 t4.project_no is not null and t4.company_id!='99' and t4.status!=1
+		 order by t2.unitcode,last_send_time desc
+	</select>
+	
+	<select id="powerOff" resultType="OfflineReport">
+		select * from (
+		select * from em_meter_warning t where 
+		 t.meter_no=#{meterNo} and
+		 t.description='断电' and t.e_end_time is not null
+		 and to_date(t.e_end_time,'yyyy-mm-dd HH24:mi:ss')&lt;=to_date(#{lastSendTime},'yyyy-mm-dd HH24:mi:ss')
+		 and to_date(t.e_end_time,'yyyy-mm-dd HH24:mi:ss')&gt;to_date(#{lastSendTime},'yyyy-mm-dd HH24:mi:ss')-1
+		 order by t.e_end_time desc) where rownum=1
+	</select>
+	
+	<select id="offLineDeal" resultType="NBValue">
+	select * from gdmeter_his.zz_nb_data_${companyId} t where t.e_num=#{meterNo}
+	and t.create_time&lt;=to_date(#{lastSendTime},'yyyy-mm-dd HH24:mi:ss') 
+	and t.create_time&gt;to_date(#{lastSendTime},'yyyy-mm-dd HH24:mi:ss')-1 
+	order by t.create_time
+	</select>
+	
+	<select id="selectMeterEvent" resultType="MeterWarning">
+		select t2.id,t2.e_num meter_no,t2.e_seq,t2.e_start_time,t2.e_end_time,
+	    (select to_char((max(t3.time/1000)/(3600*24)+TO_DATE('1970-01-01 08:00:00', 'YYYY-MM-DD HH24:MI:SS')),'YYYY-MM-DD HH24:MI:SS')
+	     from em_data_xb t3 where t3.e_num=t22.meter_no) last_send_time,
+	     to_char(t2.create_time,'yyyyMM') yearmonth,
+	    2 level1,t2.create_time,t2.time/1000 collect_time,		
+			t22.company_id,t2.event_type description    
+		from em_nb_event t2,em_meter t22
+	     where  t2.event_type in ('power_cut','B1','B3','B5','B7','B9')  
+	     and t2.e_num=t22.meter_no and t2.deal_flag=0     
+		 order by t2.id desc
+		
+	</select>
+	
+	<update id="updateDealMeterEvent">
+		update em_nb_event set deal_flag=1 where id&lt;=${id}
+	</update>
+	
+	<select id="selectMeterOnline"  resultType="java.lang.String">
+		select t.meter_no from em_meter t where t.status!=1 
+	and exists ( select * from em_data_xb t2 where t2.e_num=t.meter_no and (sysdate-t2.create_time)*24&lt;1 )
+	</select>
+	
+	<insert id="insert" parameterType="MeterWarning">
+		insert into em_meter_warning
+		  (id, meter_no, last_send_time, level1,  collect_time, yearmonth, company_id,DESCRIPTION,e_seq,e_start_time,e_end_time)
+		values
+		( EM_WARNING_SEQ.Nextval,#{meterNo},#{lastSendTime},#{level1},#{collectTime},#{yearmonth},#{companyId},#{description},#{eseq},#{estarttime},#{eendtime})
+	</insert>
+	
+	<update id="updateMeterStatus">
+		update em_meter set status=${status} where meter_no=#{meterNo}
+	</update>
+	
+	<update id="updateMeterOffline" >
+		 update em_meter set status=0 where meter_no in
+		 (
+		 select tt.e_num meter_no from (
+		 select t.e_num,max(t.create_time) max_time   from em_data_xb t 
+		 group by t.e_num)  tt where (sysdate-tt.max_time)*24*60-80>0)
+	</update>
+	
+	<select id="selectListLahezha"  resultType="MeterWarning">
+		select t1.e_num meter_no,t1.e_switch
+	     from em_data_xb t1 where 
+	    t1.time=(select max(t2.time) from em_data_xb t2 where t1.e_num=t2.e_num) and exists
+	    (select t3.id from em_meter t3 where t3.meter_no=t1.e_num )  
+	    and ((t1.e_switch='55' and (select t4.lahezha_status from em_meter t4 where t4.meter_no=t1.e_num )=1)
+	      or (t1.e_switch='AA' and (select t4.lahezha_status from em_meter t4 where t4.meter_no=t1.e_num )=0)
+	    )
+	    order by t1.e_num
+	</select>
+	
+	<update id="updateMeterLahezha">
+		update em_meter set lahezha_status=${lahezhaStatus} where METER_NO=#{meterNo}
+	</update>
+
+</mapper>

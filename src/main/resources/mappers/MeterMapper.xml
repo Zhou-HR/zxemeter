@@ -1,0 +1,581 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gd.mapper.MeterMapper">
+
+	<select id="countByCondition" parameterType="java.util.Map"
+		resultType="int">
+		select count(*) from em_meter t
+				where 1=1 <!-- t.company_Id in <include refid="com.gd.mapper.AShareMapper.companyIdTable"/>
+				 -->
+		<if test="companyIds != null">
+			and t.company_Id in ${companyIds}
+		</if>
+		<if test="deviceNo != null">
+			and t.device_no = #{deviceNo}
+		</if>
+		<if test="meterNo != null">
+			and t.METER_NO = #{meterNo}
+		</if>
+		<if test="meterType != null">
+			and t.METER_TYPE = #{meterType}
+		</if>
+		<if test="source != null">
+			and t.SOURCE = #{source}
+		</if>
+		<if test="platform != null">
+			and t.PLATFORM = #{platform}
+		</if>
+		<if test="projectNo != null">
+			and t.project_no = #{projectNo}
+		</if>
+		<if test="status ==0">
+			and (t.status=0 or t.status>1)					
+		</if>
+		<if test="status ==1">
+			and t.status=1					
+		</if>
+		<if test="projectNoStatus == 0">
+			and t.project_no is null
+		</if>
+		<if test="projectNoStatus == 1">
+			and t.project_no is not null
+		</if>
+		<if test="companyId != null and companyId.length()==2 ">
+			and t.COMPANY_ID like #{companyId}||'%'
+		</if>
+		<if test="companyId != null and companyId.length()==4 ">
+			and t.COMPANY_ID = #{companyId}
+		</if>
+		<if test="installDate1 != null">
+			and t.install_time>=to_date(#{installDate1},'yyyy-mm-dd')
+		</if>
+		<if test="installDate2 != null">
+			<![CDATA[and t.install_time<to_date(#{installDate2},'yyyy-mm-dd')]]>
+		</if>
+	</select>
+	
+	<select id="selectList" parameterType="java.util.Map" resultType="Meter">
+		select * 
+		from(select r.* ,ROWNUM  rn
+				from(
+				select 
+				(select t2.name from t_permission t2 where t2.company_id=substr(t.company_id,0,2)) company,
+				(select t2.name from t_permission t2 where t2.company_id=t.company_id) unit,
+				t.* from em_meter t
+				where 1=1 <!-- t.company_Id in <include refid="com.gd.mapper.AShareMapper.companyIdTable"/>
+				 -->
+				<if test="companyIds != null">
+					and t.company_Id in ${companyIds}
+				</if>
+				<if test="deviceNo != null">
+					and t.device_no = #{deviceNo}
+				</if>
+				<if test="meterNo != null">
+					and t.METER_NO = #{meterNo}
+				</if>
+				<if test="meterType != null">
+					and t.METER_TYPE = #{meterType}
+				</if>
+				<if test="platform != null">
+					and t.PLATFORM = #{platform}
+				</if>
+				<if test="projectNo != null">
+					and t.project_no = #{projectNo}
+				</if>
+				<if test="status ==0">
+					and (t.status=0 or t.status>1)					
+				</if>
+				<if test="status ==1">
+					and t.status=1					
+				</if>
+				<if test="projectNoStatus == 0">
+					and t.project_no is null
+				</if>
+				<if test="projectNoStatus == 1">
+					and t.project_no is not null
+				</if>
+				<if test="companyId != null and companyId.length()==2 ">
+					and t.COMPANY_ID like #{companyId}||'%'
+				</if>
+				<if test="companyId != null and companyId.length()==4 ">
+					and t.COMPANY_ID = #{companyId}
+				</if>
+				<if test="installDate1 != null">
+					and t.install_time>=to_date(#{installDate1},'yyyy-mm-dd')
+				</if>
+				<if test="installDate2 != null">
+					<![CDATA[and t.install_time<to_date(#{installDate2},'yyyy-mm-dd')]]>
+				</if>
+				order by t.status desc,t.id desc
+			) r
+			 where ROWNUM &lt;= #{p2}
+		) table_alias
+		where table_alias.rn &gt; #{p1}
+	</select>
+	
+	<select id="getDayReport" resultType="MeterMonthReport" parameterType="java.util.Map">
+		select * from em_day_report t where (t.yearmonth between ${date1} and ${date2} )
+		and t.meter_no in
+		(
+			select METER_NO 
+		from(select r.* ,ROWNUM  rn
+				from(
+				select distinct t.meter_no from em_day_report t
+				where (t.yearmonth between ${date1} and ${date2} )
+				<if test="meterNo != null">
+					and t.METER_NO = #{meterNo}
+				</if>
+				<if test="companyId != null and companyId.length()==2 ">
+					and t.COMPANY_ID like #{companyId}||'%'
+				</if>
+				<if test="companyId != null and companyId.length()==4 ">
+					and t.COMPANY_ID = #{companyId}
+				</if>
+				<if test="projectNo != null">
+					and t.project_no = #{projectNo}
+				</if>
+				
+				order by t.meter_no
+			) r
+			 where ROWNUM &lt;= #{p2}
+		) table_alias
+		where table_alias.rn &gt; #{p1}
+		)
+		
+	</select>
+	
+	<select id="countDayReport" parameterType="java.util.Map" 	resultType="int">
+		select count(distinct t.meter_no) from em_day_report t
+				where (t.yearmonth between ${date1} and ${date2} )
+		<if test="meterNo != null">
+			and t.METER_NO = #{meterNo}
+		</if>
+		<if test="companyId != null and companyId.length()==2 ">
+			and t.COMPANY_ID like #{companyId}||'%'
+		</if>
+		<if test="companyId != null and companyId.length()==4 ">
+			and t.COMPANY_ID = #{companyId}
+		</if>
+		<if test="projectNo != null">
+			and t.project_no = #{projectNo}
+		</if>
+	</select>
+	
+	<select id="getMonthReport" resultType="MeterMonthReport" parameterType="java.util.Map">
+	select t2.meter_no,t2.project_no,substr(t2.yearmonth,0,6) yearmonth,sum(t2.e_value) evalue from em_day_report t2, 
+(select * from
+(select r.* ,ROWNUM  rn
+        from(
+select distinct t.meter_no,t.project_no from em_day_report t 
+where t.year=#{year} and t.project_no is not null 
+				<if test="meterNo != null">
+					and t.METER_NO = #{meterNo}
+				</if>
+				<if test="companyId != null and companyId.length()==2 ">
+					and t.COMPANY_ID like #{companyId}||'%'
+				</if>
+				<if test="companyId != null and companyId.length()==4 ">
+					and t.COMPANY_ID = #{companyId}
+				</if>
+				<if test="projectNo != null">
+					and t.project_no = #{projectNo}
+				</if>
+order by t.meter_no,t.project_no
+) r
+ where ROWNUM &lt;= #{p2}
+ ) table_alias
+		where table_alias.rn &gt; #{p1}) r2 
+    
+    where t2.meter_no=r2.meter_no and t2.project_no=r2.project_no
+    group by t2.meter_no,t2.project_no,substr(t2.yearmonth,0,6)
+				order by t2.meter_no,t2.project_no
+				
+	</select>
+	
+	<select id="countMonthReport" parameterType="java.util.Map" 	resultType="int">
+		select count(distinct t.meter_no||t.project_no) from em_day_report t
+				where t.year=#{year} and t.project_no is not null 
+		<if test="meterNo != null">
+			and t.METER_NO = #{meterNo}
+		</if>
+		<if test="companyId != null and companyId.length()==2 ">
+			and t.COMPANY_ID like #{companyId}||'%'
+		</if>
+		<if test="companyId != null and companyId.length()==4 ">
+			and t.COMPANY_ID = #{companyId}
+		</if>
+		<if test="projectNo != null">
+			and t.project_no = #{projectNo}
+		</if>
+		
+	</select>
+	
+	<select id="countDownSendByCondition" parameterType="java.util.Map"
+		resultType="int">
+		select count(*) from em_meter t
+				where t.company_Id in <include refid="com.gd.mapper.AShareMapper.companyIdTable"/> 
+				
+		<if test="meterNo != null">
+			and t.METER_NO = #{meterNo}
+		</if>
+		
+	</select>
+	
+	<select id="selectDownSendList" parameterType="java.util.Map" resultType="Meter">
+		select * 
+		from(select r.* ,ROWNUM  rn
+				from(
+				select t.* from em_meter t
+				where  t.company_Id in <include refid="com.gd.mapper.AShareMapper.companyIdTable"/> 				
+				
+				<if test="meterNo != null">
+					and t.METER_NO = #{meterNo}
+				</if>
+				order by t.METER_NO
+			) r
+			 where ROWNUM &lt;= #{p2}
+		) table_alias
+		where table_alias.rn &gt; #{p1}
+	</select>
+	
+	<select id="countMeterRealCheckByCondition" parameterType="java.util.Map"
+		resultType="int">
+		select count(*) from em_meter t
+				where t.company_Id in <include refid="com.gd.mapper.AShareMapper.companyIdTable"/> 
+				and t.imei is not null and t.status=1 and t.project_no is not null
+		<if test="meterNo != null">
+			and t.METER_NO = #{meterNo}
+		</if>
+		<if test="companyId != null and companyId.length()==2 ">
+			and t.COMPANY_ID like #{companyId}||'%'
+		</if>
+		<if test="companyId != null and companyId.length()==4 ">
+			and t.COMPANY_ID = #{companyId}
+		</if>
+		
+	</select>
+	
+	<select id="selectMeterRealCheckList" parameterType="java.util.Map" resultType="Meter">
+		select * 
+		from(select r.* ,ROWNUM  rn
+				from(
+				select t.* from em_meter t
+				where t.company_Id in <include refid="com.gd.mapper.AShareMapper.companyIdTable"/> 
+				and t.imei is not null and t.status=1 and t.project_no is not null
+				<if test="meterNo != null">
+					and t.METER_NO = #{meterNo}
+				</if>
+				<if test="companyId != null and companyId.length()==2 ">
+					and t.COMPANY_ID like #{companyId}||'%'
+				</if>
+				<if test="companyId != null and companyId.length()==4 ">
+					and t.COMPANY_ID = #{companyId}
+				</if>
+				order by t.METER_NO
+			) r
+			 where ROWNUM &lt;= #{p2}
+		) table_alias
+		where table_alias.rn &gt; #{p1}
+	</select>
+	
+	<select id="countMeterLostData" parameterType="java.util.Map"
+		resultType="int">
+		select count(*) from em_meter_lostdata t,em_project_all t2 where t.project_no=t2.project_no(+)
+		<if test="meterNo != null">
+			and t.METER_NO = #{meterNo}
+		</if>
+		<if test="installDate1 != null">
+			 and to_char(t.create_time,'yyyy-MM-dd')=#{installDate1}
+		</if>
+		<if test="projectNo != null">
+			and t.project_no = #{projectNo}
+		</if>
+		<if test="companyId ==99 ">
+			and t.project_no is null
+		</if>
+		<if test="companyId != null and companyId.length()==2 and companyId!=99 ">
+			and t2.corpcode = #{companyId}
+		</if>
+		<if test="companyId != null and companyId.length()==4 ">
+			and t2.unitcode = #{companyId}
+		</if>
+	</select>
+	
+	<select id="selectMeterLostDataList" parameterType="java.util.Map" resultType="MeterLostData">
+		select * 
+		from(select r.* ,ROWNUM  rn
+				from(
+				select t.*,t2.unitcode companyId from em_meter_lostdata t,em_project_all t2 where t.project_no=t2.project_no(+)
+				<if test="meterNo != null">
+					and t.METER_NO = #{meterNo}
+				</if>
+				<if test="installDate1 != null">
+					 and to_char(t.create_time,'yyyy-MM-dd')=#{installDate1}
+				</if>
+				<if test="projectNo != null">
+					and t.project_no = #{projectNo}
+				</if>
+				<if test="companyId ==99 ">
+					and t.project_no is null
+				</if>
+				<if test="companyId != null and companyId.length()==2 and companyId!=99 ">
+					and t2.corpcode = #{companyId}
+				</if>
+				<if test="companyId != null and companyId.length()==4 ">
+					and t2.unitcode = #{companyId}
+				</if>
+				order by t.update_time desc,t.meter_no,t.seq
+			) r
+			 where ROWNUM &lt;= #{p2}
+		) table_alias
+		where table_alias.rn &gt; #{p1}
+	</select>
+	
+	<select id="getMonthWarningCount" parameterType="java.util.Map"	resultType="int">
+		select count(*) from (select distinct t.meter_no,substr(t.company_id,0,2) from em_meter_warning t
+		where t.company_Id in <include refid="com.gd.mapper.AShareMapper.companyIdTable"/>
+		and t.yearmonth like #{year}||'%'
+		<if test="meterNo != null">
+			and t.meter_no = #{meterNo}
+		</if>
+		)
+	</select>
+	
+	<select id="getMonthWarning" resultType="MeterWarning">
+		select t.meter_no,t.yearmonth,t.project_no,t.company_id,
+		(select t2.company_name from em_company t2 where t2.company_id=substr(t.company_id,0,2)) company,
+        (select t2.company_name from em_company t2 where t2.company_id=t.company_id) unit
+		 from em_meter_warning t,
+		(select * 
+		from (select r.* ,ROWNUM  rn
+				from(
+				select distinct t.meter_no,substr(t.company_id,0,2) company_id from em_meter_warning t
+				where t.company_Id in <include refid="com.gd.mapper.AShareMapper.companyIdTable"/>
+				and t.yearmonth like #{year}||'%'
+				<if test="meterNo != null">
+					and t.meter_no = #{meterNo}
+				</if>
+				order by company_id,t.meter_no
+			) r
+			 where ROWNUM &lt;= #{p2}
+		) table_alias
+		where table_alias.rn &gt; #{p1}
+		) tp
+		where t.meter_no=tp.meter_no and substr(t.company_id,0,2)=tp.company_id
+		and t.yearmonth like #{year}||'%' 
+			
+		 
+		
+		order by t.company_id,t.meter_no,t.yearmonth
+	</select>
+	
+	<select id="getMeterByMeterNo" resultType="Meter">
+		select * from em_meter t where t.meter_no=#{meterNo}
+	</select>
+	
+	<select id="getMeterLastInstallCompany" resultType="String">
+		select t2.unitcode from tb_meter_info t,em_project_all t2 
+		where t.new_meter_number=#{meterNo} and rownum=1 and t2.project_no=t.proj_code
+		order by seqid desc
+	</select>
+	
+	<insert id="insertDownLog">
+		insert into em_meter_down_log
+		  (id, name, meter_no, param, result, user1,imei)
+		values
+		  (em_meter_down_log_seq.nextval, #{name}, #{meterNo}, #{param}, #{result}, #{user1},#{imei})
+	</insert>
+	
+	<select id="selectTbMeterInfo" parameterType="java.util.Map" resultType="TbMeterInfo">
+		select * 
+		from(select r.* ,ROWNUM  rn
+				from(
+		select t.*,t2.cityname,t2.unitname from tb_meter_info_show t,em_project_all t2  
+		where t2.unitcode in <include refid="com.gd.mapper.AShareMapper.companyIdTable"/>
+		and t.proj_code=t2.project_no(+)
+		<if test="newMeterNo != null">
+			and t.NEW_METER_NUMBER = #{newMeterNo}
+		</if>
+		<if test="oldMeterNo != null">
+			and t.OLD_METER_NUMBER = #{oldMeterNo}
+		</if>
+		<if test="projectNo != null">
+			and t.PROJ_CODE = #{projectNo}
+		</if>
+		<if test="companyId != null and companyId.length()==2 ">
+			and t2.corpcode = #{companyId}
+		</if>
+		<if test="companyId != null and companyId.length()==4 ">
+			and t2.unitcode = #{companyId}
+		</if>
+		<if test="newBox != null">
+			and t.IF_USE_NEW_BOX = ${newBox}
+		</if>
+		<if test="stateGrid != null">
+			and t.IF_STATE_GRID = ${stateGrid}
+		</if>
+		order by t.create_time desc
+		) r
+			 where ROWNUM &lt;= #{p2}
+		) table_alias
+		where table_alias.rn &gt; #{p1}
+	</select>
+	
+	<select id="countTbMeterInfo" parameterType="java.util.Map" resultType="int">
+		select count(*) from tb_meter_info_show t,em_project_all t2 
+		where t2.unitcode in <include refid="com.gd.mapper.AShareMapper.companyIdTable"/>
+		and t.proj_code=t2.project_no(+)
+		<if test="newMeterNo != null">
+			and t.NEW_METER_NUMBER = #{newMeterNo}
+		</if>
+		<if test="oldMeterNo != null">
+			and t.OLD_METER_NUMBER = #{oldMeterNo}
+		</if>
+		<if test="projectNo != null">
+			and t.PROJ_CODE = #{projectNo}
+		</if>
+		<if test="companyId != null and companyId.length()==2 ">
+			and t2.corpcode = #{companyId}
+		</if>
+		<if test="companyId != null and companyId.length()==4 ">
+			and t2.unitcode = #{companyId}
+		</if>
+		<if test="newBox != null">
+			and t.IF_USE_NEW_BOX = ${newBox}
+		</if>
+		<if test="stateGrid != null">
+			and t.IF_STATE_GRID = ${stateGrid}
+		</if>
+	</select>
+	
+	<select id="getReport" resultType="String">
+		select t1.read_value,t1.create_time from em_nb_read t1,em_nb_cmds t2 where t1.data_seq=t2.data_seq 
+		and t1.imei=t2.imei and t2.imei=#{imei} and t1.create_time>=sysdate-2/24/60 and rownum=1
+	</select>
+	
+	<select id="selectListMeterLowValue" resultType="NBValue">
+	select * 
+		from(select r.* ,ROWNUM  rn
+				from(
+				
+		select ti.*,t2.company_id,t2.project_no from (
+		select sum(to_number(t.e_value)) e_value,t.meter_no from em_day_report t 
+		where  e_value=0
+		group by t.meter_no ) ti,em_meter t2 where ti.meter_no=t2.meter_no
+		order by t2.company_id,t2.meter_no
+		) r
+			 where ROWNUM &lt;= #{p2}
+		) table_alias
+		where table_alias.rn &gt; #{p1}
+	</select>
+	
+	<select id="countMeterLowValueByCondition" parameterType="java.util.Map"
+		resultType="int">
+				
+		select count(*) from (
+		select sum(to_number(t.e_value)) e_value,t.meter_no from em_day_report t 
+		where  e_value=0
+		group by t.meter_no ) ti,em_meter t2 where ti.meter_no=t2.meter_no
+		
+	</select>
+	
+	<select id="exportListMeterLowValue" resultType="NBValue">
+				
+		select ti.*,t2.company_id,t2.project_no from (
+		select sum(to_number(t.e_value)) e_value,t.meter_no from em_day_report t 
+		where  e_value=0
+		group by t.meter_no ) ti,em_meter t2 where ti.meter_no=t2.meter_no
+		order by t2.company_id,t2.meter_no
+		
+	</select>
+	
+	<select id="meterInstallReport" resultType="Meter">
+		select (select t6.company_name from em_company t6 where t6.company_id=substr(t.company_id,0,2)) company,
+		(select t4.company_name from em_company t4 where t4.company_id=t.company_id) unit,
+		t.meter_no,t.meter_type,t.project_no,t2.project_name,t2.address,
+		(case when t.status=1 then '在线' else '离线' end) str_status,
+		to_char(t.install_time,'yyyy-mm-dd HH24:MI:SS') str_instlltime from em_meter t,em_project_all t2 
+		where t.company_Id in <include refid="com.gd.mapper.AShareMapper.companyIdTable"/>
+		and t.project_no=t2.project_no 
+		order by t.company_id,t.install_time desc
+	</select>
+	
+	<select id="selectAllMeter" resultType="Meter">
+		select * from em_meter t
+		<!-- 
+		where t.meter_no='191128120785' -->
+		order by t.meter_no
+	</select>
+	
+	<insert id="insertMeter">
+		insert into em_meter
+		  (id,  meter_no, imei, meter_type,  new_value, old_value, old_meter_no, platform, user_id,address,company_Id)
+		values
+		  (METER_SEQ.Nextval,#{meterNo},#{imei},#{meterType},#{newValue},#{oldValue},#{oldMeterNo},#{platform},#{userId},#{address},#{companyId})
+	</insert>
+	
+	<select id="selectCompnayIdByUserId" resultType="String">
+		select t4.company_id from t_user t1,t_user_role t2,t_role_permission t3,t_permission t4
+		 where t1.id=t2.user_id and t2.role_id=t3.role_id and t3.permission_id=t4.id and length(t4.company_id)=4
+		 and t1.id=#{userId}
+ 	</select>
+ 	
+ 	<select id="selectCompnayIdByName" resultType="String">
+		select t.company_id from t_permission t where t.name=#{name}
+ 	</select>
+ 	
+ 	<delete id="deleteById">
+ 		delete from em_meter where id=#{id}
+ 	</delete>
+ 	
+ 	<select id="selectCompanyYearMonthValueByYearAndUserId" resultType="CompanyYearMonthValue">
+ 	select tt.*,
+	round(decode(yearValue,0,0,yearValue/(select count(distinct t8.month) 
+	from em_day_report t8 where t8.company_id=tt.company_id and t8.year=#{year})),2) avgValue
+	from (
+	select t4.name company,t4.company_id,
+	nvl((select sum(to_number(t6.e_value)) from em_day_report t6 where t6.company_id=t4.company_id and t6.year=#{year}),0) yearValue
+	from t_user t1,t_user_role t2,t_role_permission t3,t_permission t4
+     where t1.id=t2.user_id and t2.role_id=t3.role_id and t3.permission_id=t4.id and length(t4.company_id)=4
+     and t1.id=#{userId} order by t4.company_id) tt
+	</select>
+	
+	<update id="updateMeterStatus">
+		update em_meter set status=${status} where meter_no=#{meterNo}
+	</update>
+	
+	<update id="updateMeterPrice">
+		update em_meter set price=${price} 
+		where 
+		company_Id in ${companyIds}
+		<if test="companyId != null">
+			and company_id like #{companyId}||'%'
+		</if>
+		
+	</update>
+	
+	<insert id="insertDayReport">
+		insert into em_day_report
+		  (id, meter_no, project_no, year, month, e_value1, e_value2, e_value,company_id, yearmonth,day,E_SEQ1,E_SEQ2,TB_METER_ID_NEW,TB_METER_ID_OLD,NEW_METER_VALUE,OLD_METER_VALUE,fee)
+		values
+		  (EM_DAY_REPORT_SEQ.Nextval, #{meterNo}, #{projectNo}, #{year}, #{month}, #{evalue1}, #{evalue2}, #{evalue}, #{companyId}, #{yearmonth},#{day},
+		  #{eseq1},#{eseq2},#{tbMeterIdNew},#{tbMeterIdOld},#{newMeterValue},#{oldMeterValue},#{fee}
+		  )
+	</insert>
+	
+	<select id="getYesterdayMaxMeterDayValue" resultType="String">
+		select max(to_number(t.e_kwh1)) from em_data_xb t
+		where t.TIME/1000&gt;=${time1} and t.TIME/1000&lt;${time1}+86400 and t.E_NUM=#{meterNo}
+	</select>
+	
+	<select id="getMaxMeterDayValue" resultType="String">
+		select max(to_number(t.e_kwh1))  from em_data_xb t
+		where t.TIME/1000&lt;${time1}+86400 and t.E_NUM=#{meterNo}
+	</select>
+	
+	<select id="getLastDayReport" resultType="MeterMonthReport">
+		select * from 
+		(select * from em_day_report t where t.meter_no=#{meterNo} order by id desc) where rownum=1
+	</select>
+	
+</mapper>

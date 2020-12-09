@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gd.mapper.ExportMapper">
+
+	<select id="selectMonthMeterValue" resultType="MeterMonthReport">
+		select (select t2.company_name from em_company t2 where substr(t.company_id,0,2)=t2.company_id) company,
+		(select t2.company_name from em_company t2 where t.company_id=t2.company_id) shiyebu,t.*
+		from em_day_report t 
+		where t.company_Id in <include refid="com.gd.mapper.AShareMapper.companyIdTable"/>
+		and t.year=${year} and t.month=${month}
+		order by t.company_id,t.meter_no,t.yearmonth
+	</select>
+	
+	<select id="selectMonthMeterValueAll" resultType="MeterMonthReport">
+		select t.meter_no,t.project_no,t.e_value,t.company_id,t.day,t.fee,
+		(select t2.name from t_permission t2 where t2.company_id=t.company_id) company
+		from em_day_report t 
+		where 
+		company_Id in ${companyIds} and
+		t.year=${year} and t.month=${month}
+		order by t.company_id,t.meter_no,t.yearmonth
+	</select>
+	
+	<select id="selectCarrierType" resultType="String">
+		select distinct t.carrier_name from em_day_carrier_report t
+	    where t.company_Id in <include refid="com.gd.mapper.AShareMapper.companyIdTable"/> 
+	    and t.year=${year} and t.month=${month}
+	    order by t.carrier_name desc
+	</select>
+	
+	<select id="selectMonthCarrierValue" resultType="MeterMonthReport">
+		select (select t2.company_name from em_company t2 where substr(t.company_id,0,2)=t2.company_id) company,
+	    (select t2.company_name from em_company t2 where t.company_id=t2.company_id) shiyebu,t.*
+	    from em_day_carrier_report t 
+	    where t.company_Id in <include refid="com.gd.mapper.AShareMapper.companyIdTable"/> 
+	    and t.year=${year} and t.month=${month} and t.carrier_name=#{carrierName}
+	    order by t.company_id,t.meter_no,t.yearmonth
+	</select>
+	
+	
+</mapper>

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:task="http://www.springframework.org/schema/task"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+          http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+          http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.2.xsd 
+          ">
+
+	<task:annotation-driven />
+	
+	<bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
+        <property name="maxTotal" value="-1" />
+    </bean>
+		
+	<bean id="jedisPool" class="redis.clients.jedis.JedisPool">
+        <constructor-arg name="poolConfig" ref="jedisPoolConfig"/>
+        <constructor-arg name="host" value="127.0.0.1"/>  
+        <!--<constructor-arg name="host" value="120.55.163.230"/>-->
+    </bean>
+    <bean class="com.gd.redis.JedisUtil" p:pool-ref="jedisPool" destroy-method="destroy"/>
+    
+    <bean class="com.gd.basic.common.BeanFactoryUtil"/>
+
+    <context:component-scan base-package="com.gd"/>
+
+     <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+        <property name="driverClass" value="oracle.jdbc.driver.OracleDriver"/>        
+        
+        <property name="user" value="zxMETER"/>
+        <property name="jdbcUrl" value="jdbc:oracle:thin:@39.108.178.36:1521:orcl"/>
+        
+        <!--
+        <property name="user" value="zxMETER"/>
+        <property name="jdbcUrl" value="jdbc:oracle:thin:@47.103.102.210:1521:orcl"/>
+        -->
+        <!-- 
+        <property name="jdbcUrl" value="jdbc:oracle:thin:@192.168.10.146:1521:orcl"/>
+         -->
+        <property name="password" value="guodong123"/>
+    </bean>
+
+
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="mapperLocations" value="classpath*:mappers/**/*.xml"/>
+        <property name="typeAliasesPackage" value="com.gd.model.po"/>
+        <property name="failFast" value="true"/>
+        <property name="configuration">
+            <bean class="org.apache.ibatis.session.Configuration">
+                <property name="mapUnderscoreToCamelCase" value="true"/>
+                <property name="cacheEnabled" value="true"/>
+                <property name="logImpl" value="org.apache.ibatis.logging.log4j2.Log4j2Impl"/>
+                <property name="defaultExecutorType" value="REUSE"/>
+                <property name="autoMappingUnknownColumnBehavior" value="WARNING"/>
+            </bean>
+        </property>
+        <property name="objectWrapperFactory">
+            <bean class="com.gd.basic.common.dict.ObjectWrapperFactoryImpl"/>
+        </property>
+        <property name="typeHandlers">
+            <array>
+                <bean class="com.gd.basic.common.dict.DictTypeHandler"/>
+            </array>
+        </property>
+    </bean>
+
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.gd.mapper"/>
+    </bean>
+
+    <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <bean class="org.springframework.transaction.support.TransactionTemplate">
+        <constructor-arg ref="txManager"/>
+    </bean>
+
+    <bean class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">
+        <constructor-arg index="0" ref="dataSource"/>
+    </bean>
+
+    <tx:annotation-driven transaction-manager="txManager" proxy-target-class="true"/>
+    
+</beans>

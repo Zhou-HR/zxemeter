@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gd.mapper.NBSendPackageMapper">
+
+	<select id="countByCondition" parameterType="java.util.Map"
+		resultType="int">
+		select count(*) from em_send_package t where 1=1
+		<if test="companyId != null and companyId.length()==2 and companyId!=99 ">
+			and t.company_Id like #{companyId}||'%'
+		</if>
+		<if test="companyId != null and companyId.length()==4 ">
+			and t.company_Id = #{companyId}
+		</if>
+		
+	</select>
+	
+	<select id="selectList" parameterType="java.util.Map" resultType="NBSendPackage">
+		select * 
+		from(select r.* ,ROWNUM  rn
+				from(
+			select * from em_send_package t where 1=1
+			<if test="companyId != null and companyId.length()==2 and companyId!=99 ">
+				and t.company_Id like #{companyId}||'%'
+			</if>
+			<if test="companyId != null and companyId.length()==4 ">
+				and t.company_Id = #{companyId}
+			</if>
+			order by total        
+			) r
+			 where ROWNUM &lt;= #{p2}
+		) table_alias
+		where table_alias.rn &gt; #{p1}
+	</select>
+
+</mapper>

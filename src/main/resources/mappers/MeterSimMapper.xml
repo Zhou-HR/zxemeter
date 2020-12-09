@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gd.mapper.MeterSimMapper">
+
+	<select id="countByCondition" parameterType="java.util.Map"		resultType="int">
+		select count(*) from em_meter_sim t
+		where t.meter_no=#{meterNo}
+	</select>
+	
+	<select id="selectList" parameterType="java.util.Map" resultType="MeterSim">
+		select * 
+		from(select r.* ,ROWNUM  rn
+				from(
+				select t.* from em_meter_sim t
+				where t.meter_no=#{meterNo} order by t.insert_time desc
+			) r
+			 where ROWNUM &lt;= #{p2}
+		) table_alias
+		where table_alias.rn &gt; #{p1}
+	</select>
+	
+	
+</mapper>

@@ -1,0 +1,427 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gd.mapper.StatMapper">
+
+	<select id="countMeterNum" parameterType="java.util.Map" resultType="int">
+		select count(distinct substr(t.company_id,0,2)) from em_meter t
+				where 1=1
+		
+	</select>
+	
+	<select id="selectListMeterNum" parameterType="java.util.Map" resultType="Meter">
+		select t2.name company,t1.status,t1.company_id from em_meter t1,t_permission t2 
+		where 
+		t1.company_Id in ${companyIds}
+		and t1.company_id=t2.company_id order by t1.company_id
+	</select>
+	
+	<select id="countMeterNum1" parameterType="java.util.Map" resultType="int">
+		select count(distinct t.company_id) from em_meter t
+				where t.company_id like #{companyId}||'%'
+		
+	</select>
+	
+	<select id="selectListMeterNum1" parameterType="java.util.Map" resultType="Meter">
+		select t2.name company,t1.status,t1.company_id from em_meter t1,t_permission t2 
+		where t1.company_id like #{companyId}||'%' and t1.company_id=t2.company_id 
+		
+		order by t1.company_id
+	</select>
+	
+	<select id="countMeterNum2" parameterType="java.util.Map" resultType="int">
+		select count(distinct t.project_no) from em_meter t
+				where t.project_no = #{projectNo}
+				
+		
+	</select>
+	
+	<select id="selectListMeterNum2" parameterType="java.util.Map" resultType="Meter">
+		select t1.project_no company,t1.status,t1.company_id from em_meter t1
+		where t1.project_no = #{projectNo}
+		
+		order by t1.project_no
+	</select>
+	
+	
+	<select id="selectListMeterValueTime" parameterType="java.util.Map" resultType="MeterValueTime">
+		select sum(t.e_value) value,t.month time from em_day_report t where t.meter_no=#{meterNo} and t.year=#{year}
+		group by t.month
+	</select>
+	
+	<select id="selectListMeterValueTimeDay" parameterType="java.util.Map" resultType="MeterValueTime">
+		select t.e_value value,t.yearmonth time  from em_day_report t where t.meter_no=#{meterNo} 
+		and (t.yearmonth between ${time1} and ${time2}) order by t.yearmonth
+	</select>
+	
+	<select id="countMeterValue" parameterType="java.util.Map" resultType="int">
+		select count(distinct substr(t.company_id,0,2)) from em_day_report t
+				where 1=1
+		<if test="year != null">
+			and t.year=${year}
+		</if>
+	</select>
+	
+	<select id="selectListMeterValue" parameterType="java.util.Map" resultType="MeterValueTime">
+		select ti1.*,t2.name company from (
+	select substr(t1.company_id,0,2) company_id,substr(t1.yearmonth,0,6) time,sum(t1.e_value) value from em_day_report t1
+	<if test="year != null">
+			where t1.year=${year}
+		</if>
+    group by substr(t1.company_id,0,2),substr(t1.yearmonth,0,6)
+    order by substr(t1.company_id,0,2),substr(t1.yearmonth,0,6)) ti1,t_permission t2
+    where ti1.company_id=t2.company_id
+    order by ti1.company_id,ti1.time
+	</select>
+	
+	<select id="countMeterValue1" parameterType="java.util.Map" resultType="int">
+		select count(distinct t.company_id) from em_day_report t
+			where 1=1
+			<if test="companyId != null and companyId.length()==2 ">
+				and t.COMPANY_ID like #{companyId}||'%'
+			</if>
+			<if test="companyId != null and companyId.length()==4 ">
+				and t.COMPANY_ID = #{companyId}
+			</if>
+			<if test="year != null">
+				and t.year=${year}
+			</if>
+		
+	</select>
+	
+	<select id="selectListMeterValue1" parameterType="java.util.Map" resultType="MeterValueTime">
+		select ti1.*,t2.name company from (
+  select t1.company_id company_id,substr(t1.yearmonth,0,6) time,sum(t1.e_value) value from em_day_report t1
+  <if test="year != null">
+		where t1.year=${year}
+	</if>
+    group by t1.company_id,substr(t1.yearmonth,0,6)
+    order by t1.company_id,substr(t1.yearmonth,0,6)) ti1,t_permission t2
+    where ti1.company_id=t2.company_id
+    <if test="companyId != null and companyId.length()==2 ">
+		and ti1.COMPANY_ID like #{companyId}||'%'
+	</if>
+	<if test="companyId != null and companyId.length()==4 ">
+		and ti1.COMPANY_ID = #{companyId}
+	</if>
+	
+    order by ti1.company_id,ti1.time
+	</select>
+	
+	<select id="countMeterValue2" parameterType="java.util.Map" resultType="int">
+		select count(distinct t.project_no) from em_day_report t
+			where 1=1
+			<if test="companyId != null and companyId.length()==4 and projectNo==null">
+				and t.COMPANY_ID = #{companyId}
+			</if>
+			<if test="projectNo != null">
+				and t.project_no = #{projectNo}
+			</if>
+			<if test="year != null">
+				and t.year=${year}
+			</if>
+	</select>
+	
+	<select id="selectListMeterValue2" parameterType="java.util.Map" resultType="MeterValueTime">
+  select t1.project_no company,substr(t1.yearmonth,0,6) time,sum(t1.e_value) value from em_day_report t1
+  	where 1=1 
+  	<if test="companyId != null and companyId.length()==4 and projectNo==null">
+		and t1.COMPANY_ID = #{companyId}
+	</if>
+	<if test="projectNo != null">
+		and t1.project_no = #{projectNo}
+	</if>
+	<if test="year != null">
+		and t1.year=${year}
+	</if>
+    group by t1.project_no,substr(t1.yearmonth,0,6)
+    order by t1.project_no,substr(t1.yearmonth,0,6)
+    
+	</select>
+	
+	<select id="countMeterValueDay" parameterType="java.util.Map" resultType="int">
+		select count(distinct substr(t.company_id,0,2)) from em_day_report t
+				where (t.yearmonth between ${date1} and ${date2} )
+	</select>
+	
+	<select id="selectListMeterValueDay" parameterType="java.util.Map" resultType="MeterValueTime">
+		select ti1.*,t2.name company from (
+	select substr(t1.company_id,0,2) company_id,t1.yearmonth time,sum(t1.e_value) value from em_day_report t1
+	where (t1.yearmonth between ${date1} and ${date2} )
+    group by substr(t1.company_id,0,2),t1.yearmonth
+    order by substr(t1.company_id,0,2),t1.yearmonth
+    ) ti1,t_permission t2
+    where ti1.company_id=t2.company_id
+    order by ti1.company_id,ti1.time
+	</select>
+	
+	<select id="countMeterValueDay1" parameterType="java.util.Map" resultType="int">
+		select count(distinct t.company_id) from em_day_report t
+			where 1=1
+			<if test="companyId != null and companyId.length()==2 ">
+				and t.COMPANY_ID like #{companyId}||'%'
+			</if>
+			<if test="companyId != null and companyId.length()==4 ">
+				and t.COMPANY_ID = #{companyId}
+			</if>
+			and (t.yearmonth between ${date1} and ${date2} )
+		
+	</select>
+	
+	<select id="selectListMeterValueDay1" parameterType="java.util.Map" resultType="MeterValueTime">
+		select ti1.*,t2.name company from (
+  select t1.company_id company_id,t1.yearmonth time,sum(t1.e_value) value from em_day_report t1
+  where (t1.yearmonth between ${date1} and ${date2} )
+    group by t1.company_id,t1.yearmonth
+    order by t1.company_id,t1.yearmonth
+    ) ti1,t_permission t2
+    where ti1.company_id=t2.company_id
+    <if test="companyId != null and companyId.length()==2 ">
+		and ti1.COMPANY_ID like #{companyId}||'%'
+	</if>
+	<if test="companyId != null and companyId.length()==4 ">
+		and ti1.COMPANY_ID = #{companyId}
+	</if>
+	
+    order by ti1.company_id,ti1.time
+	</select>
+	
+	<select id="countMeterValueDay2" parameterType="java.util.Map" resultType="int">
+		select count(distinct t.project_no) from em_day_report t
+			where 1=1
+			<if test="companyId != null and companyId.length()==4 and projectNo==null">
+				and t.COMPANY_ID = #{companyId}
+			</if>
+			<if test="projectNo != null">
+				and t.project_no = #{projectNo}
+			</if>
+			and (t.yearmonth between ${date1} and ${date2} )
+	</select>
+	
+	<select id="selectListMeterValueDay2" parameterType="java.util.Map" resultType="MeterValueTime">
+  select t1.project_no company,t1.yearmonth time,sum(t1.e_value) value from em_day_report t1
+  	where 1=1 
+  	<if test="companyId != null and companyId.length()==4 and projectNo==null">
+		and t1.COMPANY_ID = #{companyId}
+	</if>
+	<if test="projectNo != null">
+		and t1.project_no = #{projectNo}
+	</if>
+	and (t1.yearmonth between ${date1} and ${date2} )
+    group by t1.project_no,t1.yearmonth
+    order by t1.project_no,t1.yearmonth
+    
+	</select>
+	
+	<select id="countCarrierValue" parameterType="java.util.Map" resultType="int">
+		select count(distinct substr(t.company_id,0,2)) from em_day_report t
+				where 
+			t.year=${year} and t.month=${month}
+	</select>
+	
+	<select id="selectListCarrierValue" parameterType="java.util.Map" resultType="CarrierValueFee">
+		select ti1.*,t2.name from (
+	select substr(t1.company_id,0,2) company_id,sum(t1.yd_value) yd_value,sum(t1.yd_fee)/100 yd_fee,
+	sum(t1.dx_value) dx_value,sum(t1.dx_fee)/100 dx_fee,sum(t1.lt_value) lt_value,sum(t1.lt_fee)/100 lt_fee,
+	sum(t1.total_fee)/100 total_fee,sum(t1.total_value) total_value
+	 from em_day_report t1 where t1.year=${year} and t1.month=${month}
+	group by substr(t1.company_id,0,2)) ti1,t_permission t2
+    where ti1.company_id=t2.company_id
+    order by ti1.company_id
+	</select>
+	
+	<select id="countCarrierValue1" parameterType="java.util.Map" resultType="int">
+		select count(distinct t.company_id) from em_day_report t
+				where 
+			t.year=${year} and t.month=${month} and t.COMPANY_ID like #{companyId}||'%'
+	</select>
+	
+	<select id="selectListCarrierValue1" parameterType="java.util.Map" resultType="CarrierValueFee">
+		select ti1.*,t2.name from (
+	select t1.company_id company_id,sum(t1.yd_value) yd_value,sum(t1.yd_fee)/100 yd_fee,
+	sum(t1.dx_value) dx_value,sum(t1.dx_fee)/100 dx_fee,sum(t1.lt_value) lt_value,sum(t1.lt_fee)/100 lt_fee,
+	sum(t1.total_fee)/100 total_fee,sum(t1.total_value) total_value
+	 from em_day_report t1 where t1.year=${year} and t1.month=${month} 
+	 and t1.COMPANY_ID like #{companyId}||'%'
+	group by t1.COMPANY_ID
+	) ti1,t_permission t2
+    where ti1.company_id=t2.company_id
+    order by ti1.company_id
+	</select>
+	
+	<select id="countCarrierValue2" parameterType="java.util.Map" resultType="int">
+		select count(distinct t.project_no) from em_day_report t
+				where 
+			t.year=${year} and t.month=${month} 
+			<if test="companyId != null and companyId.length()==4 and projectNo==null">
+				and t.COMPANY_ID = #{companyId}
+			</if>
+			<if test="projectNo != null">
+				and t.project_no = #{projectNo}
+			</if>
+	</select>
+	
+	<select id="selectListCarrierValue2" parameterType="java.util.Map" resultType="CarrierValueFee">
+		
+	select t1.project_no name,sum(t1.yd_value) yd_value,sum(t1.yd_fee)/100 yd_fee,
+	sum(t1.dx_value) dx_value,sum(t1.dx_fee)/100 dx_fee,sum(t1.lt_value) lt_value,sum(t1.lt_fee)/100 lt_fee,
+	sum(t1.total_fee)/100 total_fee,sum(t1.total_value) total_value
+	 from em_day_report t1 where t1.year=${year} and t1.month=${month} 
+	 <if test="companyId != null and companyId.length()==4 and projectNo==null">
+		and t1.COMPANY_ID = #{companyId}
+	</if>
+	<if test="projectNo != null">
+		and t1.project_no = #{projectNo}
+	</if>
+	group by t1.project_no
+    order by t1.project_no
+	</select>
+	
+	<select id="countCarrierValueDay" parameterType="java.util.Map" resultType="int">
+		select count(distinct substr(t.company_id,0,2)) from em_day_report t
+				where 
+			t.yearmonth=${date1}
+	</select>
+	
+	<select id="selectListCarrierValueDay" parameterType="java.util.Map" resultType="CarrierValueFee">
+		select ti1.*,t2.name from (
+	select substr(t1.company_id,0,2) company_id,sum(t1.yd_value) yd_value,sum(t1.yd_fee)/100 yd_fee,
+	sum(t1.dx_value) dx_value,sum(t1.dx_fee)/100 dx_fee,sum(t1.lt_value) lt_value,sum(t1.lt_fee)/100 lt_fee,
+	sum(t1.total_fee)/100 total_fee,sum(t1.total_value) total_value
+	 from em_day_report t1 where t1.yearmonth=${date1}
+	group by substr(t1.company_id,0,2)) ti1,t_permission t2
+    where ti1.company_id=t2.company_id
+    order by ti1.company_id
+	</select>
+	
+	<select id="countCarrierValueDay1" parameterType="java.util.Map" resultType="int">
+		select count(distinct t.company_id) from em_day_report t
+				where 
+			t.yearmonth=${date1} and t.COMPANY_ID like #{companyId}||'%'
+	</select>
+	
+	<select id="selectListCarrierValueDay1" parameterType="java.util.Map" resultType="CarrierValueFee">
+		select ti1.*,t2.name from (
+	select t1.company_id company_id,sum(t1.yd_value) yd_value,sum(t1.yd_fee)/100 yd_fee,
+	sum(t1.dx_value) dx_value,sum(t1.dx_fee)/100 dx_fee,sum(t1.lt_value) lt_value,sum(t1.lt_fee)/100 lt_fee,
+	sum(t1.total_fee)/100 total_fee,sum(t1.total_value) total_value
+	 from em_day_report t1 where t1.yearmonth=${date1}
+	 and t1.COMPANY_ID like #{companyId}||'%'
+	group by t1.COMPANY_ID
+	) ti1,t_permission t2
+    where ti1.company_id=t2.company_id
+    order by ti1.company_id
+	</select>
+	
+	<select id="countCarrierValueDay2" parameterType="java.util.Map" resultType="int">
+		select count(distinct t.project_no) from em_day_report t
+				where 
+			t.yearmonth=${date1}
+			<if test="companyId != null and companyId.length()==4 and projectNo==null">
+				and t.COMPANY_ID = #{companyId}
+			</if>
+			<if test="projectNo != null">
+				and t.project_no = #{projectNo}
+			</if>
+	</select>
+	
+	<select id="selectListCarrierValueDay2" parameterType="java.util.Map" resultType="CarrierValueFee">
+		
+	select t1.project_no name,sum(t1.yd_value) yd_value,sum(t1.yd_fee)/100 yd_fee,
+	sum(t1.dx_value) dx_value,sum(t1.dx_fee)/100 dx_fee,sum(t1.lt_value) lt_value,sum(t1.lt_fee)/100 lt_fee,
+	sum(t1.total_fee)/100 total_fee,sum(t1.total_value) total_value
+	 from em_day_report t1 where t1.yearmonth=${date1} 
+	 <if test="companyId != null and companyId.length()==4 and projectNo==null">
+		and t1.COMPANY_ID = #{companyId}
+	</if>
+	<if test="projectNo != null">
+		and t1.project_no = #{projectNo}
+	</if>
+	group by t1.project_no
+    order by t1.project_no
+	</select>
+	
+	<select id="getCarrierValueDayChart" parameterType="java.util.Map" resultType="CarrierValueFee">
+		
+		select t.carrier_name name,sum(t.carrier_value) value,sum(t.carrier_fee)/100 fee  
+		from em_day_carrier_report t 
+		where t.company_Id in <include refid="com.gd.mapper.AShareMapper.companyIdTable"/> 
+		and t.yearmonth=replace(#{date1},'-','')
+		<if test="companyId != null and companyId.length()==2 and projectNo==''">
+			and t.COMPANY_ID like #{companyId}||'%'
+		</if>
+		<if test="companyId != null and companyId.length()==4 and projectNo==''">
+			and t.COMPANY_ID = #{companyId}
+		</if>
+		<if test="projectNo != null and projectNo.length()!=0 ">
+			and t.project_no = #{projectNo}
+		</if>
+		group by t.carrier_name
+		order by t.carrier_name desc
+	</select>
+	
+	<select id="getCarrierValueChart" parameterType="java.util.Map" resultType="CarrierValueFee">
+		
+		select t.carrier_name name,sum(t.carrier_value) value,sum(t.carrier_fee)/100 fee  
+		from em_day_carrier_report t 
+		where t.company_Id in <include refid="com.gd.mapper.AShareMapper.companyIdTable"/>
+		<if test="year == null or year ==''">
+			and t.year = to_char(sysdate,'yyyy')
+		</if>
+		<if test="year != null and year !=''">
+			and t.year = ${year}
+		</if>
+		<if test="month == null or month ==''">
+			and t.month = to_number(to_char(sysdate,'MM'))
+		</if>
+		<if test="month != null and month !=''">
+			and t.month = ${month}
+		</if>
+		<if test="companyId != null and companyId.length()==2 and projectNo==''">
+			and t.COMPANY_ID like #{companyId}||'%'
+		</if>
+		<if test="companyId != null and companyId.length()==4 and projectNo==''">
+			and t.COMPANY_ID = #{companyId}
+		</if>
+		<if test="projectNo != null and projectNo.length()!=0 ">
+			and t.project_no = #{projectNo}
+		</if>
+		group by t.carrier_name
+		order by t.carrier_name desc
+	</select>
+	
+	<select id="getCompanyValueDayChart" parameterType="java.util.Map" resultType="CarrierValueFee">
+		
+		select (select t2.company_name from em_company t2 where t2.company_id= substr(t.company_id,0,4)) name,
+		nvl(sum(t.e_value),0) value,nvl(sum(t.fee),0) fee from em_day_report t
+		where 1=1 <!--  t.company_Id in <include refid="com.gd.mapper.AShareMapper.companyIdTable"/>
+		and  --> 
+		and company_Id in ${companyIds}
+		and t.yearmonth=replace(#{date1},'-','')
+		group by substr(t.company_id,0,4)
+		order by value
+	</select>
+	
+	<select id="getCompanyValueChart" parameterType="java.util.Map" resultType="CarrierValueFee">
+		
+		select (select t2.company_name from em_company t2 where t2.company_id= substr(t.company_id,0,4)) name,
+		nvl(sum(t.e_value),0) value,nvl(sum(t.fee),0) fee  from em_day_report t
+		where 1=1 <!-- and t.company_Id in <include refid="com.gd.mapper.AShareMapper.companyIdTable"/> -->
+		and company_Id in ${companyIds}
+		<if test="year == null or year ==''">
+			and t.year = to_char(sysdate,'yyyy')
+		</if>
+		<if test="year != null and year !=''">
+			and t.year = ${year}
+		</if>
+		<if test="month == null or month ==''">
+			and t.month = to_number(to_char(sysdate,'MM'))
+		</if>
+		<if test="month != null and month !=''">
+			and t.month = ${month}
+		</if>
+		
+		group by substr(t.company_id,0,4)
+		order by value
+	</select>
+	
+</mapper>

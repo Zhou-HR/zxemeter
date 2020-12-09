@@ -1,0 +1,41 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.gd.mapper.PermissionMapper">
+    <delete id="delete" parameterType="String">
+        delete from t_permission where id in(#{ids})
+    </delete>
+
+    <delete id="deleteRolePermission" parameterType="String">
+        delete from t_role_permission where permission_id in (#{ids})
+    </delete>
+    
+    <select id="getMenuPermissionsByRoleId" parameterType="int" resultType="Permission">
+        select a.* from t_permission_menu a, t_role_permission_menu b where a.id = b.permission_id and b.role_id = #{roleId}
+    </select>
+
+    <select id="getPermissionsByRoleId" parameterType="int" resultType="Permission">
+        select a.* from t_permission a, t_role_permission b where a.id = b.permission_id and b.role_id = #{roleId}
+    </select>
+
+    <select id="getPermissionsByUserId" parameterType="int" resultType="Permission">
+        select distinct a.* from t_permission a, t_role_permission b where
+        a.id = b.permission_id and a.type = 'menu' and b.role_id in (
+        select y.role_id from t_user x, t_user_role y,t_role z
+         where x.id = y.user_id and x.id = #{userId}
+         and z.status=0 and z.id=y.role_id
+        ) order by a.parent_id, a.ordered
+    </select>
+    
+    <select id="getMenuPermissionsByUserId" parameterType="int" resultType="Permission">
+        select distinct a.* from t_permission_menu a, t_role_permission_menu b where
+        a.id = b.permission_id and a.type = 'menu' and b.role_id in (
+        select y.role_id from t_user x, t_user_role_menu y,t_role_menu z 
+         where x.id = y.user_id and x.id = #{userId}
+         and z.status=0 and z.id=y.role_id
+        ) order by a.parent_id, a.ordered
+    </select>
+    
+    <insert id="insert" parameterType="Permission">
+    	insert into t_permission  values (Permission_seq.Nextval,#{name},#{path},#{type},#{parentId},#{ordered},#{icon})
+    </insert>
+</mapper>

@@ -19,6 +19,7 @@ import java.util.Date;
 /**
  * 管理员
  *
+ * @author ZhouHR
  */
 @Data
 @Crud
@@ -29,7 +30,7 @@ public class User {
 
     @NotBlank
     private String name;
-    
+
     private String realname;
 
     @Length(min = 6)
@@ -39,18 +40,18 @@ public class User {
     private String phone;
 
     private Date createTime;
-    
+
     private String dept;
-    
+
     private String title;
-    
+
     private Integer status;
-    
+
     private String hour;
-    
+
     private String everyHour;
-    
+
     private String email;
-    
+
     private String ddUserid;
 }

@@ -20,6 +20,7 @@ import java.util.Map;
 /**
  * 管理员
  *
+ * @author ZhouHR
  */
 @Data
 @Crud
@@ -30,12 +31,12 @@ public class User1 {
 
     @NotBlank
     private String name;
-    
+
     @Pattern(regexp = "^\\d+[\\d-]+\\d+$", message = "手机号不符合要求")
     private String phone;
 
     private String dept;
-    
+
     @Exclude
-	private Map permission;
+    private Map permission;
 }

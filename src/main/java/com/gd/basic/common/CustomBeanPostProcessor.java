@@ -24,15 +24,18 @@ import java.util.List;
 /**
  * 对Spring初始化bean之前或在bean初始化后进行其他处理
  *
+ * @author ZhouHR
  */
 @Component
 @Log4j2
 public class CustomBeanPostProcessor implements BeanPostProcessor {
 
+    @Override
     public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
         return bean;
     }
 
+    @Override
     public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
         if (bean instanceof ConversionService) {
             DefaultFormattingConversionService conversionService = (DefaultFormattingConversionService) bean;

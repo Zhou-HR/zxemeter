@@ -20,6 +20,7 @@ import com.gd.model.po.Role;
 import com.gd.model.po.User;
 
 /**
+ * @author ZhouHR
  */
 @Component
 @Slf4j
@@ -35,16 +36,16 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
         User user = UserMapper.getUserByName(username);
-        if(user==null){
-        	log.error("====================user==null======================");
-        	throw new DisabledException("用户名或密码错误！");
-        }else{
-        	log.info("====================user=={}======================",user.getName()+" "+user.getPassword());
+        if (user == null) {
+            log.error("====================user==null======================");
+            throw new DisabledException("用户名或密码错误！");
+        } else {
+            log.info("====================user=={}======================", user.getName() + " " + user.getPassword());
         }
 //        if (!"0".equals(user.getStatus().getValue())) {
 //            throw new DisabledException("当前用户状态不可用！");
 //        }
-        
+
         List<Role> roles = roleMapper.getRolesByUserId(user.getId());
         Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
         if (roles != null) {

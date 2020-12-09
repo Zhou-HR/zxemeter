@@ -3,6 +3,9 @@ package com.gd.basic.crud;
 import com.gd.model.po.Permission;
 
 
+/**
+ * @author ZhouHR
+ */
 public class MybatisSqlBuilder extends SqlBuilder {
 
     public MybatisSqlBuilder(TableMapping tableMapping) {

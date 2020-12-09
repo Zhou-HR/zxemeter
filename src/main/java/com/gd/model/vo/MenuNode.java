@@ -7,10 +7,11 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
+ * @author ZhouHR
  */
 @Setter
 @Getter
-public class MenuNode implements Serializable{
+public class MenuNode implements Serializable {
 
     private int id;
     private int pId;
@@ -18,6 +19,6 @@ public class MenuNode implements Serializable{
     private String path;
     private String icon;
     private List<MenuNode> child;
-    
+
     private String companyId;
 }

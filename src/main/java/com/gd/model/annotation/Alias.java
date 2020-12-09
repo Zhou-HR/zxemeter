@@ -8,6 +8,7 @@ import java.lang.annotation.Target;
 /**
  * 配置持久化对象字段与列的映射关系
  *
+ * @author ZhouHR
  */
 @Target({ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)

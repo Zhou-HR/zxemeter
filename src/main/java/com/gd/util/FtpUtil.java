@@ -14,149 +14,150 @@ import com.gd.basic.crud.FilterRule;
 import com.gd.model.po.SysCode;
 
 
+/**
+ * @author ZhouHR
+ */
 @Slf4j
 public class FtpUtil {
 
-	public static String URL;
-	public static String USERNAME;
-	public static String PASSWORD;
-	public static String PORT;
-	public static String HEAD;
+    public static String URL;
+    public static String USERNAME;
+    public static String PASSWORD;
+    public static String PORT;
+    public static String HEAD;
 
-	static {
-		CrudService crudService = CrudService.of(SysCode.class);
-		FilterRule rules=new FilterRule("dicCode","ftp");
-		SysCode sysCode=crudService.find(rules);
-		URL=sysCode.getDicKey();
-		String str=sysCode.getDicValue();
-		String arr[]=str.split(":");
-		USERNAME=arr[0];
-		PASSWORD=arr[1];
-		PORT=arr[2];
-		
-		rules=new FilterRule("dicCode","OUTER_IMG_URL");
-		sysCode=crudService.find(rules);
-		HEAD=sysCode.getDicValue();
-	}
-	
-	
+    static {
+        CrudService crudService = CrudService.of(SysCode.class);
+        FilterRule rules = new FilterRule("dicCode", "ftp");
+        SysCode sysCode = crudService.find(rules);
+        URL = sysCode.getDicKey();
+        String str = sysCode.getDicValue();
+        String arr[] = str.split(":");
+        USERNAME = arr[0];
+        PASSWORD = arr[1];
+        PORT = arr[2];
 
-	public static void upload(String directoryName, 
-			String serverfile, MultipartFile file) throws Exception{
-		FTPClient ftpClient = new FTPClient();
-		try {
-			ftpClient.connect(URL,Integer.valueOf(PORT));
+        rules = new FilterRule("dicCode", "OUTER_IMG_URL");
+        sysCode = crudService.find(rules);
+        HEAD = sysCode.getDicValue();
+    }
+
+
+    public static void upload(String directoryName,
+                              String serverfile, MultipartFile file) throws Exception {
+        FTPClient ftpClient = new FTPClient();
+        try {
+            ftpClient.connect(URL, Integer.valueOf(PORT));
 //			System.out.print(ftpClient.getReplyString());
 
-			// check reply code.
-			if (!FTPReply.isPositiveCompletion(ftpClient.getReplyCode())) {
-				ftpClient.disconnect();
+            // check reply code.
+            if (!FTPReply.isPositiveCompletion(ftpClient.getReplyCode())) {
+                ftpClient.disconnect();
 //				System.out.println("Connection refused.");
-				return;
-			}
+                return;
+            }
 
-			ftpClient.login(USERNAME, PASSWORD);
-			ftpClient.setFileType(FTPClient.BINARY_FILE_TYPE);
+            ftpClient.login(USERNAME, PASSWORD);
+            ftpClient.setFileType(FTPClient.BINARY_FILE_TYPE);
 //			System.out
 //					.println("Workdir >>" + ftpClient.printWorkingDirectory());
 //			ftpClient.makeDirectory(directoryName);
-			makeDirectory(ftpClient,directoryName);
-			ftpClient.changeWorkingDirectory(directoryName);
-			ftpClient.storeFile(serverfile, file.getInputStream());
-			
-			ftpClient.logout();
-			ftpClient.disconnect();
-		} catch (Exception e) {
-			
-			if (ftpClient.isConnected()) {
-				try {
-					ftpClient.disconnect();
-				} catch (IOException f) {
-					// do nothing
-				}
-			}
-			log.error(e.getMessage());
-			throw e;
-			//e.printStackTrace();
-		}finally{
-			if (ftpClient.isConnected()) {
-				try {
-					ftpClient.disconnect();
-				} catch (IOException f) {
-					// do nothing
-				}
-			}
-		}
-	}
-	
-	public static void upload(String directoryName, 
-			String serverfile, InputStream is) throws Exception{
-		FTPClient ftpClient = new FTPClient();
-		try {
-			ftpClient.connect(URL,Integer.valueOf(PORT));
+            makeDirectory(ftpClient, directoryName);
+            ftpClient.changeWorkingDirectory(directoryName);
+            ftpClient.storeFile(serverfile, file.getInputStream());
+
+            ftpClient.logout();
+            ftpClient.disconnect();
+        } catch (Exception e) {
+
+            if (ftpClient.isConnected()) {
+                try {
+                    ftpClient.disconnect();
+                } catch (IOException f) {
+                    // do nothing
+                }
+            }
+            log.error(e.getMessage());
+            throw e;
+            //e.printStackTrace();
+        } finally {
+            if (ftpClient.isConnected()) {
+                try {
+                    ftpClient.disconnect();
+                } catch (IOException f) {
+                    // do nothing
+                }
+            }
+        }
+    }
+
+    public static void upload(String directoryName,
+                              String serverfile, InputStream is) throws Exception {
+        FTPClient ftpClient = new FTPClient();
+        try {
+            ftpClient.connect(URL, Integer.valueOf(PORT));
 //			System.out.print(ftpClient.getReplyString());
 
-			// check reply code.
-			if (!FTPReply.isPositiveCompletion(ftpClient.getReplyCode())) {
-				ftpClient.disconnect();
+            // check reply code.
+            if (!FTPReply.isPositiveCompletion(ftpClient.getReplyCode())) {
+                ftpClient.disconnect();
 //				System.out.println("Connection refused.");
-				return;
-			}
+                return;
+            }
 
-			ftpClient.login(USERNAME, PASSWORD);
-			ftpClient.setFileType(FTPClient.BINARY_FILE_TYPE);
+            ftpClient.login(USERNAME, PASSWORD);
+            ftpClient.setFileType(FTPClient.BINARY_FILE_TYPE);
 //			System.out
 //					.println("Workdir >>" + ftpClient.printWorkingDirectory());
 //			ftpClient.makeDirectory(directoryName);
-			makeDirectory(ftpClient,directoryName);
-			ftpClient.changeWorkingDirectory(directoryName);
-			ftpClient.storeFile(serverfile, is);
-			
-			ftpClient.logout();
-			ftpClient.disconnect();
-		} catch (Exception e) {
-			if (ftpClient.isConnected()) {
-				try {
-					ftpClient.disconnect();
-				} catch (IOException f) {
-					// do nothing
-				}
-			}
-			log.error(e.getMessage());
-			
-			throw e;
-			//e.printStackTrace();
-		}finally{
-			if (ftpClient.isConnected()) {
-				try {
-					ftpClient.disconnect();
-				} catch (IOException f) {
-					// do nothing
-				}
-			}
-		}
-	}
-	
-	
+            makeDirectory(ftpClient, directoryName);
+            ftpClient.changeWorkingDirectory(directoryName);
+            ftpClient.storeFile(serverfile, is);
 
-	public static void makeDirectory(FTPClient ftpClient,String directoryName) {
-		if("/".equals(directoryName.substring(0,1)))
-			directoryName=directoryName.substring(1);
-		if("/".equals(directoryName.substring(directoryName.length()-1)))
-			directoryName=directoryName.substring(0,directoryName.length()-1);
-		String[] arr=directoryName.split("/");
-		String dir="";
-		for(String str:arr){
-			dir+="/"+str;
-			try {
-				ftpClient.makeDirectory(dir);
-			} catch (IOException e) {
-				//e.printStackTrace();
-				log.error(e.getMessage());
-			}
-		}
+            ftpClient.logout();
+            ftpClient.disconnect();
+        } catch (Exception e) {
+            if (ftpClient.isConnected()) {
+                try {
+                    ftpClient.disconnect();
+                } catch (IOException f) {
+                    // do nothing
+                }
+            }
+            log.error(e.getMessage());
 
-	}
+            throw e;
+            //e.printStackTrace();
+        } finally {
+            if (ftpClient.isConnected()) {
+                try {
+                    ftpClient.disconnect();
+                } catch (IOException f) {
+                    // do nothing
+                }
+            }
+        }
+    }
+
+
+    public static void makeDirectory(FTPClient ftpClient, String directoryName) {
+        if ("/".equals(directoryName.substring(0, 1)))
+            directoryName = directoryName.substring(1);
+        if ("/".equals(directoryName.substring(directoryName.length() - 1)))
+            directoryName = directoryName.substring(0, directoryName.length() - 1);
+        String[] arr = directoryName.split("/");
+        String dir = "";
+        for (String str : arr) {
+            dir += "/" + str;
+            try {
+                ftpClient.makeDirectory(dir);
+            } catch (IOException e) {
+                //e.printStackTrace();
+                log.error(e.getMessage());
+            }
+        }
+
+    }
 	/*
 	public static void showPic(String path,HttpServletResponse response){
 		int pos=path.lastIndexOf("/");

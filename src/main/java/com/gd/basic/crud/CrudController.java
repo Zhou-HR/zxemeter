@@ -37,6 +37,9 @@ import lombok.ToString;
 import lombok.extern.log4j.Log4j2;
 
 
+/**
+ * @author ZhouHR
+ */
 @Controller
 @Log4j2
 public class CrudController {
@@ -197,21 +200,22 @@ public class CrudController {
 
     /**
      * 分页页码重置问题
+     *
      * @param params
      * @param queryInfo
      */
     public void resetPage(Map<String, String> params, QueryInfo queryInfo) {
-		int pageSize = NumberUtils.toInt(params.get("rows"));
-		int page = NumberUtils.toInt(params.get("page"));
-		if(pageSize == 0){
-			pageSize = 10;
-		}
-		if(page == 0){
-			page = 1;
-		}
-    	queryInfo.paging(page, pageSize);
-	}
-    
+        int pageSize = NumberUtils.toInt(params.get("rows"));
+        int page = NumberUtils.toInt(params.get("page"));
+        if (pageSize == 0) {
+            pageSize = 10;
+        }
+        if (page == 0) {
+            page = 1;
+        }
+        queryInfo.paging(page, pageSize);
+    }
+
     @ToString
     private class CrudInfo {
         Class cls;

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
+ * @author ZhouHR
  */
 public final class BeanFactoryUtil {
 

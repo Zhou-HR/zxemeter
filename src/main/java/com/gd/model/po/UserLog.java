@@ -22,28 +22,28 @@ public class UserLog implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-	@Id
-	private String id;
+    @Id
+    private String id;
     /**
      * 用户ID
      */
-	private String userId;
+    private String userId;
     /**
      * 用户名
      */
-	private String userName;
+    private String userName;
     /**
      * IP
      */
-	private String ip;
+    private String ip;
     /**
      * 操作记录
      */
-	private String summary;
+    private String summary;
     /**
      * 记录时间
      */
-	private Date createTime;
-	private String remark1;
-	private String remark2;
+    private Date createTime;
+    private String remark1;
+    private String remark2;
 }

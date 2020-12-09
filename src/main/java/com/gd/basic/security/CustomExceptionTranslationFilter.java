@@ -22,6 +22,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
+ * @author ZhouHR
  */
 @Log4j2
 public class CustomExceptionTranslationFilter extends ExceptionTranslationFilter {
@@ -44,7 +45,7 @@ public class CustomExceptionTranslationFilter extends ExceptionTranslationFilter
             log.error(e);
 
             //todo 异常信息描述
-            
+
             HttpServletRequest request = (HttpServletRequest) req;
             HttpServletResponse response = (HttpServletResponse) res;
             if (request.getHeader("x-requested-with") != null) {
@@ -55,7 +56,7 @@ public class CustomExceptionTranslationFilter extends ExceptionTranslationFilter
         }
     }
 
-    
+
     @Override
     protected void sendStartAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, AuthenticationException reason) throws ServletException, IOException {
 //        * 这个方法的目的就是让用户重新去登录，默认如下：
@@ -70,22 +71,22 @@ public class CustomExceptionTranslationFilter extends ExceptionTranslationFilter
         //20190709yxl 林安康的外链不支持https，导致https不可用，并且session失效，导致http登录也失败的严重问题
         //所以basePath只能写死在配置文件里，不能从request获取
         String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath() + "/";
-        
+
         //删除cookie 根本没用
-        Cookie[] cookies=request.getCookies();
-        if(cookies!=null){
-        	for(Cookie cookie:cookies){
-            	System.out.println(cookie.getName()+"|"+cookie.getValue());
+        Cookie[] cookies = request.getCookies();
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                System.out.println(cookie.getName() + "|" + cookie.getValue());
             }
         }
-        
-        
+
+
         if (reason instanceof InsufficientAuthenticationException) {
             // 这种情况代表当前用户是匿名用户或者remember-me用户，出现了拒绝访问的情况
             if (request.getHeader("x-requested-with") != null) {
                 response.sendError(HttpServletResponse.SC_FORBIDDEN, "Access Denied");
             } else {
-                response.sendRedirect(basePath+"errors/access-denied.jsp");
+                response.sendRedirect(basePath + "errors/access-denied.jsp");
             }
         } else {
             // 跳转到登录页面
@@ -93,7 +94,7 @@ public class CustomExceptionTranslationFilter extends ExceptionTranslationFilter
             if (request.getHeader("x-requested-with") != null) {
                 response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "no login");
             } else {
-                response.sendRedirect(basePath+"login.jsp");
+                response.sendRedirect(basePath + "login.jsp");
             }
         }
     }

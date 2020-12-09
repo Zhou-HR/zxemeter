@@ -2,88 +2,90 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.gd.mapper.MeterMaintainMapper">
 
-	<select id="countByCondition" parameterType="java.util.Map"		resultType="int">
-		select count(*) from em_meter_maintain t
-		where t.company_Id in <include refid="com.gd.mapper.AShareMapper.companyIdTable"/>
-		<if test="meterNo != null">
-			and t.METER_NO = #{meterNo}
-		</if>
-		<if test='status == "0"'>
-			and t.deal_date is null
-		</if>
-		<if test='status == "1"'>
-			and t.deal_date is not null
-		</if>
-		<if test="projectNo != null">
-			and t.project_no = #{projectNo}
-		</if>
-		<if test="companyId != null and companyId.length()==2 ">
-			and t.company_Id like #{companyId}||'%'
-		</if>
-		<if test="companyId != null and companyId.length()==4 ">
-			and t.company_Id = #{companyId}
-		</if>
-	</select>
-	
-	<select id="findById" resultType="MeterMaintain">
+    <select id="countByCondition" parameterType="java.util.Map" resultType="int">
+        select count(*) from em_meter_maintain t
+        where t.company_Id in
+        <include refid="com.gd.mapper.AShareMapper.companyIdTable"/>
+        <if test="meterNo != null">
+            and t.METER_NO = #{meterNo}
+        </if>
+        <if test='status == "0"'>
+            and t.deal_date is null
+        </if>
+        <if test='status == "1"'>
+            and t.deal_date is not null
+        </if>
+        <if test="projectNo != null">
+            and t.project_no = #{projectNo}
+        </if>
+        <if test="companyId != null and companyId.length()==2 ">
+            and t.company_Id like #{companyId}||'%'
+        </if>
+        <if test="companyId != null and companyId.length()==4 ">
+            and t.company_Id = #{companyId}
+        </if>
+    </select>
+
+    <select id="findById" resultType="MeterMaintain">
 		select t.* from em_meter_maintain t
 				where  t.id=#{id}
 	</select>
-	
-	<select id="selectList" parameterType="java.util.Map" resultType="MeterMaintain">
-		select * 
-		from(select r.* ,ROWNUM  rn
-				from(
-				select t.* from em_meter_maintain t
-				where t.company_Id in <include refid="com.gd.mapper.AShareMapper.companyIdTable"/>
-				<if test="meterNo != null">
-					and t.METER_NO = #{meterNo}
-				</if>
-				<if test='status == "0"'>
-					and t.deal_date is null
-				</if>
-				<if test='status == "1"'>
-					and t.deal_date is not null
-				</if>
-				<if test="projectNo != null">
-					and t.project_no = #{projectNo}
-				</if>
-				<if test="companyId != null and companyId.length()==2 ">
-					and t.company_Id like #{companyId}||'%'
-				</if>
-				<if test="companyId != null and companyId.length()==4 ">
-					and t.company_Id = #{companyId}
-				</if>
-				
-				order by t.send_date desc
-			) r
-			 where ROWNUM &lt;= #{p2}
-		) table_alias
-		where table_alias.rn &gt; #{p1}
-	</select>
-	
-	<insert id="insertMaintainPic" parameterType="MeterMaintainPic">
+
+    <select id="selectList" parameterType="java.util.Map" resultType="MeterMaintain">
+        select *
+        from(select r.* ,ROWNUM rn
+        from(
+        select t.* from em_meter_maintain t
+        where t.company_Id in
+        <include refid="com.gd.mapper.AShareMapper.companyIdTable"/>
+        <if test="meterNo != null">
+            and t.METER_NO = #{meterNo}
+        </if>
+        <if test='status == "0"'>
+            and t.deal_date is null
+        </if>
+        <if test='status == "1"'>
+            and t.deal_date is not null
+        </if>
+        <if test="projectNo != null">
+            and t.project_no = #{projectNo}
+        </if>
+        <if test="companyId != null and companyId.length()==2 ">
+            and t.company_Id like #{companyId}||'%'
+        </if>
+        <if test="companyId != null and companyId.length()==4 ">
+            and t.company_Id = #{companyId}
+        </if>
+
+        order by t.send_date desc
+        ) r
+        where ROWNUM &lt;= #{p2}
+        ) table_alias
+        where table_alias.rn &gt; #{p1}
+    </select>
+
+    <insert id="insertMaintainPic" parameterType="MeterMaintainPic">
 		insert into em_meter_maintain_pic
 		  (id, maintain_id, path)
 		values
 		  (#{id}, #{maintainId}, #{path})
 	</insert>
-	
-	<update id="updateMaintainPic">
+
+    <update id="updateMaintainPic">
 		update em_meter_maintain_pic set status=1,update_time=sysdate
 		where id in (${imgs}) and maintain_id=#{id}
 	</update>
-	
-	<update id="updateMaintainPicReset">
+
+    <update id="updateMaintainPicReset">
 		update em_meter_maintain_pic set status=0,update_time=sysdate
 		where maintain_id=#{id}
 	</update>
-	
-	<select id="selectMaintainPic" resultType="MeterMaintainPic">
+
+    <select id="selectMaintainPic" resultType="MeterMaintainPic">
 		select * from em_meter_maintain_pic t where t.maintain_id=${id} and t.status=1 order by t.create_time
 	</select>
-	
-	<select id="selectMeterEvent" resultType="MeterMaintain">
+
+    <select id="selectMeterEvent" resultType="MeterMaintain">
 		select t2.id,t2.e_num meter_no,t2.e_seq,t2.e_start_time,t2.e_end_time,
 		(select to_char((max(t3.COLLECT_TIME)/(3600*24)+TO_DATE('1970-01-01 08:00:00', 'YYYY-MM-DD HH24:MI:SS')),'YYYY-MM-DD HH24:MI:SS')
 		 from v_em_data t3 where t3.METER_NO=t22.meter_no) last_send_time
@@ -98,5 +100,5 @@
 		 order by t2.id desc
 		
 	</select>
-	
+
 </mapper>

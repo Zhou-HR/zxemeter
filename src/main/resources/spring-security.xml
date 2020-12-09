@@ -18,7 +18,8 @@
     <http pattern="\S*\.(ico|css)" request-matcher="ciRegex" security="none"/>
     <http pattern="/" security="none"/>
     -->
-    <http pattern="(.+\.(js|js\?_=.+|jpg|png|css|ttf.*|woff.*))|/login.jsp|/jumpToAli.jsp|/decorators/.+|/errors/.+|jsp/security/role-editMenu.jsp" request-matcher="ciRegex" security="none"/>
+    <http pattern="(.+\.(js|js\?_=.+|jpg|png|css|ttf.*|woff.*))|/login.jsp|/jumpToAli.jsp|/decorators/.+|/errors/.+|jsp/security/role-editMenu.jsp"
+          request-matcher="ciRegex" security="none"/>
     <!-- 
 	<http pattern="/login.jsp" security="none"/>
 	<http pattern="^((?!login).)*$" request-matcher="ciRegex" security="none"/>
@@ -39,8 +40,10 @@
                 3：如果session过期或者服务器重启后session丢失，就无法保存上一步操作了，这时，用户登陆后，跳转到default-target-url配置内容
                 4：如果在用户名密码验证过后，还要额外做一些操作，比如校验验证码，可以通过配置authentication-success-handler-ref配置自定义的AuthenticationSuccessHandler来实现
         -->
-        <form-login login-page="/login.jsp" login-processing-url="/login" username-parameter="userName" password-parameter="password"
-                    always-use-default-target="true" default-target-url="/index" authentication-failure-url="/login.jsp"/>
+        <form-login login-page="/login.jsp" login-processing-url="/login" username-parameter="userName"
+                    password-parameter="password"
+                    always-use-default-target="true" default-target-url="/index"
+                    authentication-failure-url="/login.jsp"/>
 
         <!--
             用户退出配置，delete-cookies：退出时，清除JSESSIONID
@@ -54,8 +57,10 @@
                 3：max-sessions：同一个用户最多同时存在多少个
                 4：error-if-maximum-exceeded：超出max-sessions时，如果为true，抛出异常，异常信息保存在session中，为false，前面用户的session被置为过期，跳转到expired-url
         -->
-        <session-management session-fixation-protection="migrateSession" invalid-session-url="/errors/session-time-out.jsp">
-            <concurrency-control max-sessions="100" expired-url="/errors/session-expired.jsp" error-if-maximum-exceeded="false"/>
+        <session-management session-fixation-protection="migrateSession"
+                            invalid-session-url="/errors/session-time-out.jsp">
+            <concurrency-control max-sessions="100" expired-url="/errors/session-expired.jsp"
+                                 error-if-maximum-exceeded="false"/>
         </session-management>
 
         <custom-filter ref="characterEncodingFilter" before="SECURITY_CONTEXT_FILTER"/>
@@ -72,7 +77,8 @@
             3、除了上面生成的RememberMeServices的实例外，还会额外增加一个RememberMeAuthenticationFilter，用来实现自动登录
             4、token-validity-seconds：有效秒数，key：用来加密生成token，remember-me-parameter：参数名，remember-me-cookie：cookie名
         -->
-        <remember-me key="app-pro" token-validity-seconds="86400" remember-me-parameter="remember-me" remember-me-cookie="remember-me"/>
+        <remember-me key="app-pro" token-validity-seconds="86400" remember-me-parameter="remember-me"
+                     remember-me-cookie="remember-me"/>
 
         <!--跨站请求伪造配置-->
         <csrf disabled="true"/>
@@ -99,7 +105,8 @@
     </b:bean>
 
     <!--安全过滤器-->
-    <b:bean id="filterSecurityInterceptor" class="org.springframework.security.web.access.intercept.FilterSecurityInterceptor">
+    <b:bean id="filterSecurityInterceptor"
+            class="org.springframework.security.web.access.intercept.FilterSecurityInterceptor">
         <b:property name="rejectPublicInvocations" value="true"/>
         <b:property name="accessDecisionManager" ref="accessDecisionManager"/>
         <b:property name="securityMetadataSource" ref="securityMetadataSourceWrapper"/>

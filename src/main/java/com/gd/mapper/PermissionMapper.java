@@ -5,6 +5,7 @@ import com.gd.model.po.Permission;
 import java.util.List;
 
 /**
+ * @author ZhouHR
  */
 public interface PermissionMapper {
 	

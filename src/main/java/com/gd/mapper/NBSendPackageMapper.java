@@ -5,12 +5,14 @@ import java.util.Map;
 
 import com.gd.model.po.NBSendPackage;
 
+/**
+ * @author ZhouHR
+ */
 public interface NBSendPackageMapper {
 
-	int countByCondition(Map<String, Object> map);
-	
-	List<NBSendPackage> selectList(Map<String, Object> map);
+    int countByCondition(Map<String, Object> map);
+
+    List<NBSendPackage> selectList(Map<String, Object> map);
 
 
-	
 }

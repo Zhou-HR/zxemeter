@@ -8,6 +8,7 @@ import java.lang.annotation.Target;
 /**
  * 排除该字段，就是说不与表做映射
  *
+ * @author ZhouHR
  */
 @Target({ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)

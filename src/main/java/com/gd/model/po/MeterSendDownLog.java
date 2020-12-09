@@ -4,26 +4,29 @@ import java.util.Date;
 
 import lombok.Data;
 
+/**
+ * @author ZhouHR
+ */
 @Data
 public class MeterSendDownLog {
-	
-	private Integer id;
 
-	private String meterNo="";
-	
-	private String name;
-	
-	private String imei="";
-	
-	private String param;
-	
-	private String result="超时";
-	
-	private Date createDate;
-	
-	private String user1;
-	
-	private String userName;
-	
+    private Integer id;
+
+    private String meterNo = "";
+
+    private String name;
+
+    private String imei = "";
+
+    private String param;
+
+    private String result = "超时";
+
+    private Date createDate;
+
+    private String user1;
+
+    private String userName;
+
 
 }

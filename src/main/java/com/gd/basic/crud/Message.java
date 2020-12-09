@@ -12,6 +12,7 @@ import lombok.ToString;
 /**
  * ajax请求响应信息模板
  *
+ * @author ZhouHR
  */
 @Data
 @ToString

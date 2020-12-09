@@ -12,6 +12,7 @@ import java.util.Collection;
 /**
  * 对Spring Security提供的AccessDecisionManager进行包装
  *
+ * @author ZhouHR
  */
 @Log4j2
 public class AccessDecisionManagerWrapper implements AccessDecisionManager {

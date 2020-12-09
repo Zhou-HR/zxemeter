@@ -13,6 +13,7 @@ import java.util.List;
 /**
  * 分页查询参数
  *
+ * @author ZhouHR
  */
 @Data
 public class QueryInfo {

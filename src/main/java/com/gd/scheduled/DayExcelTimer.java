@@ -29,8 +29,9 @@ import com.gd.util.DateUtil;
 import com.gdiot.ssm.entity.Project;
 
 
-
-//@Component
+/**
+ * @author ZhouHR
+ */ //@Component
 @Slf4j
 public class DayExcelTimer {
 /*	

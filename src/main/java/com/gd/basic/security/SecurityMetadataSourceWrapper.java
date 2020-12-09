@@ -28,6 +28,7 @@ import com.gd.model.po.Role;
 /**
  * 继承FilterInvocationSecurityMetadataSource，目的是，自定义安全资源元数据的获取方式和提供刷新方法
  *
+ * @author ZhouHR
  */
 @Log4j2
 @Component
@@ -56,19 +57,19 @@ public class SecurityMetadataSourceWrapper implements FilterInvocationSecurityMe
                     continue;
                 }
 
-                List<String> listAttribute=new ArrayList<String>();
-                
+                List<String> listAttribute = new ArrayList<String>();
+
                 for (int i = 0; i < roles.size(); i++) {
                     Role role = roles.get(i);
                     if (role.isValid()) {
-                    	listAttribute.add(role.getName());
+                        listAttribute.add(role.getName());
                     }
                 }
                 String[] attributeNames = new String[listAttribute.size()];
                 listAttribute.toArray(attributeNames);
-                
-                if(permission.getPath().indexOf("jsp")==0)
-                	permission.setPath("/"+permission.getPath());
+
+                if (permission.getPath().indexOf("jsp") == 0)
+                    permission.setPath("/" + permission.getPath());
                 requestMap.put(new RegexRequestMatcher(permission.getPath(), null, true), SecurityConfig.createList(attributeNames));
             }
         }

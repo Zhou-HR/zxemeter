@@ -22,6 +22,7 @@ import com.gd.model.po.Role;
 import com.gd.model.po.User;
 
 /**
+ * @author ZhouHR
  */
 @Service
 @Log4j2
@@ -31,7 +32,7 @@ public class UserService {
 
     @Autowired
     private RoleMapper roleMapper;
-    
+
     @Autowired
     private UserMapper userMapper;
 
@@ -46,22 +47,22 @@ public class UserService {
     private SessionRegistry sessionRegistry;
 
     @Transactional
-    public void save(User user, String roleIds,String wechats) {
-    	user.setPassword(getEncodePassword(user.getPassword()));
+    public void save(User user, String roleIds, String wechats) {
+        user.setPassword(getEncodePassword(user.getPassword()));
         int id = crudService.insertAndRtnKey(user);
         saveUserRole(id, roleIds);
         saveUserWechat(id, wechats);
     }
 
     @Transactional
-    public void edit(User user, String roleIds,String roleMenuIds) {
+    public void edit(User user, String roleIds, String roleMenuIds) {
         userMapper.removeUserRoleByUserId(user.getId());
         userMapper.removeMenuUserRoleByUserId(user.getId());
         //userMapper.removeUserWechatByUserId(user.getId());
         int length = user.getPassword().length();
         // 长度等于32，代表不修改密码
         if (length != 32) {
-        	user.setPassword(getEncodePassword(user.getPassword()));
+            user.setPassword(getEncodePassword(user.getPassword()));
         }
         crudService.update(user);
         saveUserRole(user.getId(), roleIds);
@@ -70,15 +71,15 @@ public class UserService {
 
 //        refreshUserSession(user.getName());
     }
-    
-    public void changePwd(User user){
-    	
-    	crudService.update(user);
+
+    public void changePwd(User user) {
+
+        crudService.update(user);
     }
 
     @Transactional
     public void remove(int id) {
-    	User user = findById(id);
+        User user = findById(id);
         crudService.delete(id);
         userMapper.removeUserRoleByUserId(id);
         userMapper.removeUserWechatByUserId(id);
@@ -92,7 +93,7 @@ public class UserService {
             userMapper.saveUserRole(UserId, Arrays.asList(strings));
         }
     }
-    
+
     @Transactional
     private void saveMenuUserRole(int UserId, String roleIds) {
         String[] strings = StringUtils.split(roleIds, ",");
@@ -100,7 +101,7 @@ public class UserService {
             userMapper.saveMenuUserRole(UserId, Arrays.asList(strings));
         }
     }
-    
+
     @Transactional
     private void saveUserWechat(int UserId, String wechats) {
         String[] strings = StringUtils.split(wechats, ",");
@@ -121,7 +122,7 @@ public class UserService {
         }
         return roleIds.toString();
     }
-    
+
     public String getMenuRoleIdsByUser(int userId) {
         StringBuilder roleIds = new StringBuilder();
         List<Role> roles = roleMapper.getMenuRolesByUserId(userId);
@@ -130,7 +131,7 @@ public class UserService {
         }
         return roleIds.toString();
     }
-    
+
 
     public String getEncodePassword(String password) {
         return passwordEncoder.encodePassword(password, saltSource.getSalt(null));
@@ -144,7 +145,7 @@ public class UserService {
     private void refreshUserSession(String name) {
         List<Object> principals = sessionRegistry.getAllPrincipals();
         for (Object principal : principals) {
-        	org.springframework.security.core.userdetails.User user = (org.springframework.security.core.userdetails.User) principal;
+            org.springframework.security.core.userdetails.User user = (org.springframework.security.core.userdetails.User) principal;
             if (!user.getUsername().equals(name)) {
                 continue;
             }

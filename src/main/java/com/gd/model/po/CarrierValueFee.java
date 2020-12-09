@@ -4,16 +4,16 @@ import lombok.Data;
 
 @Data
 public class CarrierValueFee {
-	
-	private String name;
-//	
+
+    private String name;
+    //
 //	private String month;
 //	
 //	private String yearmonthday;
 //	
-	private String value;
-//	
-	private String fee;
+    private String value;
+    //
+    private String fee;
 //	
 //	private String dxValue;
 //	

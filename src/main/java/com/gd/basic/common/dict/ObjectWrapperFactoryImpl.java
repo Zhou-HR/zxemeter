@@ -5,6 +5,7 @@ import org.apache.ibatis.reflection.wrapper.ObjectWrapper;
 import org.apache.ibatis.reflection.wrapper.ObjectWrapperFactory;
 
 /**
+ * @author ZhouHR
  */
 public class ObjectWrapperFactoryImpl implements ObjectWrapperFactory {
 

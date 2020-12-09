@@ -14,6 +14,7 @@ import javax.validation.constraints.NotNull;
 /**
  * 权限
  *
+ * @author ZhouHR
  */
 @Data
 @Crud
@@ -37,6 +38,6 @@ public class Permission {
 
     @SafeHtml
     private String icon;
-    
+
     private String companyId;
 }

@@ -7,6 +7,7 @@ import com.gd.model.annotation.Crud;
 /**
  * syscode
  *
+ * @author ZhouHR
  */
 @Data
 @Crud
@@ -15,7 +16,7 @@ public class SysCode {
     private int id;
 
     private String dicName;
-    
+
     private String dicCode;
 
     private String dicKey;

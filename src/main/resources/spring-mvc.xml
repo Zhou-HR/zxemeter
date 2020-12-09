@@ -16,15 +16,13 @@
             </bean>
         </mvc:message-converters>
     </mvc:annotation-driven>
-    
+
     <!-- 访问下载的二维码图片 -->
     <mvc:resources location="/down/" mapping="/down/**"/>
     <!-- 访问上传的logo图片 -->
     <mvc:resources location="/upload/" mapping="/upload/**"/>
-    
-	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
 
-
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
 
 
     <mvc:view-resolvers>
@@ -37,14 +35,14 @@
     <bean id="validatorFactoryBean" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
         <property name="providerClass" value="org.hibernate.validator.HibernateValidator"/>
     </bean>
-    
-    <mvc:interceptors>
-		<mvc:interceptor>
-			<mvc:mapping path="/**"/>
-			<mvc:exclude-mapping path="/wx/*"/>
-			<bean class="com.gd.basic.interceptor.UserAuthInterceptor"/>
-		</mvc:interceptor>
 
-		<bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor"/>
-	</mvc:interceptors>
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <mvc:exclude-mapping path="/wx/*"/>
+            <bean class="com.gd.basic.interceptor.UserAuthInterceptor"/>
+        </mvc:interceptor>
+
+        <bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor"/>
+    </mvc:interceptors>
 </beans>

@@ -7,9 +7,12 @@ import org.apache.ibatis.annotations.Param;
 
 import com.gd.model.po.NBValue;
 
+/**
+ * @author ZhouHR
+ */
 public interface Guangdong2gMapper {
 
-	int countLoraByCondition(Map<String, Object> map);
-	
-	List<NBValue> selectLoraList(Map<String, Object> map);
+    int countLoraByCondition(Map<String, Object> map);
+
+    List<NBValue> selectLoraList(Map<String, Object> map);
 }

@@ -7,6 +7,7 @@ import org.apache.ibatis.reflection.property.PropertyTokenizer;
 import org.apache.ibatis.reflection.wrapper.BeanWrapper;
 
 /**
+ * @author ZhouHR
  */
 public class BeanHasDictWrapper extends BeanWrapper {
 

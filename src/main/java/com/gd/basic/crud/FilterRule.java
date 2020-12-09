@@ -4,6 +4,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 
+/**
+ * @author ZhouHR
+ */
 @Data
 @NoArgsConstructor
 public class FilterRule {

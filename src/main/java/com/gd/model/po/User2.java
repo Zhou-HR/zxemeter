@@ -19,6 +19,7 @@ import java.util.Date;
 /**
  * 管理员
  *
+ * @author ZhouHR
  */
 @Data
 @Crud
@@ -27,7 +28,7 @@ public class User2 {
     private int id;
 
     private String name;
-    
+
     private String parentid;
-    
+
 }

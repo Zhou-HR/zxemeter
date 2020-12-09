@@ -31,6 +31,7 @@ import com.gd.model.po.Role;
 import com.gd.user.service.RoleService;
 
 /**
+ * @author ZhouHR
  */
 @Controller
 @RequestMapping("/role")
@@ -38,19 +39,19 @@ public class RoleController {
 
     @Autowired
     private RoleService roleService;
-    
+
     private CrudService crudService = CrudService.of(Role.class);
 
     @RequestMapping("/detail/{id}")
     public String detail(@PathVariable int id, @RequestParam String forward, Model model) {
         model.addAttribute("entity", roleService.findById(id));
-        List<Permission> list=roleService.getPermissionByRoleId(id);
-        for(int i=0;i<list.size();i++){
-        	Permission permission=list.get(i);
-        	if(permission.getId()==21){
-        		list.remove(i);
-        		break;
-        	}
+        List<Permission> list = roleService.getPermissionByRoleId(id);
+        for (int i = 0; i < list.size(); i++) {
+            Permission permission = list.get(i);
+            if (permission.getId() == 21) {
+                list.remove(i);
+                break;
+            }
         }
         model.addAttribute("permissions", list);
         return forward;
@@ -82,28 +83,28 @@ public class RoleController {
         roleService.edit(role, permissions);
         return Message.SUCCESS;
     }
-    
+
     @RequestMapping(value = "/paging1", method = RequestMethod.POST)
     @ResponseBody
     public Map paging1(@RequestBody QueryInfo queryInfo) {
-    	List<FilterRule> lstFilterRule=queryInfo.getRules();
-    	FilterRule rule=new FilterRule("name",RuleOp.notequal,"ROLE_ADMIN");
-    	if(lstFilterRule==null)
-    		lstFilterRule=new ArrayList<FilterRule>();
-    	lstFilterRule.add(rule);
-    	queryInfo.setRules(lstFilterRule);
-    	queryInfo.setSort("name");
+        List<FilterRule> lstFilterRule = queryInfo.getRules();
+        FilterRule rule = new FilterRule("name", RuleOp.notequal, "ROLE_ADMIN");
+        if (lstFilterRule == null)
+            lstFilterRule = new ArrayList<FilterRule>();
+        lstFilterRule.add(rule);
+        queryInfo.setRules(lstFilterRule);
+        queryInfo.setSort("name");
         HashMap<Object, Object> map = new HashMap<>(2);
         map.put("total", crudService.count(queryInfo.getRules()));
         map.put("rows", crudService.paging(queryInfo));
 
         return map;
     }
-    
+
     @RequestMapping(value = "/list1")
     @ResponseBody
     public List list() {
-    	FilterRule rule=new FilterRule("name",RuleOp.notequal,"ROLE_ADMIN");
+        FilterRule rule = new FilterRule("name", RuleOp.notequal, "ROLE_ADMIN");
         return crudService.list(rule);
     }
 }

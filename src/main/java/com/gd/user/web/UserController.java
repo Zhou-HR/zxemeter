@@ -34,6 +34,7 @@ import com.gd.model.po.User;
 import com.gd.user.service.UserService;
 
 /**
+ * @author ZhouHR
  */
 @Controller
 @RequestMapping("/user")
@@ -41,10 +42,10 @@ public class UserController {
 
     @Autowired
     private UserService userService;
-    
+
     @Autowired
     private MeterWarningMapper meterWarningMapper;
-    
+
     private CrudService crudService = CrudService.of(User.class);
 
     @RequestMapping("/detail/{id}")
@@ -64,101 +65,101 @@ public class UserController {
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     @ResponseBody
-    public Message save(String roles,String wechats, @Valid User user, Errors errors) {
+    public Message save(String roles, String wechats, @Valid User user, Errors errors) {
         if (errors.hasErrors()) {
             return new Message(false, errors);
         }
-        userService.save(user, roles,wechats);
+        userService.save(user, roles, wechats);
         return Message.SUCCESS;
     }
 
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
     @ResponseBody
-    public Message edit(String roles,String menuRoles,@Validated({Update.class, Default.class}) User user, Errors errors) {
+    public Message edit(String roles, String menuRoles, @Validated({Update.class, Default.class}) User user, Errors errors) {
         if (errors.hasErrors()) {
             return new Message(false, errors);
         }
-        userService.edit(user, roles,menuRoles);
+        userService.edit(user, roles, menuRoles);
         return Message.SUCCESS;
     }
-    
+
     @RequestMapping(value = "/changePwd", method = RequestMethod.POST)
     @ResponseBody
-    public Message changePwd(String oldPassword,String newPassword, HttpServletRequest request) {
-        String encodedPassword=userService.getEncodePassword(oldPassword);
+    public Message changePwd(String oldPassword, String newPassword, HttpServletRequest request) {
+        String encodedPassword = userService.getEncodePassword(oldPassword);
         HttpSession session = request.getSession();
-        User user=(User) session.getAttribute("user");
-        if(!encodedPassword.equals(user.getPassword())){
-        	return new Message(false, "密码错误!");
+        User user = (User) session.getAttribute("user");
+        if (!encodedPassword.equals(user.getPassword())) {
+            return new Message(false, "密码错误!");
         }
         user.setPassword(userService.getEncodePassword(newPassword));
         userService.changePwd(user);
         return Message.SUCCESS;
     }
-    
+
     @RequestMapping(value = "/setEmail", method = RequestMethod.POST)
     @ResponseBody
-    public Message setEmail(String email,String everyHour,String hour, HttpServletRequest request) {
-    	HttpSession session = request.getSession();
-        User user=(User) session.getAttribute("user");
+    public Message setEmail(String email, String everyHour, String hour, HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
         user.setEmail(email);
         user.setEveryHour(everyHour);
         user.setHour(hour);
         crudService.update(user);
-        
+
         return Message.SUCCESS;
     }
-    
+
     @RequestMapping(value = "/paging1", method = RequestMethod.POST)
     @ResponseBody
     public Map paging1(@RequestBody QueryInfo queryInfo) {
-    	List<FilterRule> lstFilterRule=queryInfo.getRules();
-    	FilterRule rule=new FilterRule("name",RuleOp.notequal,"admins");
-    	if(lstFilterRule==null)
-    		lstFilterRule=new ArrayList<FilterRule>();
-    	lstFilterRule.add(rule);
-    	rule=new FilterRule("status",RuleOp.equal,"0");
-    	lstFilterRule.add(rule);
-    	queryInfo.setRules(lstFilterRule);
-    	queryInfo.setSort("id");
+        List<FilterRule> lstFilterRule = queryInfo.getRules();
+        FilterRule rule = new FilterRule("name", RuleOp.notequal, "admins");
+        if (lstFilterRule == null)
+            lstFilterRule = new ArrayList<FilterRule>();
+        lstFilterRule.add(rule);
+        rule = new FilterRule("status", RuleOp.equal, "0");
+        lstFilterRule.add(rule);
+        queryInfo.setRules(lstFilterRule);
+        queryInfo.setSort("id");
         HashMap<Object, Object> map = new HashMap<>(2);
         map.put("total", crudService.count(queryInfo.getRules()));
         map.put("rows", crudService.paging(queryInfo));
 
         return map;
     }
-    
+
     @RequestMapping("/toListEmail")
-	public String toListEmail(HttpServletRequest request) {
-    	HttpSession session = request.getSession();
-        User user=(User) session.getAttribute("user");
+    public String toListEmail(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
         request.setAttribute("user", user);
-		return "jsp/security/email";
-	}
-    
+        return "jsp/security/email";
+    }
+
     @RequestMapping("/toListMeterProperty")
-	public String toListMeterProperty(HttpServletRequest request) {
-    	List<MeterProperty> listMeterProperty= meterWarningMapper.getMeterProperty();
-    	for(MeterProperty meterProperty:listMeterProperty){
-			if("电压".equals(meterProperty.getName())){
-				String maxVoltage=meterProperty.getValue();
-				request.setAttribute("maxVoltage", maxVoltage);
-			}
-				
-			if("电量".equals(meterProperty.getName())){
-				String maxEvalue=meterProperty.getValue();
-				request.setAttribute("maxEvalue", maxEvalue);
-			}
-		}
-    	
-		return "jsp/security/meter-listProperty";
-	}
-    
+    public String toListMeterProperty(HttpServletRequest request) {
+        List<MeterProperty> listMeterProperty = meterWarningMapper.getMeterProperty();
+        for (MeterProperty meterProperty : listMeterProperty) {
+            if ("电压".equals(meterProperty.getName())) {
+                String maxVoltage = meterProperty.getValue();
+                request.setAttribute("maxVoltage", maxVoltage);
+            }
+
+            if ("电量".equals(meterProperty.getName())) {
+                String maxEvalue = meterProperty.getValue();
+                request.setAttribute("maxEvalue", maxEvalue);
+            }
+        }
+
+        return "jsp/security/meter-listProperty";
+    }
+
     @RequestMapping(value = "/setMeterProperty", method = RequestMethod.POST)
     @ResponseBody
-    public Message setMeterProperty(String maxVoltage,String maxEvalue, HttpServletRequest request) {
-    	meterWarningMapper.setMeterProperty(1,maxVoltage);
-    	meterWarningMapper.setMeterProperty(2,maxEvalue);
+    public Message setMeterProperty(String maxVoltage, String maxEvalue, HttpServletRequest request) {
+        meterWarningMapper.setMeterProperty(1, maxVoltage);
+        meterWarningMapper.setMeterProperty(2, maxEvalue);
         return Message.SUCCESS;
     }
 }

@@ -5,14 +5,15 @@ import com.gd.model.po.Dict;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 
 /**
+ * @author ZhouHR
  */
 public class BeanHasDictSqlParameterSource extends BeanPropertySqlParameterSource {
-	
-	private final Object dictObject;
+
+    private final Object dictObject;
 
     public BeanHasDictSqlParameterSource(Object object) {
         super(object);
-        dictObject=object;
+        dictObject = object;
     }
 
     @Override

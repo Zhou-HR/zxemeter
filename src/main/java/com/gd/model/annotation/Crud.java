@@ -8,6 +8,7 @@ import java.lang.annotation.Target;
 /**
  * 根据此注解来决定持久化对象是否具有单表增删改查的功能
  *
+ * @author ZhouHR
  */
 @Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)

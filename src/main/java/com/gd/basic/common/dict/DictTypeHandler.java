@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
+ * @author ZhouHR
  */
 public class DictTypeHandler extends BaseTypeHandler<Dict> {
 

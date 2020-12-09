@@ -8,6 +8,7 @@ import java.text.ParseException;
 import java.util.Locale;
 
 /**
+ * @author ZhouHR
  */
 public class DictFormatter implements Formatter<Dict> {
     @Override

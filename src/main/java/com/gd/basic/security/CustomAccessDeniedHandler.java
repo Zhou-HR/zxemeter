@@ -17,6 +17,7 @@ import java.io.IOException;
  * <p>
  * 为了解决上面的问题这里更改它的处理方式，一是改为redirect跳转，另外是增加ajax请求时的处理
  *
+ * @author ZhouHR
  * @see org.springframework.security.web.access.ExceptionTranslationFilter
  * @see org.springframework.security.web.access.AccessDeniedHandlerImpl
  */

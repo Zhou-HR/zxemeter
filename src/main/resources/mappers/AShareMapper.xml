@@ -11,8 +11,8 @@
 		         and z.status=0 and z.id=y.role_id
 		        ) 
 		) 
-    </sql>   
-    
+    </sql>
+
     <sql id="companyIdTableExist">
        (
 		select distinct a.company_id from t_permission a, t_role_permission b where
@@ -22,11 +22,11 @@
 		         and z.status=0 and z.id=y.role_id and t1.company_id=a.company_id
 		        ) 
 		) 
-    </sql>  
-    
+    </sql>
+
     <sql id="companyIdWhere">
-       
-    </sql>       
-	
-	
+
+    </sql>
+
+
 </mapper>

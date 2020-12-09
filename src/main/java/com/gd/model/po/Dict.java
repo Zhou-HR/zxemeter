@@ -12,6 +12,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 import javax.validation.constraints.Min;
 
 /**
+ * @author ZhouHR
  */
 @Data
 @Crud(table = "t_data_dict")
@@ -34,9 +35,9 @@ public class Dict {
     private String text;
     private int priority;
     private String remark;
-    
+
     public Dict() {
-    	System.out.println();
+        System.out.println();
     }
 
     public Dict(String value) {

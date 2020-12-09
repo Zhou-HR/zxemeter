@@ -8,7 +8,7 @@
     <delete id="deleteRolePermission" parameterType="String">
         delete from t_role_permission where permission_id in (#{ids})
     </delete>
-    
+
     <select id="getMenuPermissionsByRoleId" parameterType="int" resultType="Permission">
         select a.* from t_permission_menu a, t_role_permission_menu b where a.id = b.permission_id and b.role_id = #{roleId}
     </select>
@@ -25,7 +25,7 @@
          and z.status=0 and z.id=y.role_id
         ) order by a.parent_id, a.ordered
     </select>
-    
+
     <select id="getMenuPermissionsByUserId" parameterType="int" resultType="Permission">
         select distinct a.* from t_permission_menu a, t_role_permission_menu b where
         a.id = b.permission_id and a.type = 'menu' and b.role_id in (
@@ -34,7 +34,7 @@
          and z.status=0 and z.id=y.role_id
         ) order by a.parent_id, a.ordered
     </select>
-    
+
     <insert id="insert" parameterType="Permission">
     	insert into t_permission  values (Permission_seq.Nextval,#{name},#{path},#{type},#{parentId},#{ordered},#{icon})
     </insert>

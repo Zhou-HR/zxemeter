@@ -8,7 +8,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
+/**
+ * @author ZhouHR
+ */
 public abstract class SqlBuilder {
 
     private TableMapping mapping;
@@ -43,23 +45,22 @@ public abstract class SqlBuilder {
         SQL sql = new SQL().SELECT(columns).FROM(mapping.getTableName());
 
         List<FilterRule> filterRules = queryInfo.getRules();
-        Map<String,Integer> mapCount=new HashMap<String,Integer>();
+        Map<String, Integer> mapCount = new HashMap<String, Integer>();
         if (filterRules != null) {
             for (FilterRule rule : filterRules) {
-            	if(rule!=null){
-            		//如果有多个相同的字段查询，后面的字段参数加个数字，从1开始
-            		Integer count=mapCount.get(rule.getField());
-            		if(count==null){
-            			mapCount.put(rule.getField(), 1);
-            			sql.WHERE(mapping.getAliasMapping().get(rule.getField()) + rule.getOp().getExpression() + getParamPattern(rule.getField()));
-            		}
-            		else{
-            			count++;
-            			mapCount.put(rule.getField(), count);
-            			sql.WHERE(mapping.getAliasMapping().get(rule.getField()) + rule.getOp().getExpression() + getParamPattern(rule.getField()+(count-1)));
-            		}
+                if (rule != null) {
+                    //如果有多个相同的字段查询，后面的字段参数加个数字，从1开始
+                    Integer count = mapCount.get(rule.getField());
+                    if (count == null) {
+                        mapCount.put(rule.getField(), 1);
+                        sql.WHERE(mapping.getAliasMapping().get(rule.getField()) + rule.getOp().getExpression() + getParamPattern(rule.getField()));
+                    } else {
+                        count++;
+                        mapCount.put(rule.getField(), count);
+                        sql.WHERE(mapping.getAliasMapping().get(rule.getField()) + rule.getOp().getExpression() + getParamPattern(rule.getField() + (count - 1)));
+                    }
 //            		sql.WHERE(mapping.getAliasMapping().get(rule.getField()) + rule.getOp().getExpression() + getParamPattern(rule.getField()));
-            	}
+                }
             }
         }
 
@@ -82,22 +83,20 @@ public abstract class SqlBuilder {
         // 拼接分页，只有当rows大于0的时候才认为是分页
         if (queryInfo.getRows() > 0) {
             //s.append(" limit ").append((queryInfo.getPage() - 1) * queryInfo.getRows()).append(",").append(queryInfo.getRows());
-        	//oracle分页
+            //oracle分页
             StringBuilder sbOracle = new StringBuilder("select * from(select r.* ,ROWNUM  rn from( ");
             sbOracle.append(s);
             sbOracle.append(" ) r  where ROWNUM<=");
             sbOracle.append((queryInfo.getPage()) * queryInfo.getRows());
             sbOracle.append(" ) table_alias  where table_alias.rn>");
             sbOracle.append((queryInfo.getPage() - 1) * queryInfo.getRows());
-            
+
             //System.out.println(sbOracle.toString());
-            
+
             return sbOracle.toString();
         }
-        
-        
-        
-        
+
+
         return s.toString();
     }
 

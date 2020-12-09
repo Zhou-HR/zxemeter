@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
+ * @author ZhouHR
  */
 public class BeanHasDictRowMapper extends BeanPropertyRowMapper {
 

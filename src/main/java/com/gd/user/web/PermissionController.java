@@ -31,13 +31,14 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * @author ZhouHR
  */
 @Controller
 @RequestMapping("/permission")
 public class PermissionController {
 
     private CrudService crudService = CrudService.of(Permission.class);
-    
+
     private CrudService crudMenuService = CrudService.of(PermissionMenu.class);
 
     @Autowired
@@ -50,7 +51,7 @@ public class PermissionController {
             return new Message(false, errors);
         }
 //        int i = crudService.insertAndRtnKey(permission);
-        int i=0;
+        int i = 0;
         permissionMapper.insert(permission);
         SecurityMetadataSourceWrapper.refresh();
         return new Message(true, String.valueOf(i));
@@ -70,33 +71,33 @@ public class PermissionController {
     @RequestMapping("/all")
     @ResponseBody
     public List<Permission> all() {
-    	QueryInfo queryInfo=new QueryInfo().orderBy("parentId,ordered", "asc, asc");
-    	List<FilterRule> lstFilterRule=new ArrayList<FilterRule>();
-    	FilterRule rule=new FilterRule("id",RuleOp.greater,22);
-    	lstFilterRule.add(rule);
-    	queryInfo.setRules(lstFilterRule);
+        QueryInfo queryInfo = new QueryInfo().orderBy("parentId,ordered", "asc, asc");
+        List<FilterRule> lstFilterRule = new ArrayList<FilterRule>();
+        FilterRule rule = new FilterRule("id", RuleOp.greater, 22);
+        lstFilterRule.add(rule);
+        queryInfo.setRules(lstFilterRule);
         return crudService.paging(queryInfo);
     }
-    
+
     @RequestMapping("/menuAll")
     @ResponseBody
     public List<Permission> menuAll() {
-    	QueryInfo queryInfo=new QueryInfo().orderBy("parentId,ordered", "asc, asc");
+        QueryInfo queryInfo = new QueryInfo().orderBy("parentId,ordered", "asc, asc");
 //    	List<FilterRule> lstFilterRule=new ArrayList<FilterRule>();
 //    	FilterRule rule=new FilterRule("id",RuleOp.greater,22);
 //    	lstFilterRule.add(rule);
 //    	queryInfo.setRules(lstFilterRule);
         return crudMenuService.paging(queryInfo);
     }
-    
+
     @RequestMapping("/getStation")
     @ResponseBody
     public List<Project> getStation(String id) {
 //    	Map<String,List<Project>> map=InitLoadToRedis.getMapCompanyProject();
-    	List<Project> list=new ArrayList<Project>();
+        List<Project> list = new ArrayList<Project>();
 //    	if(list.size()>0)
 //    		System.out.println("emeter "+id+" first project meter status is "+list.get(0).getMeterStatus1());
-    	//TODO 调试时用，正式中要去掉
+        //TODO 调试时用，正式中要去掉
 //    	if(list==null) return list;
 //    	if(list.size()>2){
 //    		List<Project> listNew=list.subList(0, 2);

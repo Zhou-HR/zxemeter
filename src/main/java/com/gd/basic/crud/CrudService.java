@@ -27,6 +27,7 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * 简单的单表增删改查实现
  *
+ * @author ZhouHR
  */
 @Log4j2
 public class CrudService {
@@ -77,11 +78,11 @@ public class CrudService {
 
         return ((T) list.get(0));
     }
-    
-    public <T> List<T> list(String sort,String order,FilterRule... rules) {
-    	QueryInfo queryInfo=new QueryInfo().filter(rules);
-    	queryInfo.setSort(sort);
-    	queryInfo.setOrder(order);
+
+    public <T> List<T> list(String sort, String order, FilterRule... rules) {
+        QueryInfo queryInfo = new QueryInfo().filter(rules);
+        queryInfo.setSort(sort);
+        queryInfo.setOrder(order);
         return paging(queryInfo);
     }
 
@@ -89,9 +90,10 @@ public class CrudService {
         return paging(new QueryInfo().filter(rules));
     }
 
-    
+
     /**
      * 分页内容
+     *
      * @param queryInfo
      * @return
      */
@@ -101,43 +103,43 @@ public class CrudService {
 
         if (filterRules != null) {
             parameterSource = new MapSqlParameterSource();
-            Map<String,Integer> mapCount=new HashMap<String,Integer>();
+            Map<String, Integer> mapCount = new HashMap<String, Integer>();
             for (FilterRule filterRule : filterRules) {
-            	if(filterRule!=null){
-            		 switch (filterRule.getOp()) {
-                     case contains:
-                         filterRule.setValue("%" + filterRule.getValue() + "%");
-                         break;
-                     case beginwith:
-                         filterRule.setValue("%" + filterRule.getValue());
-                         break;
-                     case endwith:
-                         filterRule.setValue(filterRule.getValue() + "%");
-                         break;
-                 }
-            		//如果有多个相同的字段查询，后面的字段参数加个数字，从1开始
-             		Integer count=mapCount.get(filterRule.getField());
-             		if(count==null){
-             			mapCount.put(filterRule.getField(), 1);
-             			((MapSqlParameterSource) parameterSource).addValue(filterRule.getField(), filterRule.getValue());
-             		}
-             		else{
-             			count++;
-             			mapCount.put(filterRule.getField(), count);
-             			((MapSqlParameterSource) parameterSource).addValue(filterRule.getField()+(count-1), filterRule.getValue());
-             		}
+                if (filterRule != null) {
+                    switch (filterRule.getOp()) {
+                        case contains:
+                            filterRule.setValue("%" + filterRule.getValue() + "%");
+                            break;
+                        case beginwith:
+                            filterRule.setValue("%" + filterRule.getValue());
+                            break;
+                        case endwith:
+                            filterRule.setValue(filterRule.getValue() + "%");
+                            break;
+                    }
+                    //如果有多个相同的字段查询，后面的字段参数加个数字，从1开始
+                    Integer count = mapCount.get(filterRule.getField());
+                    if (count == null) {
+                        mapCount.put(filterRule.getField(), 1);
+                        ((MapSqlParameterSource) parameterSource).addValue(filterRule.getField(), filterRule.getValue());
+                    } else {
+                        count++;
+                        mapCount.put(filterRule.getField(), count);
+                        ((MapSqlParameterSource) parameterSource).addValue(filterRule.getField() + (count - 1), filterRule.getValue());
+                    }
 //            		 ((MapSqlParameterSource) parameterSource).addValue(filterRule.getField(), filterRule.getValue());
-            	}
+                }
             }
         } else {
             parameterSource = EmptySqlParameterSource.INSTANCE;
         }
-        
+
         return jdbcTemplate.query(sqlBuilder.selectWithOthers(queryInfo), parameterSource, getRowMapper(mapping.getCls()));
     }
 
     /**
      * 查询总数
+     *
      * @param filterRules
      * @return
      */

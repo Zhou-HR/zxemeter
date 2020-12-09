@@ -13,6 +13,5 @@
  * BeanHasDictSqlParameterSource：扩展BeanSqlParameterSource，处理Dict到String的转换
  * <p>
  * DictUtil：Dict的帮助类，缓存数据库字典表的内容
- *
  */
 package com.gd.basic.common.dict;

@@ -24,6 +24,7 @@ import java.util.Collection;
 import java.util.List;
 
 /**
+ * @author ZhouHR
  */
 @Service
 @Log4j2
@@ -43,7 +44,7 @@ public class RoleService {
     @Transactional
     public void save(Role role, String permissions) {
 //        int roleId = crudService.insertAndRtnKey(role);
-    	int roleId=roleMapper.insert(role);
+        int roleId = roleMapper.insert(role);
         saveRolePermission(role.getId(), permissions);
 
         SecurityMetadataSourceWrapper.refresh();
@@ -72,8 +73,8 @@ public class RoleService {
 
     @Transactional
     public void saveRolePermission(int roleId, String permissionIds) {
-        String[] strings = StringUtils.split("21,"+permissionIds, ",");
-        
+        String[] strings = StringUtils.split("21," + permissionIds, ",");
+
         if (ArrayUtils.isNotEmpty(strings)) {
             roleMapper.saveRolePermission(roleId, Arrays.asList(strings));
         }

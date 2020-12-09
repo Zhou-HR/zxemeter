@@ -25,6 +25,7 @@ import com.gd.model.po.Role;
 import com.gd.model.po.RoleMenu;
 
 /**
+ * @author ZhouHR
  */
 @Service
 @Log4j2
@@ -44,7 +45,7 @@ public class RoleMenuService {
     @Transactional
     public void save(Role role, String permissions) {
 //        int roleId = crudService.insertAndRtnKey(role);
-    	int roleId=roleMapper.insertMenu(role);
+        int roleId = roleMapper.insertMenu(role);
         saveRolePermission(role.getId(), permissions);
 
         SecurityMetadataSourceWrapper.refresh();
@@ -74,7 +75,7 @@ public class RoleMenuService {
     @Transactional
     public void saveRolePermission(int roleId, String permissionIds) {
         String[] strings = StringUtils.split(permissionIds, ",");
-        
+
         if (ArrayUtils.isNotEmpty(strings)) {
             roleMapper.saveMenuRolePermission(roleId, Arrays.asList(strings));
         }

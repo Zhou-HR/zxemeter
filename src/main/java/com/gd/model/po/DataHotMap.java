@@ -4,13 +4,16 @@ import java.io.Serializable;
 
 import lombok.Data;
 
+/**
+ * @author ZhouHR
+ */
 @Data
-public class DataHotMap implements Serializable{
-	
-	private static final long serialVersionUID =1L;
+public class DataHotMap implements Serializable {
 
-	private String name;
-	
-	private Integer value;
-	
+    private static final long serialVersionUID = 1L;
+
+    private String name;
+
+    private Integer value;
+
 }

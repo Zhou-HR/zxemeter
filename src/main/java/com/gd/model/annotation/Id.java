@@ -8,6 +8,7 @@ import java.lang.annotation.Target;
 /**
  * 代表该字段是主键
  *
+ * @author ZhouHR
  */
 @Target({ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)

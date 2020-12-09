@@ -4,13 +4,14 @@ import java.util.List;
 
 import lombok.Data;
 
+/**
+ * @author ZhouHR
+ */
 @Data
 public class SubMenu {
-	
-	private String companyId;
-	
-	private String companyName;
-	
-	
+
+    private String companyId;
+
+    private String companyName;
 
 }

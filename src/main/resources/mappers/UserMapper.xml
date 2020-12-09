@@ -5,7 +5,7 @@
     <select id="getUserByName" parameterType="String" resultType="User">
         select * from t_user where name = #{name}
     </select>
-    
+
     <select id="getUserEmailNotNull" resultType="User">
         select * from t_user t where t.email is not null and t.id!=1
         and (t.every_hour is not null or t.hour is not null)
@@ -14,40 +14,40 @@
     <delete id="removeUserRoleByUserId" parameterType="int">
         delete from t_user_role where user_id = #{id}
     </delete>
-    
+
     <delete id="removeMenuUserRoleByUserId" parameterType="int">
         delete from t_user_role_menu where user_id = #{id}
     </delete>
-    
+
     <delete id="removeUserWechatByUserId" parameterType="int">
         delete from t_user_wechat where user_id = #{id}
     </delete>
 
     <insert id="saveUserRole" parameterType="Map">
-    	insert all 
+        insert all
         <foreach item="roleId" collection="roleIds" separator=" ">
             into t_user_role(user_id, role_id) values(#{userId}, #{roleId})
         </foreach>
-        select 1 from dual        
-        
+        select 1 from dual
+
     </insert>
-    
+
     <insert id="saveMenuUserRole" parameterType="Map">
-    	insert all 
+        insert all
         <foreach item="roleId" collection="roleIds" separator=" ">
             into t_user_role_menu(user_id, role_id) values(#{userId}, #{roleId})
         </foreach>
-        select 1 from dual        
-        
+        select 1 from dual
+
     </insert>
-    
+
     <insert id="saveUserWechat" parameterType="Map">
         insert into t_user_wechat(user_id, open_id) values
         <foreach item="wechatId" collection="wechatIds" separator=",">
             (#{userId}, (select openid from p_wechat_accountinfo where id=#{wechatId}))
         </foreach>
     </insert>
-    
+
     <insert id="insertUserLog" parameterType="UserLog1">
         insert into em_user_log_pc
 		  (id, user_id, user_name, ip, method, param)

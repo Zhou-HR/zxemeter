@@ -12,6 +12,7 @@ import java.io.Serializable;
 /**
  * nano id
  *
+ * @author ZhouHR
  */
 @Getter
 @Setter

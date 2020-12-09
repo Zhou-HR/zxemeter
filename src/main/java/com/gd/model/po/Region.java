@@ -1,25 +1,27 @@
 package com.gd.model.po;
 
-import java.io.Serializable;
-
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 import lombok.ToString;
 
-@Setter
-@Getter
+import java.io.Serializable;
+
+
+/**
+ * @author ZhouHR
+ */
+@Data
 @ToString
 public class Region implements Serializable {
-	
-	private static final long serialVersionUID = 1L;
-	
-	private Integer id;
 
-	private String name;//
-	
-	private Integer parentId;//
-    
-	private Integer level;//
-	
+    private static final long serialVersionUID = 1L;
+
+    private Integer id;
+
+    private String name;//
+
+    private Integer parentId;//
+
+    private Integer level;//
+
 
 }

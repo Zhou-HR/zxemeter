@@ -2,134 +2,135 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.gd.mapper.MeterPersonMapper">
 
-	<select id="countByCondition" parameterType="java.util.Map"
-		resultType="int">
-		select count(*) from em_meter t
-		where t.company_Id in <include refid="com.gd.mapper.AShareMapper.companyIdTable"/> 
-		and t.project_no is not null and t.company_id is not null
-		<if test="deviceNo != null">
-			and t.device_no = #{deviceNo}
-		</if>
-		<if test="meterNo != null">
-			and t.METER_NO = #{meterNo}
-		</if>
-		<if test="meterType != null">
-			and t.METER_TYPE = #{meterType}
-		</if>
-		<if test="source != null">
-			and t.SOURCE = #{source}
-		</if>
-		<if test="platform != null">
-			and t.PLATFORM = #{platform}
-		</if>
-		<if test="projectNo != null">
-			and t.project_no = #{projectNo}
-		</if>
-		<if test="status ==0">
-			and (t.status=0 or t.status>1)					
-		</if>
-		<if test="status ==1">
-			and t.status=1					
-		</if>
-		<if test="projectNoStatus == 0">
-			and t.project_no is null
-		</if>
-		<if test="projectNoStatus == 1">
-			and t.project_no is not null
-		</if>
-		<if test="companyId != null and companyId.length()==2 ">
-			and t.company_Id like #{companyId}||'%'
-		</if>
-		<if test="companyId != null and companyId.length()==4 ">
-			and t.company_Id = #{companyId}
-		</if>
-	</select>
-	
-	<select id="selectList" parameterType="java.util.Map" resultType="Meter">
-		select * 
-		from(select r.* ,ROWNUM  rn
-				from(
-				select t.* from em_meter t
-				where t.company_Id in <include refid="com.gd.mapper.AShareMapper.companyIdTable"/> 
-				and t.project_no is not null and t.company_id is not null
-				<if test="deviceNo != null">
-					and t.device_no = #{deviceNo}
-				</if>
-				<if test="meterNo != null">
-					and t.METER_NO = #{meterNo}
-				</if>
-				<if test="meterType != null">
-					and t.METER_TYPE = #{meterType}
-				</if>
-				<if test="platform != null">
-					and t.PLATFORM = #{platform}
-				</if>
-				<if test="projectNo != null">
-					and t.project_no = #{projectNo}
-				</if>
-				<if test="status ==0">
-					and (t.status=0 or t.status>1)					
-				</if>
-				<if test="status ==1">
-					and t.status=1					
-				</if>
-				<if test="projectNoStatus == 0">
-					and t.project_no is null
-				</if>
-				<if test="projectNoStatus == 1">
-					and t.project_no is not null
-				</if>
-				<if test="companyId != null and companyId.length()==2 ">
-					and t.company_Id like #{companyId}||'%'
-				</if>
-				<if test="companyId != null and companyId.length()==4 ">
-					and t.company_Id = #{companyId}
-				</if>
-				
-				order by t.status desc,create_time desc
-			) r
-			 where ROWNUM &lt;= #{p2}
-		) table_alias
-		where table_alias.rn &gt; #{p1}
-	</select>
-	
-	<select id="findById" resultType="Meter">
+    <select id="countByCondition" parameterType="java.util.Map"
+            resultType="int">
+        select count(*) from em_meter t
+        where t.company_Id in
+        <include refid="com.gd.mapper.AShareMapper.companyIdTable"/>
+        and t.project_no is not null and t.company_id is not null
+        <if test="deviceNo != null">
+            and t.device_no = #{deviceNo}
+        </if>
+        <if test="meterNo != null">
+            and t.METER_NO = #{meterNo}
+        </if>
+        <if test="meterType != null">
+            and t.METER_TYPE = #{meterType}
+        </if>
+        <if test="source != null">
+            and t.SOURCE = #{source}
+        </if>
+        <if test="platform != null">
+            and t.PLATFORM = #{platform}
+        </if>
+        <if test="projectNo != null">
+            and t.project_no = #{projectNo}
+        </if>
+        <if test="status ==0">
+            and (t.status=0 or t.status>1)
+        </if>
+        <if test="status ==1">
+            and t.status=1
+        </if>
+        <if test="projectNoStatus == 0">
+            and t.project_no is null
+        </if>
+        <if test="projectNoStatus == 1">
+            and t.project_no is not null
+        </if>
+        <if test="companyId != null and companyId.length()==2 ">
+            and t.company_Id like #{companyId}||'%'
+        </if>
+        <if test="companyId != null and companyId.length()==4 ">
+            and t.company_Id = #{companyId}
+        </if>
+    </select>
+
+    <select id="selectList" parameterType="java.util.Map" resultType="Meter">
+        select *
+        from(select r.* ,ROWNUM rn
+        from(
+        select t.* from em_meter t
+        where t.company_Id in
+        <include refid="com.gd.mapper.AShareMapper.companyIdTable"/>
+        and t.project_no is not null and t.company_id is not null
+        <if test="deviceNo != null">
+            and t.device_no = #{deviceNo}
+        </if>
+        <if test="meterNo != null">
+            and t.METER_NO = #{meterNo}
+        </if>
+        <if test="meterType != null">
+            and t.METER_TYPE = #{meterType}
+        </if>
+        <if test="platform != null">
+            and t.PLATFORM = #{platform}
+        </if>
+        <if test="projectNo != null">
+            and t.project_no = #{projectNo}
+        </if>
+        <if test="status ==0">
+            and (t.status=0 or t.status>1)
+        </if>
+        <if test="status ==1">
+            and t.status=1
+        </if>
+        <if test="projectNoStatus == 0">
+            and t.project_no is null
+        </if>
+        <if test="projectNoStatus == 1">
+            and t.project_no is not null
+        </if>
+        <if test="companyId != null and companyId.length()==2 ">
+            and t.company_Id like #{companyId}||'%'
+        </if>
+        <if test="companyId != null and companyId.length()==4 ">
+            and t.company_Id = #{companyId}
+        </if>
+
+        order by t.status desc,create_time desc
+        ) r
+        where ROWNUM &lt;= #{p2}
+        ) table_alias
+        where table_alias.rn &gt; #{p1}
+    </select>
+
+    <select id="findById" resultType="Meter">
 		select t.* from em_meter t
 				where  t.id=#{id}
 	</select>
-	
-	<select id="findByMeterNo" resultType="Meter">
+
+    <select id="findByMeterNo" resultType="Meter">
 		select t.* from em_meter t
 				where  t.meter_no=#{meterNo}
 	</select>
-	
-	<select id="findPersonById" resultType="SimpleDict">
+
+    <select id="findPersonById" resultType="SimpleDict">
 		select t2.name value,t2.realname text from t_user t2 
 		where t2.dept_code=(select t.company_id from em_meter t where id=#{id}) and t2.status=0
 	</select>
-	
-	<update id="updateMeterPerson">
+
+    <update id="updateMeterPerson">
 		update em_meter set user_code=#{userCode} where id=#{id}
 	</update>
-	
-	<select id="findMeterMaintainByMeterId" resultType="MeterMaintain">
+
+    <select id="findMeterMaintainByMeterId" resultType="MeterMaintain">
 		select * from em_meter_maintain t,em_meter t2 
     where t.meter_no=t2.meter_no and t2.id=#{id} and t.sender=#{userCode} and t.send_date=#{sendDate}
 	</select>
-	
-	<insert id="insert" parameterType="MeterMaintain">
+
+    <insert id="insert" parameterType="MeterMaintain">
 		insert into em_meter_maintain (id, meter_no, sender, reason, receiver, send_date,PROJECT_NO,COMPANY_ID)
 		values (METER_MAINTAIN_SEQ.nextval,#{meterNo},#{sender},#{reason},#{receiver},#{sendDate},#{projectNo},#{companyId})
 	</insert>
-	
-	<update id="updateReasonById" parameterType="MeterMaintain">
+
+    <update id="updateReasonById" parameterType="MeterMaintain">
 		update em_meter_maintain set reason=#{reason},RECEIVER=#{receiver} where id=#{id}
 	</update>
-	
-	<update id="updateResultById" parameterType="MeterMaintain">
+
+    <update id="updateResultById" parameterType="MeterMaintain">
 		update em_meter_maintain set dealer=#{dealer},deal_result=#{dealResult},deal_date=#{dealDate},update_time=sysdate where id=#{id}
 	</update>
-	
-	
+
 
 </mapper>

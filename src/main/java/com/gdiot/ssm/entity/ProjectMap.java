@@ -4,6 +4,9 @@ import java.io.Serializable;
 
 import lombok.Data;
 
+/**
+ * @author ZhouHR
+ */
 @Data
 public class ProjectMap implements Serializable{
 	

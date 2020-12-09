@@ -6,17 +6,18 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
-@Data 
-@Setter
-@Getter
+/**
+ * @author ZhouHR
+ */
+@Data
 public class SmokeDownPo implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	private int id;
-	private String deviceId;
-	private String sendData;
-	private String result;
-	private String createTime;
-	
+    private int id;
+    private String deviceId;
+    private String sendData;
+    private String result;
+    private String createTime;
+
 }

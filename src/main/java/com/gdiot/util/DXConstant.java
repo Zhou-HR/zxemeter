@@ -12,6 +12,9 @@
  */
 package com.gdiot.util;
 
+/**
+ * @author ZhouHR
+ */
 public class DXConstant {
 
     //please replace the IP and Port, when you use the demo.
@@ -55,8 +58,8 @@ public class DXConstant {
     //Paths of certificates.
     public static String SELFCERTPATH = "/outgoing.CertwithKey.pkcs12";
     public static String TRUSTCAPATH = "/ca.jks";
-	
-	//SpringBoot Paths of certificates.
+
+    //SpringBoot Paths of certificates.
     public static String SPRINGBOOT_SELFCERTPATH = "/cert/outgoing.CertwithKey.pkcs12";
     public static String SPRINGBOOT_TRUSTCAPATH = "/cert/ca.jks";
 
@@ -73,7 +76,7 @@ public class DXConstant {
      */
     public static final String HEADER_APP_KEY = "app_key";
     public static final String HEADER_APP_AUTH = "Authorization";
-    
+
     /*
      * Application Access Security:
      * 1. APP_AUTH
@@ -81,7 +84,7 @@ public class DXConstant {
      */
     public static final String APP_AUTH = BASE_URL + "/iocm/app/sec/v1.1.0/login";
     public static final String REFRESH_TOKEN = BASE_URL + "/iocm/app/sec/v1.1.0/refreshToken";
-    
+
 
     /*
      * Device Management:
@@ -112,8 +115,8 @@ public class DXConstant {
     public static final String QUERY_DEVICE_HISTORY_DATA = BASE_URL + "/iocm/app/data/v1.1.0/deviceDataHistory";
     public static final String QUERY_DEVICE_CAPABILITIES = BASE_URL + "/iocm/app/data/v1.1.0/deviceCapabilities";
     public static final String SUBSCRIBE_NOTIFYCATION = BASE_URL + "/iocm/app/sub/v1.1.0/subscribe";
-    
-    
+
+
     /*
      * Signaling Delivery：
      * 1. POST_ASYN_CMD

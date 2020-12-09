@@ -2,38 +2,41 @@ package com.gdiot.model;
 
 import lombok.Data;
 
+/**
+ * @author ZhouHR
+ */
 @Data
 public class AKREMEventPo {
 
-	private int id;
-	private String devId;
-	private String imei;
-	private String origValue;
-	private long time;
-	
-	//解析出的数据
-	private String eventType;
-	private String eNum;//表号
-	//解析出的数据
-	private String eStartTime;//事件开始的时间
-	private String OverVThreshold;
-	private String LowVThreshold;
-	private String OverAThreshold;
-	private String LowAThreshold;
-	private String OverKWThreshold;
-	private String LowKWThreshold;
-	private String OverVValue;
-	private String LowVValue;
-	private String OverAValue;
-	private String LowAValue;
-	private String OverKWValue;
-	private String LowKWValue;
-	private String AlertAllow;
-	private String AlertStatus;
-	private String AlertType;
-	private String eVValue;
-	private String eAValue;
-	
+    private int id;
+    private String devId;
+    private String imei;
+    private String origValue;
+    private long time;
+
+    //解析出的数据
+    private String eventType;
+    private String eNum;//表号
+    //解析出的数据
+    private String eStartTime;//事件开始的时间
+    private String OverVThreshold;
+    private String LowVThreshold;
+    private String OverAThreshold;
+    private String LowAThreshold;
+    private String OverKWThreshold;
+    private String LowKWThreshold;
+    private String OverVValue;
+    private String LowVValue;
+    private String OverAValue;
+    private String LowAValue;
+    private String OverKWValue;
+    private String LowKWValue;
+    private String AlertAllow;
+    private String AlertStatus;
+    private String AlertType;
+    private String eVValue;
+    private String eAValue;
+
 //	private String eEndTime;//事件结束的时间
 //	private String eStartKwh;//事件开始电量
 //	private String eStartKwh2;//事件开始电量
@@ -60,8 +63,8 @@ public class AKREMEventPo {
 //	private String eStartModule;//模块状态监控字
 //	private String eEndModule;//模块状态监控字
 //	private int flagReload;
-	/**
-	 * 信息来源:01:NB;02:Lora
-	 */
-	private String source;
+    /**
+     * 信息来源:01:NB;02:Lora
+     */
+    private String source;
 }

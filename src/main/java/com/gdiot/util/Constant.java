@@ -1,6 +1,9 @@
 
 package com.gdiot.util;
 
+/**
+ * @author ZhouHR
+ */
 public class Constant {
     // 类型
     public static final String DEVICE_INFO_CHANGED = "deviceInfoChanged";

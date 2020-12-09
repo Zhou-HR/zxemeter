@@ -4,6 +4,9 @@ import com.huawei.iotplatform.client.NorthApiClient;
 import com.huawei.iotplatform.client.NorthApiException;
 import com.huawei.iotplatform.client.dto.ClientInfo;
 
+/**
+ * @author ZhouHR
+ */
 public class AuthUtil {
 
     private static NorthApiClient northApiClient = null;

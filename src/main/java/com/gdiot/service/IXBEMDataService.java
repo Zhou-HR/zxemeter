@@ -5,9 +5,14 @@ import java.util.Map;
 
 import com.gdiot.model.XBEMDataPo;
 
+/**
+ * @author ZhouHR
+ */
 public interface IXBEMDataService {
 
-	int addOne(XBEMDataPo mXBEMDataPo);
-	Map<String, Object> selectList(String dev_id,String eNum, Long beginTime, Long endTime,String source,int pageNo,int pageSize);
-	List<XBEMDataPo> selectOne(String imei,long e_seq);
+    int addOne(XBEMDataPo mXBEMDataPo);
+
+    Map<String, Object> selectList(String dev_id, String eNum, Long beginTime, Long endTime, String source, int pageNo, int pageSize);
+
+    List<XBEMDataPo> selectOne(String imei, long e_seq);
 }

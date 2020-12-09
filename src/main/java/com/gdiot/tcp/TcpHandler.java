@@ -6,18 +6,22 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * @author ZhouHR
+ */
 @Slf4j
 @Service
 public class TcpHandler extends ChannelInboundHandlerAdapter {
-	@Override
+    @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-		//得到消息后，可根据消息类型分发给不同的service去处理数据
-        String preHandlerAfferentMsg = (String)msg; 
-        log.info("{logger print out data}: "+preHandlerAfferentMsg);
+        //得到消息后，可根据消息类型分发给不同的service去处理数据
+        String preHandlerAfferentMsg = (String) msg;
+        log.info("{logger print out data}: " + preHandlerAfferentMsg);
         ctx.writeAndFlush("hello word tcp server send"); //返回数据给tcP Client
         log.info("channelRead");
     }
-	@Override
+
+    @Override
     public void channelRegistered(ChannelHandlerContext ctx) throws Exception {
         log.info("channelRegistered");
         ctx.fireChannelRegistered();
@@ -40,7 +44,7 @@ public class TcpHandler extends ChannelInboundHandlerAdapter {
         log.info("channelInactive");
         ctx.fireChannelInactive();
     }
-    
+
     @Override
     public void channelReadComplete(ChannelHandlerContext ctx) throws Exception {
         log.info("channelReadComplete");
@@ -65,5 +69,5 @@ public class TcpHandler extends ChannelInboundHandlerAdapter {
         log.info("exceptionCaught");
         ctx.fireExceptionCaught(cause);
     }
-    
+
 }

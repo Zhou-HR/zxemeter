@@ -140,16 +140,16 @@ public class EmDataNBUtil {
         Map map = new HashMap();
         // 截取表号
         String eNum = orig_data.substring(2, 14);
-        String hexNum=highLowSwap(eNum);
+        String hexNum = highLowSwap(eNum);
         map.put("eNum", hexNum);
         // 截取状态
         String status = orig_data.substring(28, 32);
         if (status != null) {
             if ("3333".equals(status)) {
-                map.put("status",  "合闸");
+                map.put("status", "合闸");
             }
             if ("8333".equals(status)) {
-                map.put("status",  "拉闸");
+                map.put("status", "拉闸");
             }
 
         }
@@ -160,7 +160,7 @@ public class EmDataNBUtil {
         Map map = new HashMap();
         // 截取表号
         String eNum = orig_data.substring(2, 14);
-        String hexNum=highLowSwap(eNum);
+        String hexNum = highLowSwap(eNum);
         map.put("eNum", hexNum);
         // 截取状态
         String status = orig_data.substring(16, 18);

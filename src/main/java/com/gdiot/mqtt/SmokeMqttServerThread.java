@@ -11,21 +11,25 @@ import org.springframework.stereotype.Component;
 import com.gdiot.SpMeterDataApplication;
 import com.gdiot.mqtt.MqttTask;
 
-//@Component
-public class SmokeMqttServerThread  extends Thread  {
-	private static Logger log = LoggerFactory.getLogger(SpMeterDataApplication.class);
-	
-	public SmokeMqttServerThread() {
-		
-	}
-	public void run() {
-		// TODO Auto-generated method stub
-		log.info("SmokeMqttServerThread run--------");
-		MqttTask mqttTask = new  MqttTask(MqttConfig.SMOKE_HOST, MqttConfig.SMOKE_clientid,MqttConfig.SMOKE_userName,
-				MqttConfig.SMOKE_passWord, MqttConfig.SMOKE_TOPIC_SERVER);
-    	MQTTClientFactory.getInstance(mqttTask);
-    	mqttTask.run();
-    	log.info("SmokeMqttServerThread run--------mqttTask="+ mqttTask);
-	}
+/**
+ * @author ZhouHR
+ */ //@Component
+public class SmokeMqttServerThread extends Thread {
+    private static Logger log = LoggerFactory.getLogger(SpMeterDataApplication.class);
+
+    public SmokeMqttServerThread() {
+
+    }
+
+    @Override
+    public void run() {
+        // TODO Auto-generated method stub
+        log.info("SmokeMqttServerThread run--------");
+        MqttTask mqttTask = new MqttTask(MqttConfig.SMOKE_HOST, MqttConfig.SMOKE_clientid, MqttConfig.SMOKE_userName,
+                MqttConfig.SMOKE_passWord, MqttConfig.SMOKE_TOPIC_SERVER);
+        MQTTClientFactory.getInstance(mqttTask);
+        mqttTask.run();
+        log.info("SmokeMqttServerThread run--------mqttTask=" + mqttTask);
+    }
 
 }

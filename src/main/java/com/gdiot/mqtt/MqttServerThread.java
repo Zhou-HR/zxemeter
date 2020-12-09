@@ -11,21 +11,25 @@ import org.springframework.stereotype.Component;
 import com.gdiot.SpMeterDataApplication;
 import com.gdiot.mqtt.MqttTask;
 
-//@Component
-public class MqttServerThread  extends Thread  {
-	private static Logger log = LoggerFactory.getLogger(SpMeterDataApplication.class);
-	
-	public MqttServerThread() {
-		
-	}
-	public void run() {
-		// TODO Auto-generated method stub
-		log.info("MqttServerThread run--------");
-		MqttTask mqttTask = new  MqttTask(MqttConfig.HOST, MqttConfig.clientid,MqttConfig.userName,
-				MqttConfig.passWord, MqttConfig.TOPIC_CLIENT);
-    	MQTTClientFactory.getInstance(mqttTask);
-    	mqttTask.run();
-    	log.info("MqttServerThread run--------mqttTask="+ mqttTask);
-	}
+/**
+ * @author ZhouHR
+ */ //@Component
+public class MqttServerThread extends Thread {
+    private static Logger log = LoggerFactory.getLogger(SpMeterDataApplication.class);
+
+    public MqttServerThread() {
+
+    }
+
+    @Override
+    public void run() {
+        // TODO Auto-generated method stub
+        log.info("MqttServerThread run--------");
+        MqttTask mqttTask = new MqttTask(MqttConfig.HOST, MqttConfig.clientid, MqttConfig.userName,
+                MqttConfig.passWord, MqttConfig.TOPIC_CLIENT);
+        MQTTClientFactory.getInstance(mqttTask);
+        mqttTask.run();
+        log.info("MqttServerThread run--------mqttTask=" + mqttTask);
+    }
 
 }

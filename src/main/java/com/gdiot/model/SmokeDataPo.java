@@ -6,19 +6,20 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
-@Data 
-@Setter
-@Getter
+/**
+ * @author ZhouHR
+ */
+@Data
 public class SmokeDataPo implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	private int id;
-	private String devId;
-	private String origValue;
-	private long time;
-	private String source;
-	private String dataStatus;
-	private String createTime;
-	
+    private int id;
+    private String devId;
+    private String origValue;
+    private long time;
+    private String source;
+    private String dataStatus;
+    private String createTime;
+
 }

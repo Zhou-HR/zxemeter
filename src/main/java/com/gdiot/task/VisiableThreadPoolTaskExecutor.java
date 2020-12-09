@@ -10,22 +10,25 @@ import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.util.concurrent.ListenableFuture;
 
+/**
+ * @author ZhouHR
+ */
 public class VisiableThreadPoolTaskExecutor extends ThreadPoolTaskExecutor {
     private static final Logger logger = LoggerFactory.getLogger(VisiableThreadPoolTaskExecutor.class);
 
-    private void showThreadPoolInfo(String prefix){
+    private void showThreadPoolInfo(String prefix) {
         ThreadPoolExecutor threadPoolExecutor = getThreadPoolExecutor();
 
-        if(null==threadPoolExecutor){
+        if (null == threadPoolExecutor) {
             return;
         }
 
-        logger.info("task: {}, "+this.getThreadNamePrefix());
-        logger.info("task: {}"+prefix);
-        logger.info("task: taskCount [{}]"+threadPoolExecutor.getTaskCount());
-        logger.info("task:  completedTaskCount [{}], "+threadPoolExecutor.getCompletedTaskCount());
-        logger.info("task:  activeCount [{}]"+threadPoolExecutor.getActiveCount());
-        logger.info("task:  queueSize [{}]"+threadPoolExecutor.getQueue().size());
+        logger.info("task: {}, " + this.getThreadNamePrefix());
+        logger.info("task: {}" + prefix);
+        logger.info("task: taskCount [{}]" + threadPoolExecutor.getTaskCount());
+        logger.info("task:  completedTaskCount [{}], " + threadPoolExecutor.getCompletedTaskCount());
+        logger.info("task:  activeCount [{}]" + threadPoolExecutor.getActiveCount());
+        logger.info("task:  queueSize [{}]" + threadPoolExecutor.getQueue().size());
     }
 
     @Override

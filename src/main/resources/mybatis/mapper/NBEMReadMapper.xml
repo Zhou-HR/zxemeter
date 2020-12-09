@@ -1,72 +1,72 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.gdiot.mapper.NBEMReadMapper">
-	
-	<sql id="Base_Column_Sql">
+
+    <sql id="Base_Column_Sql">
 		id,dev_id,imei,orig_value,time,e_num,e_fac,read_type,read_value,data_seq,source
 	</sql>
-	
-	<insert id="insertOne" parameterType="com.gdiot.model.YDEMNBReadPo">
-		insert into em_read_xb (
-			<include refid="Base_Column_Sql"></include>
-		) values (default,
-		#{devId,jdbcType=VARCHAR},
-		#{imei,jdbcType=VARCHAR},
-		#{origValue,jdbcType=VARCHAR},
-		#{time,jdbcType=BIGINT},
-		#{eNum,jdbcType=VARCHAR},
-		#{eFac,jdbcType=VARCHAR},
-		#{readType,jdbcType=VARCHAR},
-		#{readValue,jdbcType=VARCHAR},
-		#{dataSeq,jdbcType=VARCHAR},
-		#{source,jdbcType=VARCHAR})
-	</insert>
-	
-	<select id="selectList" resultType="com.gdiot.model.YDEMNBReadPo">
-		select * from em_read_xb
-			where 1 = 1		
-			<if test="dev_id != null">
-				and dev_id = #{dev_id,jdbcType=VARCHAR}
-			</if>
-			<if test="e_num != null">
-				and e_num = #{e_num,jdbcType=VARCHAR}
-			</if>
-			<if test="imei != null">
-				and imei = #{imei,jdbcType=VARCHAR}
-			</if>
-			<if test="beginTime != null">
-				and time &gt; #{beginTime,jdbcType=BIGINT}
-			</if>
-			<if test="endTime != null">
-				and time &lt;= #{endTime,jdbcType=BIGINT}
-			</if>
-			<if test="source != null">
-				and source = #{source,jdbcType=VARCHAR}
-			</if>		
-			order by id desc
-		limit #{offset} ,#{limit}
-	</select>
-	
-	<select id="countByCondition" resultType="java.lang.Integer">
-		select count(*) from em_read_xb
-		where 1 = 1
-		<if test="dev_id != null">
-			and dev_id = #{dev_id,jdbcType=VARCHAR}
-		</if>
-		<if test="e_num != null">
-			and e_num = #{e_num,jdbcType=VARCHAR}
-		</if>
-		<if test="imei != null">
-			and imei = #{imei,jdbcType=VARCHAR}
-		</if>
-		<if test="beginTime != null">
-			and time &gt; #{beginTime,jdbcType=BIGINT}
-		</if>
-		<if test="endTime != null">
-			and time &lt;= #{endTime,jdbcType=BIGINT}
-		</if>
-		<if test="source != null">
-			and source = #{source,jdbcType=VARCHAR}
-		</if>
-	</select>
+
+    <insert id="insertOne" parameterType="com.gdiot.model.YDEMNBReadPo">
+        insert into em_read_xb (
+        <include refid="Base_Column_Sql"></include>
+        ) values (default,
+        #{devId,jdbcType=VARCHAR},
+        #{imei,jdbcType=VARCHAR},
+        #{origValue,jdbcType=VARCHAR},
+        #{time,jdbcType=BIGINT},
+        #{eNum,jdbcType=VARCHAR},
+        #{eFac,jdbcType=VARCHAR},
+        #{readType,jdbcType=VARCHAR},
+        #{readValue,jdbcType=VARCHAR},
+        #{dataSeq,jdbcType=VARCHAR},
+        #{source,jdbcType=VARCHAR})
+    </insert>
+
+    <select id="selectList" resultType="com.gdiot.model.YDEMNBReadPo">
+        select * from em_read_xb
+        where 1 = 1
+        <if test="dev_id != null">
+            and dev_id = #{dev_id,jdbcType=VARCHAR}
+        </if>
+        <if test="e_num != null">
+            and e_num = #{e_num,jdbcType=VARCHAR}
+        </if>
+        <if test="imei != null">
+            and imei = #{imei,jdbcType=VARCHAR}
+        </if>
+        <if test="beginTime != null">
+            and time &gt; #{beginTime,jdbcType=BIGINT}
+        </if>
+        <if test="endTime != null">
+            and time &lt;= #{endTime,jdbcType=BIGINT}
+        </if>
+        <if test="source != null">
+            and source = #{source,jdbcType=VARCHAR}
+        </if>
+        order by id desc
+        limit #{offset} ,#{limit}
+    </select>
+
+    <select id="countByCondition" resultType="java.lang.Integer">
+        select count(*) from em_read_xb
+        where 1 = 1
+        <if test="dev_id != null">
+            and dev_id = #{dev_id,jdbcType=VARCHAR}
+        </if>
+        <if test="e_num != null">
+            and e_num = #{e_num,jdbcType=VARCHAR}
+        </if>
+        <if test="imei != null">
+            and imei = #{imei,jdbcType=VARCHAR}
+        </if>
+        <if test="beginTime != null">
+            and time &gt; #{beginTime,jdbcType=BIGINT}
+        </if>
+        <if test="endTime != null">
+            and time &lt;= #{endTime,jdbcType=BIGINT}
+        </if>
+        <if test="source != null">
+            and source = #{source,jdbcType=VARCHAR}
+        </if>
+    </select>
 </mapper>

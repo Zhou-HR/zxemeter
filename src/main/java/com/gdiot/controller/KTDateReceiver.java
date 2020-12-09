@@ -21,7 +21,6 @@ import java.security.NoSuchAlgorithmException;
 
 /**
  * 数据接收程序接口类
- * <p>
  *
  * @author zjq
  */

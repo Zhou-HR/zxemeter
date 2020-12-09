@@ -1,63 +1,54 @@
 package com.gdiot.udp;
 
-import java.net.InetAddress;
-import java.net.InetSocketAddress;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import com.gdiot.model.WMCmdDataPo;
-import com.gdiot.model.WMCmdSendLogPo;
 import com.gdiot.service.AsyncService;
-import com.gdiot.service.IWMDataService;
-import com.gdiot.task.DataSenderTask;
-import com.gdiot.util.SpringContextUtils;
-import com.gdiot.util.UdpConfig;
-import com.gdiot.util.Utilty;
-
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.socket.DatagramPacket;
 import io.netty.handler.codec.MessageToMessageDecoder;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import java.net.InetSocketAddress;
+import java.util.List;
+
+/**
+ * @author ZhouHR
+ */
 @Slf4j
 @Service
 public class UdpDecoderHandler extends MessageToMessageDecoder<DatagramPacket> {
 
-	@Autowired
-	private AsyncService asyncService;
-	
-	@Override
-	protected void decode(ChannelHandlerContext arg0, DatagramPacket datagramPacket, List<Object> out) throws Exception {
-		// TODO Auto-generated method stub
-		log.info("解析client上报数据");
-		InetSocketAddress  recipen = datagramPacket.recipient();
-    	InetSocketAddress  sender = datagramPacket.sender();
+    @Autowired
+    private AsyncService asyncService;
+
+    @Override
+    protected void decode(ChannelHandlerContext arg0, DatagramPacket datagramPacket, List<Object> out) throws Exception {
+        // TODO Auto-generated method stub
+        log.info("解析client上报数据");
+        InetSocketAddress recipen = datagramPacket.recipient();
+        InetSocketAddress sender = datagramPacket.sender();
         ByteBuf byteBuf = datagramPacket.content();
         byte[] data = new byte[byteBuf.readableBytes()];
         byteBuf.readBytes(data);
-        
+
         UdpPacketMsg udpPacketMsg = new UdpPacketMsg();
         udpPacketMsg.setServerAddress(recipen);
         udpPacketMsg.setClientAddress(sender);
         udpPacketMsg.setData(data);
         log.info("接收数据包byteBuf：" + byteBuf);
         log.info("接收数据包data：" + data);
-        
+
         //String msg = new String(data);
         //LOGGER.info("{}收到消息{}:" + msg);
         out.add(udpPacketMsg); //将数据传入下一个handler
-        
+
 //        byte[] buffer = new byte[UdpConfig.MAX_LENGTH];
 //        DatagramPacket packet = new DatagramPacket(buffer, buffer.length);
 //        receive(packet);
 //        response(packet);
 //        log.error("接收数据包packet：" + packet);
-	}
+    }
 	
 	/*public void receive(DatagramPacket packet) throws Exception {
         datagramSocket.receive(packet);

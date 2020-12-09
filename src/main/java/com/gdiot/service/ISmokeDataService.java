@@ -8,12 +8,16 @@ import com.gdiot.model.SmokeDevicePo;
 import com.gdiot.model.SmokeDownPo;
 
 
+/**
+ * @author ZhouHR
+ */
 public interface ISmokeDataService {
 
-	int insert(SmokeDataPo mSmokeDataPo);
-	Map<String, Object> selectbyDevId(String dev_id,int pageNo,int pageSize);
-	
-	List<SmokeDevicePo> selectAlarmList(String deviceId,String deviceType);
-	
-	int insertAlarmDown(SmokeDownPo mSmokeDownPo);
+    int insert(SmokeDataPo mSmokeDataPo);
+
+    Map<String, Object> selectbyDevId(String dev_id, int pageNo, int pageSize);
+
+    List<SmokeDevicePo> selectAlarmList(String deviceId, String deviceType);
+
+    int insertAlarmDown(SmokeDownPo mSmokeDownPo);
 }

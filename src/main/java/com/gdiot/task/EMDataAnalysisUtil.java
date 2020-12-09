@@ -14,6 +14,9 @@ import com.gdiot.util.Utilty;
 
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * @author ZhouHR
+ */
 @Slf4j
 public class EMDataAnalysisUtil {
 
@@ -1352,10 +1355,10 @@ public class EMDataAnalysisUtil {
 
     public static Map<String, Object> getAKRSingleReadValue(String dataValue) {
         Map<String, Object> map = new HashMap<String, Object>();
-        if (dataValue.length()==4){
+        if (dataValue.length() == 4) {
             Integer cycle = Integer.valueOf(dataValue, 16);
             map.put("value", cycle.toString());
-            
+
         }
         if (dataValue.length() == 8) {
             String dataStr = dataValue.substring(0, 8);
@@ -1450,6 +1453,7 @@ public class EMDataAnalysisUtil {
 
     /**
      * 数据解析
+     *
      * @param map
      * @param num
      * @param dataValue

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gdiot.ssm.dao.WMDataMapper">
+	
+	<sql id="Base_Column_Sql">
+		id,dev_id,orig_value,time,source,
+		wm_num,wm_time,data_flag1,data_flag2,data_seq,
+		wm_flow,wm_reverse_flow,wm_flow_rate,wm_statu1,wm_statu2,send_ip,send_port
+	</sql>
+	
+	<insert id="insertOne" >
+		insert into wm_data (
+			id,dev_id,orig_value,time,source,
+		wm_num,wm_time,data_flag1,data_flag2,data_seq,
+		wm_flow,wm_reverse_flow,wm_flow_rate,wm_statu1,wm_statu2,send_ip,send_port
+		) values (default,#{devId},#{origValue},#{time},#{source},
+		#{wmNum},#{wmTime},#{dataFlag1},#{dataFlag2},#{dataSeq},
+		#{wmFlow},#{wmReverseFlow},#{wmFlowRate},#{wmStatu1},#{wmStatu2},#{sendIp},#{sendPort})
+	</insert>
+	
+	<select id="selectbyNum" resultType="com.gdiot.ssm.entity.WMDataPo">
+		select * 
+		from(select * from wm_data
+				where 1 = 1		
+				<if test="wm_num != null">
+					and wm_num = #{wm_num}
+				</if>
+				order by id desc
+			) r
+		where ROWNUM &lt;= 10
+	</select>
+	
+	<select id="selectbyDevId" resultType="com.gdiot.ssm.entity.WMDataPo">
+		select * 
+		from(select r.* ,ROWNUM  rn
+				from(
+				select * from wm_data
+				where 1 = 1		
+				<if test="dev_id != null">
+					and (dev_id = #{dev_id} or wm_num = #{dev_id})
+				</if>
+				order by id desc
+			) r
+			 where ROWNUM &lt;= #{offset} + #{limit}
+		) table_alias
+		where table_alias.rn &gt; #{offset}
+	</select>
+	<select id="countbyDevId" resultType="java.lang.Integer">
+		select count(*) from wm_data
+		where  1 = 1	
+		<if test="dev_id != null">
+			and dev_id = #{dev_id}
+		</if>
+		order by id desc
+	</select>
+	
+	<insert id="insertCmdSendData" >
+		insert into wm_cmd_send_data (
+			id,wm_num,cmd_data,down_status,type,update_time
+		) values (default,#{wmNum},#{cmdData},#{downStatus},#{type},CURRENT_TIMESTAMP )
+	</insert>
+	
+	<select id="selectCmdSendData" resultType="com.gdiot.ssm.entity.WMCmdDataPo">
+		select * from wm_cmd_send_data where down_status = '1' order by id desc
+	</select>
+
+	<update id="updateCmdSendStatus" >
+		UPDATE wm_cmd_send_data 
+			SET
+			down_status = #{downStatus},
+			update_time = CURRENT_TIMESTAMP
+			WHERE
+			id = #{id} 
+	</update>
+	
+	<insert id="insertCmdSendLog" >
+		insert into wm_cmd_send_log (
+			id,wm_num,cmd_data,down_ip,down_port,type
+		) values (default,#{wmNum},#{cmdData},#{downIp},#{downPort},#{type})
+	</insert>
+	
+	<insert id="insertReadData" >
+		insert into wm_read_data (
+			id,wm_num,orig_value,type,source,value,time
+		) values (default,#{wmNum},#{origValue},#{type},#{source},#{value},#{time})
+	</insert>
+	
+	<select id="selectReadData" resultType="com.gdiot.ssm.entity.WMReadDataPo">
+		select * from wm_read_data 
+			where 1 = 1		
+				<if test="wm_num != null">
+					and wm_num = #{wm_num}
+				</if>
+				<if test="type != null">
+					and type = #{type}
+				</if>
+				order by id desc
+	</select>
+	
+</mapper>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gdiot.ssm.dao.SmokeDataMapper">
+	
+	<insert id="insertOne">
+		insert into smoke_data (
+			id,dev_id,orig_value,time,source,data_status
+		) values (default,#{dev_id},#{orig_value},#{time},#{source},#{data_status})
+	</insert>
+	
+	<select id="selectbyDevId" resultType="com.gdiot.ssm.entity.SmokeDataPo">
+		select * 
+		from(select r.* ,ROWNUM  rn
+				from(
+				select * from smoke_data
+				where 1 = 1		
+				<if test="dev_id != null">
+					and dev_id = #{dev_id}
+				</if>
+				order by id desc
+			) r
+			 where ROWNUM &lt;= #{offset} + #{limit}
+		) table_alias
+		where table_alias.rn &gt; #{offset}
+	</select>
+	<select id="countbyDevId" resultType="java.lang.Integer">
+		select count(*) from smoke_data
+		where  1 = 1	
+		<if test="dev_id != null">
+			and dev_id = #{dev_id}
+		</if>
+		order by id desc
+	</select>
+	
+</mapper>

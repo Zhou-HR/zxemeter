@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gdiot.ssm.dao.NBYDEMStatusMapper">
+	<resultMap type="com.gdiot.ssm.entity.YDEMeterStatusPo" id="BaseResultMap">
+		<id property="id" column="id" jdbcType="INTEGER"/>
+		<result property="dev_id" column="dev_id" jdbcType="VARCHAR"/>
+		<result property="imei" column="imei" jdbcType="VARCHAR"/>
+		<result property="status" column="status" jdbcType="INTEGER"/>
+		<result property="type" column="type" jdbcType="INTEGER"/>
+		<result property="login_type" column="login_type" jdbcType="INTEGER"/>
+		<result property="time" column="time" jdbcType="BIGINT"/>
+	</resultMap>
+			
+	<sql id="Base_Column_Sql">
+		id,dev_id,imei,status,type,login_type,time
+	</sql>
+	
+	<insert id="insertStatus" parameterType="com.gdiot.ssm.entity.YDEMeterStatusPo">
+		insert into em_nb_status (
+			<include refid="Base_Column_Sql"></include>
+		) values (default,#{dev_id},#{imei},#{status},#{type},#{login_type},#{time})
+	</insert>
+	
+	<update id="updateEMStatus" parameterType="com.gdiot.ssm.entity.YDEMeterStatusPo" > 
+	  UPDATE EM_NB_STATUS SET STATUS=#{status},TYPE=#{type},TIME=#{time} WHERE DEV_ID=#{dev_id}
+	  <!-- 属性字段名区分大小写 -->
+	</update>
+	
+	<select id="selectDevid" parameterType="com.gdiot.ssm.entity.YDEMeterStatusPo" resultType="com.gdiot.ssm.entity.YDEMeterStatusPo">
+		 SELECT * FROM em_nb_status WHERE DEV_ID = #{dev_id} order by time desc
+		 <!--注意：结果字段名与属性名保持一致，区分大小写-->
+	</select>
+
+
+	<!-- em_nb_status_seq.nextval -->
+	
+	<select id="selectStatus" resultMap="BaseResultMap">
+		select * 
+		from(select r.* ,ROWNUM  rn
+				from(
+				select * from em_nb_status
+				where 1 = 1		
+				<if test="dev_id != null">
+					and dev_id = #{dev_id}
+				</if>
+				<if test="imei != null">
+					and imei = #{imei}
+				</if>
+				<if test="status != null">
+					and status = #{status}
+				</if>		
+				order by time desc
+			) r
+			 where ROWNUM &lt;= #{offset} + #{limit}
+		) table_alias
+		where table_alias.rn &gt; #{offset}
+	</select>
+	
+	<select id="countByCondition" resultType="java.lang.Integer">
+		select count(*) from em_nb_status
+		where 1 = 1
+		<if test="dev_id != null">
+			and dev_id = #{dev_id}
+		</if>
+		<if test="imei != null">
+			and imei = #{imei}
+		</if>
+		<if test="status != null">
+			and status = #{status}
+		</if>
+	</select>
+	
+</mapper>

@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/emeter.iml" filepath="$PROJECT_DIR$/emeter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/zx_meter_data.iml" filepath="$PROJECT_DIR$/zx_meter_data.iml" />
     </modules>
   </component>
 </project>

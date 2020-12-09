@@ -5,186 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="42f621c1-6d1a-48ab-86ff-6c08db9a1b26" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/emeter.iml" beforeDir="false" afterPath="$PROJECT_DIR$/emeter.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/basic/common/BeanFactoryUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/basic/common/BeanFactoryUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/basic/common/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/basic/common/Constants.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/basic/common/ContextRefreshedListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/basic/common/ContextRefreshedListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/basic/common/CustomBeanPostProcessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/basic/common/CustomBeanPostProcessor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/basic/common/GenericController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/basic/common/GenericController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/basic/common/JsonUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/basic/common/JsonUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/basic/common/ScanUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/basic/common/ScanUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/basic/common/dict/BeanHasDictRowMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/basic/common/dict/BeanHasDictRowMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/basic/common/dict/BeanHasDictSqlParameterSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/basic/common/dict/BeanHasDictSqlParameterSource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/basic/common/dict/BeanHasDictWrapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/basic/common/dict/BeanHasDictWrapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/basic/common/dict/DictFormatter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/basic/common/dict/DictFormatter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/basic/common/dict/DictTypeHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/basic/common/dict/DictTypeHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/basic/common/dict/DictUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/basic/common/dict/DictUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/basic/common/dict/ObjectWrapperFactoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/basic/common/dict/ObjectWrapperFactoryImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/basic/common/dict/package-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/basic/common/dict/package-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/basic/crud/CrudController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/basic/crud/CrudController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/basic/crud/CrudService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/basic/crud/CrudService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/basic/crud/FilterRule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/basic/crud/FilterRule.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/basic/crud/Message.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/basic/crud/Message.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/basic/crud/MybatisSqlBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/basic/crud/MybatisSqlBuilder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/basic/crud/NamedSqlBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/basic/crud/NamedSqlBuilder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/basic/crud/QueryInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/basic/crud/QueryInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/basic/crud/SqlBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/basic/crud/SqlBuilder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/basic/crud/TableMapping.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/basic/crud/TableMapping.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/basic/interceptor/UserAuthInterceptor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/basic/interceptor/UserAuthInterceptor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/basic/security/AccessDecisionManagerWrapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/basic/security/AccessDecisionManagerWrapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/basic/security/CustomAccessDeniedHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/basic/security/CustomAccessDeniedHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/basic/security/CustomExceptionTranslationFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/basic/security/CustomExceptionTranslationFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/basic/security/SecurityMetadataSourceWrapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/basic/security/SecurityMetadataSourceWrapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/basic/security/UserDetailsServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/basic/security/UserDetailsServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/common/Edit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/common/Edit.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/common/Insert.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/common/Insert.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/common/Update.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/common/Update.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/emeter/DownController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/emeter/DownController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/emeter/ExportController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/emeter/ExportController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/emeter/MenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/emeter/MenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/emeter/MeterController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/emeter/MeterController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/emeter/MeterMaintainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/emeter/MeterMaintainController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/emeter/MeterSimController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/emeter/MeterSimController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/emeter/MeterWarningController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/emeter/MeterWarningController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/emeter/NBController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/emeter/NBController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/emeter/StatController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/emeter/StatController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/emeter/StationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/emeter/StationController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/mapper/ExportMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/mapper/ExportMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/mapper/G2Mapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/mapper/G2Mapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/mapper/Guangdong2gMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/mapper/Guangdong2gMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/mapper/LoraMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/mapper/LoraMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/mapper/MenuMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/mapper/MenuMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/mapper/MeterMaintainMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/mapper/MeterMaintainMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/mapper/MeterMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/mapper/MeterMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/mapper/MeterPersonMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/mapper/MeterPersonMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/mapper/MeterSimMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/mapper/MeterSimMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/mapper/MeterWarningMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/mapper/MeterWarningMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/mapper/NBMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/mapper/NBMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/mapper/NBSendPackageMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/mapper/NBSendPackageMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/mapper/PermissionMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/mapper/PermissionMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/mapper/RoleMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/mapper/RoleMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/mapper/StatMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/mapper/StatMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/mapper/StationMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/mapper/StationMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/mapper/UserMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/mapper/UserMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/model/annotation/Alias.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/model/annotation/Alias.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/model/annotation/Crud.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/model/annotation/Crud.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/model/annotation/Exclude.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/model/annotation/Exclude.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/model/annotation/Id.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/model/annotation/Id.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/model/po/CarrierValueFee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/model/po/CarrierValueFee.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/model/po/Company.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/model/po/Company.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/model/po/CompanyYearMonthValue.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/model/po/CompanyYearMonthValue.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/model/po/Data.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/model/po/Data.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/model/po/DataHotMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/model/po/DataHotMap.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/model/po/Dict.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/model/po/Dict.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/model/po/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/model/po/Menu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/model/po/Meter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/model/po/Meter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/model/po/Meter12Month.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/model/po/Meter12Month.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/model/po/Meter3Value.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/model/po/Meter3Value.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/model/po/MeterLostData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/model/po/MeterLostData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/model/po/MeterMaintain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/model/po/MeterMaintain.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/model/po/MeterMaintainPic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/model/po/MeterMaintainPic.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/model/po/MeterMonthReport.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/model/po/MeterMonthReport.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/model/po/MeterNum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/model/po/MeterNum.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/model/po/MeterProperty.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/model/po/MeterProperty.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/model/po/MeterSendDownLog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/model/po/MeterSendDownLog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/model/po/MeterSim.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/model/po/MeterSim.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/model/po/MeterValueTime.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/model/po/MeterValueTime.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/model/po/MeterWarning.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/model/po/MeterWarning.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/model/po/NBSendPackage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/model/po/NBSendPackage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/model/po/NBValue.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/model/po/NBValue.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/model/po/OfflineReport.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/model/po/OfflineReport.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/model/po/Permission.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/model/po/Permission.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/model/po/PermissionMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/model/po/PermissionMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/model/po/Region.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/model/po/Region.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/model/po/Role.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/model/po/Role.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/model/po/RoleMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/model/po/RoleMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/model/po/RolePermission.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/model/po/RolePermission.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/model/po/SimpleDict.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/model/po/SimpleDict.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/model/po/Station.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/model/po/Station.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/model/po/SubMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/model/po/SubMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/model/po/SysCode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/model/po/SysCode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/model/po/TbMeterInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/model/po/TbMeterInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/model/po/TextValue.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/model/po/TextValue.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/model/po/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/model/po/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/model/po/User1.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/model/po/User1.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/model/po/User2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/model/po/User2.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/model/po/UserLog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/model/po/UserLog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/model/po/UserLog1.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/model/po/UserLog1.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/model/po/UserRole.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/model/po/UserRole.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/model/vo/Entity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/model/vo/Entity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/model/vo/MenuExport.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/model/vo/MenuExport.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/model/vo/MenuNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/model/vo/MenuNode.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/model/vo/NanoId.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/model/vo/NanoId.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/redis/InitLoadToRedis.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/redis/InitLoadToRedis.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/redis/JdkSerializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/redis/JdkSerializer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/redis/JedisUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/redis/JedisUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/redis/StringSerializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/redis/StringSerializer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/redis/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/redis/Test.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/scheduled/DataSyncTimer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/scheduled/DataSyncTimer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/scheduled/DayExcelTimer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/scheduled/DayExcelTimer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/scheduled/DownloadDmpTimer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/scheduled/DownloadDmpTimer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/scheduled/HeartbeatTimer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/scheduled/HeartbeatTimer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/scheduled/LahezhaCheckTimer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/scheduled/LahezhaCheckTimer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/scheduled/MeterValueDayTimer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/scheduled/MeterValueDayTimer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/scheduled/ThreadUserLog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/scheduled/ThreadUserLog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/scheduled/WarningCheckTimer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/scheduled/WarningCheckTimer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/service/MeterService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/service/MeterService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/user/service/PermissionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/user/service/PermissionService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/user/service/RoleMenuService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/user/service/RoleMenuService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/user/service/RoleService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/user/service/RoleService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/user/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/user/service/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/user/web/DictController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/user/web/DictController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/user/web/IndexController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/user/web/IndexController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/user/web/PermissionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/user/web/PermissionController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/user/web/RoleController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/user/web/RoleController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/user/web/RoleMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/user/web/RoleMenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/user/web/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/user/web/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/util/DateUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/util/DateUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/util/DateUtil2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/util/DateUtil2.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/util/DingDingUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/util/DingDingUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/util/EmailUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/util/EmailUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/util/ExportDataTools.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/util/ExportDataTools.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/util/FtpUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/util/FtpUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/util/HttpClientUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/util/HttpClientUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/util/JdbcSchedularLog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/util/JdbcSchedularLog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/util/JdbcUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/util/JdbcUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/util/POIUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/util/POIUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/util/PerformanceUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/util/PerformanceUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/util/PropertiesUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/util/PropertiesUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/util/ReflectUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/util/ReflectUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/util/ThreadUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/util/ThreadUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/util/WebUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/util/WebUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/ssm/entity/Company.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/ssm/entity/Company.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/ssm/entity/Project.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/ssm/entity/Project.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/ssm/entity/ProjectMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/ssm/entity/ProjectMap.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/ssm/entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/ssm/entity/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/interface.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/interface.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/log4j2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/log4j2.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mappers/AShareMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mappers/AShareMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mappers/ExportMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mappers/ExportMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mappers/G2Mapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mappers/G2Mapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mappers/Guangdong2gMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mappers/Guangdong2gMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mappers/LoraMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mappers/LoraMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mappers/Menu.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mappers/Menu.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mappers/MeterMaintainMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mappers/MeterMaintainMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mappers/MeterMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mappers/MeterMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mappers/MeterPersonMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mappers/MeterPersonMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mappers/MeterSimMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mappers/MeterSimMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mappers/MeterWarningMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mappers/MeterWarningMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mappers/NBMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mappers/NBMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mappers/NBSendPackageMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mappers/NBSendPackageMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mappers/PermissionMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mappers/PermissionMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mappers/RoleMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mappers/RoleMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mappers/StatMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mappers/StatMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mappers/StationMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mappers/StationMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mappers/UserMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mappers/UserMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/settings-dev.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/settings-dev.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/spring-context.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/spring-context.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/spring-mvc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/spring-mvc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/spring-security.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/spring-security.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/redis/JedisLock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/redis/JedisLock.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -216,16 +43,192 @@
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RunManager">
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="class" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
+    </configuration>
+    <configuration default="true" type="DjangoTestsConfigurationType">
+      <module name="emeter" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="TARGET" value="" />
+      <option name="SETTINGS_FILE" value="" />
+      <option name="CUSTOM_SETTINGS" value="false" />
+      <option name="USE_OPTIONS" value="false" />
+      <option name="OPTIONS" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="emeter" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="WORKING_DIRECTORY" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="emeter" />
+      <option name="filePath" />
+      <option name="vmParameters" />
+      <option name="alternativeJrePath" />
+      <option name="programParameters" />
+      <option name="passParentEnvs" value="true" />
+      <option name="workingDirectory" />
+      <option name="isAlternativeJrePathEnabled" value="false" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="filePath" />
+      <option name="vmParameters" />
+      <option name="alternativeJrePath" />
+      <option name="programParameters" />
+      <option name="passParentEnvs" value="true" />
+      <option name="workingDirectory" />
+      <option name="isAlternativeJrePathEnabled" value="false" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="WORKING_DIRECTORY" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="PyBehaveRunConfigurationType" factoryName="Behave">
+      <module name="emeter" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="ADDITIONAL_ARGS" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="PyLettuceRunConfigurationType" factoryName="Lettuce">
+      <module name="emeter" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="ADDITIONAL_ARGS" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="PythonConfigurationType" factoryName="Python">
+      <module name="emeter" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="Python.FlaskServer">
+      <module name="emeter" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="launchJavascriptDebuger" value="false" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="Tox" factoryName="Tox">
+      <module name="emeter" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="tests" factoryName="Doctests">
+      <module name="emeter" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_SCRIPT" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="tests" factoryName="Unittests">
+      <module name="emeter" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
+      <method v="2" />
     </configuration>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />

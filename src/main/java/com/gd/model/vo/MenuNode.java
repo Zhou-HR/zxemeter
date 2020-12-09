@@ -3,14 +3,14 @@ package com.gd.model.vo;
 import java.io.Serializable;
 import java.util.List;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
 /**
  * @author ZhouHR
  */
-@Setter
-@Getter
+@Data
 public class MenuNode implements Serializable {
 
     private int id;

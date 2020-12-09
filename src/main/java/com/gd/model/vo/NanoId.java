@@ -2,6 +2,7 @@ package com.gd.model.vo;
 
 import com.gd.model.annotation.Id;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,8 +15,7 @@ import java.io.Serializable;
  *
  * @author ZhouHR
  */
-@Getter
-@Setter
+@Data
 public abstract class NanoId implements Serializable {
 
 
@@ -29,6 +29,7 @@ public abstract class NanoId implements Serializable {
     }
 
     public static String getNanoId() {
+
         return System.nanoTime() + RandomStringUtils.randomNumeric(5);
     }
 }

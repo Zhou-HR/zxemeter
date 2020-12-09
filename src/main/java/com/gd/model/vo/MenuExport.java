@@ -2,6 +2,7 @@ package com.gd.model.vo;
 
 import java.io.Serializable;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -9,8 +10,7 @@ import lombok.ToString;
 /**
  * @author ZhouHR
  */
-@Getter
-@Setter
+@Data
 @ToString
 public class MenuExport implements Serializable {
     private static final long serialVersionUID = 1L;

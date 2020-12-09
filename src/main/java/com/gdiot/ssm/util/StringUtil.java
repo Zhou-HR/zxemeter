@@ -13,22 +13,25 @@ package com.gdiot.ssm.util;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * @author ZhouHR
+ */
 public class StringUtil {
 
     public static boolean strIsNullOrEmpty(String s) {
         return (null == s || s.trim().length() < 1);
     }
-    
-    public static boolean isEmpty(String s){
-    	return (s==null||s.trim().length()<1);
+
+    public static boolean isEmpty(String s) {
+        return (s == null || s.trim().length() < 1);
     }
-    
+
     public static String getTimeCodeStr() {
-    	StringBuffer sb = new StringBuffer("0241");
-    	Date now = new Date();
-    	SimpleDateFormat sdf = new SimpleDateFormat("ssmmHH");
-    	sb.append(sdf.format(now));
-    	sb.append("00");
-    	return sb.toString();
+        StringBuffer sb = new StringBuffer("0241");
+        Date now = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("ssmmHH");
+        sb.append(sdf.format(now));
+        sb.append("00");
+        return sb.toString();
     }
 }

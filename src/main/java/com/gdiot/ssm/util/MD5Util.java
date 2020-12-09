@@ -3,8 +3,11 @@ package com.gdiot.ssm.util;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+/**
+ * @author ZhouHR
+ */
 public class MD5Util {
-	public static String getPwd(String pwd) {
+    public static String getPwd(String pwd) {
         try {
             // 创建加密对象
             MessageDigest digest = MessageDigest.getInstance("md5");
@@ -48,7 +51,7 @@ public class MD5Util {
      * @param args
      */
     public static void main(String[] args) {
-        String pwd = MD5Util.getPwd("111111"+"{1q@!}");
+        String pwd = MD5Util.getPwd("111111" + "{1q@!}");
         System.out.println(pwd);
     }
 }

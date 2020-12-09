@@ -24,8 +24,9 @@ public class LoraDataServiceImpl implements ILoraDataService {
 	@Autowired
 	private LoraDataMapper mLoraDataMapper;
 
-	public Map<String, Object> listLoraData(String deviceNo, Long beginTime, Long endTime, String source,
-			int pageNo, int pageSize) {
+	@Override
+    public Map<String, Object> listLoraData(String deviceNo, Long beginTime, Long endTime, String source,
+                                            int pageNo, int pageSize) {
 		Map<String, Object> result = new HashMap<String, Object>();
 		int count = mLoraDataMapper.countByCondition(deviceNo, beginTime, endTime, source);
 		log.info("LoraServiceImpl lora count="+ count);
@@ -64,6 +65,7 @@ public class LoraDataServiceImpl implements ILoraDataService {
 		return result;
 	}
 
+	@Override
 	public int addOne(LoraDataPo LoraData) {
 		log.info("begin addOne");
 		return mLoraDataMapper.insertOne(LoraData);

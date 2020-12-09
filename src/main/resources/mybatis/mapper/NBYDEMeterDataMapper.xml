@@ -1,54 +1,54 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.gdiot.ssm.dao.NBYDEMeterDataMapper">
-	<resultMap type="com.gdiot.ssm.entity.YDEMeterDataPo" id="BaseResultMap">
-		<id property="id" column="id" jdbcType="INTEGER"/>
-		<result property="dev_id" column="dev_id" jdbcType="VARCHAR"/>
-		<result property="imei" column="imei" jdbcType="VARCHAR"/>
-		<result property="ds_id" column="ds_id" jdbcType="VARCHAR"/>
-		<result property="orig_value" column="orig_value" jdbcType="VARCHAR"/>
-		<result property="type" column="type" jdbcType="INTEGER"/>
-		<result property="time" column="time" jdbcType="BIGINT"/>
-		<result property="source" column="source" jdbcType="VARCHAR"/>
-		
-		<result property="e_readings" column="e_readings" jdbcType="VARCHAR"/>
-		<result property="e_voltage" column="e_voltage" jdbcType="VARCHAR"/>
-		<result property="e_current" column="e_current" jdbcType="VARCHAR"/>
-		<result property="e_signal" column="e_signal" jdbcType="VARCHAR"/>
-		<result property="e_num" column="e_num" jdbcType="VARCHAR"/>
-		<result property="e_fac" column="e_fac" jdbcType="VARCHAR"/>
-		<result property="e_time" column="e_time" jdbcType="VARCHAR"/>
-		<result property="e_seq" column="e_seq" jdbcType="BIGINT"/>
-		<result property="flag_reload" column="flag_reload" jdbcType="INTEGER" />
-		<result property="e_switch" column="e_switch" jdbcType="VARCHAR"/>
-		<result property="seq_type" column="seq_type" jdbcType="VARCHAR"/>
-		
-		<result property="e_kwh1" column="e_kwh1" jdbcType="VARCHAR"/>
-		<result property="e_kwh2" column="e_kwh2" jdbcType="VARCHAR"/>
-		<result property="e_kw1_all" column="e_kw1_all" jdbcType="VARCHAR"/>
-		<!-- <result property="e_kw1_a" column="e_kw1_a" jdbcType="VARCHAR"/>
-		<result property="e_kw1_b" column="e_kw1_b" jdbcType="VARCHAR"/>
-		<result property="e_kw1_c" column="e_kw1_c" jdbcType="VARCHAR"/> -->
-		<result property="e_kw2_all" column="e_kw2_all" jdbcType="VARCHAR"/>
-		<!-- <result property="e_kw2_a" column="e_kw2_a" jdbcType="VARCHAR"/>
-		<result property="e_kw2_b" column="e_kw2_b" jdbcType="VARCHAR"/>
-		<result property="e_kw2_c" column="e_kw2_c" jdbcType="VARCHAR"/> -->
-		<result property="e_voltage_a" column="e_voltage_a" jdbcType="VARCHAR"/>
-		<result property="e_voltage_b" column="e_voltage_b" jdbcType="VARCHAR"/>
-		<result property="e_voltage_c" column="e_voltage_c" jdbcType="VARCHAR"/>
-		<result property="e_current_a" column="e_current_a" jdbcType="VARCHAR"/>
-		<result property="e_current_b" column="e_current_b" jdbcType="VARCHAR"/>
-		<result property="e_current_c" column="e_current_c" jdbcType="VARCHAR"/>
-		<result property="e_factor_all" column="e_factor_all" jdbcType="VARCHAR"/>
-		<!-- <result property="e_factor_a" column="e_factor_a" jdbcType="VARCHAR"/>
-		<result property="e_factor_b" column="e_factor_b" jdbcType="VARCHAR"/>
-		<result property="e_factor_c" column="e_factor_c" jdbcType="VARCHAR"/> -->
-		<result property="e_statu1" column="e_statu1" jdbcType="VARCHAR"/>
-		<result property="e_statu2" column="e_statu2" jdbcType="VARCHAR"/>
-	</resultMap>
-	
-	<!--  e_kw1_a,e_kw1_b,e_kw1_c,  e_kw2_a,e_kw2_b,e_kw2_c,  e_factor_a,e_factor_b,e_factor_c,-->
-	<sql id="Base_Column_Sql">
+    <resultMap type="com.gdiot.ssm.entity.YDEMeterDataPo" id="BaseResultMap">
+        <id property="id" column="id" jdbcType="INTEGER"/>
+        <result property="dev_id" column="dev_id" jdbcType="VARCHAR"/>
+        <result property="imei" column="imei" jdbcType="VARCHAR"/>
+        <result property="ds_id" column="ds_id" jdbcType="VARCHAR"/>
+        <result property="orig_value" column="orig_value" jdbcType="VARCHAR"/>
+        <result property="type" column="type" jdbcType="INTEGER"/>
+        <result property="time" column="time" jdbcType="BIGINT"/>
+        <result property="source" column="source" jdbcType="VARCHAR"/>
+
+        <result property="e_readings" column="e_readings" jdbcType="VARCHAR"/>
+        <result property="e_voltage" column="e_voltage" jdbcType="VARCHAR"/>
+        <result property="e_current" column="e_current" jdbcType="VARCHAR"/>
+        <result property="e_signal" column="e_signal" jdbcType="VARCHAR"/>
+        <result property="e_num" column="e_num" jdbcType="VARCHAR"/>
+        <result property="e_fac" column="e_fac" jdbcType="VARCHAR"/>
+        <result property="e_time" column="e_time" jdbcType="VARCHAR"/>
+        <result property="e_seq" column="e_seq" jdbcType="BIGINT"/>
+        <result property="flag_reload" column="flag_reload" jdbcType="INTEGER"/>
+        <result property="e_switch" column="e_switch" jdbcType="VARCHAR"/>
+        <result property="seq_type" column="seq_type" jdbcType="VARCHAR"/>
+
+        <result property="e_kwh1" column="e_kwh1" jdbcType="VARCHAR"/>
+        <result property="e_kwh2" column="e_kwh2" jdbcType="VARCHAR"/>
+        <result property="e_kw1_all" column="e_kw1_all" jdbcType="VARCHAR"/>
+        <!-- <result property="e_kw1_a" column="e_kw1_a" jdbcType="VARCHAR"/>
+        <result property="e_kw1_b" column="e_kw1_b" jdbcType="VARCHAR"/>
+        <result property="e_kw1_c" column="e_kw1_c" jdbcType="VARCHAR"/> -->
+        <result property="e_kw2_all" column="e_kw2_all" jdbcType="VARCHAR"/>
+        <!-- <result property="e_kw2_a" column="e_kw2_a" jdbcType="VARCHAR"/>
+        <result property="e_kw2_b" column="e_kw2_b" jdbcType="VARCHAR"/>
+        <result property="e_kw2_c" column="e_kw2_c" jdbcType="VARCHAR"/> -->
+        <result property="e_voltage_a" column="e_voltage_a" jdbcType="VARCHAR"/>
+        <result property="e_voltage_b" column="e_voltage_b" jdbcType="VARCHAR"/>
+        <result property="e_voltage_c" column="e_voltage_c" jdbcType="VARCHAR"/>
+        <result property="e_current_a" column="e_current_a" jdbcType="VARCHAR"/>
+        <result property="e_current_b" column="e_current_b" jdbcType="VARCHAR"/>
+        <result property="e_current_c" column="e_current_c" jdbcType="VARCHAR"/>
+        <result property="e_factor_all" column="e_factor_all" jdbcType="VARCHAR"/>
+        <!-- <result property="e_factor_a" column="e_factor_a" jdbcType="VARCHAR"/>
+        <result property="e_factor_b" column="e_factor_b" jdbcType="VARCHAR"/>
+        <result property="e_factor_c" column="e_factor_c" jdbcType="VARCHAR"/> -->
+        <result property="e_statu1" column="e_statu1" jdbcType="VARCHAR"/>
+        <result property="e_statu2" column="e_statu2" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--  e_kw1_a,e_kw1_b,e_kw1_c,  e_kw2_a,e_kw2_b,e_kw2_c,  e_factor_a,e_factor_b,e_factor_c,-->
+    <sql id="Base_Column_Sql">
 		id,dev_id,imei,ds_id,orig_value,type,time,source,
 		e_readings,e_voltage,e_current,e_signal,e_num,e_fac,
 		e_time,e_seq,flag_reload,e_switch,seq_type,
@@ -56,113 +56,113 @@
 		e_voltage_a,e_voltage_b,e_voltage_c,e_current_a,e_current_b,e_current_c,
   		e_factor_all,e_statu1,e_statu2
 	</sql>
-	
-	<!--  #{e_kw1_a},#{e_kw1_b},#{e_kw1_c},   #{e_kw2_a},#{e_kw2_b},#{e_kw2_c},  #{e_factor_a},#{e_factor_b},#{e_factor_c}, -->
-	<insert id="insertOne" parameterType="com.gdiot.ssm.entity.YDEMeterDataPo">
-		insert into em_nb_data (
-			<include refid="Base_Column_Sql"></include>
-		) values (default,#{dev_id},#{imei},#{ds_id},#{orig_value},#{type},#{time},#{source},
-		#{e_readings},#{e_voltage},#{e_current},#{e_signal},#{e_num},#{e_fac},
-		#{e_time},#{e_seq},#{flag_reload},#{e_switch},#{seq_type},
-		#{e_kwh1},#{e_kwh2},#{e_kw1_all},#{e_kw2_all},
-		#{e_voltage_a},#{e_voltage_b},#{e_voltage_c},#{e_current_a},#{e_current_b},#{e_current_c},
-  		#{e_factor_all},#{e_statu1},#{e_statu2})
-	</insert>
-	
-	<select id="selectList" resultMap="BaseResultMap">
-		select * 
-		from(select r.* ,ROWNUM  rn
-				from(
-				select * from em_nb_data
-				where 1 = 1		
-				<if test="dev_id != null">
-					and dev_id = #{dev_id}
-				</if>
-				<if test="e_num != null">
-					and e_num = #{e_num}
-				</if>
-				<if test="imei != null">
-					and imei = #{imei}
-				</if>
-				<if test="beginTime != null">
-					and time &gt; #{beginTime}
-				</if>
-				<if test="endTime != null">
-					and time &lt;= #{endTime}
-				</if>
-				<if test="source != null">
-					and source = #{source}
-				</if>		
-				order by time desc
-			) r
-			 where ROWNUM &lt;= #{offset} + #{limit}
-		) table_alias
-		where table_alias.rn &gt; #{offset}
-	</select>
-	
-	<select id="countByCondition" resultType="java.lang.Integer">
-		select count(*) from em_nb_data
-		where 1 = 1
-		<if test="dev_id != null">
-			and dev_id = #{dev_id}
-		</if>
-		<if test="e_num != null">
-			and e_num = #{e_num}
-		</if>
-		<if test="imei != null">
-			and imei = #{imei}
-		</if>
-		<if test="beginTime != null">
-			and time &gt; #{beginTime}
-		</if>
-		<if test="endTime != null">
-			and time &lt;= #{endTime}
-		</if>
-		<if test="source != null">
-			and source = #{source}
-		</if>
-	</select>
-	
-	<!-- by imei  SELECT * FROM EM_DATA WHERE IMEI='866971031491171' ORDER BY COLLECT_TIME DESC -->
-	<select id="selectbyimei" resultMap="BaseResultMap">
-		select * from em_nb_data
-		where  1 = 1	
-		<if test="imei != null">
-			and imei = #{imei}
-		</if>
-		order by id desc
-	</select>
-	
-	<select id="selectbyseq" resultMap="BaseResultMap">
-		select * from em_nb_data
-		where  1 = 1	
-		<if test="imei != null">
-			and imei = #{imei}
-		</if>
-		<if test="e_seq != null">
-			and e_seq = #{e_seq}
-		</if>
-		order by id desc
-	</select>
-	<update id="updateData" parameterType="com.gdiot.ssm.entity.YDEMeterDataPo" > 
-	  	UPDATE em_nb_data SET 
-	  		e_voltage=#{e_voltage},
-	  		e_voltage_a=#{e_voltage_a},
-	  		e_voltage_b=#{e_voltage_b},
-	  		e_voltage_c=#{e_voltage_c},
-	  		e_current=#{e_current},
-	  		e_current_a=#{e_current_a},
-	  		e_current_b=#{e_current_b},
-	  		e_current_c=#{e_current_c},
-	  		e_factor_all=#{e_factor_all},
-	  		e_factor_a=#{e_factor_a},
-	  		e_factor_b=#{e_factor_b},
-	  		e_factor_c=#{e_factor_c},
-	  		e_statu1=#{e_statu1},
-	  		e_statu2=#{e_statu2},
-	  		e_switch=#{e_switch},
-	  		orig_value2=#{orig_value2}
-	 	WHERE imei=#{imei} and e_seq=#{e_seq} and id=#{id}
-	  <!-- 属性字段名区分大小写   UPDATE em_cmds_seq SET cmd_seq='56',data_seq='D6' WHERE imei='866971032563111' -->
-	</update>
+
+    <!--  #{e_kw1_a},#{e_kw1_b},#{e_kw1_c},   #{e_kw2_a},#{e_kw2_b},#{e_kw2_c},  #{e_factor_a},#{e_factor_b},#{e_factor_c}, -->
+    <insert id="insertOne" parameterType="com.gdiot.ssm.entity.YDEMeterDataPo">
+        insert into em_nb_data (
+        <include refid="Base_Column_Sql"></include>
+        ) values (default,#{dev_id},#{imei},#{ds_id},#{orig_value},#{type},#{time},#{source},
+        #{e_readings},#{e_voltage},#{e_current},#{e_signal},#{e_num},#{e_fac},
+        #{e_time},#{e_seq},#{flag_reload},#{e_switch},#{seq_type},
+        #{e_kwh1},#{e_kwh2},#{e_kw1_all},#{e_kw2_all},
+        #{e_voltage_a},#{e_voltage_b},#{e_voltage_c},#{e_current_a},#{e_current_b},#{e_current_c},
+        #{e_factor_all},#{e_statu1},#{e_statu2})
+    </insert>
+
+    <select id="selectList" resultMap="BaseResultMap">
+        select *
+        from(select r.* ,ROWNUM rn
+        from(
+        select * from em_nb_data
+        where 1 = 1
+        <if test="dev_id != null">
+            and dev_id = #{dev_id}
+        </if>
+        <if test="e_num != null">
+            and e_num = #{e_num}
+        </if>
+        <if test="imei != null">
+            and imei = #{imei}
+        </if>
+        <if test="beginTime != null">
+            and time &gt; #{beginTime}
+        </if>
+        <if test="endTime != null">
+            and time &lt;= #{endTime}
+        </if>
+        <if test="source != null">
+            and source = #{source}
+        </if>
+        order by time desc
+        ) r
+        where ROWNUM &lt;= #{offset} + #{limit}
+        ) table_alias
+        where table_alias.rn &gt; #{offset}
+    </select>
+
+    <select id="countByCondition" resultType="java.lang.Integer">
+        select count(*) from em_nb_data
+        where 1 = 1
+        <if test="dev_id != null">
+            and dev_id = #{dev_id}
+        </if>
+        <if test="e_num != null">
+            and e_num = #{e_num}
+        </if>
+        <if test="imei != null">
+            and imei = #{imei}
+        </if>
+        <if test="beginTime != null">
+            and time &gt; #{beginTime}
+        </if>
+        <if test="endTime != null">
+            and time &lt;= #{endTime}
+        </if>
+        <if test="source != null">
+            and source = #{source}
+        </if>
+    </select>
+
+    <!-- by imei  SELECT * FROM EM_DATA WHERE IMEI='866971031491171' ORDER BY COLLECT_TIME DESC -->
+    <select id="selectbyimei" resultMap="BaseResultMap">
+        select * from em_nb_data
+        where 1 = 1
+        <if test="imei != null">
+            and imei = #{imei}
+        </if>
+        order by id desc
+    </select>
+
+    <select id="selectbyseq" resultMap="BaseResultMap">
+        select * from em_nb_data
+        where 1 = 1
+        <if test="imei != null">
+            and imei = #{imei}
+        </if>
+        <if test="e_seq != null">
+            and e_seq = #{e_seq}
+        </if>
+        order by id desc
+    </select>
+    <update id="updateData" parameterType="com.gdiot.ssm.entity.YDEMeterDataPo">
+        UPDATE em_nb_data SET
+        e_voltage=#{e_voltage},
+        e_voltage_a=#{e_voltage_a},
+        e_voltage_b=#{e_voltage_b},
+        e_voltage_c=#{e_voltage_c},
+        e_current=#{e_current},
+        e_current_a=#{e_current_a},
+        e_current_b=#{e_current_b},
+        e_current_c=#{e_current_c},
+        e_factor_all=#{e_factor_all},
+        e_factor_a=#{e_factor_a},
+        e_factor_b=#{e_factor_b},
+        e_factor_c=#{e_factor_c},
+        e_statu1=#{e_statu1},
+        e_statu2=#{e_statu2},
+        e_switch=#{e_switch},
+        orig_value2=#{orig_value2}
+        WHERE imei=#{imei} and e_seq=#{e_seq} and id=#{id}
+        <!-- 属性字段名区分大小写   UPDATE em_cmds_seq SET cmd_seq='56',data_seq='D6' WHERE imei='866971032563111' -->
+    </update>
 </mapper>

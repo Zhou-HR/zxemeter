@@ -21,8 +21,9 @@ public class NBYDEMeterDataServiceImpl implements INBYDEMeterDataService {
 	@Autowired
 	private NBYDEMeterDataMapper mNBYDEMeterDataMapper;
 
-	public Map<String, Object> listNBEMeterData(String dev_id,String eNum,String imei,  
-			Long beginTime, Long endTime, String source,int pageNo, int pageSize) {
+	@Override
+	public Map<String, Object> listNBEMeterData(String dev_id, String eNum, String imei,
+												Long beginTime, Long endTime, String source, int pageNo, int pageSize) {
 		Map<String, Object> result = new HashMap<String, Object>();
 		int count = mNBYDEMeterDataMapper.countByCondition(dev_id,eNum,imei, beginTime, endTime, source);
 		log.info("mNBYDEMeterDataMapper count="+ count);
@@ -62,7 +63,8 @@ public class NBYDEMeterDataServiceImpl implements INBYDEMeterDataService {
 //		result.put("list", list);
 //		return result;
 //	}
-	public List<YDEMeterDataPo> selectbyimei(String imei){
+	@Override
+    public List<YDEMeterDataPo> selectbyimei(String imei){
 //		Map<String, Object> result = new HashMap<String, Object>();
 		List<YDEMeterDataPo> list = mNBYDEMeterDataMapper.selectbyimei(imei);
 		log.info("mNBYDEMeterDataMapper list.size()="+ list.size());
@@ -70,6 +72,7 @@ public class NBYDEMeterDataServiceImpl implements INBYDEMeterDataService {
 		return list;
 	}
 	
+	@Override
 	public int addOne(YDEMeterDataPo mYDEMeterDataPo) {
 		log.info("NBYDEMeterDataServiceImpl EMeter begin addOne");
 		return mNBYDEMeterDataMapper.insertOne(mYDEMeterDataPo);

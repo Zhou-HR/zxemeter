@@ -9,17 +9,20 @@ import com.gdiot.ssm.dao.GprsDataMapper;
 import com.gdiot.ssm.entity.GprsDataPo;
 import com.gdiot.ssm.service.IGprsDataService;
 
+/**
+ * @author ZhouHR
+ */
 @Service("GprsDataService")
 public class GprsDataServiceImpl implements IGprsDataService {
-	
-	private Logger log = LoggerFactory.getLogger(GprsDataServiceImpl.class);
 
-	@Autowired
-	private GprsDataMapper mGprsDataMapper;
+    private Logger log = LoggerFactory.getLogger(GprsDataServiceImpl.class);
 
-	public int addOne(GprsDataPo gprsData) {
-		log.info("begin gprs data addOne");
-		return mGprsDataMapper.insertOne(gprsData);
-	}
+    @Autowired
+    private GprsDataMapper mGprsDataMapper;
+
+    public int addOne(GprsDataPo gprsData) {
+        log.info("begin gprs data addOne");
+        return mGprsDataMapper.insertOne(gprsData);
+    }
 
 }

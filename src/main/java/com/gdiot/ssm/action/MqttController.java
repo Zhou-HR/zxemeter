@@ -14,25 +14,28 @@ import com.gdiot.ssm.mqtt.MQTTClientFactory;
 import com.gdiot.ssm.mqtt.MqttConfig;
 import com.gdiot.ssm.mqtt.MqttSendCmdsUtil;
 
+/**
+ * @author ZhouHR
+ */
 @Controller
 @RequestMapping(value = "/mqtt_2g")
 public class MqttController {
-	private  org.slf4j.Logger LOGGER = LoggerFactory.getLogger(MqttController.class);
-	
-	@ResponseBody
-	@RequestMapping(value = "/pub_data", method = RequestMethod.POST)
-	public String sendData(@RequestBody Map<String, String> params) {
+    private org.slf4j.Logger LOGGER = LoggerFactory.getLogger(MqttController.class);
+
+    @ResponseBody
+    @RequestMapping(value = "/pub_data", method = RequestMethod.POST)
+    public String sendData(@RequestBody Map<String, String> params) {
 //		String topic = null;
-		String content = null;
-		if(params!=null) {
-			if(params.containsKey("content")) {
-				content = params.get("content");
-			}
-		}
-		String topic = MqttConfig.TOPIC_SERVER;
-		LOGGER.info(String.format("sendData,topic:%s,message:%s", topic,content));
-		MqttSendCmdsUtil mMqttSendCmdsUtil = new MqttSendCmdsUtil();
-		JSONObject errJson = mMqttSendCmdsUtil.MqttSendCmds(topic, content);
+        String content = null;
+        if (params != null) {
+            if (params.containsKey("content")) {
+                content = params.get("content");
+            }
+        }
+        String topic = MqttConfig.TOPIC_SERVER;
+        LOGGER.info(String.format("sendData,topic:%s,message:%s", topic, content));
+        MqttSendCmdsUtil mMqttSendCmdsUtil = new MqttSendCmdsUtil();
+        JSONObject errJson = mMqttSendCmdsUtil.MqttSendCmds(topic, content);
 		
 		/*JSONObject errJson = new JSONObject();
 		
@@ -43,42 +46,43 @@ public class MqttController {
 			errJson.put("content", content);
 			errJson.put("code", "1");
 		}*/
-        
+
         return errJson.toJSONString();
-	}
-	@ResponseBody
-	@RequestMapping(value = "/send_cmd", method = RequestMethod.POST)
-	public JSONObject PubData(@RequestBody Map<String, String> params) {
-		String imei = null;
-		String content = null;
-		String time = null;
-		String type = null;
-		if(params!=null) {
-			if(params.containsKey("imei")) {
-				imei = params.get("imei");
-			}
-			if(params.containsKey("content")) {
-				content = params.get("content");
-			}
-			if(params.containsKey("time")) {
-				time = params.get("time");
-			}
-			if(params.containsKey("type")) {
-				type = params.get("type");
-			}
-		}
-		JSONObject msg = new JSONObject();
-		msg.put("imei", imei);
-		msg.put("time", time);
-		msg.put("data", content);
-		msg.put("type", type);
-		
-		String topic = MqttConfig.TOPIC_SERVER+"/"+imei;
-		LOGGER.info(String.format("sendData,topic:%s,message:%s", topic,msg));
-		
-		MqttSendCmdsUtil mMqttSendCmdsUtil = new MqttSendCmdsUtil();
-		JSONObject errJson = mMqttSendCmdsUtil.MqttSendCmds(topic, msg);
-		LOGGER.info("mqtt下行  result="+errJson);
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/send_cmd", method = RequestMethod.POST)
+    public JSONObject PubData(@RequestBody Map<String, String> params) {
+        String imei = null;
+        String content = null;
+        String time = null;
+        String type = null;
+        if (params != null) {
+            if (params.containsKey("imei")) {
+                imei = params.get("imei");
+            }
+            if (params.containsKey("content")) {
+                content = params.get("content");
+            }
+            if (params.containsKey("time")) {
+                time = params.get("time");
+            }
+            if (params.containsKey("type")) {
+                type = params.get("type");
+            }
+        }
+        JSONObject msg = new JSONObject();
+        msg.put("imei", imei);
+        msg.put("time", time);
+        msg.put("data", content);
+        msg.put("type", type);
+
+        String topic = MqttConfig.TOPIC_SERVER + "/" + imei;
+        LOGGER.info(String.format("sendData,topic:%s,message:%s", topic, msg));
+
+        MqttSendCmdsUtil mMqttSendCmdsUtil = new MqttSendCmdsUtil();
+        JSONObject errJson = mMqttSendCmdsUtil.MqttSendCmds(topic, msg);
+        LOGGER.info("mqtt下行  result=" + errJson);
 		
 		
 		/*JSONObject errJson = new JSONObject();
@@ -90,5 +94,5 @@ public class MqttController {
 			errJson.put("error", "fail");
 		}*/
         return errJson;
-	}
+    }
 }

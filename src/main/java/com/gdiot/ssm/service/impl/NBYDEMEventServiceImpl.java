@@ -21,8 +21,9 @@ public class NBYDEMEventServiceImpl implements INBYDEMEventService {
 	@Autowired
 	private NBEMEventMapper mNBYDEMEventMapper;
 
-	public Map<String, Object> listNBEMeterData(String dev_id,String eNum,String imei,  
-			Long beginTime, Long endTime, String source,int pageNo, int pageSize) {
+	@Override
+    public Map<String, Object> listNBEMeterData(String dev_id, String eNum, String imei,
+                                                Long beginTime, Long endTime, String source, int pageNo, int pageSize) {
 		Map<String, Object> result = new HashMap<String, Object>();
 		int count = mNBYDEMEventMapper.countByCondition(dev_id,eNum,imei, beginTime, endTime, source);
 		log.info("mNBYDEMEventMapper count="+ count);
@@ -50,6 +51,7 @@ public class NBYDEMEventServiceImpl implements INBYDEMEventService {
 		return result;
 	}
 	
+	@Override
 	public int addOne(YDEMeterEventPo mYDEMeterEventPo) {
 		log.info("YDEMeterEventPo EMeter begin addOne");
 		return mNBYDEMEventMapper.insertOne(mYDEMeterEventPo);

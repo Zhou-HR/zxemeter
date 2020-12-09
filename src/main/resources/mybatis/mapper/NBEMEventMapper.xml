@@ -1,51 +1,51 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.gdiot.ssm.dao.NBEMEventMapper">
-	<resultMap type="com.gdiot.ssm.entity.YDEMeterEventPo" id="BaseResultMap">
-		<id property="id" column="id" jdbcType="INTEGER"/>
-		<result property="dev_id" column="dev_id" jdbcType="VARCHAR"/>
-		<result property="orig_value" column="orig_value" jdbcType="VARCHAR"/>
-		<result property="time" column="time" jdbcType="BIGINT"/>
-		<result property="event_type" column="event_type" jdbcType="INTEGER"/>
-		<result property="e_num" column="e_num" jdbcType="VARCHAR"/>
-		<result property="e_fac" column="e_fac" jdbcType="VARCHAR"/>
-		<result property="imei" column="imei" jdbcType="VARCHAR"/>
-		<result property="e_seq" column="e_seq" jdbcType="BIGINT"/>
-		
-		<result property="e_start_time" column="e_start_time" jdbcType="VARCHAR" />
-		<result property="e_end_time" column="e_end_time" jdbcType="VARCHAR"/>
-		
-		<result property="e_start_kwh" column="e_start_kwh" jdbcType="VARCHAR"/>
-		<result property="e_end_kwh" column="e_end_kwh" jdbcType="VARCHAR"/>
-		<result property="e_start_kwh2" column="e_start_kwh2" jdbcType="VARCHAR"/>
-		<result property="e_end_kwh2" column="e_end_kwh2" jdbcType="VARCHAR"/>
-		<result property="e_start_voltage_a" column="e_start_voltage_a" jdbcType="VARCHAR"/>
-		<result property="e_start_voltage_b" column="e_start_voltage_b" jdbcType="VARCHAR"/>
-		<result property="e_start_voltage_c" column="e_start_voltage" jdbcType="VARCHAR"/>
-		<result property="e_end_voltage_a" column="e_end_voltage_a" jdbcType="VARCHAR"/>
-		<result property="e_end_voltage_b" column="e_end_voltage_b" jdbcType="VARCHAR"/>
-		<result property="e_end_voltage_c" column="e_end_voltage_c" jdbcType="VARCHAR"/>
-		<result property="e_start_current_a" column="e_start_current_a" jdbcType="VARCHAR"/>
-		<result property="e_start_current_b" column="e_start_current_b" jdbcType="VARCHAR"/>
-		<result property="e_start_current_c" column="e_start_current_c" jdbcType="VARCHAR"/>
-		<result property="e_end_current_a" column="e_end_current_a" jdbcType="VARCHAR"/>
-		<result property="e_end_current_b" column="e_end_current_b" jdbcType="VARCHAR"/>
-		<result property="e_end_current_c" column="e_end_current_c" jdbcType="VARCHAR"/>
-		
-		<result property="e_start_switch" column="e_start_switch" jdbcType="VARCHAR"/>
-		<result property="e_end_switch" column="e_end_switch" jdbcType="VARCHAR"/>
-		<result property="e_start_status1" column="e_start_status1" jdbcType="VARCHAR"/>
-		<result property="e_end_status1" column="e_end_status1" jdbcType="VARCHAR"/>
-		<result property="e_start_status2" column="e_start_status2" jdbcType="VARCHAR"/>
-		<result property="e_end_status2" column="e_end_status2" jdbcType="VARCHAR"/>
-		<result property="e_start_module" column="e_start_module" jdbcType="VARCHAR"/>
-		<result property="e_end_module" column="e_end_module" jdbcType="VARCHAR"/>
-		<result property="flag_reload" column="flag_reload" jdbcType="VARCHAR"/>
-		<result property="source" column="source" jdbcType="VARCHAR"/>
-		<result property="deal_flag" column="deal_flag" jdbcType="INTEGER"/>
-	</resultMap>
-	
-	<sql id="Base_Column_Sql">
+    <resultMap type="com.gdiot.ssm.entity.YDEMeterEventPo" id="BaseResultMap">
+        <id property="id" column="id" jdbcType="INTEGER"/>
+        <result property="dev_id" column="dev_id" jdbcType="VARCHAR"/>
+        <result property="orig_value" column="orig_value" jdbcType="VARCHAR"/>
+        <result property="time" column="time" jdbcType="BIGINT"/>
+        <result property="event_type" column="event_type" jdbcType="INTEGER"/>
+        <result property="e_num" column="e_num" jdbcType="VARCHAR"/>
+        <result property="e_fac" column="e_fac" jdbcType="VARCHAR"/>
+        <result property="imei" column="imei" jdbcType="VARCHAR"/>
+        <result property="e_seq" column="e_seq" jdbcType="BIGINT"/>
+
+        <result property="e_start_time" column="e_start_time" jdbcType="VARCHAR"/>
+        <result property="e_end_time" column="e_end_time" jdbcType="VARCHAR"/>
+
+        <result property="e_start_kwh" column="e_start_kwh" jdbcType="VARCHAR"/>
+        <result property="e_end_kwh" column="e_end_kwh" jdbcType="VARCHAR"/>
+        <result property="e_start_kwh2" column="e_start_kwh2" jdbcType="VARCHAR"/>
+        <result property="e_end_kwh2" column="e_end_kwh2" jdbcType="VARCHAR"/>
+        <result property="e_start_voltage_a" column="e_start_voltage_a" jdbcType="VARCHAR"/>
+        <result property="e_start_voltage_b" column="e_start_voltage_b" jdbcType="VARCHAR"/>
+        <result property="e_start_voltage_c" column="e_start_voltage" jdbcType="VARCHAR"/>
+        <result property="e_end_voltage_a" column="e_end_voltage_a" jdbcType="VARCHAR"/>
+        <result property="e_end_voltage_b" column="e_end_voltage_b" jdbcType="VARCHAR"/>
+        <result property="e_end_voltage_c" column="e_end_voltage_c" jdbcType="VARCHAR"/>
+        <result property="e_start_current_a" column="e_start_current_a" jdbcType="VARCHAR"/>
+        <result property="e_start_current_b" column="e_start_current_b" jdbcType="VARCHAR"/>
+        <result property="e_start_current_c" column="e_start_current_c" jdbcType="VARCHAR"/>
+        <result property="e_end_current_a" column="e_end_current_a" jdbcType="VARCHAR"/>
+        <result property="e_end_current_b" column="e_end_current_b" jdbcType="VARCHAR"/>
+        <result property="e_end_current_c" column="e_end_current_c" jdbcType="VARCHAR"/>
+
+        <result property="e_start_switch" column="e_start_switch" jdbcType="VARCHAR"/>
+        <result property="e_end_switch" column="e_end_switch" jdbcType="VARCHAR"/>
+        <result property="e_start_status1" column="e_start_status1" jdbcType="VARCHAR"/>
+        <result property="e_end_status1" column="e_end_status1" jdbcType="VARCHAR"/>
+        <result property="e_start_status2" column="e_start_status2" jdbcType="VARCHAR"/>
+        <result property="e_end_status2" column="e_end_status2" jdbcType="VARCHAR"/>
+        <result property="e_start_module" column="e_start_module" jdbcType="VARCHAR"/>
+        <result property="e_end_module" column="e_end_module" jdbcType="VARCHAR"/>
+        <result property="flag_reload" column="flag_reload" jdbcType="VARCHAR"/>
+        <result property="source" column="source" jdbcType="VARCHAR"/>
+        <result property="deal_flag" column="deal_flag" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Base_Column_Sql">
 		id,dev_id,orig_value,time,event_type,e_num,e_fac,imei,e_seq,e_start_time,e_end_time,
 		e_start_kwh,e_end_kwh,e_start_kwh2,e_end_kwh2,
 		e_start_voltage_a,e_start_voltage_b,e_start_voltage_c,e_end_voltage_a,e_end_voltage_b,e_end_voltage_c,
@@ -53,69 +53,70 @@
 		e_start_switch,e_end_switch,e_start_status1,e_end_status1,e_start_status2,e_end_status2,
 		e_start_module,e_end_module,flag_reload,source,deal_flag
 	</sql>
-	
-	<insert id="insertOne" parameterType="com.gdiot.ssm.entity.YDEMeterEventPo">
-		insert into em_nb_event (
-			<include refid="Base_Column_Sql"></include>
-		) values (default,#{dev_id},#{orig_value},#{time},#{event_type},#{e_num},#{e_fac},#{imei},#{e_seq},#{e_start_time},#{e_end_time},
-		#{e_start_kwh},#{e_end_kwh},#{e_start_kwh2},#{e_end_kwh2},
-		#{e_start_voltage_a},#{e_start_voltage_b},#{e_start_voltage_c},#{e_end_voltage_a},#{e_end_voltage_b},#{e_end_voltage_c},
-		#{e_start_current_a},#{e_start_current_b},#{e_start_current_c},#{e_end_current_a},#{e_end_current_b},#{e_end_current_c},
-		#{e_start_switch},#{e_end_switch},#{e_start_status1},#{e_end_status1},#{e_start_status2},#{e_end_status2},
-		#{e_start_module},#{e_end_module},#{flag_reload},#{source},#{deal_flag})
-	</insert>
-	
-	<select id="selectList" resultMap="BaseResultMap">
-		select * 
-		from(select r.* ,ROWNUM  rn
-				from(
-				select * from em_nb_event
-				where 1 = 1		
-				<if test="dev_id != null">
-					and dev_id = #{dev_id}
-				</if>
-				<if test="e_num != null">
-					and e_num = #{e_num}
-				</if>
-				<if test="imei != null">
-					and imei = #{imei}
-				</if>
-				<if test="beginTime != null">
-					and time &gt; #{beginTime}
-				</if>
-				<if test="endTime != null">
-					and time &lt;= #{endTime}
-				</if>
-				<if test="source != null">
-					and source = #{source}
-				</if>		
-				order by time desc
-			) r
-			 where ROWNUM &lt;= #{offset} + #{limit}
-		) table_alias
-		where table_alias.rn &gt; #{offset}
-	</select>
-	
-	<select id="countByCondition" resultType="java.lang.Integer">
-		select count(*) from em_nb_event
-		where 1 = 1
-		<if test="dev_id != null">
-			and dev_id = #{dev_id}
-		</if>
-		<if test="e_num != null">
-			and e_num = #{e_num}
-		</if>
-		<if test="imei != null">
-			and imei = #{imei}
-		</if>
-		<if test="beginTime != null">
-			and time &gt; #{beginTime}
-		</if>
-		<if test="endTime != null">
-			and time &lt;= #{endTime}
-		</if>
-		<if test="source != null">
-			and source = #{source}
-		</if>
-	</select>
+
+    <insert id="insertOne" parameterType="com.gdiot.ssm.entity.YDEMeterEventPo">
+        insert into em_nb_event (
+        <include refid="Base_Column_Sql"></include>
+        ) values
+        (default,#{dev_id},#{orig_value},#{time},#{event_type},#{e_num},#{e_fac},#{imei},#{e_seq},#{e_start_time},#{e_end_time},
+        #{e_start_kwh},#{e_end_kwh},#{e_start_kwh2},#{e_end_kwh2},
+        #{e_start_voltage_a},#{e_start_voltage_b},#{e_start_voltage_c},#{e_end_voltage_a},#{e_end_voltage_b},#{e_end_voltage_c},
+        #{e_start_current_a},#{e_start_current_b},#{e_start_current_c},#{e_end_current_a},#{e_end_current_b},#{e_end_current_c},
+        #{e_start_switch},#{e_end_switch},#{e_start_status1},#{e_end_status1},#{e_start_status2},#{e_end_status2},
+        #{e_start_module},#{e_end_module},#{flag_reload},#{source},#{deal_flag})
+    </insert>
+
+    <select id="selectList" resultMap="BaseResultMap">
+        select *
+        from(select r.* ,ROWNUM rn
+        from(
+        select * from em_nb_event
+        where 1 = 1
+        <if test="dev_id != null">
+            and dev_id = #{dev_id}
+        </if>
+        <if test="e_num != null">
+            and e_num = #{e_num}
+        </if>
+        <if test="imei != null">
+            and imei = #{imei}
+        </if>
+        <if test="beginTime != null">
+            and time &gt; #{beginTime}
+        </if>
+        <if test="endTime != null">
+            and time &lt;= #{endTime}
+        </if>
+        <if test="source != null">
+            and source = #{source}
+        </if>
+        order by time desc
+        ) r
+        where ROWNUM &lt;= #{offset} + #{limit}
+        ) table_alias
+        where table_alias.rn &gt; #{offset}
+    </select>
+
+    <select id="countByCondition" resultType="java.lang.Integer">
+        select count(*) from em_nb_event
+        where 1 = 1
+        <if test="dev_id != null">
+            and dev_id = #{dev_id}
+        </if>
+        <if test="e_num != null">
+            and e_num = #{e_num}
+        </if>
+        <if test="imei != null">
+            and imei = #{imei}
+        </if>
+        <if test="beginTime != null">
+            and time &gt; #{beginTime}
+        </if>
+        <if test="endTime != null">
+            and time &lt;= #{endTime}
+        </if>
+        <if test="source != null">
+            and source = #{source}
+        </if>
+    </select>
 </mapper>

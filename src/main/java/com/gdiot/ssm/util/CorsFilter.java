@@ -7,13 +7,18 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Component;
 
+/**
+ * @author ZhouHR
+ */
 @Component
 public class CorsFilter implements Filter {
- 
+
+    @Override
     public void init(FilterConfig filterConfig) throws ServletException {
- 
+
     }
- 
+
+    @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         response.setHeader("Access-Control-Allow-Origin", "*");
@@ -22,12 +27,13 @@ public class CorsFilter implements Filter {
 //        response.setHeader("Access-Control-Allow-Headers", "x-requested-with,Authorization");
         response.setHeader("Access-Control-Allow-Credentials", "true");
         response.setHeader("Access-Control-Allow-Headers",
-				"Authorization,Content-Type,Accept,Origin,User-Agent,DNT,Cache-Control,X-Mx-ReqToken,Keep-Alive,X-Requested-With,If-Modified-Since,token");
+                "Authorization,Content-Type,Accept,Origin,User-Agent,DNT,Cache-Control,X-Mx-ReqToken,Keep-Alive,X-Requested-With,If-Modified-Since,token");
         filterChain.doFilter(servletRequest, servletResponse);
     }
- 
+
+    @Override
     public void destroy() {
- 
+
     }
 
 }

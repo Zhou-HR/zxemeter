@@ -1,22 +1,22 @@
 spring:
-    datasource:
-        driverClassName: oracle.jdbc.driver.OracleDriver
-        url: jdbc:oracle:thin:@localhost:1521:orcl
-        username: zxmeter
-        password: guodong123
-        
-    redis:
-        host: 127.0.0.1
-        port: 6379
+  datasource:
+    driverClassName: oracle.jdbc.driver.OracleDriver
+    url: jdbc:oracle:thin:@localhost:1521:orcl
+    username: zxmeter
+    password: guodong123
+
+  redis:
+    host: 127.0.0.1
+    port: 6379
 
 mybatis:
-    type-aliases-package: com.gdiot.ssm.entity
-    config-locations: classpath:mybatis/mybatis-config.xml
-    mapper-locations: classpath:mybatis/mapper/*.xml
-    
-    configuration:
-        map-underscore-to-camel-case: true
-    
+  type-aliases-package: com.gdiot.ssm.entity
+  config-locations: classpath:mybatis/mybatis-config.xml
+  mapper-locations: classpath:mybatis/mapper/*.xml
+
+  configuration:
+    map-underscore-to-camel-case: true
+
 server:
-    port: 8087
+  port: 8087
     

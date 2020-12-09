@@ -4,9 +4,12 @@ import java.util.Map;
 
 import com.gdiot.ssm.entity.LoraDataPo;
 
+/**
+ * @author ZhouHR
+ */
 public interface ILoraDataService {
 
-	Map<String, Object> listLoraData(String deviceNo, Long beginTime, Long endTime,String source,int pageNo,int pageSize);
+    Map<String, Object> listLoraData(String deviceNo, Long beginTime, Long endTime, String source, int pageNo, int pageSize);
 
-	int addOne(LoraDataPo LoraData);
+    int addOne(LoraDataPo LoraData);
 }

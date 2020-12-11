@@ -56,6 +56,7 @@ public class DataSenderTask implements Runnable {
 //		LOGGER.info("task: DataSenderTask data receive: data:"+data);
     }
 
+    @Override
     public void run() {
         log.info("task: DataSenderTask run-data :" + data);
         log.info("task: DataSenderTask run-data_type :" + data_type);
@@ -63,6 +64,13 @@ public class DataSenderTask implements Runnable {
             case "nb":
                 try {
                     NBAnalysis();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                break;
+            case "qd":
+                try {
+                    QDAnalysis();
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -127,6 +135,320 @@ public class DataSenderTask implements Runnable {
                 break;
             default:
                 break;
+        }
+    }
+
+    /**
+     * 千丁电表数据接收解析
+     *
+     * @throws JSONException
+     */
+    private void QDAnalysis() throws JSONException {
+        YDUtil.BodyObj obj = YDUtil.resolveBody(data, false);
+        org.json.JSONObject data = (org.json.JSONObject) obj.getMsg();
+//		LOGGER.info("task: data receive: dev_id:"+data.getLong("dev_id"));
+        int type = data.getInt("type");
+        if (type == 1) {//value 数据点消息
+            // "msg":{"at":1553224758882,"imei":"866971030389733","type":1,"ds_id":"3200_0_5750",
+            //"value":"01F00075000064FFFFFFB83836383136333034303230353934373436303034393430353030313533375B1101A5D41B0000150044140041FA071304FA012770000807200080B8FFFFFF00000000000538363831363330343032303539343734363030343934303530303135333715E27D75000000000BFAFF4C",
+            //"dev_id":520156945}
+
+            log.info("task: data receive: imei:" + data.getString("imei"));
+            String ori_value = data.getString("value");
+            String dev_id = data.getLong("dev_id") + "";
+            String ds_id = (data.getString("ds_id").equals("")) ? "" : data.getString("ds_id");
+            String imei = data.getString("imei");
+            long time = data.getLong("at");
+
+            log.info("task: data receive: ori_value:" + ori_value);
+            String regex = "^[A-Fa-f0-9]+$";//是16进制数
+            if (ori_value.matches(regex)) {
+//        		YDEMeterValuePo mYDEMeterValuePo = AnalysisData15(ori_value,mYDEMeterDataPo);//AnalysisData(ori_value);
+                int len = ori_value.length();
+                String orig_code = ori_value.substring(0, len).trim().replaceAll(" ", "");
+//        		LOGGER.info("AnalysisData15: orig_code:"+orig_code);
+                byte[] binaryData = Utilty.hexStringToBytes(orig_code);
+                len = binaryData.length;
+                String startbyte = Integer.toHexString(binaryData[0] & 0xFF).toUpperCase();
+                String endbyte = Integer.toHexString(binaryData[len - 1] & 0xFF);
+                log.info("analysis: startbyte:" + startbyte);
+                log.info("analysis: endbyte:" + endbyte);
+                if ("80".equals(startbyte) && "16".equals(endbyte)) {//电表启动发出的是8X，电表响应后台的是CX
+//        			System.out.println("AnalysisData15: 80----------------");
+                    //表号
+                    String e_num = Utilty.convertByteToString(binaryData, 3, 8);
+                    log.info("task: 80 analysis: e_num:" + e_num);
+                    String regex_eNum = "^\\d{12}$";//e_num 12
+                    if (!e_num.matches(regex_eNum)) {//验证表号是否合法
+                        log.error("e_num error");
+                        return;
+                    }
+
+                    String e_fac = orig_code.substring(16, 18);
+                    log.info("task: 80 analysis: e_fac=" + e_fac);
+
+                    String dataType = orig_code.substring(18, 20);
+                    log.info("task: 80 analysis: dataType=" + dataType);
+
+                    byte dataLen = binaryData[10];
+                    log.info("task: 80 analysis: data Length=" + dataLen);
+                    //数据域
+                    String valueD = orig_code.substring(22, 22 + dataLen * 2);
+                    //700633081201031910051602000000200375090031024223410315953450021D968002000081020000820100
+//        			LOGGER.info("AnalysisData15: valueD:"+ valueD);
+                    switch (dataType) {
+                        case "A1"://定时上报数据
+                        case "FF"://定时上报数据
+                            Map<String, String> emMap = new HashMap<String, String>();
+                            emMap.put("imei", imei);
+                            emMap.put("dev_id", imei);
+                            emMap.put("ds_id", ds_id);
+                            emMap.put("time", String.valueOf(time));
+                            emMap.put("type", String.valueOf(type));
+                            emMap.put("ori_value", ori_value);
+                            emMap.put("source", data_type);
+                            emMap.put("e_num", e_num);
+                            emMap.put("e_fac", e_fac);
+                            emMap.put("dataType", dataType);
+                            emMap.put("flag_reload", "0");
+                            SaveXBEMDataToDB(emMap, valueD);//20190618
+                            log.info("task: 80 insert into SQL end!");
+
+                            break;
+                        case "B1"://停电事件  返回 C90148000000031900B1005316
+                        case "B3"://拉合闸事件  返回 C90147000000031900B3005216
+                        case "B5"://过流事件	CA0148000000031900B5004E16
+                        case "B7"://过压事件
+                        case "B9"://欠压事件
+                        case "BB"://重启记录最近十次  E80D48000000031900BB22BA0281177006313315240419FA030503FFBA0281177006213515240419FA0304FFFFFF16
+                        case "BD"://编程记录最近十次	CC0148000000031900BD004416
+                            Map<String, String> eventMap = new HashMap<String, String>();
+                            eventMap.put("dev_id", imei);
+                            eventMap.put("imei", imei);
+                            eventMap.put("e_fac", e_fac);
+                            eventMap.put("e_num", e_num);
+                            eventMap.put("time", String.valueOf(time));
+                            eventMap.put("ori_value", ori_value);
+                            eventMap.put("source", data_type);
+                            eventMap.put("flag_reload", "0");//上报
+                            eventMap.put("data_type", dataType);
+                            eventMap.put("deal_flag", "0");
+                            SaveEventDataToDB(eventMap, valueD);//zjq 20190719
+                            log.info("task: insert nb event into SQL end!");
+
+                            break;
+                        default:
+                            break;
+                    }
+                } else if (!"80".equals(endbyte) /*&& ifUpDateSeq(startbyte)*/ && "16".equals(endbyte)) {//电表响应后台的是CX  "C0".equals(startbyte)
+                    //C00100000000000000F801205816
+//        			byte[] binaryData = Utilty.hexStringToBytes(data);
+
+                    String e_num = Utilty.convertByteToString(binaryData, 3, 8);
+                    log.info("task: C0 analysis: e_num:" + e_num);
+
+                    String e_fac = orig_code.substring(16, 18);
+                    log.info("task: C0 analysis: e_fac=" + e_fac);
+
+                    String dataType = orig_code.substring(18, 20);
+                    log.info("task: C0 analysis: dataType=" + dataType);
+
+                    byte dataLen = binaryData[10];
+                    log.info("task: C0 analysis: data Length=" + dataLen);
+
+                    //数据域
+                    String valueD = orig_code.substring(22, 22 + dataLen * 2);
+
+                    switch (dataType) {
+                        //定时上报数据 冻结数据
+                        case "A1"://读取丢帧项
+                        case "FF"://读取多项数据
+                        case "A3"://第几次日冻结数据
+                        case "A5"://第几次月冻结数据
+                            //C00D39000000031900A332A20201007006071111150419100400000000F8012120030000003102632241030700005002000080021800810200808201AA5516
+                            //C00D47000000031900A134A003340200700627421811041910050000000000F8012420030000003102762241030700005002000080020000810200808201551516
+                            //加flag
+
+                            Map<String, String> emMap = new HashMap<String, String>();
+                            emMap.put("imei", imei);
+                            emMap.put("dev_id", imei);
+                            emMap.put("ds_id", ds_id);
+                            emMap.put("time", String.valueOf(time));
+                            emMap.put("type", String.valueOf(type));
+                            emMap.put("ori_value", ori_value);
+                            emMap.put("source", data_type);
+                            emMap.put("e_num", e_num);
+                            emMap.put("e_fac", e_fac);
+                            emMap.put("dataType", dataType);
+                            emMap.put("flag_reload", "1");
+                            SaveXBEMDataToDB(emMap, valueD);//20190618
+                            log.info("task: CX insert into SQL end!");
+
+                            break;
+                        //事件数据
+                        case "B1"://停电事件
+                        case "B3"://拉合闸事件
+                        case "B5"://过流事件
+                        case "B7"://过压事件
+                        case "B9"://欠压事件
+                        case "BB"://重启记录最近十次
+                        case "BD"://编程记录最近十次
+
+                            Map<String, String> eventMap = new HashMap<String, String>();
+                            eventMap.put("dev_id", imei);
+                            eventMap.put("imei", imei);
+                            eventMap.put("e_fac", e_fac);
+                            eventMap.put("e_num", e_num);
+                            eventMap.put("time", String.valueOf(time));
+                            eventMap.put("ori_value", ori_value);
+                            eventMap.put("source", data_type);
+                            eventMap.put("flag_reload", "1");//下行
+                            eventMap.put("data_type", dataType);
+                            eventMap.put("deal_flag", "0");
+                            SaveEventDataToDB(eventMap, valueD);//zjq 20190719
+                            log.info("task: insert nb event into SQL end!");
+
+                            break;
+                        //事件次数
+                        case "B0"://停电事件总次数 //C00147000000031900B00203005916
+                        case "B2"://拉合闸总次数 //C00147000000031900B20209005116
+                        case "B4"://过流总数 //C00147000000031900B40200005816
+                        case "B6"://过压事件总数 //C00147000000031900B60200005616
+                        case "B8"://欠压事件次数 //C00147000000031900B80200005416
+                        case "BA"://模块重启次数 //C00147000000031900BA0200005216
+                        case "BC"://编程记录次数
+                        case "A0"://整点冻结次数 //C00147000000031900A0032802004116
+                        case "A2"://日冻结次数 //C00147000000031900A20203006716
+                        case "A4"://月冻结次数 //C00147000000031900A401016816
+                            //抄表
+                        case "F5"://IMSI ASCII //C00147000000031900F50F3436303034353539333130323938310116
+                        case "F6"://IMEI  ASCII //C00147000000031900F60F383636393731303330333839333337F016
+                        case "F7"://ICCID ASCII //C00147000000031900F7143839383630343335313031383930303532393830ED16
+                        case "F8"://信号强度 //C00147000000031900F80124F116
+                        case "F9"://驻网状态
+                        case "FA"://模块监控状态字
+                        case "10"://有功总电能 //C0014700000003190010050000000000F916
+                        case "11"://A相有功电能 //C0014700000003190010050000000000F916
+                        case "12"://B相有功电能
+                        case "13"://C相有功电能
+                        case "20"://总有功功率
+                        case "21"://A相有功功率
+                        case "22"://B相有功功率
+                        case "23"://C相有功功率
+                        case "31"://A相电压 //C00147000000031900310258226116
+                        case "32"://B相电压
+                        case "33"://C相电压
+                        case "41"://A相电流 //C001470000000319004103070000C316
+                        case "42"://B相电流
+                        case "43"://C相电流
+                        case "50"://总功率因数
+                        case "60"://频率
+                        case "70"://时间
+                        case "71"://注册标识
+                        case "72"://上报时间
+                        case "73"://认证时长
+                        case "74"://心跳间隔
+                        case "80"://电表运行状态字1
+                        case "81"://电表运行状态字2
+                        case "82"://继电器控制字
+                        case "83"://电表常数
+                        case "90"://厂家标识
+                        case "91"://硬件版本号
+                        case "92"://软件版本号
+                        case "93"://协议版本号
+                        case "94"://表号
+                        case "95"://通讯号
+                        case "96"://用户号
+                            log.info("task: c0 start analysis-----------dataType=" + dataType);
+                            if (mINBYDEMReadService == null) {
+                                mINBYDEMReadService = SpringContextUtils.getBean(INBYDEMReadService.class);
+                            }
+                            YDEMNBReadPo mYDEMNBReadPo = new YDEMNBReadPo();
+                            Map<String, String> result_read = EMDataAnalysisUtil.getReadValue(dataType, valueD);
+                            mYDEMNBReadPo.setDevId(imei);
+                            mYDEMNBReadPo.setImei(imei);
+                            mYDEMNBReadPo.setOrigValue(ori_value);
+                            mYDEMNBReadPo.setSource(data_type);
+                            mYDEMNBReadPo.setTime(time);
+                            mYDEMNBReadPo.setENum(e_num);
+                            mYDEMNBReadPo.setEFac(e_fac);
+                            mYDEMNBReadPo.setDataSeq(startbyte);
+                            mYDEMNBReadPo.setReadType(result_read.get("read_type") != null ? result_read.get("read_type") : "");
+                            mYDEMNBReadPo.setReadValue(result_read.get("read_value") != null ? result_read.get("read_value") : "");
+                            mINBYDEMReadService.addOne(mYDEMNBReadPo);
+                            log.info("task: c0 insert into SQL end!");
+                            break;
+                    }
+                } else if ("90".equals(startbyte) && "16".equals(endbyte)) {
+
+                    String e_num = Utilty.convertByteToString(binaryData, 3, 8);
+                    log.info("task: C0 analysis: e_num:" + e_num);
+
+                    String e_fac = orig_code.substring(16, 18);
+                    log.info("task: C0 analysis: e_fac=" + e_fac);
+
+                    String dataType = orig_code.substring(18, 20);
+                    log.info("task: C0 analysis: dataType=" + dataType);
+
+                    byte dataLen = binaryData[10];
+                    log.info("task: C0 analysis: data Length=" + dataLen);
+
+                    //数据域
+                    String valueD = orig_code.substring(22, 22 + dataLen * 2);
+
+                    switch (dataType) {
+                        //定时上报数据 冻结数据
+                        case "A1"://读取丢帧项
+                            Map<String, String> emMap9 = new HashMap<String, String>();
+                            emMap9.put("imei", imei);
+                            emMap9.put("dev_id", imei);
+                            emMap9.put("ds_id", ds_id);
+                            emMap9.put("time", String.valueOf(time));
+                            emMap9.put("type", String.valueOf(type));
+                            emMap9.put("ori_value", ori_value);
+                            emMap9.put("source", data_type);
+                            emMap9.put("e_num", e_num);
+                            emMap9.put("e_fac", e_fac);
+                            emMap9.put("flag_reload", "0");
+                            SaveXBEMDataToDB(emMap9, valueD);//20190618
+                            log.info("task: 90 insert into SQL end!");
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+        } else if (type == 2) {//login 设备上下线消息
+            //"msg":{"at":1553224749838,"login_type":10,"imei":"866971030389733","type":2,"dev_id":520156945,"status":1}
+            if (nbYDEMStatusService == null) {
+                nbYDEMStatusService = SpringContextUtils.getBean(INBYDEMStatusService.class);
+            }
+            String dev_id = data.getLong("dev_id") + "";
+            String imei = data.getString("imei");
+            int status = data.getInt("status");
+            int login_type = data.getInt("login_type");
+            long time = data.getLong("at");
+            log.info("task: : nbYDEMStatusService : dev_id=" + dev_id);
+            log.info("task: : nbYDEMStatusService : imei=" + imei);
+            log.info("task: : nbYDEMStatusService : 设备上下线 status=" + status);
+            log.info("task: : nbYDEMStatusService : login_type=" + login_type);
+            log.info("task: : nbYDEMStatusService : time=" + time);
+
+            YDEMeterStatusPo mYDEMeterStatusPo = new YDEMeterStatusPo();
+            mYDEMeterStatusPo.setDevId(dev_id);
+            mYDEMeterStatusPo.setImei(imei);
+            mYDEMeterStatusPo.setType(type);
+            mYDEMeterStatusPo.setLoginType(login_type);
+            mYDEMeterStatusPo.setStatus(status);
+            mYDEMeterStatusPo.setTime(time);
+            log.info("task: : nbYDEMStatusService: in insertStatus");
+            List<YDEMeterStatusPo> list = nbYDEMStatusService.selectDevid(dev_id, imei);
+            if (list.size() >= 1) {//存在，更新
+                nbYDEMStatusService.updateEMStatus(mYDEMeterStatusPo);
+            } else {//数据库中不存在，插入
+                nbYDEMStatusService.insertStatus(mYDEMeterStatusPo);
+            }
+            log.info("task: status insert into SQL end!");
         }
     }
 

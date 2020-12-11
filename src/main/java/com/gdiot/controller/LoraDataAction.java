@@ -18,22 +18,22 @@ import com.gdiot.service.AsyncService;
 import com.gdiot.service.IWMDataService;
 import com.gdiot.util.LoraConfig;
 import com.gdiot.util.SpringContextUtils;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @author ZhouHR
  */
-@Controller
+@RestController
 @RequestMapping(value = "/lora")
 public class LoraDataAction {
 
-    @Autowired()
+    @Autowired
     private AsyncService asyncService;
 
-    @Autowired()
+    @Autowired
     private IWMDataService mIWMDataService;
 
     @RequestMapping("/send_cmd")
-    @ResponseBody
     public Map<String, Object> send_cmd(@RequestBody Map<String, String> params) {
         System.out.print("send_cmd---------------------------");
         String module_type = null;
@@ -100,7 +100,6 @@ public class LoraDataAction {
     }
 
     @RequestMapping("/lora_wm_send_cmd")
-    @ResponseBody
     public Map<String, Object> lora_wm_send_cmd(@RequestBody Map<String, String> params) {
         System.out.print("send_cmd---------------------------");
         String dev_id = null;
@@ -132,7 +131,6 @@ public class LoraDataAction {
     }
 
     @RequestMapping("/get_wm_list")
-    @ResponseBody
     public Map<String, Object> get_wm_list(@RequestBody Map<String, String> params) {
         System.out.print("send_cmd---------------------------");
         Map<String, Object> result = new HashMap<String, Object>();

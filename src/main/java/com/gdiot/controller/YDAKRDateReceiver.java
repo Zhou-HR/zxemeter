@@ -27,11 +27,11 @@ import java.util.Map;
  *
  * @author zjq
  */
-@Controller
+@RestController
 @RequestMapping("/akr")
 public class YDAKRDateReceiver {
 
-    @Autowired()
+    @Autowired
     private AsyncService asyncService;
 
     private static Logger logger = LoggerFactory.getLogger(YDAKRDateReceiver.class);
@@ -47,8 +47,7 @@ public class YDAKRDateReceiver {
      * @param body 数据消息
      * @return 任意字符串。OneNet平台接收到http 200的响应，才会认为数据推送成功，否则会重发。
      */
-    @RequestMapping(value = "/receive", method = RequestMethod.POST)
-    @ResponseBody
+    @PostMapping(value = "/receive")
     public String receive(@RequestBody String body) throws NoSuchPaddingException, InvalidKeyException, NoSuchAlgorithmException, IllegalBlockSizeException, BadPaddingException, InvalidAlgorithmParameterException {
 
         logger.info("akr data receive:  body String --- " + body);
@@ -115,8 +114,7 @@ public class YDAKRDateReceiver {
      * @return msg值
      */
 
-    @RequestMapping(value = "/receive", method = RequestMethod.GET)
-    @ResponseBody
+    @GetMapping(value = "/receive")
     public String check(@RequestParam(value = "msg") String msg,
                         @RequestParam(value = "nonce") String nonce,
                         @RequestParam(value = "signature") String signature) throws UnsupportedEncodingException {

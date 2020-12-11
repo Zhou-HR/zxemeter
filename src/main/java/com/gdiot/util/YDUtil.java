@@ -177,6 +177,7 @@ public class YDUtil {
             this.msgSignature = msgSignature;
         }
 
+        @Override
         public String toString() {
             return "{ \"msg\":" + this.msg + "，\"nonce\":" + this.nonce + "，\"signature\":" + this.msgSignature + "}";
         }

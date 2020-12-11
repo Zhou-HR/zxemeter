@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AnalysisUIOptions">
+    <option name="GROUP_BY_SEVERITY" value="true" />
+  </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="42f621c1-6d1a-48ab-86ff-6c08db9a1b26" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/controller/YDQDDateReceiver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/SpMeterDataApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/SpMeterDataApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/controller/KTDateReceiver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/controller/KTDateReceiver.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/controller/LoraDataAction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/controller/LoraDataAction.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/controller/MqttController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/controller/MqttController.java" afterDir="false" />
@@ -14,120 +18,9 @@
       <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/controller/UDPController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/controller/UDPController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/controller/YDAKRDateReceiver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/controller/YDAKRDateReceiver.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/controller/YDZXXBDateReceiver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/controller/YDZXXBDateReceiver.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/lora/LoraClientFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/lora/LoraClientFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/lora/LoraEMServerThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/lora/LoraEMServerThread.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/lora/LoraSendCmds.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/lora/LoraSendCmds.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/lora/LoraSendCmdsUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/lora/LoraSendCmdsUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/lora/LoraSmokeAlertServerThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/lora/LoraSmokeAlertServerThread.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/lora/LoraSmokeServerThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/lora/LoraSmokeServerThread.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/lora/LoraTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/lora/LoraTask.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/lora/LoraWMServerThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/lora/LoraWMServerThread.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/lora/WebSocketUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/lora/WebSocketUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/mapper/AKREMDataMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/mapper/AKREMDataMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/mapper/KTNBEMDataMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/mapper/KTNBEMDataMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/mapper/NBEMEventMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/mapper/NBEMEventMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/mapper/NBEMReadMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/mapper/NBEMReadMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/mapper/NBYDEMStatusMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/mapper/NBYDEMStatusMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/mapper/SmokeDataMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/mapper/SmokeDataMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/mapper/WMDataMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/mapper/WMDataMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/mapper/XBEMDataMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/mapper/XBEMDataMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/mapper/XBEMMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/mapper/XBEMMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/model/AKREMDataPo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/model/AKREMDataPo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/model/AKREMEventPo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/model/AKREMEventPo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/model/AKREMReadPo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/model/AKREMReadPo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/model/DataPo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/model/DataPo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/model/DeviceDataChangedPo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/model/DeviceDataChangedPo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/model/DeviceServiceDataPo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/model/DeviceServiceDataPo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/model/EMDayReportPo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/model/EMDayReportPo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/model/EMMeterPo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/model/EMMeterPo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/model/GprsDataPo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/model/GprsDataPo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/model/KTREMReadPo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/model/KTREMReadPo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/model/LoraDataPo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/model/LoraDataPo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/model/NBDXDataPo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/model/NBDXDataPo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/model/SmokeDataPo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/model/SmokeDataPo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/model/SmokeDevicePo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/model/SmokeDevicePo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/model/SmokeDownPo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/model/SmokeDownPo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/model/WMCmdDataPo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/model/WMCmdDataPo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/model/WMCmdSendLogPo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/model/WMCmdSendLogPo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/model/WMDataPo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/model/WMDataPo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/model/WMReadDataPo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/model/WMReadDataPo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/model/XBEMDataPo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/model/XBEMDataPo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/model/YDEMNBReadPo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/model/YDEMNBReadPo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/model/YDEMeterEventPo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/model/YDEMeterEventPo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/model/YDEMeterStatusPo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/model/YDEMeterStatusPo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/model/ktEmDataPo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/model/ktEmDataPo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/mqtt/MQTTClientFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/mqtt/MQTTClientFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/mqtt/MqttConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/mqtt/MqttConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/mqtt/MqttSendCmdsUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/mqtt/MqttSendCmdsUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/mqtt/MqttServerThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/mqtt/MqttServerThread.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/mqtt/MqttTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/mqtt/MqttTask.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/mqtt/SmokeMqttServerThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/mqtt/SmokeMqttServerThread.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/scheduled/ScheduledTimeTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/scheduled/ScheduledTimeTask.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/scheduled/TimeTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/scheduled/TimeTask.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/service/AsyncService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/service/AsyncService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/service/IAKREMDataService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/service/IAKREMDataService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/service/INBYDEMEventService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/service/INBYDEMEventService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/service/INBYDEMReadService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/service/INBYDEMReadService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/service/INBYDEMStatusService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/service/INBYDEMStatusService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/service/ISmokeDataService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/service/ISmokeDataService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/service/IWMDataService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/service/IWMDataService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/service/IXBEMDataService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/service/IXBEMDataService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/service/IXBEMService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/service/IXBEMService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/service/impl/AKREMDataServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/service/impl/AKREMDataServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/service/impl/AsyncServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/service/impl/AsyncServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/service/impl/KTDataServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/service/impl/KTDataServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/service/impl/NBYDEMEventServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/service/impl/NBYDEMEventServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/service/impl/NBYDEMReadServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/service/impl/NBYDEMReadServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/service/impl/NBYDEMStatusServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/service/impl/NBYDEMStatusServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/service/impl/SmokeDataServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/service/impl/SmokeDataServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/service/impl/WMDataServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/service/impl/WMDataServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/service/impl/XBEMDataServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/service/impl/XBEMDataServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/service/impl/XBEMServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/service/impl/XBEMServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/task/DataSenderTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/task/DataSenderTask.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/task/EMDataAnalysisUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/task/EMDataAnalysisUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/task/ExecutorConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/task/ExecutorConfiguration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/task/VisiableThreadPoolTaskExecutor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/task/VisiableThreadPoolTaskExecutor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/tcp/TcpDecoderHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/tcp/TcpDecoderHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/tcp/TcpEncoderHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/tcp/TcpEncoderHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/tcp/TcpHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/tcp/TcpHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/tcp/TcpTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/tcp/TcpTask.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/udp/UdpDecoderHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/udp/UdpDecoderHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/udp/UdpEncoderHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/udp/UdpEncoderHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/udp/UdpHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/udp/UdpHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/udp/UdpPacketMsg.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/udp/UdpPacketMsg.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/udp/UdpReceiveTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/udp/UdpReceiveTask.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/udp/UdpServerThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/udp/UdpServerThread.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/util/AuthUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/util/AuthUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/util/CRC16.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/util/CRC16.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/util/Constant.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/util/Constant.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/util/CorsFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/util/CorsFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/util/DXConstant.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/util/DXConstant.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/util/DateUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/util/DateUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/util/EmDataNBUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/util/EmDataNBUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/util/JvmMemoryUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/util/JvmMemoryUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/util/LoraConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/util/LoraConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/util/MD5Util.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/util/MD5Util.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/util/PerformanceUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/util/PerformanceUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/util/PropertiesUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/util/PropertiesUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/util/ResultObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/util/ResultObject.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/util/SpringContextUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/util/SpringContextUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/util/StringUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/util/StringUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/util/TcpConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/util/TcpConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/util/UdpConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/util/UdpConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/util/Utilty.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/util/Utilty.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/util/WMUdpSendCmdsUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/util/WMUdpSendCmdsUtils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/util/YDConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/util/YDConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/util/YDUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/util/YDUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mybatis/mapper/AKREMDataMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mybatis/mapper/AKREMDataMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mybatis/mapper/KTNBMDataMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mybatis/mapper/KTNBMDataMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mybatis/mapper/NBEMEventMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mybatis/mapper/NBEMEventMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mybatis/mapper/NBEMReadMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mybatis/mapper/NBEMReadMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mybatis/mapper/NBYDEMStatusMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mybatis/mapper/NBYDEMStatusMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mybatis/mapper/SmokeDataMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mybatis/mapper/SmokeDataMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mybatis/mapper/WMDataMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mybatis/mapper/WMDataMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mybatis/mapper/XBEMDataMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mybatis/mapper/XBEMDataMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mybatis/mapper/XBEMMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mybatis/mapper/XBEMMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mybatis/mybatis-config.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mybatis/mybatis-config.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -146,8 +39,7 @@
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
-        <option name="mavenHome" value="D:/apache-maven-3.6.3" />
-        <option name="userSettingsFile" value="D:\settings\settings.xml" />
+        <option name="mavenHome" value="D:\IntelliJ IDEA 2020.2.4\plugins\maven\lib\maven3" />
       </MavenGeneralSettings>
     </option>
   </component>
@@ -161,17 +53,14 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/lib" />
-    <property name="settings.editor.selected.configurable" value="MavenSettings" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/.." />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="vcs.Subversion" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="E:\project\zxemeter" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="E:\project\zxemeter\lib" />
-      <recent name="E:\project\zxemeter" />
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.gdiot.controller" />
     </key>
   </component>
   <component name="RunManager">
@@ -184,13 +73,6 @@
       <option name="TEST_OBJECT" value="CLASS" />
       <properties />
       <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="SpMeterDataApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
-      <module name="zx_data" />
-      <option name="SPRING_BOOT_MAIN_CLASS" value="com.gdiot.SpMeterDataApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -212,16 +94,38 @@
       <option name="presentableId" value="Default" />
       <updated>1607478852968</updated>
       <workItem from="1607478854383" duration="1531000" />
-      <workItem from="1607493932284" duration="1741000" />
+      <workItem from="1607649022030" duration="5048000" />
+      <workItem from="1607676670715" duration="5576000" />
     </task>
     <task id="LOCAL-00001" summary="ZhouHR">
-      <created>1607494428101</created>
+      <created>1607498076478</created>
       <option name="number" value="00001" />
       <option name="presentableId" value="LOCAL-00001" />
       <option name="project" value="LOCAL" />
-      <updated>1607494428101</updated>
+      <updated>1607498076478</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="ZhouHR">
+      <created>1607654703132</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1607654703133</updated>
+    </task>
+    <task id="LOCAL-00003" summary="ZhouHR">
+      <created>1607655019761</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1607655019761</updated>
+    </task>
+    <task id="LOCAL-00004" summary="ZhouHR">
+      <created>1607660469886</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1607660469886</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -232,37 +136,45 @@
     <option name="LAST_COMMIT_MESSAGE" value="ZhouHR" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="664" y="320" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1607494360612">
+    <state x="474" y="94" key="CommitChangelistDialog2" timestamp="1607660468712">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="664" y="320" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1607494360612" />
-    <state x="449" y="94" key="CommitChangelistDialog2" timestamp="1607494425723">
+    <state x="474" y="94" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1607660468712" />
+    <state x="740" y="261" key="FileChooserDialogImpl" timestamp="1607672075413">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="449" y="94" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1607494425723" />
-    <state x="740" y="274" key="FileChooserDialogImpl" timestamp="1607494125413">
+    <state x="740" y="261" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1607672075413" />
+    <state x="540" y="254" key="IDE.errors.dialog" timestamp="1607658716120">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="740" y="274" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1607494125413" />
-    <state x="540" y="254" key="IDE.errors.dialog" timestamp="1607495329981">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="540" y="254" key="IDE.errors.dialog/0.0.1920.1040@0.0.1920.1040" timestamp="1607495329981" />
+    <state x="540" y="254" key="IDE.errors.dialog/0.0.1920.1040@0.0.1920.1040" timestamp="1607658716120" />
     <state x="490" y="175" key="Maven.ArtifactSearchDialog" timestamp="1607479849124">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="490" y="175" key="Maven.ArtifactSearchDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1607479849124" />
-    <state x="461" y="164" key="SettingsEditor" timestamp="1607494128004">
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1607664005324">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="461" y="164" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1607494128004" />
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1607494432438">
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1607664005324" />
+    <state x="720" y="232" key="git4idea.branch.GitSmartOperationDialog" timestamp="1607658446411">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1607494432438" />
+    <state x="720" y="232" key="git4idea.branch.GitSmartOperationDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1607658446411" />
+    <state x="616" y="240" key="run.anything.popup" timestamp="1607679942019">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="616" y="240" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1607679942019" />
     <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1607479053124">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1607479053124" />
+    <state x="765" y="421" key="svn.upgradeDialog" timestamp="1607672079457">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="765" y="421" key="svn.upgradeDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1607672079457" />
+    <state x="702" y="383" key="svn4idea.checkout.options" timestamp="1607672078185">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="702" y="383" key="svn4idea.checkout.options/0.0.1920.1040@0.0.1920.1040" timestamp="1607672078185" />
   </component>
 </project>

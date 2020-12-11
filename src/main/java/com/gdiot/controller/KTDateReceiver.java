@@ -6,11 +6,7 @@ import com.gdiot.util.AuthenticationUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
@@ -24,16 +20,15 @@ import java.security.NoSuchAlgorithmException;
  *
  * @author zjq
  */
-@Controller
+@RestController
 @RequestMapping("/jbq")
 public class KTDateReceiver {
-    @Autowired()
+    @Autowired
     private AsyncService asyncService;
 
     private static Logger logger = LoggerFactory.getLogger(YDAKRDateReceiver.class);
 
-    @RequestMapping(value = "/receiveData", method = RequestMethod.POST)
-    @ResponseBody
+    @PostMapping(value = "/receiveData")
     public void receive(@RequestBody String body) throws NoSuchPaddingException, InvalidKeyException, NoSuchAlgorithmException, IllegalBlockSizeException, BadPaddingException, InvalidAlgorithmParameterException {
         logger.info("kt data receive:  body String --- " + body);
         AuthenticationUtil.getAccessToken();

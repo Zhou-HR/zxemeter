@@ -1,29 +1,23 @@
 package com.gdiot.controller;
 
-import java.util.Map;
-
-import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.alibaba.fastjson.JSONObject;
-import com.gdiot.mqtt.MQTTClientFactory;
 import com.gdiot.mqtt.MqttConfig;
 import com.gdiot.mqtt.MqttSendCmdsUtil;
+import org.slf4j.LoggerFactory;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 /**
  * @author ZhouHR
  */
-@Controller
+@RestController
 @RequestMapping(value = "/mqtt_2g")
 public class MqttController {
     private org.slf4j.Logger LOGGER = LoggerFactory.getLogger(MqttController.class);
 
-    @ResponseBody
-    @RequestMapping(value = "/pub_data", method = RequestMethod.POST)
+
+    @PostMapping(value = "/pub_data")
     public String sendData(@RequestBody Map<String, String> params) {
 //		String topic = null;
         String content = null;
@@ -36,22 +30,10 @@ public class MqttController {
         LOGGER.info(String.format("sendData,topic:%s,message:%s", topic, content));
         MqttSendCmdsUtil mMqttSendCmdsUtil = new MqttSendCmdsUtil();
         JSONObject errJson = mMqttSendCmdsUtil.MqttSendCmds(topic, content);
-		
-		/*JSONObject errJson = new JSONObject();
-		
-		if(MQTTClientFactory.getInstance(null).getClient().pubMessage(MqttConfig.TOPIC_SERVER, content)) {
-			errJson.put("content", content);
-			errJson.put("code", "0");
-		}else {
-			errJson.put("content", content);
-			errJson.put("code", "1");
-		}*/
-
         return errJson.toJSONString();
     }
 
-    @ResponseBody
-    @RequestMapping(value = "/send_cmd", method = RequestMethod.POST)
+    @PostMapping(value = "/send_cmd")
     public JSONObject PubData(@RequestBody Map<String, String> params) {
         String imei = null;
         String content = null;
@@ -83,16 +65,7 @@ public class MqttController {
         MqttSendCmdsUtil mMqttSendCmdsUtil = new MqttSendCmdsUtil();
         JSONObject errJson = mMqttSendCmdsUtil.MqttSendCmds(topic, msg);
         LOGGER.info("mqtt下行  result=" + errJson);
-		
-		
-		/*JSONObject errJson = new JSONObject();
-		if(MQTTClientFactory.getInstance(null).getClient().pubMessage(topic, msg)) {
-			errJson.put("errno", 0);
-			errJson.put("error", "succ");
-		}else {
-			errJson.put("errno", 1);
-			errJson.put("error", "fail");
-		}*/
+
         return errJson;
     }
 }

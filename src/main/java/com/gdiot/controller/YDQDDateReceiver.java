@@ -1,17 +1,13 @@
 package com.gdiot.controller;
 
+import com.gdiot.service.AsyncService;
+import com.gdiot.task.DataSenderTask;
+import com.gdiot.util.YDConfig;
+import com.gdiot.util.YDUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
-import com.gdiot.service.AsyncService;
-import com.gdiot.task.DataSenderTask;
-import com.gdiot.util.ResultObject;
-import com.gdiot.util.YDConfig;
-import com.gdiot.util.YDUtil;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
@@ -20,16 +16,16 @@ import java.io.UnsupportedEncodingException;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
-import java.util.Map;
 
 /**
- * 数据接收程序接口类 中性平台，芯北电表
+ * 数据接收程序接口类 千丁电表
  *
- * @author zjq
+ * @author ZhouHR
+ * @date 2020/12/11
  */
 @RestController
-@RequestMapping("/yd")
-public class YDZXXBDateReceiver {
+@RequestMapping("/qd")
+public class YDQDDateReceiver {
 
     @Autowired
     private AsyncService asyncService;
@@ -60,14 +56,14 @@ public class YDZXXBDateReceiver {
 //        logger.info("data receive:  body Object --- " +obj);
         //body Object --- { "msg":{"dev_id":518766092,"imei":"866971030431923","value":"123456789","at":1552029366942,"ds_id":"3200_0_5750","type":1}，"nonce":h9(2&z&z，"signature":sq56j/8xiIRMqJwYv7gt1w==}
         if (obj != null) {
-            boolean dataRight = YDUtil.checkSignature(obj, YDConfig.ZX_XB_EM_TOKEN);
+            boolean dataRight = YDUtil.checkSignature(obj, YDConfig.QD_TOKEN);
             if (dataRight) {
                 // body String --- {"msg":{"at":1552274056993,"imei":"866971031491171","type":1,"ds_id":"3200_0_5750","value":"0000350001350100000101FF724039221000000087220000081700000150000073810300747400009788030081090000000212180118F4","dev_id":518816929},"msg_signature":"36TD6jzIr1ntIzbn7dcRcw==","nonce":"I$TLyP&f"}
 //            	logger.info("data receive: content" + obj.toString());
 //            	logger.info("data receive: getMsg length:"+obj.getMsg().toString().length());
 //            	logger.info("data receive: getMsg:"+obj.getMsg().toString());
 
-                DataSenderTask task = new DataSenderTask(body, "nb");
+                DataSenderTask task = new DataSenderTask(body, "qd");
                 asyncService.executeAsync(task);
 //            	task.run();
                 logger.info("task: recvUpdateDeviceDatasNotify done");
@@ -111,7 +107,6 @@ public class YDZXXBDateReceiver {
      * @param signature 签名
      * @return msg值
      */
-
     @GetMapping(value = "/receive")
     public String check(@RequestParam(value = "msg") String msg,
                         @RequestParam(value = "nonce") String nonce,
@@ -119,11 +114,10 @@ public class YDZXXBDateReceiver {
 
         logger.info("url&token check: msg:{} nonce{} ", msg, nonce);
         logger.info("url&token check: signature:{}", signature);
-        if (YDUtil.checkToken(msg, nonce, signature, YDConfig.ZX_XB_EM_TOKEN)) {
+        if (YDUtil.checkToken(msg, nonce, signature, YDConfig.QD_TOKEN)) {
             return msg;
         } else {
             return "error";
         }
     }
 }
-

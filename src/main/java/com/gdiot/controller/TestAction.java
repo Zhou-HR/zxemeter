@@ -1,66 +1,52 @@
 package com.gdiot.controller;
 
+import com.gdiot.model.WMDataPo;
+import com.gdiot.service.*;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-
-import com.gdiot.model.WMDataPo;
-import com.gdiot.service.IAKREMDataService;
-import com.gdiot.service.INBYDEMEventService;
-import com.gdiot.service.INBYDEMReadService;
-import com.gdiot.service.INBYDEMStatusService;
-import com.gdiot.service.ISmokeDataService;
-import com.gdiot.service.IWMDataService;
-import com.gdiot.service.IXBEMDataService;
-
-import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author ZhouHR
  */
 @Slf4j
-@Controller
+@RestController
 @RequestMapping("/test")
 public class TestAction {
 
-    @Autowired()
+    @Autowired
     @Qualifier("XBEMDataService")
     private IXBEMDataService mXBEMDataService;
 
-    @Autowired()
+    @Autowired
     private IAKREMDataService mAKREMDataService;
 
-    @Autowired()
+    @Autowired
     private INBYDEMEventService mINBYDEMEventService;
-    @Autowired()
+    @Autowired
     private INBYDEMReadService mINBYDEMReadService;
-    @Autowired()
+    @Autowired
     private INBYDEMStatusService mINBYDEMStatusService;
 
-    @Autowired()
+    @Autowired
     private IWMDataService mIWMDataService;
 
-    @Autowired()
+    @Autowired
     private ISmokeDataService mISmokeDataService;
 
-    @RequestMapping(value = "/test", method = RequestMethod.GET)
-    @ResponseBody
+    @GetMapping(value = "/test")
     public void test() {
         log.info("test===========@@@@@@@@@@@@@");
         log.info("测试页面");
         System.out.printf("测试页面");
     }
 
-    @RequestMapping(value = "/getXBEMDataList", method = RequestMethod.POST)
-    @ResponseBody
+    @PostMapping(value = "/getXBEMDataList")
     public Map<String, Object> get_em_data_list(@RequestBody Map<String, String> params) {
         Map<String, Object> result = new HashMap<String, Object>();
         String dev_id = null;
@@ -106,8 +92,7 @@ public class TestAction {
         return result;
     }
 
-    @RequestMapping(value = "/getAKREMDataList", method = RequestMethod.POST)
-    @ResponseBody
+    @PostMapping(value = "/getAKREMDataList")
     public Map<String, Object> get_akr_em_data_list(@RequestBody Map<String, String> params) {
         Map<String, Object> result = new HashMap<String, Object>();
         String dev_id = null;
@@ -153,8 +138,7 @@ public class TestAction {
         return result;
     }
 
-    @RequestMapping(value = "/getWmData", method = RequestMethod.POST)
-    @ResponseBody
+    @PostMapping(value = "/getWmData")
     public Map<String, Object> getWmData(@RequestBody Map<String, String> params) {
         String wm_num = null;
         int pageNo = 1;
@@ -177,8 +161,7 @@ public class TestAction {
         return map;
     }
 
-    @RequestMapping(value = "/getSmokeDataList", method = RequestMethod.POST)
-    @ResponseBody
+    @PostMapping(value = "/getSmokeDataList")
     public Map<String, Object> get_smoke_data_list(@RequestBody Map<String, String> params) {
         Map<String, Object> result = new HashMap<String, Object>();
         String dev_id = null;
@@ -208,8 +191,7 @@ public class TestAction {
         return result;
     }
 
-    @RequestMapping(value = "/getXBEventDataList", method = RequestMethod.POST)
-    @ResponseBody
+    @PostMapping(value = "/getXBEventDataList")
     public Map<String, Object> get_xb_event_data_list(@RequestBody Map<String, String> params) {
         Map<String, Object> result = new HashMap<String, Object>();
         String dev_id = null;
@@ -255,8 +237,7 @@ public class TestAction {
         return result;
     }
 
-    @RequestMapping(value = "/getNBStatusList", method = RequestMethod.POST)
-    @ResponseBody
+    @PostMapping(value = "/getNBStatusList")
     public Map<String, Object> get_nb_status_list(@RequestBody Map<String, String> params) {
         Map<String, Object> result = new HashMap<String, Object>();
         String dev_id = null;

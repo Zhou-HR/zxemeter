@@ -4,34 +4,39 @@
  * @authors Jack.Chan (fulicat@qq.com)
  * @date    2014-11-18 15:52:50
  */
-.chart-title{
-	text-align:center;
-	color:#362827;
+.chart-title {
+    text-align: center;
+    color: #362827;
 }
-.chart{
-	overflow:auto;
-	width:560px;
+
+.chart {
+    overflow: auto;
+    width: 560px;
 }
 
 .node circle {
-cursor: pointer;
-	fill: #fff;
-	stroke: steelblue;
-	stroke-width: 1.5px;
+    cursor: pointer;
+    fill: #fff;
+    stroke: steelblue;
+    stroke-width: 1.5px;
 }
-.node text{
-	font-size: 11px;
+
+.node text {
+    font-size: 11px;
 }
+
 path.link {
-fill: none;
-stroke: #ccc;
-stroke-width: 1.5px;
+    fill: none;
+    stroke: #ccc;
+    stroke-width: 1.5px;
 }
+
 rect {
-	fill: none;
-	pointer-events: all;
+    fill: none;
+    pointer-events: all;
 }
+
 line {
-	stroke: #000;
-	stroke-width: 1.5px;
+    stroke: #000;
+    stroke-width: 1.5px;
 }

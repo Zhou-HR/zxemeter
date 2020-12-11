@@ -5,11 +5,11 @@
  * Licensed under MIT (https://github.com/silviomoreto/bootstrap-select/blob/master/LICENSE)
  */
 (function ($) {
-  $.fn.selectpicker.defaults = {
-    noneSelectedText: 'Nessuna selezione',
-    noneResultsText: 'Nessun risultato',
-    countSelectedText: 'Selezionati {0} di {1}',
-    maxOptionsText: ['Limite raggiunto ({n} {var} max)', 'Limite del gruppo raggiunto ({n} {var} max)', ['elementi', 'elemento']],
-    multipleSeparator: ', '
-  };
+    $.fn.selectpicker.defaults = {
+        noneSelectedText: 'Nessuna selezione',
+        noneResultsText: 'Nessun risultato',
+        countSelectedText: 'Selezionati {0} di {1}',
+        maxOptionsText: ['Limite raggiunto ({n} {var} max)', 'Limite del gruppo raggiunto ({n} {var} max)', ['elementi', 'elemento']],
+        multipleSeparator: ', '
+    };
 }(jQuery));

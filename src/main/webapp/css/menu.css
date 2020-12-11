@@ -1,19 +1,106 @@
-﻿div{margin: 0}
-#menu{width:100%;}
-#menu .left{float: left;width: 37%;position: relative;}
-#menu .left>img{position: relative;}
-#menu .left>.menu-child{position: absolute;;bottom: 21%;width: 67%;left: 15%;}
-#menu .left .menu-child .top{position: relative;text-align: center;}
-#menu .left .menu-child .bottom{position: relative; background: #f3f3f3;border: 1px solid #ccc;height: 30px;}
-#menu .left .menu-child .top .area{width: 98%;border: 1px solid #ccc;background: #f3f3f3;border-bottom: 0;margin: 0;padding: 0}
-#menu .left .menu-child .top .dib{width: 98%;border-top: 1px solid #ccc;border-bottom: 0;height: 10px;}
-#menu .left .menu-child .top .dib>.caret{color:#ddd;margin-left: 3px; vertical-align: middle;border-top: 6px dashed;border-top: 6px solid\9;border-right: 6px solid transparent;border-left: 6px solid transparent;}
+﻿div {
+    margin: 0
+}
 
-#menu .left .menu-child .top>div {position: relative;padding: 0;margin: 0}
-#menu .left .menu-child .top .meun-con{position: absolute;width: 100%;left:0;bottom: 0;}
-#menu .right{float: left;width: 60%;margin-left: 2%;position: relative;}
-#menu p{font-size: 14px;line-height: 30px;color: #000;width: 100%;text-align: center;margin: 0}
+#menu {
+    width: 100%;
+}
 
-#menu .menu-word {line-height: 20px;margin-top: 5px;border-right: 1px solid #ccc;}
-#menu .bottom>div{margin: 0;padding: 0}
-#menu .add{cursor: pointer;}
+#menu .left {
+    float: left;
+    width: 37%;
+    position: relative;
+}
+
+#menu .left > img {
+    position: relative;
+}
+
+#menu .left > .menu-child {
+    position: absolute;;
+    bottom: 21%;
+    width: 67%;
+    left: 15%;
+}
+
+#menu .left .menu-child .top {
+    position: relative;
+    text-align: center;
+}
+
+#menu .left .menu-child .bottom {
+    position: relative;
+    background: #f3f3f3;
+    border: 1px solid #ccc;
+    height: 30px;
+}
+
+#menu .left .menu-child .top .area {
+    width: 98%;
+    border: 1px solid #ccc;
+    background: #f3f3f3;
+    border-bottom: 0;
+    margin: 0;
+    padding: 0
+}
+
+#menu .left .menu-child .top .dib {
+    width: 98%;
+    border-top: 1px solid #ccc;
+    border-bottom: 0;
+    height: 10px;
+}
+
+#menu .left .menu-child .top .dib > .caret {
+    color: #ddd;
+    margin-left: 3px;
+    vertical-align: middle;
+    border-top: 6px dashed;
+    border-top: 6px solid \9;
+    border-right: 6px solid transparent;
+    border-left: 6px solid transparent;
+}
+
+#menu .left .menu-child .top > div {
+    position: relative;
+    padding: 0;
+    margin: 0
+}
+
+#menu .left .menu-child .top .meun-con {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    bottom: 0;
+}
+
+#menu .right {
+    float: left;
+    width: 60%;
+    margin-left: 2%;
+    position: relative;
+}
+
+#menu p {
+    font-size: 14px;
+    line-height: 30px;
+    color: #000;
+    width: 100%;
+    text-align: center;
+    margin: 0
+}
+
+#menu .menu-word {
+    line-height: 20px;
+    margin-top: 5px;
+    border-right: 1px solid #ccc;
+}
+
+#menu .bottom > div {
+    margin: 0;
+    padding: 0
+}
+
+#menu .add {
+    cursor: pointer;
+}

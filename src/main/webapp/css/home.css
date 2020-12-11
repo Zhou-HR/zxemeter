@@ -1,71 +1,359 @@
-﻿div{margin: 0}
-#home{width:100%;border: 1px solid #ccc;}
-#home .rowc{ width: 96%;margin-left: 2%}
-#home .rowc1{ width: 47%;margin-left: 2%;float: left;}
-#home .head{background: #f4f7fb;margin-top: 10px;border: 1px solid #ccc;margin-bottom: 10px;}
-#home .head .list-item{width: 14%;float: left;text-align: center;}
-#home .list .list-item .title{vertical-align: middle;font-family: 黑体;font-size: 14px;color: #666666;width: 100%;margin: 0;line-height: 30px;margin-top: 5px;}
-#home .list .list-item .num{vertical-align: middle;font-family: 黑体;font-size: 18px;color: #666666;width: 100%;margin: 0;line-height: 30px;}
-#home .list .list-item .num>span{font-size: 14px;}
-#home .list-item .content{margin: 20px 0;border-right: 1px solid #ccc;}
-#home .list-item .end{border-right:0}
-#home .icon-center{left:50%;margin-left: -16px;}
+﻿div {
+    margin: 0
+}
 
-#home .table{border:1px solid #ccc; position: relative;}
-#home .table .title{width: 100%;background:#f4f7fb; }
-#home .table .title p{vertical-align: middle;font-family: 黑体;font-size: 16px;color: #666666;margin: 0;line-height: 30px;float: left;margin-left: 20px;}
-#home .table .title .t-right{float: left;margin-left: 70%;}
-#home .table .title .t-right img {margin-right: 10px;}
-#home .table .title .t-right>p{vertical-align: middle;font-family: 黑体;font-size: 14px;color: #666666;margin: 0;line-height: 30px;text-decoration: underline;}
+#home {
+    width: 100%;
+    border: 1px solid #ccc;
+}
 
-#home .table .line{width: 90%;margin-top: 30px;margin-left: 8%;margin-bottom: 30px;position: relative;}
-#home .table .line .line-item{height:45px;}
-#home .rowc .line .line-item>p{width:5%;font-family: 黑体;font-size: 12px;color: #666666;margin: 0;float:left;text-align: right;height: 45px;padding-top: 32px;}
-#home .rowc1 .line .line-item>p{width:10%;font-family: 黑体;font-size: 12px;color: #666666;margin: 0;float:left;text-align: right;height: 45px;padding-top: 32px;}
-#home .table .line .db{float: left;margin-left: 1%;width: 93%;border-bottom: 1px solid #ccc;height: 100%}
+#home .rowc {
+    width: 96%;
+    margin-left: 2%
+}
 
-#home .rowc .line .db2{float: left;margin-left: 1%;width: 93%;border-top:1px solid #ccc;height: 100%}
-#home .rowc1 .line .db2{float: left;margin-left: 1%;width: 88%;border-top:1px solid #ccc;height: 100%}
-#home .table .line .line-item>.zhong{line-height: 45px;padding: 0;vertical-align: middle;}
+#home .rowc1 {
+    width: 47%;
+    margin-left: 2%;
+    float: left;
+}
+
+#home .head {
+    background: #f4f7fb;
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+}
+
+#home .head .list-item {
+    width: 14%;
+    float: left;
+    text-align: center;
+}
+
+#home .list .list-item .title {
+    vertical-align: middle;
+    font-family: 黑体;
+    font-size: 14px;
+    color: #666666;
+    width: 100%;
+    margin: 0;
+    line-height: 30px;
+    margin-top: 5px;
+}
+
+#home .list .list-item .num {
+    vertical-align: middle;
+    font-family: 黑体;
+    font-size: 18px;
+    color: #666666;
+    width: 100%;
+    margin: 0;
+    line-height: 30px;
+}
+
+#home .list .list-item .num > span {
+    font-size: 14px;
+}
+
+#home .list-item .content {
+    margin: 20px 0;
+    border-right: 1px solid #ccc;
+}
+
+#home .list-item .end {
+    border-right: 0
+}
+
+#home .icon-center {
+    left: 50%;
+    margin-left: -16px;
+}
+
+#home .table {
+    border: 1px solid #ccc;
+    position: relative;
+}
+
+#home .table .title {
+    width: 100%;
+    background: #f4f7fb;
+}
+
+#home .table .title p {
+    vertical-align: middle;
+    font-family: 黑体;
+    font-size: 16px;
+    color: #666666;
+    margin: 0;
+    line-height: 30px;
+    float: left;
+    margin-left: 20px;
+}
+
+#home .table .title .t-right {
+    float: left;
+    margin-left: 70%;
+}
+
+#home .table .title .t-right img {
+    margin-right: 10px;
+}
+
+#home .table .title .t-right > p {
+    vertical-align: middle;
+    font-family: 黑体;
+    font-size: 14px;
+    color: #666666;
+    margin: 0;
+    line-height: 30px;
+    text-decoration: underline;
+}
+
+#home .table .line {
+    width: 90%;
+    margin-top: 30px;
+    margin-left: 8%;
+    margin-bottom: 30px;
+    position: relative;
+}
+
+#home .table .line .line-item {
+    height: 45px;
+}
+
+#home .rowc .line .line-item > p {
+    width: 5%;
+    font-family: 黑体;
+    font-size: 12px;
+    color: #666666;
+    margin: 0;
+    float: left;
+    text-align: right;
+    height: 45px;
+    padding-top: 32px;
+}
+
+#home .rowc1 .line .line-item > p {
+    width: 10%;
+    font-family: 黑体;
+    font-size: 12px;
+    color: #666666;
+    margin: 0;
+    float: left;
+    text-align: right;
+    height: 45px;
+    padding-top: 32px;
+}
+
+#home .table .line .db {
+    float: left;
+    margin-left: 1%;
+    width: 93%;
+    border-bottom: 1px solid #ccc;
+    height: 100%
+}
+
+#home .rowc .line .db2 {
+    float: left;
+    margin-left: 1%;
+    width: 93%;
+    border-top: 1px solid #ccc;
+    height: 100%
+}
+
+#home .rowc1 .line .db2 {
+    float: left;
+    margin-left: 1%;
+    width: 88%;
+    border-top: 1px solid #ccc;
+    height: 100%
+}
+
+#home .table .line .line-item > .zhong {
+    line-height: 45px;
+    padding: 0;
+    vertical-align: middle;
+}
 
 
-#home .table .line .mouth{width: 93%;margin:0;margin-left: 6%;margin-top: 10px;}
-#home .table .line .line-table-value{margin-left: 7%;}
-#home .rowc .line .mouth>p{width: 8%;text-align: center;font-size: 12px;color: #666666;margin: 0;float:left;}
-#home .rowc1 .line .mouth>p{width: 18%;text-align: center;font-size: 12px;color: #666666;margin: 0;float:left;}
+#home .table .line .mouth {
+    width: 93%;
+    margin: 0;
+    margin-left: 6%;
+    margin-top: 10px;
+}
 
-#home .table .line .wechatnum{position: absolute;top:0;left:6%;width: 93%;}
+#home .table .line .line-table-value {
+    margin-left: 7%;
+}
 
-#home .table .line .line-item .line-heng{border-radius: 20px;height: 24px;margin-left: 1%;margin-top: 11px;width: 40%}
+#home .rowc .line .mouth > p {
+    width: 8%;
+    text-align: center;
+    font-size: 12px;
+    color: #666666;
+    margin: 0;
+    float: left;
+}
 
-#home .table .line #kuang{width:100px;height: 60px;position: absolute;border-radius:5px;background: rgba(0,0,0,0.6)} 
-#home .table .line #kuang>p{width: 100%;text-align: left;font-size: 12px;color: #fff;margin: 0;padding-left: 15px;margin-top:9px;line-height: 16px; }
-#home .table .line #kuang>.num{color:#ffcd5f;font-size: 16px;}
+#home .rowc1 .line .mouth > p {
+    width: 18%;
+    text-align: center;
+    font-size: 12px;
+    color: #666666;
+    margin: 0;
+    float: left;
+}
+
+#home .table .line .wechatnum {
+    position: absolute;
+    top: 0;
+    left: 6%;
+    width: 93%;
+}
+
+#home .table .line .line-item .line-heng {
+    border-radius: 20px;
+    height: 24px;
+    margin-left: 1%;
+    margin-top: 11px;
+    width: 40%
+}
+
+#home .table .line #kuang {
+    width: 100px;
+    height: 60px;
+    position: absolute;
+    border-radius: 5px;
+    background: rgba(0, 0, 0, 0.6)
+}
+
+#home .table .line #kuang > p {
+    width: 100%;
+    text-align: left;
+    font-size: 12px;
+    color: #fff;
+    margin: 0;
+    padding-left: 15px;
+    margin-top: 9px;
+    line-height: 16px;
+}
+
+#home .table .line #kuang > .num {
+    color: #ffcd5f;
+    font-size: 16px;
+}
 
 
-#home .round-img{position: absolute;top:40px;left: 32px;}
+#home .round-img {
+    position: absolute;
+    top: 40px;
+    left: 32px;
+}
 
-#home .round-img .word{top:5px; left: 35px; width: 30px;}
-#home .bian{width:140px;height: 140px;background: #fff;border-radius:50%;left:53%;margin-left: -70px;top:120px;}
-#home .bian .nei{border: 1px solid #ccc;width: 120px;height: 120px;margin-top: 10px;margin-left: 10px;border-radius: 50%;}
-#home .bian .nei>p{width: 100%;
+#home .round-img .word {
+    top: 5px;
+    left: 35px;
+    width: 30px;
+}
+
+#home .bian {
+    width: 140px;
+    height: 140px;
+    background: #fff;
+    border-radius: 50%;
+    left: 53%;
+    margin-left: -70px;
+    top: 120px;
+}
+
+#home .bian .nei {
+    border: 1px solid #ccc;
+    width: 120px;
+    height: 120px;
+    margin-top: 10px;
+    margin-left: 10px;
+    border-radius: 50%;
+}
+
+#home .bian .nei > p {
+    width: 100%;
     text-align: center;
     font-size: 20px;
     color: #666;
-    margin: 0;line-height: 120px;}
-#round1,#round2{width: 100%;}
-.bottomline{border-bottom: 1px solid #ccc;}
-.iconcon{width:100%;overflow: hidden;height: 35px;position: relative;}
-.icon{width:33px;position: absolute;height: 100%}
-.smile{background-image: url('../images/icon.png');background-size: 100%;background-position: 0 0}
-.sad{background-image: url('../images/icon.png');background-size: 100%;background-position: 0 35px}
-.hand{background-image: url('../images/icon.png');background-size: 100%;background-position: 0 70px}
-.sound{background-image: url('../images/icon.png');background-size: 100%;background-position: 0 105px}
-.lei{background-image: url('../images/icon.png');background-size: 100%;background-position: 0 140px}
-.money{background-image: url('../images/icon.png');background-size: 100%;background-position: 0 175px}
-.gray{background: #fbfbfb}
-.blue{background: #76bbe7}
-.yellow{background:#ffcd5f;}
+    margin: 0;
+    line-height: 120px;
+}
+
+#round1, #round2 {
+    width: 100%;
+}
+
+.bottomline {
+    border-bottom: 1px solid #ccc;
+}
+
+.iconcon {
+    width: 100%;
+    overflow: hidden;
+    height: 35px;
+    position: relative;
+}
+
+.icon {
+    width: 33px;
+    position: absolute;
+    height: 100%
+}
+
+.smile {
+    background-image: url('../images/icon.png');
+    background-size: 100%;
+    background-position: 0 0
+}
+
+.sad {
+    background-image: url('../images/icon.png');
+    background-size: 100%;
+    background-position: 0 35px
+}
+
+.hand {
+    background-image: url('../images/icon.png');
+    background-size: 100%;
+    background-position: 0 70px
+}
+
+.sound {
+    background-image: url('../images/icon.png');
+    background-size: 100%;
+    background-position: 0 105px
+}
+
+.lei {
+    background-image: url('../images/icon.png');
+    background-size: 100%;
+    background-position: 0 140px
+}
+
+.money {
+    background-image: url('../images/icon.png');
+    background-size: 100%;
+    background-position: 0 175px
+}
+
+.gray {
+    background: #fbfbfb
+}
+
+.blue {
+    background: #76bbe7
+}
+
+.yellow {
+    background: #ffcd5f;
+}
 
 
 

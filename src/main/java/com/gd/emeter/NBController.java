@@ -107,10 +107,11 @@ public class NBController {
         }
 
         String source = null;
-        if (params.get("source") != null)
+        if (params.get("source") != null) {
             source = params.get("source").toString();
-        else
+        } else {
             source = meterType;
+        }
 
         List<NBValue> list = null;
         int total = 0;
@@ -124,9 +125,9 @@ public class NBController {
             //查询companyIds
             String companyIds = nbMapper.getCompanyIdsByUserId(userId);
             String[] arr = companyIds.split(",");
-            if (StringUtils.isEmpty(companyIds))
+            if (StringUtils.isEmpty(companyIds)) {
                 companyIds = "('')";
-            else {
+            } else {
 //					companyIds="("+companyIds+")";
                 StringBuilder sb = new StringBuilder("(");
                 for (String str : arr) {
@@ -140,8 +141,9 @@ public class NBController {
             }
 
             log.info(companyIds);
-            if (arr.length < 400)
+            if (arr.length < 400) {
                 params.put("companyIds", companyIds);
+            }
             list = nbMapper.selectNBList(params);
             t2 = System.currentTimeMillis();
             log.info("===============================selectNBList共花时间：" + (t2 - t1) + "====================================");
@@ -174,7 +176,9 @@ public class NBController {
             //设置 公司 事业部
             String projectNo = nbValue.getProjectNo();
             Project project = InitLoadToRedis.getProject(projectNo);
-            if (project == null) continue;
+            if (project == null) {
+                continue;
+            }
             String companyId = project.getCompanyId();
             nbValue.setUnit(InitLoadToRedis.getCompanyName(companyId));
             if (companyId != null && companyId.length() == 4) {

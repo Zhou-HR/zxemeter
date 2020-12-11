@@ -137,8 +137,9 @@ public class MeterController {
             String projectNo = nbValue.getProjectNo();
             if (StringUtils.isNotEmpty(projectNo)) {
                 Project project = InitLoadToRedis.getProject(projectNo);
-                if (project != null)
+                if (project != null) {
                     nbValue.setProjectName(project.getProjectName());
+                }
             }
         }
 
@@ -178,20 +179,23 @@ public class MeterController {
         //查询companyIds
         String companyIds = nbMapper.getCompanyIdsByUserId(userId);
         String[] arr = companyIds.split(",");
-        if (StringUtils.isEmpty(companyIds))
+        if (StringUtils.isEmpty(companyIds)) {
             companyIds = "('')";
-        else
+        } else {
             companyIds = "(" + companyIds + ")";
+        }
         params.put("companyIds", companyIds);
         List<Meter> list = meterMapper.selectList(params);
         for (Meter meter : list) {
             String userCode = meter.getUserCode();
             String str = meter.getOldValue();
-            if (StringUtils.isNotEmpty(str) && str.indexOf(".") == 0)
+            if (StringUtils.isNotEmpty(str) && str.indexOf(".") == 0) {
                 meter.setOldValue("0" + str);
+            }
             str = meter.getNewValue();
-            if (StringUtils.isNotEmpty(str) && str.indexOf(".") == 0)
+            if (StringUtils.isNotEmpty(str) && str.indexOf(".") == 0) {
                 meter.setNewValue("0" + str);
+            }
 //    		User user=InitLoadToRedis.getUser(userCode);
 //    		if(user!=null){
 //    			meter.setUserName(user.getRealname());
@@ -263,16 +267,23 @@ public class MeterController {
         List<MeterMaintain> list = meterMaintainMapper.selectList(params);
         for (MeterMaintain meterMaintain : list) {
             meterMaintain.setDealResultShort(meterMaintain.getDealResult());
-            if (meterMaintain.getDealResult() != null && meterMaintain.getDealResult().length() > 20)
+            if (meterMaintain.getDealResult() != null && meterMaintain.getDealResult().length() > 20) {
                 meterMaintain.setDealResultShort(meterMaintain.getDealResult().substring(0, 20) + "...");
+            }
             User user = InitLoadToRedis.getUser(meterMaintain.getSender());
-            if (user != null) meterMaintain.setSenderName(user.getRealname());
+            if (user != null) {
+                meterMaintain.setSenderName(user.getRealname());
+            }
 
             user = InitLoadToRedis.getUser(meterMaintain.getReceiver());
-            if (user != null) meterMaintain.setReceiverName(user.getRealname());
+            if (user != null) {
+                meterMaintain.setReceiverName(user.getRealname());
+            }
 
             user = InitLoadToRedis.getUser(meterMaintain.getDealer());
-            if (user != null) meterMaintain.setDealerName(user.getRealname());
+            if (user != null) {
+                meterMaintain.setDealerName(user.getRealname());
+            }
 
             //设置 公司 事业部
             String companyId = meterMaintain.getCompanyId();
@@ -453,23 +464,27 @@ public class MeterController {
             List<Meter> list = new ArrayList<Meter>();
             for (int i = 1; i <= sheet.getLastRowNum(); i++) {
                 Row row = sheet.getRow(i);
-                if (row == null || row.getCell(1) == null)
+                if (row == null || row.getCell(1) == null) {
                     break;
+                }
                 for (int j = 0; j < row.getLastCellNum(); j++) {
-                    if (row.getCell(j) != null)
+                    if (row.getCell(j) != null) {
                         row.getCell(j).setCellType(Cell.CELL_TYPE_STRING);
+                    }
                 }
 
 
                 Meter meter = new Meter();
 
                 String meterNo = row.getCell(1).getStringCellValue();
-                if (StringUtils.isEmpty(meterNo)) break;
+                if (StringUtils.isEmpty(meterNo)) {
+                    break;
+                }
 
                 //判断表号是否已经存在
-                if (mapMeterNo.get(meterNo) == null)
+                if (mapMeterNo.get(meterNo) == null) {
                     mapMeterNo.put(meterNo, 1);
-                else {
+                } else {
                     workbook.close();
                     message.setMessage(meterNo + "表号已存在！");
                     return message;
@@ -530,12 +545,15 @@ public class MeterController {
                 meter.setMeterType(meterType);
                 meter.setImei(imei);
                 meter.setNewValue(newValue);
-                if (row.getCell(5) != null)
+                if (row.getCell(5) != null) {
                     meter.setOldMeterNo(row.getCell(5).getStringCellValue());
-                if (row.getCell(6) != null)
+                }
+                if (row.getCell(6) != null) {
                     meter.setOldValue(row.getCell(6).getStringCellValue());
-                if (row.getCell(7) != null)
+                }
+                if (row.getCell(7) != null) {
                     meter.setAddress(row.getCell(7).getStringCellValue());
+                }
 
                 list.add(meter);
             }
@@ -548,7 +566,9 @@ public class MeterController {
             message.setMessage("解析失败！");
             return message;
         } finally {
-            if (workbook != null) workbook.close();
+            if (workbook != null) {
+                workbook.close();
+            }
         }
 
         message.setMessage("成功导入" + count + "条!");
@@ -568,10 +588,11 @@ public class MeterController {
         //查询companyIds
         String companyIds = nbMapper.getCompanyIdsByUserId(userId);
         String[] arr = companyIds.split(",");
-        if (StringUtils.isEmpty(companyIds))
+        if (StringUtils.isEmpty(companyIds)) {
             companyIds = "('')";
-        else
+        } else {
             companyIds = "(" + companyIds + ")";
+        }
         params.put("companyIds", companyIds);
 
         params.put("companyId", companyId);

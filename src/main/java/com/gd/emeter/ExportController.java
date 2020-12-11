@@ -86,10 +86,12 @@ public class ExportController {
             log.error(e.getMessage());
         } finally {
             try {
-                if (out != null)
+                if (out != null) {
                     out.close();
-                if (in != null)
+                }
+                if (in != null) {
                     in.close();
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -177,10 +179,12 @@ public class ExportController {
             log.error(e.getMessage());
         } finally {
             try {
-                if (out != null)
+                if (out != null) {
                     out.close();
-                if (in != null)
+                }
+                if (in != null) {
                     in.close();
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -266,8 +270,9 @@ public class ExportController {
                 } else {
                     OfflineReport powOff = meterWarningMapper.powerOff(meterNo, lastSendTime);
                     String powOffTime = "";
-                    if (powOff != null)
+                    if (powOff != null) {
                         powOffTime = powOff.getEstarttime() + "~" + powOff.getEendtime();
+                    }
                     cell = row.createCell(cellNum);
                     cell.setCellValue(powOffTime);
                     cellNum++;
@@ -277,8 +282,9 @@ public class ExportController {
                     long lmeterNo = Long.valueOf(meterNo);
                     Long mod = lmeterNo % 1000;
                     String strMod = mod.toString();
-                    while (strMod.length() < 3)
+                    while (strMod.length() < 3) {
                         strMod = "0" + strMod;
+                    }
                     log.info(strMod);
 //					lstNBValue=meterWarningMapper.offLineDeal(meterNo, lastSendTime,offlineReport.getCompanyId());
                     lstNBValue = meterWarningMapper.offLineDeal(meterNo, lastSendTime, strMod);
@@ -287,32 +293,37 @@ public class ExportController {
                     String maxESeq = "";
                     Map<String, Integer> repeatSeqMap = new HashMap<String, Integer>();
                     Integer repeatSeq = 0;
-                    if ("190623101526".equals(meterNo))
+                    if ("190623101526".equals(meterNo)) {
                         log.info(meterNo);
+                    }
                     for (NBValue nbValue : lstNBValue) {
 
-                        if (repeatSeqMap.get(nbValue.getEseq()) != null)
+                        if (repeatSeqMap.get(nbValue.getEseq()) != null) {
                             repeatSeq++;
+                        }
                         repeatSeqMap.put(nbValue.getEseq(), 1);
                         if (StringUtils.isEmpty(minEsignal)) {
                             minEsignal = nbValue.getEsignal();
                         } else {
-                            if (Integer.valueOf(nbValue.getEsignal()) < Integer.valueOf(minEsignal))
+                            if (Integer.valueOf(nbValue.getEsignal()) < Integer.valueOf(minEsignal)) {
                                 minEsignal = nbValue.getEsignal();
+                            }
                         }
                         if (StringUtils.isEmpty(maxESeq)) {
                             maxESeq = nbValue.getEseq();
                         } else {
-                            if (Integer.valueOf(nbValue.getEseq()) > Integer.valueOf(maxESeq))
+                            if (Integer.valueOf(nbValue.getEseq()) > Integer.valueOf(maxESeq)) {
                                 maxESeq = nbValue.getEseq();
+                            }
                         }
                     }
 
                     cell = row.createCell(cellNum);
-                    if (StringUtils.isEmpty(minEsignal))
+                    if (StringUtils.isEmpty(minEsignal)) {
                         cell.setCellValue("");
-                    else
+                    } else {
                         cell.setCellValue(Integer.valueOf(minEsignal));
+                    }
                     cellNum++;
 
                     cell = row.createCell(cellNum);
@@ -320,10 +331,11 @@ public class ExportController {
                     cellNum++;
 
                     cell = row.createCell(cellNum);
-                    if (StringUtils.isEmpty(maxESeq))
+                    if (StringUtils.isEmpty(maxESeq)) {
                         cell.setCellValue("");
-                    else
+                    } else {
                         cell.setCellValue(Integer.valueOf(maxESeq));
+                    }
                     cellNum++;
 
                     cell = row.createCell(cellNum);
@@ -351,10 +363,12 @@ public class ExportController {
             log.error(e.getMessage());
         } finally {
             try {
-                if (out != null)
+                if (out != null) {
                     out.close();
-                if (in != null)
+                }
+                if (in != null) {
                     in.close();
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -366,8 +380,9 @@ public class ExportController {
         Map<String, Object> params = new HashMap<String, Object>();
         String userId = request.getSession().getAttribute("userId").toString();
         params.put("userId", userId);
-        if (StringUtils.isNotEmpty(companyId))
+        if (StringUtils.isNotEmpty(companyId)) {
             params.put("companyId", companyId);
+        }
         List<NBValue> list = meterMapper.exportListMeterLowValue(params);
         for (NBValue nbValue : list) {
             //设置 公司 事业部
@@ -380,8 +395,9 @@ public class ExportController {
             String projectNo = nbValue.getProjectNo();
             if (StringUtils.isNotEmpty(projectNo)) {
                 Project project = InitLoadToRedis.getProject(projectNo);
-                if (project != null)
+                if (project != null) {
                     nbValue.setProjectName(project.getProjectName());
+                }
             }
         }
         InputStream in = null;
@@ -440,10 +456,12 @@ public class ExportController {
             log.error(e.getMessage());
         } finally {
             try {
-                if (out != null)
+                if (out != null) {
                     out.close();
-                if (in != null)
+                }
+                if (in != null) {
                     in.close();
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -676,10 +694,11 @@ public class ExportController {
             //查询companyIds
             String companyIds = nbMapper.getCompanyIdsByUserId(userId);
             String[] arr = companyIds.split(",");
-            if (StringUtils.isEmpty(companyIds))
+            if (StringUtils.isEmpty(companyIds)) {
                 companyIds = "('')";
-            else
+            } else {
                 companyIds = "(" + companyIds + ")";
+            }
 
             List<MeterMonthReport> list = exportMapper.selectMonthMeterValueAll(c.get(Calendar.YEAR), c.get(Calendar.MONTH) + 1, companyIds);
             t2 = System.currentTimeMillis();
@@ -733,10 +752,12 @@ public class ExportController {
                         cellNum++;
                         if (bFind) {
                             cell.setCellValue(Double.valueOf(meterMonthReportFind.getEvalue()));
-                            if ("fee".equals(type))
+                            if ("fee".equals(type)) {
                                 cell.setCellValue(Double.valueOf(meterMonthReportFind.getFee()));
-                        } else
+                            }
+                        } else {
                             cell.setCellValue(0.00);
+                        }
 
                     }
 
@@ -773,7 +794,9 @@ public class ExportController {
     }
 
     private void sum(Sheet sheet, int rowNum, int columnNum) {
-        if (rowNum == 0) return;
+        if (rowNum == 0) {
+            return;
+        }
         Row row = sheet.getRow(0);
         Cell cell = row.getCell(columnNum);
         cell.setCellValue("汇总");

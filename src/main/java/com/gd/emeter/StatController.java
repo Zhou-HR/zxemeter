@@ -141,7 +141,9 @@ public class StatController {
 
     private static void plusValue(Meter12Month meter12Month, String value) {
         BigDecimal bd1 = new BigDecimal(meter12Month.getYearValue());
-        if (StringUtils.isEmpty(value)) value = "0";
+        if (StringUtils.isEmpty(value)) {
+            value = "0";
+        }
         BigDecimal bd2 = new BigDecimal(value);
         bd1 = bd1.add(bd2);
         meter12Month.setYearValue(bd1.toPlainString());
@@ -163,9 +165,9 @@ public class StatController {
         Date date = sdf.parse(date1);
         Calendar c = Calendar.getInstance();
         c.setTime(date);
-        c.set(c.DAY_OF_WEEK, c.MONDAY);
+        c.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
         date1 = sdf1.format(c.getTime());
-        c.add(c.DAY_OF_WEEK, 6);
+        c.add(Calendar.DAY_OF_WEEK, 6);
         String date2 = sdf1.format(c.getTime());
         params.put("date1", date1);
         params.put("date2", date2);
@@ -200,7 +202,7 @@ public class StatController {
 
             for (Field field : result) {
                 String name = "evalue" + nmonth;
-                if (name.equals(field.getName()))
+                if (name.equals(field.getName())) {
                     try {
                         field.setAccessible(true);
                         field.set(meter12Month, meterMonthReport.getEvalue());
@@ -209,6 +211,7 @@ public class StatController {
                     } catch (IllegalAccessException e) {
                         e.printStackTrace();
                     }
+                }
             }
         }
         map.put("rows", listMeter12Month);
@@ -258,7 +261,7 @@ public class StatController {
 
             for (Field field : result) {
                 String name = "evalue" + nmonth;
-                if (name.equals(field.getName()))
+                if (name.equals(field.getName())) {
                     try {
                         field.setAccessible(true);
                         field.set(meter12Month, meterMonthReport.getEvalue());
@@ -267,6 +270,7 @@ public class StatController {
                     } catch (IllegalAccessException e) {
                         e.printStackTrace();
                     }
+                }
             }
 
         }
@@ -351,6 +355,8 @@ public class StatController {
                 case 12:
                     meter12Month.setEvalue12(getValuePlusOne(meter12Month.getEvalue12()));
                     break;
+                default:
+
             }
 
         }
@@ -360,9 +366,9 @@ public class StatController {
     }
 
     private String getValuePlusOne(String value) {
-        if (value == null)
+        if (value == null) {
             return "1";
-        else {
+        } else {
             int n = Integer.valueOf(value);
             n++;
             return String.valueOf(n);
@@ -409,23 +415,26 @@ public class StatController {
         //查询companyIds
         String companyIds = nbMapper.getCompanyIdsByUserId(userId);
         String[] arr = companyIds.split(",");
-        if (StringUtils.isEmpty(companyIds))
+        if (StringUtils.isEmpty(companyIds)) {
             companyIds = "('')";
-        else
+        } else {
             companyIds = "(" + companyIds + ")";
+        }
         params.put("companyIds", companyIds);
 
         String companyId = "";
-        if (params.get("companyId") != null)
+        if (params.get("companyId") != null) {
             companyId = params.get("companyId").toString();
+        }
         List<Meter> list;
         if (params.get("projectNo") != null) {
             list = satMapper.selectListMeterNum2(params);
         } else {
-            if (StringUtils.isEmpty(companyId))
+            if (StringUtils.isEmpty(companyId)) {
                 list = satMapper.selectListMeterNum(params);
-            else
+            } else {
                 list = satMapper.selectListMeterNum1(params);
+            }
 
         }
 
@@ -443,10 +452,11 @@ public class StatController {
             }
 
             Integer status = meter.getStatus();
-            if (status == 1)
+            if (status == 1) {
                 meterNum.setOnline(meterNum.getOnline() + 1);
-            else
+            } else {
                 meterNum.setOffline(meterNum.getOffline() + 1);
+            }
             meterNum.setAll(meterNum.getAll() + 1);
         }
 
@@ -454,10 +464,11 @@ public class StatController {
         if (params.get("projectNo") != null) {
             map.put("total", satMapper.countMeterNum2(params));
         } else {
-            if (StringUtils.isEmpty(companyId))
+            if (StringUtils.isEmpty(companyId)) {
                 map.put("total", satMapper.countMeterNum(params));
-            else
+            } else {
                 map.put("total", satMapper.countMeterNum1(params));
+            }
         }
 
         return map;
@@ -476,23 +487,26 @@ public class StatController {
             params.put("year", cyear.get(Calendar.YEAR));
         }
         String companyId = "";
-        if (params.get("companyId") != null)
+        if (params.get("companyId") != null) {
             companyId = params.get("companyId").toString();
+        }
 
         List<MeterValueTime> list;
         String projectNo = "";
-        if (params.get("projectNo") != null)
+        if (params.get("projectNo") != null) {
             projectNo = params.get("projectNo").toString();
+        }
         if (StringUtils.isNoneEmpty(projectNo)) {
             list = satMapper.selectListMeterValue2(params);
         } else {
-            if (StringUtils.isEmpty(companyId))
+            if (StringUtils.isEmpty(companyId)) {
                 list = satMapper.selectListMeterValue(params);
-            else {
-                if (companyId.length() == 2)
+            } else {
+                if (companyId.length() == 2) {
                     list = satMapper.selectListMeterValue1(params);
-                else
+                } else {
                     list = satMapper.selectListMeterValue2(params);
+                }
             }
         }
 
@@ -500,13 +514,14 @@ public class StatController {
         if (StringUtils.isNoneEmpty(projectNo)) {
             total = satMapper.countMeterValue2(params);
         } else {
-            if (StringUtils.isEmpty(companyId))
+            if (StringUtils.isEmpty(companyId)) {
                 total = satMapper.countMeterValue(params);
-            else {
-                if (companyId.length() == 2)
+            } else {
+                if (companyId.length() == 2) {
                     total = satMapper.countMeterValue1(params);
-                else
+                } else {
                     total = satMapper.countMeterValue2(params);
+                }
             }
         }
 
@@ -551,7 +566,7 @@ public class StatController {
         for (Meter12Month meter12Month : listMeter12Month) {
             int nValidMonth = 0;
             String yearValue = meter12Month.getYearValue();
-            if (!yearValue.equals("0")) {
+            if (!"0".equals(yearValue)) {
                 for (Field field : result) {
                     for (int i = 1; i <= 12; i++) {
                         String name = "evalue" + i;
@@ -559,8 +574,9 @@ public class StatController {
                             try {
                                 field.setAccessible(true);
                                 String value = field.get(meter12Month).toString();
-                                if (!value.equals("0"))
+                                if (!"0".equals(value)) {
                                     nValidMonth++;
+                                }
                             } catch (IllegalArgumentException e) {
                                 e.printStackTrace();
                             } catch (IllegalAccessException e) {
@@ -599,9 +615,9 @@ public class StatController {
         Date date = sdf.parse(date1);
         Calendar c = Calendar.getInstance();
         c.setTime(date);
-        c.set(c.DAY_OF_WEEK, c.MONDAY);
+        c.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
         date1 = sdf1.format(c.getTime());
-        c.add(c.DAY_OF_WEEK, 6);
+        c.add(Calendar.DAY_OF_WEEK, 6);
         String date2 = sdf1.format(c.getTime());
         params.put("date1", date1);
         params.put("date2", date2);
@@ -609,25 +625,28 @@ public class StatController {
 //		List<MeterValueTime> list = satMapper.selectListMeterValueDay(params);
 
         String companyId = "";
-        if (params.get("companyId") != null)
+        if (params.get("companyId") != null) {
             companyId = params.get("companyId").toString();
+        }
 
         String projectNo = "";
-        if (params.get("projectNo") != null)
+        if (params.get("projectNo") != null) {
             projectNo = params.get("projectNo").toString();
+        }
 
         List<MeterValueTime> list;
 
         if (StringUtils.isNoneEmpty(projectNo)) {
             list = satMapper.selectListMeterValueDay2(params);
         } else {
-            if (StringUtils.isEmpty(companyId))
+            if (StringUtils.isEmpty(companyId)) {
                 list = satMapper.selectListMeterValueDay(params);
-            else {
-                if (companyId.length() == 2)
+            } else {
+                if (companyId.length() == 2) {
                     list = satMapper.selectListMeterValueDay1(params);
-                else
+                } else {
                     list = satMapper.selectListMeterValueDay2(params);
+                }
             }
         }
 
@@ -635,13 +654,14 @@ public class StatController {
         if (StringUtils.isNoneEmpty(projectNo)) {
             total = satMapper.countMeterValueDay2(params);
         } else {
-            if (StringUtils.isEmpty(companyId))
+            if (StringUtils.isEmpty(companyId)) {
                 total = satMapper.countMeterValueDay(params);
-            else {
-                if (companyId.length() == 2)
+            } else {
+                if (companyId.length() == 2) {
                     total = satMapper.countMeterValueDay1(params);
-                else
+                } else {
                     total = satMapper.countMeterValueDay2(params);
+                }
             }
         }
 
@@ -672,7 +692,7 @@ public class StatController {
 
             for (Field field : result) {
                 String name = "evalue" + nmonth;
-                if (name.equals(field.getName()))
+                if (name.equals(field.getName())) {
                     try {
                         field.setAccessible(true);
                         field.set(meter12Month, meterValueTime.getValue());
@@ -681,6 +701,7 @@ public class StatController {
                     } catch (IllegalAccessException e) {
                         e.printStackTrace();
                     }
+                }
             }
 
         }
@@ -752,10 +773,11 @@ public class StatController {
         //查询companyIds
         String companyIds = nbMapper.getCompanyIdsByUserId(userId);
         String[] arr = companyIds.split(",");
-        if (StringUtils.isEmpty(companyIds))
+        if (StringUtils.isEmpty(companyIds)) {
             companyIds = "('')";
-        else
+        } else {
             companyIds = "(" + companyIds + ")";
+        }
         params.put("companyIds", companyIds);
 
         List<CarrierValueFee> list = satMapper.getCompanyValueChart(params);
@@ -785,10 +807,11 @@ public class StatController {
         //查询companyIds
         String companyIds = nbMapper.getCompanyIdsByUserId(userId);
         String[] arr = companyIds.split(",");
-        if (StringUtils.isEmpty(companyIds))
+        if (StringUtils.isEmpty(companyIds)) {
             companyIds = "('')";
-        else
+        } else {
             companyIds = "(" + companyIds + ")";
+        }
         params.put("companyIds", companyIds);
 
         List<CarrierValueFee> list = satMapper.getCompanyValueDayChart(params);

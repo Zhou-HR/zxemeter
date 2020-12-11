@@ -91,8 +91,9 @@ public class DownController {
             }
             String projectNo = meter.getProjectNo();
             Project project = InitLoadToRedis.getProject(projectNo);
-            if (project != null)
+            if (project != null) {
                 meter.setProjectName(project.getProjectName());
+            }
             //设置 公司 事业部
             String companyId = meter.getCompanyId();
             meter.setUnit(InitLoadToRedis.getCompanyName(companyId));
@@ -132,7 +133,9 @@ public class DownController {
 
     private boolean timeOut(String meterNo) {
         Object object = JedisUtil.get(meterNo + REDIS_KEY);
-        if (object != null) return true;
+        if (object != null) {
+            return true;
+        }
         return false;
     }
 
@@ -151,10 +154,12 @@ public class DownController {
 //		}else
 //			setTime(meterNo);
         Map<String, String> param = new HashMap<String, String>();
-        if ("lora".equals(meterType))
+        if ("lora".equals(meterType)) {
             meterType = "lora_em";
-        if ("2g".equals(meterType))
+        }
+        if ("2g".equals(meterType)) {
             meterType = "mqtt_2g";
+        }
         param.put("module_type", meterType);
         param.put("imei", imei);
         param.put("operate_type", "O");
@@ -169,12 +174,15 @@ public class DownController {
 
         try {
             String result = HttpClientUtil.postJson(SENDCMD, param, "utf8");
-            if (StringUtils.isNotEmpty(result) && (result.indexOf("succ") != -1 || result.indexOf("error\\\":0") != -1))
+            if (StringUtils.isNotEmpty(result) && (result.indexOf("succ") != -1 || result.indexOf("error\\\":0") != -1)) {
                 result = "下发成功";
-            if (result != null)
+            }
+            if (result != null) {
                 meterSendDownLog.setResult(result);
-            if (!"下发成功".equals(result))
+            }
+            if (!"下发成功".equals(result)) {
                 result = "下发失败";
+            }
 //			else
 //				result="超时";
 //			if(StringUtils.isNotEmpty(result)){
@@ -203,8 +211,9 @@ public class DownController {
         if (timeOut(meterNo)) {
             message.setMessage(MESSAGETIMEOUT);
             return message;
-        } else
+        } else {
             setTime(meterNo);
+        }
 
         //判断是不是广东2g
         if ("广东雅达2g".equals(meterType)) {
@@ -219,11 +228,13 @@ public class DownController {
             try {
 
                 String result = HttpClientUtil.postJson(SENDCMD, param, "utf8");
-                if (result == null)
+                if (result == null) {
                     result = "超时";
+                }
                 message.setMessage(result);
-                if (result == null)
+                if (result == null) {
                     return message;
+                }
 //				Map result_map = JSONObject.parseObject(result);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -247,13 +258,15 @@ public class DownController {
         try {
 
             String result = HttpClientUtil.postJson(SENDCMD, param, "utf8");
-            if (result != null)
+            if (result != null) {
                 meterSendDownLog.setResult(result);
-            else
+            } else {
                 result = "超时";
+            }
             message.setMessage(result);
-            if (result == null)
+            if (result == null) {
                 return message;
+            }
 //			Map result_map = JSONObject.parseObject(result);
         } catch (Exception e) {
             e.printStackTrace();
@@ -284,10 +297,11 @@ public class DownController {
         try {
 
             String result = HttpClientUtil.postJson(SENDCMD, param, "utf8");
-            if (result != null)
+            if (result != null) {
                 meterSendDownLog.setResult(result);
-            else
+            } else {
                 result = "超时";
+            }
             message.setMessage(result);
             return message;
 //			Map result_map = JSONObject.parseObject(result);
@@ -309,17 +323,21 @@ public class DownController {
         if (timeOut(meterNo)) {
             message.setMessage(MESSAGETIMEOUT);
             return message;
-        } else
+        } else {
             setTime(meterNo);
+        }
         Map<String, String> param = new HashMap<String, String>();
-        if ("2g".equals(meterType))
+        if ("2g".equals(meterType)) {
             meterType = "mqtt_2g";
+        }
         if ("广东雅达2g".equals(meterType)) {
             meterType = "gdyd_2g";
-            if ("10".equals(type))
+            if ("10".equals(type)) {
                 type = "8000";
-            if ("72".equals(type))
+            }
+            if ("72".equals(type)) {
                 type = "0A001005";
+            }
         }
 
         param.put("module_type", meterType);
@@ -334,10 +352,11 @@ public class DownController {
         try {
 
             String result = HttpClientUtil.postJson(SENDCMD, param, "utf8");
-            if (result != null)
+            if (result != null) {
                 meterSendDownLog.setResult(result);
-            else
+            } else {
                 result = "超时";
+            }
             message.setMessage(result);
             return message;
 //			Map result_map = JSONObject.parseObject(result);
@@ -359,8 +378,9 @@ public class DownController {
         if (timeOut(meterNo)) {
             message.setMessage(MESSAGETIMEOUT);
             return message;
-        } else
+        } else {
             setTime(meterNo);
+        }
         Map<String, String> param = new HashMap<String, String>();
         param.put("module_type", meterType);
         param.put("imei", imei);
@@ -374,10 +394,11 @@ public class DownController {
         try {
 
             String result = HttpClientUtil.postJson(SENDCMD, param, "utf8");
-            if (result != null)
+            if (result != null) {
                 meterSendDownLog.setResult(result);
-            else
+            } else {
                 result = "超时";
+            }
             message.setMessage(result);
             return message;
 //				Map result_map = JSONObject.parseObject(result);
@@ -399,8 +420,9 @@ public class DownController {
         if (timeOut(meterNo)) {
             message.setMessage(MESSAGETIMEOUT);
             return message;
-        } else
+        } else {
             setTime(meterNo);
+        }
 
         Map<String, String> param = new HashMap<String, String>();
         param.put("module_type", meterType);
@@ -416,10 +438,11 @@ public class DownController {
         try {
 
             String result = HttpClientUtil.postJson(SENDCMD, param, "utf8");
-            if (result != null)
+            if (result != null) {
                 meterSendDownLog.setResult(result);
-            else
+            } else {
                 result = "超时";
+            }
             message.setMessage(result);
             return message;
 //			Map result_map = JSONObject.parseObject(result);
@@ -437,7 +460,9 @@ public class DownController {
     @ResponseBody
     public String getReport(String imei, HttpServletRequest request) {
         String value = meterMapper.getReport(imei);
-        if (value != null) return value;
+        if (value != null) {
+            return value;
+        }
         return "null";
     }
 }

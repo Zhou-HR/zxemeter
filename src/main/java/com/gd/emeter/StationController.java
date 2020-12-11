@@ -152,7 +152,9 @@ public class StationController {
     private static boolean check(String value) {
         try {
             int n = Integer.valueOf(value);
-            if (n < 0 || n > 10000) return false;
+            if (n < 0 || n > 10000) {
+                return false;
+            }
             return true;
         } catch (Exception ex) {
             return false;

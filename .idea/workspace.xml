@@ -5,13 +5,93 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="42f621c1-6d1a-48ab-86ff-6c08db9a1b26" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/model/po/CarrierValueFee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/model/po/CarrierValueFee.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/model/vo/Entity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/model/vo/Entity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/model/vo/MenuExport.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/model/vo/MenuExport.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/model/vo/MenuNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/model/vo/MenuNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/model/vo/NanoId.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/model/vo/NanoId.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gd/redis/JedisLock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gd/redis/JedisLock.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_commons_commons_pool2_2_3.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__redis_clients_jedis_2_7_1.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/ssm/entity/ProjectMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/ssm/entity/ProjectMap.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/sitemesh3.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/sitemesh3.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/decorators/basic-theme - 副本.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/decorators/basic-theme - 副本.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/decorators/basic-theme.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/decorators/basic-theme.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/decorators/edit-theme.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/decorators/edit-theme.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/decorators/list-theme.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/decorators/list-theme.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/errors/access-denied.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/errors/access-denied.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/errors/error.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/errors/error.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/errors/session-expired.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/errors/session-expired.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/errors/session-time-out - 副本.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/errors/session-time-out - 副本.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/errors/session-time-out.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/errors/session-time-out.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/index1.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/index1.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/jsp/emeter/NB.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/jsp/emeter/NB.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/jsp/emeter/comingSoon.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/jsp/emeter/comingSoon.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/jsp/emeter/listCarrier.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/jsp/emeter/listCarrier.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/jsp/emeter/listCarrierValue.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/jsp/emeter/listCarrierValue.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/jsp/emeter/listCarrierValueChart.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/jsp/emeter/listCarrierValueChart.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/jsp/emeter/listCarrierValueDay.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/jsp/emeter/listCarrierValueDay.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/jsp/emeter/listCarrierValueDayChart.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/jsp/emeter/listCarrierValueDayChart.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/jsp/emeter/listDayReport.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/jsp/emeter/listDayReport.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/jsp/emeter/listLostDataReload.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/jsp/emeter/listLostDataReload.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/jsp/emeter/listMap.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/jsp/emeter/listMap.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/jsp/emeter/listMeter.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/jsp/emeter/listMeter.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/jsp/emeter/listMeterDownSend.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/jsp/emeter/listMeterDownSend.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/jsp/emeter/listMeterInstall.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/jsp/emeter/listMeterInstall.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/jsp/emeter/listMeterLowValue.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/jsp/emeter/listMeterLowValue.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/jsp/emeter/listMeterMaintainCheck.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/jsp/emeter/listMeterMaintainCheck.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/jsp/emeter/listMeterMaintainReply.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/jsp/emeter/listMeterMaintainReply.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/jsp/emeter/listMeterNum.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/jsp/emeter/listMeterNum.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/jsp/emeter/listMeterPerson.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/jsp/emeter/listMeterPerson.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/jsp/emeter/listMeterPrice.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/jsp/emeter/listMeterPrice.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/jsp/emeter/listMeterRealCheck.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/jsp/emeter/listMeterRealCheck.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/jsp/emeter/listMeterSim.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/jsp/emeter/listMeterSim.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/jsp/emeter/listMeterValue.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/jsp/emeter/listMeterValue.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/jsp/emeter/listMeterValueChart.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/jsp/emeter/listMeterValueChart.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/jsp/emeter/listMeterValueDay.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/jsp/emeter/listMeterValueDay.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/jsp/emeter/listMeterValueDayChart.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/jsp/emeter/listMeterValueDayChart.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/jsp/emeter/listMeterWarning.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/jsp/emeter/listMeterWarning.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/jsp/emeter/listMonthReport.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/jsp/emeter/listMonthReport.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/jsp/emeter/listNB.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/jsp/emeter/listNB.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/jsp/emeter/listNBSendPackage.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/jsp/emeter/listNBSendPackage.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/jsp/emeter/listStatWarning.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/jsp/emeter/listStatWarning.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/jsp/emeter/listStation.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/jsp/emeter/listStation.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/jsp/emeter/meter-GetLostReportData.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/jsp/emeter/meter-GetLostReportData.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/jsp/emeter/meter-GetMeterData.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/jsp/emeter/meter-GetMeterData.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/jsp/emeter/meter-GetMeterRealCheck.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/jsp/emeter/meter-GetMeterRealCheck.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/jsp/emeter/meter-SetReportTime.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/jsp/emeter/meter-SetReportTime.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/jsp/emeter/meter-maintain-check.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/jsp/emeter/meter-maintain-check.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/jsp/emeter/meter-maintain-edit.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/jsp/emeter/meter-maintain-edit.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/jsp/emeter/meter-maintain-edit2.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/jsp/emeter/meter-maintain-edit2.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/jsp/emeter/meter-openclose.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/jsp/emeter/meter-openclose.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/jsp/emeter/meter-person-edit.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/jsp/emeter/meter-person-edit.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/jsp/emeter/price-edit - 副本.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/jsp/emeter/price-edit - 副本.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/jsp/emeter/price-edit.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/jsp/emeter/price-edit.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/jsp/emeter/user-edit.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/jsp/emeter/user-edit.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/jsp/index-https.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/jsp/index-https.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/jsp/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/jsp/index.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/jsp/security/email.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/jsp/security/email.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/jsp/security/meter-listProperty.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/jsp/security/meter-listProperty.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/jsp/security/meter-person-edit.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/jsp/security/meter-person-edit.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/jsp/security/permission.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/jsp/security/permission.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/jsp/security/role-edit.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/jsp/security/role-edit.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/jsp/security/role-editMenu.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/jsp/security/role-editMenu.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/jsp/security/role-list - ╕▒▒╛.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/jsp/security/role-list - ╕▒▒╛.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/jsp/security/role-list - 副本.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/jsp/security/role-list - 副本.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/jsp/security/role-list.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/jsp/security/role-list.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/jsp/security/role-listMenu.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/jsp/security/role-listMenu.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/jsp/security/user-change-pwd.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/jsp/security/user-change-pwd.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/jsp/security/user-edit-pwd.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/jsp/security/user-edit-pwd.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/jsp/security/user-edit.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/jsp/security/user-edit.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/jsp/security/user-edit1.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/jsp/security/user-edit1.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/jsp/security/user-list - ╕▒▒╛.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/jsp/security/user-list - ╕▒▒╛.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/jsp/security/user-list - 副本.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/jsp/security/user-list - 副本.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/jsp/security/user-list.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/jsp/security/user-list.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/jsp/security/user-list1.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/jsp/security/user-list1.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/jsp/security/user-list2.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/jsp/security/user-list2.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/jsp/security/user-list3.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/jsp/security/user-list3.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/jsp/security/user-list4.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/jsp/security/user-list4.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/jsp/test.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/jumpToAli.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/jumpToAli.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/login.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/login.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/test.html" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,6 +116,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/.." />
@@ -43,192 +124,16 @@
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RunManager">
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
-    </configuration>
-    <configuration default="true" type="DjangoTestsConfigurationType">
-      <module name="emeter" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="TARGET" value="" />
-      <option name="SETTINGS_FILE" value="" />
-      <option name="CUSTOM_SETTINGS" value="false" />
-      <option name="USE_OPTIONS" value="false" />
-      <option name="OPTIONS" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration default="true" type="JetRunConfigurationType">
-      <module name="emeter" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="WORKING_DIRECTORY" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
-      <module name="emeter" />
-      <option name="filePath" />
-      <option name="vmParameters" />
-      <option name="alternativeJrePath" />
-      <option name="programParameters" />
-      <option name="passParentEnvs" value="true" />
-      <option name="workingDirectory" />
-      <option name="isAlternativeJrePathEnabled" value="false" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="WORKING_DIRECTORY" />
-      <option name="filePath" />
-      <option name="vmParameters" />
-      <option name="alternativeJrePath" />
-      <option name="programParameters" />
-      <option name="passParentEnvs" value="true" />
-      <option name="workingDirectory" />
-      <option name="isAlternativeJrePathEnabled" value="false" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="WORKING_DIRECTORY" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="PyBehaveRunConfigurationType" factoryName="Behave">
-      <module name="emeter" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="ADDITIONAL_ARGS" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration default="true" type="PyLettuceRunConfigurationType" factoryName="Lettuce">
-      <module name="emeter" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="ADDITIONAL_ARGS" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration default="true" type="PythonConfigurationType" factoryName="Python">
-      <module name="emeter" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration default="true" type="Python.FlaskServer">
-      <module name="emeter" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="launchJavascriptDebuger" value="false" />
-      <method v="2" />
-    </configuration>
-    <configuration default="true" type="Tox" factoryName="Tox">
-      <module name="emeter" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <method v="2" />
-    </configuration>
-    <configuration default="true" type="tests" factoryName="Doctests">
-      <module name="emeter" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="" />
-      <option name="CLASS_NAME" value="" />
-      <option name="METHOD_NAME" value="" />
-      <option name="FOLDER_NAME" value="" />
-      <option name="TEST_TYPE" value="TEST_SCRIPT" />
-      <option name="PATTERN" value="" />
-      <option name="USE_PATTERN" value="false" />
-      <method v="2" />
-    </configuration>
-    <configuration default="true" type="tests" factoryName="Unittests">
-      <module name="emeter" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;&quot;" />
-      <option name="_new_targetType" value="&quot;PATH&quot;" />
-      <method v="2" />
     </configuration>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -247,17 +152,42 @@
       <option name="presentableId" value="Default" />
       <updated>1607478852968</updated>
       <workItem from="1607478854383" duration="1531000" />
+      <workItem from="1607649022030" duration="1078000" />
     </task>
+    <task id="LOCAL-00001" summary="ZhouHR">
+      <created>1607498076478</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1607498076478</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="ZhouHR" />
+    <option name="LAST_COMMIT_MESSAGE" value="ZhouHR" />
+  </component>
   <component name="WindowStateProjectService">
+    <state x="474" y="94" key="CommitChangelistDialog2" timestamp="1607498074191">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="474" y="94" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1607498074191" />
+    <state x="540" y="254" key="IDE.errors.dialog" timestamp="1607498087873">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="540" y="254" key="IDE.errors.dialog/0.0.1920.1040@0.0.1920.1040" timestamp="1607498087873" />
     <state x="490" y="175" key="Maven.ArtifactSearchDialog" timestamp="1607479849124">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="490" y="175" key="Maven.ArtifactSearchDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1607479849124" />
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1607498078063">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1607498078063" />
     <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1607479053124">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

@@ -9,45 +9,45 @@
 <script src="./assets/plugins/bootstrap-select/js/bootstrap-select.min.js" type="text/javascript"></script>
 
 
-
 <select id="usertype" name="usertype" class="selectpicker show-tick form-control" multiple data-live-search="false">
-             <option value="0">苹果</option>
-                                        <option value="1">菠萝</option>
-                                        <option value="2">香蕉</option>
-                                        <option value="3">火龙果</option>
-                                        <option value="4">梨子</option>
-                                        <option value="5">草莓</option>
-                                        <option value="6">哈密瓜</option>
-                                        <option value="7">椰子</option>
-                                        <option value="8">猕猴桃</option>
-                                        <option value="9">桃子</option>                           
-                                </select>
-								
-<select name="wechats" data-url="wechat/list" data-text-name="name" data-value="${wechatIds}" class="form-control selectpicker" multiple title="请选择"
-                                        data-fv-notempty="true" data-fv-icon="false"> 
-										<option value="0">苹果</option>
-                                        <option value="1">菠萝</option>
-                                        <option value="2">香蕉</option>
-                                        <option value="3">火龙果</option>
-                                        <option value="4">梨子</option>
-                                        <option value="5">草莓</option>
-                                        <option value="6">哈密瓜</option>
-                                        <option value="7">椰子</option>
-                                        <option value="8">猕猴桃</option>
-                                        <option value="9">桃子</option>
-										
-										</select>
-										
-<script>
-alert(1);
-//$("<option value='1'>xx1</option>").appendTo($('#usertype'));
+    <option value="0">苹果</option>
+    <option value="1">菠萝</option>
+    <option value="2">香蕉</option>
+    <option value="3">火龙果</option>
+    <option value="4">梨子</option>
+    <option value="5">草莓</option>
+    <option value="6">哈密瓜</option>
+    <option value="7">椰子</option>
+    <option value="8">猕猴桃</option>
+    <option value="9">桃子</option>
+</select>
 
-var str='3,4,5,6';
-    var arr=str.split(',');
-	$('#usertype').selectpicker();
+<select name="wechats" data-url="wechat/list" data-text-name="name" data-value="${wechatIds}"
+        class="form-control selectpicker" multiple title="请选择"
+        data-fv-notempty="true" data-fv-icon="false">
+    <option value="0">苹果</option>
+    <option value="1">菠萝</option>
+    <option value="2">香蕉</option>
+    <option value="3">火龙果</option>
+    <option value="4">梨子</option>
+    <option value="5">草莓</option>
+    <option value="6">哈密瓜</option>
+    <option value="7">椰子</option>
+    <option value="8">猕猴桃</option>
+    <option value="9">桃子</option>
+
+</select>
+
+<script>
+    alert(1);
+    //$("<option value='1'>xx1</option>").appendTo($('#usertype'));
+
+    var str = '3,4,5,6';
+    var arr = str.split(',');
+    $('#usertype').selectpicker();
     $('#usertype').selectpicker('val', arr);
 
-//$('#usertype').selectpicker('val', "1".split(","));
+    //$('#usertype').selectpicker('val', "1".split(","));
 
 
 </script>

@@ -62,8 +62,9 @@ public class IndexController {
             session.setAttribute("menuNodeAll", menuNode);
             session.setAttribute("topMenu", menuNode.getChild());
 
-            if (menuNode.getChild() != null)
+            if (menuNode.getChild() != null) {
                 session.setAttribute("menuNode", menuNode.getChild().get(0));
+            }
 
             session.setAttribute("basePath", basePath);
 
@@ -110,8 +111,9 @@ public class IndexController {
         HttpSession session = request.getSession();
         MenuNode menuNode = (MenuNode) session.getAttribute("menuNodeAll");
         for (MenuNode topMenu : menuNode.getChild()) {
-            if (menuId == topMenu.getId())
+            if (menuId == topMenu.getId()) {
                 session.setAttribute("menuNode", topMenu);
+            }
         }
         session.removeAttribute("roleId");
         return "jsp/index";
@@ -126,8 +128,9 @@ public class IndexController {
         MenuNode menuNode = (MenuNode) session.getAttribute("menuNode");
         for (MenuNode topMenu : menuNode.getChild()) {
             for (MenuNode subCompanyMenu : topMenu.getChild()) {
-                if (subCompanyMenu.getCompanyId().equals(id))
+                if (subCompanyMenu.getCompanyId().equals(id)) {
                     return subCompanyMenu.getChild();
+                }
             }
 
         }

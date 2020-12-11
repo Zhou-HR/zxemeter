@@ -68,8 +68,9 @@ public class SecurityMetadataSourceWrapper implements FilterInvocationSecurityMe
                 String[] attributeNames = new String[listAttribute.size()];
                 listAttribute.toArray(attributeNames);
 
-                if (permission.getPath().indexOf("jsp") == 0)
+                if (permission.getPath().indexOf("jsp") == 0) {
                     permission.setPath("/" + permission.getPath());
+                }
                 requestMap.put(new RegexRequestMatcher(permission.getPath(), null, true), SecurityConfig.createList(attributeNames));
             }
         }
@@ -83,14 +84,17 @@ public class SecurityMetadataSourceWrapper implements FilterInvocationSecurityMe
         BeanFactoryUtil.getBean(SecurityMetadataSourceWrapper.class).refreshSecurityMetadataSource();
     }
 
+    @Override
     public Collection<ConfigAttribute> getAttributes(Object object) throws IllegalArgumentException {
         return defaultFilterInvocationSecurityMetadataSource.getAttributes(object);
     }
 
+    @Override
     public Collection<ConfigAttribute> getAllConfigAttributes() {
         return defaultFilterInvocationSecurityMetadataSource.getAllConfigAttributes();
     }
 
+    @Override
     public boolean supports(Class<?> clazz) {
         return defaultFilterInvocationSecurityMetadataSource.supports(clazz);
     }

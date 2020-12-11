@@ -11,7 +11,9 @@ public class DateUtil {
 
     public static String getYearMonth(Date now) {
         Date date = new Date();
-        if (now != null) date = now;
+        if (now != null) {
+            date = now;
+        }
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMM");
 

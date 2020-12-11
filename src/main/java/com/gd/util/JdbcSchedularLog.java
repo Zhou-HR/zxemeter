@@ -15,8 +15,9 @@ public class JdbcSchedularLog {
     private static ResultSet rs1 = null;
 
     public static Connection getConnection() throws Exception {
-        if (conn != null)
+        if (conn != null) {
             return conn;
+        }
         String _driverClassName = PropertiesUtil.getValue("jdbc.driver");
         String url = PropertiesUtil.getValue("jdbc.url");
         String user = PropertiesUtil.getValue("jdbc.username");
@@ -51,7 +52,7 @@ public class JdbcSchedularLog {
 
     public static void main(String args[]) throws Exception {
 
-        insert("test", "success", 10l, 4);
+        insert("test", "success", 10L, 4);
 
     }
 }

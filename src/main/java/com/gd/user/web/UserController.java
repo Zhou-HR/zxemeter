@@ -115,8 +115,9 @@ public class UserController {
     public Map paging1(@RequestBody QueryInfo queryInfo) {
         List<FilterRule> lstFilterRule = queryInfo.getRules();
         FilterRule rule = new FilterRule("name", RuleOp.notequal, "admins");
-        if (lstFilterRule == null)
+        if (lstFilterRule == null) {
             lstFilterRule = new ArrayList<FilterRule>();
+        }
         lstFilterRule.add(rule);
         rule = new FilterRule("status", RuleOp.equal, "0");
         lstFilterRule.add(rule);

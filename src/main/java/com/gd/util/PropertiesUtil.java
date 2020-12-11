@@ -30,7 +30,9 @@ public class PropertiesUtil {
     }
 
     private static synchronized Properties getProperties() {
-        if (properties != null) return properties;
+        if (properties != null) {
+            return properties;
+        }
         PropertiesUtil util = PropertiesUtil.getInstance();
         Properties properties = util.loadProperties("interface.properties");
         return properties;
@@ -40,7 +42,7 @@ public class PropertiesUtil {
     /**
      * 加载配置文件
      *
-     * @param separator 系统路径
+     * @param fileName 系统路径
      * @return 返回Properties对象
      * @throws FileNotFoundException 抛出异常
      * @throws IOException           抛出异常

@@ -88,8 +88,9 @@ public class PermissionService {
                 menuNode.setId(menuNodeParent.getId() + id);
                 menuNode.setPId(menuNodeParent.getId());
                 String projectName = project.getProjectName();
-                if (projectName.length() > 6)
+                if (projectName.length() > 6) {
                     projectName = projectName.substring(0, 6);
+                }
                 menuNode.setName(projectName);
                 menuNode.setPath("");
                 menuNode.setIcon(menuNodeParent.getIcon());

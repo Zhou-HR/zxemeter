@@ -22,9 +22,15 @@ public class MeterService {
     public int insertMeter(List<Meter> list) {
         int count = 0;
         for (Meter meter : list) {
-            if ("lora".equals(meter.getMeterType())) meter.setPlatform("物联网");
-            if ("nb".equals(meter.getMeterType())) meter.setPlatform("移动");
-            if ("2g".equals(meter.getMeterType())) meter.setPlatform("MQTT");
+            if ("lora".equals(meter.getMeterType())) {
+                meter.setPlatform("物联网");
+            }
+            if ("nb".equals(meter.getMeterType())) {
+                meter.setPlatform("移动");
+            }
+            if ("2g".equals(meter.getMeterType())) {
+                meter.setPlatform("MQTT");
+            }
 
             meterMapper.insertMeter(meter);
             count++;

@@ -35,12 +35,15 @@ public class EmailUtil {
 
     public static void send(String subject1, String content, String emails) throws MessagingException, Exception {
         long t1 = System.currentTimeMillis();
-        if (subject1 == null || subject1.length() == 0)
+        if (subject1 == null || subject1.length() == 0) {
             subject1 = EmailUtil.subjetc;
-        if (content == null || content.length() == 0)
+        }
+        if (content == null || content.length() == 0) {
             content = EmailUtil.content;
-        if (emails == null || emails.length() == 0)
+        }
+        if (emails == null || emails.length() == 0) {
             emails = EmailUtil.to;
+        }
         Properties props = new Properties();
         props.put("mail.smtp.host", host);// 指定SMTP服务器  
         //25端口被阿里云屏蔽，用465
@@ -52,8 +55,9 @@ public class EmailUtil {
         Session mailSession = Session.getDefaultInstance(props);
         String[] arrEmail = emails.split(";");
         InternetAddress[] addresses = new InternetAddress[arrEmail.length];
-        for (int i = 0; i < arrEmail.length; i++)
+        for (int i = 0; i < arrEmail.length; i++) {
             addresses[i] = new InternetAddress(arrEmail[i]);
+        }
         Message message = new MimeMessage(mailSession);
         message.setFrom(new InternetAddress(from));// 发件人  
 //      message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));// 收件人

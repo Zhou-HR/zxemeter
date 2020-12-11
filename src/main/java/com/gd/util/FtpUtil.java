@@ -141,10 +141,12 @@ public class FtpUtil {
 
 
     public static void makeDirectory(FTPClient ftpClient, String directoryName) {
-        if ("/".equals(directoryName.substring(0, 1)))
+        if ("/".equals(directoryName.substring(0, 1))) {
             directoryName = directoryName.substring(1);
-        if ("/".equals(directoryName.substring(directoryName.length() - 1)))
+        }
+        if ("/".equals(directoryName.substring(directoryName.length() - 1))) {
             directoryName = directoryName.substring(0, directoryName.length() - 1);
+        }
         String[] arr = directoryName.split("/");
         String dir = "";
         for (String str : arr) {

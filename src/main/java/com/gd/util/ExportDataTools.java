@@ -243,10 +243,14 @@ public class ExportDataTools {
             font.setColor(IndexedColors.WHITE.getIndex()); //font.setColor(new XSSFColor(new byte[]{0,0,0}));
         }
         if (fontIsBold) {
-            if (font == null) font = workbook.createFont();
+            if (font == null) {
+                font = workbook.createFont();
+            }
             font.setBoldweight(HSSFFont.BOLDWEIGHT_BOLD);
         }
-        if (font != null) style.setFont(font);
+        if (font != null) {
+            style.setFont(font);
+        }
         return style;
     }
 
@@ -261,10 +265,14 @@ public class ExportDataTools {
             font.setColor(IndexedColors.WHITE.getIndex()); //font.setColor(new XSSFColor(new byte[]{0,0,0}));
         }
         if (fontIsBold) {
-            if (font == null) font = workbook.createFont();
+            if (font == null) {
+                font = workbook.createFont();
+            }
             font.setBoldweight(HSSFFont.BOLDWEIGHT_BOLD);
         }
-        if (font != null) style.setFont(font);
+        if (font != null) {
+            style.setFont(font);
+        }
         return style;
     }
 
@@ -278,7 +286,6 @@ public class ExportDataTools {
      * 设置样式水平和垂直方向居中
      *
      * @param style
-     * @param index
      * @return
      */
     public static XSSFCellStyle setAlignment(XSSFCellStyle style) {
@@ -301,8 +308,9 @@ public class ExportDataTools {
 
     public static Map ConvertObjToMap(Object obj) {
         Map<String, Object> reMap = new HashMap<String, Object>();
-        if (obj == null)
+        if (obj == null) {
             return null;
+        }
         Field[] fields = obj.getClass().getDeclaredFields();
         try {
             for (int i = 0; i < fields.length; i++) {

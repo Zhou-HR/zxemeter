@@ -473,8 +473,9 @@ public class ExportController {
         Map<String, Object> params = new HashMap<String, Object>();
         String userId = request.getSession().getAttribute("userId").toString();
         params.put("userId", userId);
-        if (StringUtils.isNotEmpty(companyId))
+        if (StringUtils.isNotEmpty(companyId)) {
             params.put("companyId", companyId);
+        }
         List<MeterWarning> list = meterWarningMapper.selectExportList(params);
         for (MeterWarning meterWarning : list) {
             //设置 公司 事业部
@@ -487,8 +488,9 @@ public class ExportController {
             String projectNo = meterWarning.getProjectNo();
             if (StringUtils.isNotEmpty(projectNo)) {
                 Project project = InitLoadToRedis.getProject(projectNo);
-                if (project != null)
+                if (project != null) {
                     meterWarning.setProjectName(project.getProjectName());
+                }
             }
         }
         InputStream in = null;
@@ -555,10 +557,12 @@ public class ExportController {
             log.error(e.getMessage());
         } finally {
             try {
-                if (out != null)
+                if (out != null) {
                     out.close();
-                if (in != null)
+                }
+                if (in != null) {
                     in.close();
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -571,17 +575,20 @@ public class ExportController {
         OutputStream out = null;
         try {
             Calendar c = Calendar.getInstance();
-            if (StringUtils.isEmpty(year))
+            if (StringUtils.isEmpty(year)) {
                 year = String.valueOf(c.get(Calendar.YEAR));
-            if (StringUtils.isEmpty(month))
+            }
+            if (StringUtils.isEmpty(month)) {
                 month = String.valueOf(c.get(Calendar.MONTH) + 1);
+            }
 
             c.set(Calendar.YEAR, Integer.valueOf(year));
             c.set(Calendar.MONTH, Integer.valueOf(month) - 1);
 
             String yearmonth = year + month;
-            if (yearmonth.length() == 5)
+            if (yearmonth.length() == 5) {
                 yearmonth = year + "0" + month;
+            }
             String filename = yearmonth + "月电量数据汇总";
             response.setContentType("application/vnd.ms-excel");
             response.setHeader("Content-disposition", "attachment;filename="
@@ -614,17 +621,20 @@ public class ExportController {
         OutputStream out = null;
         try {
             Calendar c = Calendar.getInstance();
-            if (StringUtils.isEmpty(year))
+            if (StringUtils.isEmpty(year)) {
                 year = String.valueOf(c.get(Calendar.YEAR));
-            if (StringUtils.isEmpty(month))
+            }
+            if (StringUtils.isEmpty(month)) {
                 month = String.valueOf(c.get(Calendar.MONTH) + 1);
+            }
 
             c.set(Calendar.YEAR, Integer.valueOf(year));
             c.set(Calendar.MONTH, Integer.valueOf(month) - 1);
 
             String yearmonth = year + month;
-            if (yearmonth.length() == 5)
+            if (yearmonth.length() == 5) {
                 yearmonth = year + "0" + month;
+            }
             String filename = yearmonth + "月电费数据汇总";
             response.setContentType("application/vnd.ms-excel");
             response.setHeader("Content-disposition", "attachment;filename="
@@ -657,8 +667,9 @@ public class ExportController {
         String path = Thread.currentThread().getContextClassLoader().getResource("").getPath();
         log.info("Thread.currentThread() path is :" + path);
         int pos = path.indexOf("WEB-INF");
-        if (pos > 0)
+        if (pos > 0) {
             path = path.substring(0, pos);
+        }
         String templatePath = path + "template/monthReport.xlsx";
         ;
 

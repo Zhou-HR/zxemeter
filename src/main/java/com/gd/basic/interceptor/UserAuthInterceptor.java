@@ -58,12 +58,14 @@ public class UserAuthInterceptor extends HandlerInterceptorAdapter {
         }
 
         Map<String, Integer> mapTopMenuPermission = (Map<String, Integer>) request.getSession().getAttribute("mapTopMenuPermission");
-        if (mapTopMenuPermission == null) return true;//admin???
+        if (mapTopMenuPermission == null) {
+            return true;//admin???
+        }
         if (requestUri.indexOf("toList") != -1) {
             requestUri = requestUri.substring(1);
-            if (mapTopMenuPermission.get(requestUri) != null)
+            if (mapTopMenuPermission.get(requestUri) != null) {
                 return true;
-            else {
+            } else {
                 response.sendRedirect("../errors/access-denied.jsp");
                 return false;
             }

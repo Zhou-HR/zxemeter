@@ -89,8 +89,9 @@ public class RoleController {
     public Map paging1(@RequestBody QueryInfo queryInfo) {
         List<FilterRule> lstFilterRule = queryInfo.getRules();
         FilterRule rule = new FilterRule("name", RuleOp.notequal, "ROLE_ADMIN");
-        if (lstFilterRule == null)
+        if (lstFilterRule == null) {
             lstFilterRule = new ArrayList<FilterRule>();
+        }
         lstFilterRule.add(rule);
         queryInfo.setRules(lstFilterRule);
         queryInfo.setSort("name");

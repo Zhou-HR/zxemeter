@@ -1,13 +1,9 @@
 package com.gdiot.task;
 
 import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.Map;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.gdiot.model.NBDXDataPo;
 import com.gdiot.util.Utilty;
@@ -844,7 +840,7 @@ public class EMDataAnalysisUtil {
     /**
      * 用于解析水表上报数据，芯北电表协议 单相电表
      *
-     * @param data3 需要解析的数据域
+     * @param data 需要解析的数据域
      * @return
      */
     public static Map<String, String> getWMDataValue(String data) {
@@ -1529,6 +1525,79 @@ public class EMDataAnalysisUtil {
             BigDecimal mBigDecimalKw = new BigDecimal(new DecimalFormat("#0.00").format((double) (Long.parseLong(dataStr_kwh, 16)) / 100));
             map.put("e_kwh1", mBigDecimalKw.toString());
         }
+        return map;
+    }
+
+    /**
+     * 千丁电表上报数据解析
+     *
+     * @param data
+     * @return
+     */
+    public static Map<String, String> getQDDataValue(String data) {
+        //data:33333333 333333 355532323232 333333323232323232 3333 33333333 34 593444474553 6335 333333333333
+        Map<String, String> map = new HashMap<String, String>();
+        //电能33333333
+        String dataStr_kwh = data.substring(0, 8);
+        //功率333333
+        String dataStr_kw = data.substring(8, 14);
+        //电压355532323232
+        String dataStr_v = data.substring(14, 26);
+        //电流333333323232323232
+        String dataStr_c = data.substring(26, 44);
+        //继电器状态3333
+        String dataStr_switch = data.substring(44, 48);
+        //时间593444474553
+        String dataStr_time = data.substring(58, 70);
+        //温度6335
+        String dataStr_eTemperature = data.substring(70, 74);
+
+        //电能33333333
+        dataStr_kwh = Utilty.convertByteToString2(Utilty.hexStringToBytes(dataStr_kwh), 1, Utilty.hexStringToBytes(dataStr_kwh).length);
+        BigDecimal mBigDecimal = new BigDecimal(new DecimalFormat("#0.00").format((double) (Long.parseLong(dataStr_kwh)) / 100));
+        log.info("data receive: 电能:" + mBigDecimal);
+        map.put("e_kwh", mBigDecimal.toString());
+
+        //功率333333
+        dataStr_kw = Utilty.convertByteToString2(Utilty.hexStringToBytes(dataStr_kw), 1, Utilty.hexStringToBytes(dataStr_kw).length);
+        BigDecimal mbd_kw_all = new BigDecimal(new DecimalFormat("#0.0000").format((double) (Long.parseLong(dataStr_kw)) / 1000));
+        log.info("data receive: 总功率:" + mbd_kw_all.toString());
+        map.put("e_kw_all", mbd_kw_all.toString());
+
+        //电压355532323232
+        String v_a = dataStr_v.substring(0, 4);
+        v_a = Utilty.convertByteToString2(Utilty.hexStringToBytes(v_a), 1, Utilty.hexStringToBytes(v_a).length);
+        BigDecimal mbd_v_a = new BigDecimal(new DecimalFormat("#00.0").format((double) (Long.parseLong(v_a)) / 10));
+        log.info("data receive: A电压:" + mbd_v_a.toString());
+        map.put("e_voltage_a", mbd_v_a.toString());
+
+        //电流333333323232323232
+        String c_a = dataStr_c.substring(0, 4);
+        c_a = Utilty.convertByteToString2(Utilty.hexStringToBytes(c_a), 1, Utilty.hexStringToBytes(c_a).length);
+        BigDecimal mbd_c_a = new BigDecimal(new DecimalFormat("#0.00").format((double) (Long.parseLong(c_a)) / 100));
+        log.info("data receive: A电流:" + mbd_c_a);
+        map.put("e_current_a", mbd_c_a.toString());
+
+        //继电器状态3333
+        String s_1 = dataStr_switch.substring(0, 2);
+        String s_2 = dataStr_switch.substring(2, 4);
+        s_1 = Utilty.convertByteToString2(Utilty.hexStringToBytes(s_1), 1, Utilty.hexStringToBytes(s_1).length);
+        s_2 = Utilty.convertByteToString2(Utilty.hexStringToBytes(s_2), 1, Utilty.hexStringToBytes(s_2).length);
+        log.info("data receive: 继电器命令状态:" + s_1);
+        log.info("data receive: 继电器实际状态" + s_2);
+        map.put("e_switch_1", s_1);
+        map.put("e_switch_2", s_2);
+
+        //时间593444474553
+        dataStr_time = Utilty.convertByteToString2(Utilty.hexStringToBytes(dataStr_time), 1, Utilty.hexStringToBytes(dataStr_time).length);
+        log.info("data receive: 时间:" + dataStr_time);
+        map.put("e_time", dataStr_time);
+        //温度6335
+        dataStr_eTemperature = Utilty.convertByteToString2(Utilty.hexStringToBytes(dataStr_eTemperature), 1, Utilty.hexStringToBytes(dataStr_eTemperature).length);
+        BigDecimal mbd_temperature = new BigDecimal(new DecimalFormat("#00.0").format((double) (Long.parseLong(dataStr_eTemperature)) / 10));
+        log.info("data receive: 温度:" + mbd_temperature);
+        map.put("e_temperature", mbd_temperature.toString());
+
         return map;
     }
 }

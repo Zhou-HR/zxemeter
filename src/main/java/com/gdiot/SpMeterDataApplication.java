@@ -53,7 +53,6 @@ public class SpMeterDataApplication {
     private static ApplicationContext context;
 
     public static void main(String[] args) {
-//		SpringApplication.run(SpMeterDataApplication.class, args);
         log.info("-------------SpMeterDataApplication run----------------");
 
         SpringApplication application = new SpringApplication(SpMeterDataApplication.class);
@@ -63,20 +62,20 @@ public class SpMeterDataApplication {
         mSpringContextUtils.setApplicationContext(context);
 
         //启动电表接收  中性平台启动  "00000000000000e3";//芯北演示电表，中性平台
-        LoraEMServerThread mLoraEMServerThread = new LoraEMServerThread();
-        mLoraEMServerThread.start();
+        //LoraEMServerThread mLoraEMServerThread = new LoraEMServerThread();
+        //mLoraEMServerThread.start();
 
         //启动烟感接收   中性平台启动  "00000000000000e5";//国动烟感演示
-        LoraSmokeServerThread mLoraSmokeServerThread = new LoraSmokeServerThread();
-        mLoraSmokeServerThread.start();
+        //LoraSmokeServerThread mLoraSmokeServerThread = new LoraSmokeServerThread();
+        //mLoraSmokeServerThread.start();
 
         //启动华南理工烟感集中报警接收  "00000000000000eb";//国动烟感集中报警演示
 //		LoraSmokeAlertServerThread mLoraSmokeAlertServerThread = new LoraSmokeAlertServerThread();
 //		mLoraSmokeAlertServerThread.start();
 
 //		//UDP 水表  原始 ZP超声波阀控水表NB-iot传协议--上行和下行   中性平台启动
-        UdpServerThread mUdpServer = new UdpServerThread();
-        mUdpServer.start();
+        //UdpServerThread mUdpServer = new UdpServerThread();
+        //mUdpServer.start();
 
         //启动2G电表接收   中性平台启动  暂不启动
 //		MqttServerThread mMqttServerThread = new MqttServerThread();
@@ -91,8 +90,8 @@ public class SpMeterDataApplication {
 //		mLoraWMServerThread.start();
 
         //启动烟感mqtt接收   华南理工
-        SmokeMqttServerThread mSmokeMqttServerThread = new SmokeMqttServerThread();
-        mSmokeMqttServerThread.start();
+        //SmokeMqttServerThread mSmokeMqttServerThread = new SmokeMqttServerThread();
+        //mSmokeMqttServerThread.start();
 
     }
 

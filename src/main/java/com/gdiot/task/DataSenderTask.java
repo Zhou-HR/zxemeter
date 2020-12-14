@@ -36,6 +36,7 @@ public class DataSenderTask implements Runnable {
     private INBYDEMEventService mINBYDEMEventService;
     private INBYDEMReadService mINBYDEMReadService;
     private IXBEMDataService mIXBEMDataService;
+    private IQDEMDataService mIQDEMDataService;
     private IWMDataService mIWMDataService;
     private ISmokeDataService mISmokeDataService;
     private IXBEMService mIXBEMService;
@@ -136,34 +137,6 @@ public class DataSenderTask implements Runnable {
             default:
                 break;
         }
-    }
-
-    /**
-     * 千丁电表数据接收解析
-     *
-     * @throws JSONException
-     */
-    private void QDAnalysis() throws JSONException {
-        //value:277000080720 01 5955FF02 2B 33333333 333333 9455 3232 3232 333333 323232 323232 33 33 33333333 34 59344C444553 A335 3333 33333333
-        YDUtil.BodyObj obj = YDUtil.resolveBody(data, false);
-        org.json.JSONObject data = (org.json.JSONObject) obj.getMsg();
-//		LOGGER.info("task: data receive: dev_id:"+data.getLong("dev_id"));
-        int type = data.getInt("type");
-        if (type == 1) {//value 数据点消息
-            String ori_value = data.getString("value");
-            String dev_id = data.getLong("dev_id") + "";
-            String ds_id = (data.getString("ds_id").equals("")) ? "" : data.getString("ds_id");
-            String imei = data.getString("imei");
-            long time = data.getLong("at");
-            log.info("task: data receive: ori_value:" + ori_value);
-            String regex = "^[A-Fa-f0-9]+$";//是16进制数
-            if (ori_value.matches(regex)) {
-                int len = ori_value.length();
-                String orig_code = ori_value.substring(0, len).trim().replaceAll(" ", "");
-
-            }
-        }
-
     }
 
     /**
@@ -1747,8 +1720,8 @@ public class DataSenderTask implements Runnable {
     /**
      * 保存安科瑞电表nb 上下线信息
      *
-     * @param map
-     * @param valueD
+     * @param d_result map
+     *                 valueD
      */
     private void SaveNBStatus(Map<String, Object> d_result) {
         if (d_result != null && d_result.size() > 0) {
@@ -1774,8 +1747,8 @@ public class DataSenderTask implements Runnable {
     /**
      * 保存安科瑞电表（nb,2g）上报数据
      *
-     * @param map
-     * @param valueD
+     * @param d_result map
+     *                 valueD
      */
     private void SaveAKREMDataToDB(Map<String, Object> d_result) {
         if (mIAKREMDataService == null) {
@@ -1819,8 +1792,8 @@ public class DataSenderTask implements Runnable {
     /**
      * 保存安科瑞电表（nb,2g）上报告警数据
      *
-     * @param map
-     * @param valueD
+     * @param d_result map
+     *                 valueD
      */
     private void SaveAKREMEventDataToDB(Map<String, Object> d_result) {
         if (mIAKREMDataService == null) {
@@ -2128,35 +2101,35 @@ public class DataSenderTask implements Runnable {
 
             if (resultMap.size() > 0) {
                 ktEmDataPo ktEmDataPo = new ktEmDataPo();
-                ktEmDataPo.seteNum(eNum);
+                //ktEmDataPo.seteNum(eNum);
                 ktEmDataPo.setDevId(deviceId);
                 ktEmDataPo.setOrigValue(orig_data);
                 // 信号
-                ktEmDataPo.seteSignal(rssi);
+                //ktEmDataPo.seteSignal(rssi);
                 // 设备资源类型
-                ktEmDataPo.seteSource("kt_nb_em");
+                //ktEmDataPo.seteSource("kt_nb_em");
                 // 上报时间
                 ktEmDataPo.setTime(System.currentTimeMillis());
                 // 有功总电
-                ktEmDataPo.seteKwAll(resultMap.get("combinationPower") != null ? resultMap.get("combinationPower") : "");
+                //ktEmDataPo.seteKwAll(resultMap.get("combinationPower") != null ? resultMap.get("combinationPower") : "");
                 // 正向有功总电
-                ktEmDataPo.seteKw1(resultMap.get("forwardPower") != null ? resultMap.get("forwardPower") : "");
+                //ktEmDataPo.seteKw1(resultMap.get("forwardPower") != null ? resultMap.get("forwardPower") : "");
                 // 反向有功总电
-                ktEmDataPo.seteKw2(resultMap.get("reversePower") != null ? resultMap.get("reversePower") : "");
+                //ktEmDataPo.seteKw2(resultMap.get("reversePower") != null ? resultMap.get("reversePower") : "");
                 // 电流
-                ktEmDataPo.seteCurrent(resultMap.get("current") != null ? resultMap.get("current") : "");
+                //ktEmDataPo.seteCurrent(resultMap.get("current") != null ? resultMap.get("current") : "");
                 // 电压
-                ktEmDataPo.seteVoltage(resultMap.get("voltage") != null ? resultMap.get("voltage") : "");
+                //ktEmDataPo.seteVoltage(resultMap.get("voltage") != null ? resultMap.get("voltage") : "");
                 // 有功功率
                 ktEmDataPo.setEkw(resultMap.get("activePower") != null ? resultMap.get("activePower") : "");
                 // 功率因数
-                ktEmDataPo.seteFactorAll(resultMap.get("powerFactor") != null ? resultMap.get("powerFactor") : "");
+                //ktEmDataPo.seteFactorAll(resultMap.get("powerFactor") != null ? resultMap.get("powerFactor") : "");
                 // 断电或通电
-                ktEmDataPo.seteSwitch(resultMap.get("switch") != null ? resultMap.get("switch") : "");
+                //ktEmDataPo.seteSwitch(resultMap.get("switch") != null ? resultMap.get("switch") : "");
                 // 状态位
-                ktEmDataPo.seteStatus(resultMap.get("status") != null ? resultMap.get("status") : "");
+                //ktEmDataPo.seteStatus(resultMap.get("status") != null ? resultMap.get("status") : "");
                 // 序列号
-                ktEmDataPo.seteSeq(Integer.parseInt(resultMap.get("seq")));
+                //ktEmDataPo.seteSeq(Integer.parseInt(resultMap.get("seq")));
                 if (ktDataService == null) {
                     ktDataService = SpringContextUtils.getBean(KTDataService.class);
                 }
@@ -2172,10 +2145,10 @@ public class DataSenderTask implements Runnable {
             KTREMReadPo ktremReadPo = new KTREMReadPo();
             ktremReadPo.setDevId(deviceId);
             ktremReadPo.setTime(System.currentTimeMillis());
-            ktremReadPo.seteOrigValue(orig_data);
+           /* ktremReadPo.seteOrigValue(orig_data);
             ktremReadPo.seteNum(resultMap.get("eNum") != null ? resultMap.get("eNum") : "");
             ktremReadPo.seteReadValue(resultMap.get("status") != null ? resultMap.get("status") : "");
-            ktremReadPo.seteSource("kt_nb_em");
+            ktremReadPo.seteSource("kt_nb_em");*/
             // 保存数据
             if (ktDataService == null) {
                 ktDataService = SpringContextUtils.getBean(KTDataService.class);
@@ -2192,10 +2165,10 @@ public class DataSenderTask implements Runnable {
             KTREMReadPo ktremReadPo = new KTREMReadPo();
             ktremReadPo.setDevId(deviceId);
             ktremReadPo.setTime(System.currentTimeMillis());
-            ktremReadPo.seteOrigValue(orig_data);
+           /* ktremReadPo.seteOrigValue(orig_data);
             ktremReadPo.seteNum(resultMap.get("eNum") != null ? resultMap.get("eNum") : "");
             ktremReadPo.seteReadValue(resultMap.get("status") != null ? resultMap.get("status") : "");
-            ktremReadPo.seteSource("kt_nb_em");
+            ktremReadPo.seteSource("kt_nb_em");*/
             // 保存数据
             if (ktDataService == null) {
                 ktDataService = SpringContextUtils.getBean(KTDataService.class);
@@ -2424,4 +2397,104 @@ public class DataSenderTask implements Runnable {
 
 
     }
+
+    /**
+     * 千丁电表数据接收解析
+     *
+     * @throws JSONException
+     */
+    private void QDAnalysis() throws JSONException {
+        //value:
+        // 01F00081000064FFFFFFBA3836383136333034303230353934373436303034393430353030313533375B1101A5D41B000015005014004DFA071304FA0127700008072000920101010001
+        // 277000080720015955FF022B33333333333333355532323232333333323232323232333333333333345934444745536335333333333333
+        // 6CFAFF34
+        YDUtil.BodyObj obj = YDUtil.resolveBody(data, false);
+        org.json.JSONObject data = (org.json.JSONObject) obj.getMsg();
+        int type = data.getInt("type");
+        if (type == 1) {//value 数据点消息
+            String ori_value = data.getString("value");
+            String dev_id = data.getLong("dev_id") + "";
+            String ds_id = (data.getString("ds_id").equals("")) ? "" : data.getString("ds_id");
+            String imei = data.getString("imei");
+            long time = data.getLong("at");
+            log.info("task: data receive: ori_value:" + ori_value);
+            String regex = "^[A-Fa-f0-9]+$";//是16进制数
+            if (ori_value.matches(regex)) {
+                int len = ori_value.length();
+                String orig_code = ori_value.substring(148, len - 8).trim().replaceAll(" ", "");
+                //orig_code:277000080720 01 5955FF02 2B
+                // 33333333333333355532323232333333323232323232333333333333345934444745536335333333333333
+                byte[] binaryData = Utilty.hexStringToBytes(orig_code);
+                len = binaryData.length;
+                String e_num = Utilty.convertByteToString(binaryData, 1, 6);
+                //e_num:200708007027
+                log.info("task: 80 analysis: e_num:" + e_num);
+
+                String regex_eNum = "^\\d{12}$";//e_num 12
+                if (!e_num.matches(regex_eNum)) {//验证表号是否合法
+                    log.error("e_num error");
+                    return;
+                }
+
+                byte dataLen = binaryData[11];
+                log.info("task: 80 analysis: data Length=" + dataLen);
+                //数据域
+                String valueD = orig_code.substring(24, 24 + dataLen * 2);
+                //valueD:33333333333333355532323232333333323232323232333333333333345934444745536335333333333333
+                Map<String, String> emMap = new HashMap<String, String>();
+                emMap.put("imei", imei);
+                emMap.put("dev_id", imei);
+                emMap.put("ds_id", ds_id);
+                emMap.put("time", String.valueOf(time));
+                emMap.put("type", String.valueOf(type));
+                emMap.put("ori_value", ori_value);
+                emMap.put("source", data_type);
+                emMap.put("e_num", e_num);
+                emMap.put("flag_reload", "0");
+                SaveQDEMDataToDB(emMap, valueD);
+                log.info("task: 80 insert into SQL end!");
+            }
+        }
+
+    }
+
+    /**
+     * 保存千丁电表上报数据
+     *
+     * @param map
+     * @param valueD
+     */
+    private void SaveQDEMDataToDB(Map<String, String> map, String valueD) {
+        if (mIQDEMDataService == null) {
+            mIQDEMDataService = SpringContextUtils.getBean(IQDEMDataService.class);
+        }
+        if (map != null && map.size() > 0 && valueD != null) {
+            Map<String, String> d_result = EMDataAnalysisUtil.getQDDataValue(valueD);
+
+            if (d_result.size() > 0) {
+                QDEMDataPo dataPo = new QDEMDataPo();
+                dataPo.setDevId(map.get("dev_id"));
+                dataPo.setOrigValue(map.get("ori_value"));
+                dataPo.setTime(Long.parseLong(map.get("time")));
+                dataPo.setSource(map.get("source"));
+                dataPo.setENum(map.get("e_num"));
+
+                dataPo.setEKwh(d_result.get("e_kwh") != null ? d_result.get("e_kwh") : "");
+                dataPo.setEKwAll(d_result.get("e_kw_all") != null ? d_result.get("e_kw_all") : "");
+                dataPo.setEVoltageA(d_result.get("e_voltage_a") != null ? d_result.get("e_voltage_a") : "");//A相电压
+                dataPo.setECurrentA(d_result.get("e_current_a") != null ? d_result.get("e_current_a") : "");//A相电流
+
+                dataPo.setESwitch1(d_result.get("e_switch_1") != null ? d_result.get("e_switch_1") : "");
+                dataPo.setESwitch2(d_result.get("e_switch_2") != null ? d_result.get("e_switch_2") : "");
+                dataPo.setETime(d_result.get("e_time") != null ? d_result.get("e_time") : "");
+                dataPo.setETemperature(d_result.get("e_temperature") != null ? d_result.get("e_temperature") : "");
+
+                System.out.println(dataPo.toString());
+                //mIQDEMDataService.addOne(dataPo);
+//		        LOGGER.info("task: lora fefefefe 80 insert into SQL end!");
+            }
+        }
+    }
 }
+
+

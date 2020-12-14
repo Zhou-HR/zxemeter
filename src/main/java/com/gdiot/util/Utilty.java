@@ -21,7 +21,18 @@ public class Utilty {
     public static String convertByteToString(byte[] array, int begin, int end) {
         StringBuffer sb = new StringBuffer();
         for (int i = end; i > begin - 1; i--) {
+
             sb.append(parseByte2HexStr(array[i - 1]));
+
+        }
+        return sb.toString();
+    }
+
+    public static String convertByteToString2(byte[] array, int begin, int end) {
+        StringBuffer sb = new StringBuffer();
+        for (int i = end; i > begin - 1; i--) {
+            int v = Integer.parseInt(parseByte2HexStr(array[i - 1]), 16) - Integer.parseInt("33", 16);
+            sb.append(Integer.toHexString(v));
         }
         return sb.toString();
     }
@@ -147,6 +158,7 @@ public class Utilty {
         return (byte) "0123456789ABCDEF".indexOf(c);
     }
 
+
     public static boolean isNumeric(String str) {
         for (int i = str.length(); --i >= 0; ) {
             int chr = str.charAt(i);
@@ -195,6 +207,7 @@ public class Utilty {
 
     public static void main(String[] args) {
         System.out.println(hexStringToASC("41542B514C57554C4441544145583D34392C41413732303030303031343235353030303030303030303036303231303030303030303030303030393634393030303030303030444434303030303030303030303030303030303030303030303030303030303130313138303030303132303044352C3078303130300D0A"));
-        ;
     }
+
+
 }

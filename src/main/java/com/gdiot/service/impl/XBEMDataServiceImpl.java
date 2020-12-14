@@ -23,6 +23,7 @@ public class XBEMDataServiceImpl implements IXBEMDataService {
     @Autowired
     private XBEMDataMapper mXBEMDataMapper;
 
+    @Override
     public int addOne(XBEMDataPo xbemDataPo) {
         log.info("begin xb em data addOne");
         return mXBEMDataMapper.insertOne(xbemDataPo);

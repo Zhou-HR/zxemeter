@@ -2421,7 +2421,13 @@ public class DataSenderTask implements Runnable {
             String regex = "^[A-Fa-f0-9]+$";//是16进制数
             if (ori_value.matches(regex)) {
                 int len = ori_value.length();
-                String orig_code = ori_value.substring(148, len - 8).trim().replaceAll(" ", "");
+                String orig_code = ori_value.substring(0, len).trim().replaceAll(" ", "");
+                String e_seq = orig_code.substring(8, 12);
+
+                String e_signal = String.valueOf((Long.valueOf(orig_code.substring(14, 22), 16).intValue() + 113) / 2);
+
+                orig_code = ori_value.substring(148, len - 8).trim().replaceAll(" ", "");
+
                 //orig_code:277000080720 01 5955FF02 2B
                 // 33333333333333355532323232333333323232323232333333333333345934444745536335333333333333
                 byte[] binaryData = Utilty.hexStringToBytes(orig_code);
@@ -2450,6 +2456,8 @@ public class DataSenderTask implements Runnable {
                 emMap.put("ori_value", ori_value);
                 emMap.put("source", data_type);
                 emMap.put("e_num", e_num);
+                emMap.put("e_seq", e_seq);
+                emMap.put("e_signal", e_signal);
                 emMap.put("flag_reload", "0");
                 SaveQDEMDataToDB(emMap, valueD);
                 log.info("task: 80 insert into SQL end!");
@@ -2478,6 +2486,8 @@ public class DataSenderTask implements Runnable {
                 dataPo.setTime(Long.parseLong(map.get("time")));
                 dataPo.setSource(map.get("source"));
                 dataPo.setENum(map.get("e_num"));
+                dataPo.setESeq(Integer.valueOf(map.get("e_seq")));
+                dataPo.setESignal(map.get("e_signal"));
 
                 dataPo.setEKwh(d_result.get("e_kwh") != null ? d_result.get("e_kwh") : "");
                 dataPo.setEKwAll(d_result.get("e_kw_all") != null ? d_result.get("e_kw_all") : "");

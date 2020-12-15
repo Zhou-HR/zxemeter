@@ -7,8 +7,8 @@ import org.slf4j.LoggerFactory;
  * @author ZhouHR
  */
 public class MQTTClientFactory {
-    private static Logger LOGGER = LoggerFactory.getLogger(MQTTClientFactory.class);
-    private MqttTask client;
+    private static final Logger LOGGER = LoggerFactory.getLogger(MQTTClientFactory.class);
+    private final MqttTask client;
 
     private static volatile MQTTClientFactory mqttPushClient = null;
 

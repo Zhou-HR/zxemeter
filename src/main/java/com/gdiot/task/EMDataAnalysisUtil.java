@@ -25,7 +25,7 @@ public class EMDataAnalysisUtil {
      * @return
      */
     public static Map<String, String> getDataValue(String data3) {
-        Map<String, String> map = new HashMap<String, String>();
+        Map<String, String> map = new HashMap<>();
         for (int i = 0, j = data3.length(); i < j; ) {
 //			System.out.print("---------i_str="+i);
             String typeStr = data3.substring(i, i + 2);
@@ -45,7 +45,7 @@ public class EMDataAnalysisUtil {
                 case "A0"://序列号 //整点冻结次数
                 case "A2"://日冻结次数
                 case "A4"://月冻结次数 //A4020400
-                    map.put("seq_type", String.valueOf(typeStr));
+                    map.put("seq_type", typeStr);
                     if (Utilty.isNumeric(data)) {
                         int e_seq = Integer.parseInt(data);
                         log.info("data receive: 序列号:" + e_seq);
@@ -1536,7 +1536,7 @@ public class EMDataAnalysisUtil {
      */
     public static Map<String, String> getQDDataValue(String data) {
         //data:33333333 333333 355532323232 333333323232323232 3333 33333333 34 593444474553 6335 333333333333
-        Map<String, String> map = new HashMap<String, String>();
+        Map<String, String> map = new HashMap<>();
         //电能33333333
         String dataStr_kwh = data.substring(0, 8);
         //功率333333

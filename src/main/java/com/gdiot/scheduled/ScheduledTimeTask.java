@@ -1,22 +1,17 @@
 package com.gdiot.scheduled;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.ApplicationArguments;
-import org.springframework.boot.ApplicationRunner;
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Component;
-
 import com.gdiot.mapper.XBEMMapper;
 import com.gdiot.model.EMMeterPo;
 import com.gdiot.service.AsyncService;
 import com.gdiot.task.DataSenderTask;
-
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.ApplicationArguments;
+import org.springframework.boot.ApplicationRunner;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author ZhouHR
@@ -43,7 +38,7 @@ public class ScheduledTimeTask implements ApplicationRunner {
             String e_num = emMeterPo.getMeterNo();
             log.info("查询表号 e_num=" + e_num);
 
-            Map<String, Object> map = new HashMap<String, Object>();
+            Map<String, Object> map = new HashMap<>();
             map.put("time", currentTime);
             map.put("e_num", e_num);
             map.put("EMMeterPo", emMeterPo);

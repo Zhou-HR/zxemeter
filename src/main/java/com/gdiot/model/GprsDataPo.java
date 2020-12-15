@@ -1,10 +1,8 @@
 package com.gdiot.model;
 
-import java.io.Serializable;
-
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+
+import java.io.Serializable;
 
 /**
  * @author ZhouHR

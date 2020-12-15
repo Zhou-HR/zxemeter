@@ -62,7 +62,7 @@ public class TimeTask {
             String e_num = emMeterPo.getMeterNo();
             log.info("查询表号 e_num=" + e_num);
 
-            Map<String, Object> map = new HashMap<String, Object>();
+            Map<String, Object> map = new HashMap<>();
             map.put("time", currentTime);
             map.put("e_num", e_num);
             map.put("EMMeterPo", emMeterPo);

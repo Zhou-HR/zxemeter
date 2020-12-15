@@ -1,11 +1,12 @@
 package com.gdiot.model;
 
+import lombok.Data;
+
 import java.io.Serializable;
 
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
-
+/**
+ * @author ZhouHR
+ */
 @Data
 public class LoraDataPo implements Serializable {
 

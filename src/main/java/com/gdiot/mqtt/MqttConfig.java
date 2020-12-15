@@ -11,13 +11,13 @@ public class MqttConfig {
     public static final String TOPIC_CLIENT = "mqtt_2g/client";//服务端订阅 ，设备上报的消息，设备发布
     public static final String TOPIC_SERVER = "mqtt_2g/server";//服务端发布，下行的消息，设备端订阅
     //定义MQTT的ID，可以在MQTT服务配置中指定
-    public static final String clientid = "mqtt_2g/xb";
+    public static final String CLIENTID = "mqtt_2g/xb";
 
-    public static final int ConnectionTimeout = 10;
-    public static final int KeepAliveTime = 20;
+    public static final int CONNECTION_TIMEOUT = 10;
+    public static final int KEEP_ALIVE_TIME = 20;
 
-    public static final String userName = "stonegeek";
-    public static final String passWord = "123456";
+    public static final String USERNAME = "stonegeek";
+    public static final String PASSWORD = "123456";
 
     /*
      * 0 almost once

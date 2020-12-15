@@ -1,21 +1,14 @@
 package com.gdiot.mqtt;
 
+import com.gdiot.SpMeterDataApplication;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.boot.ApplicationArguments;
-import org.springframework.boot.ApplicationRunner;
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.core.annotation.Order;
-import org.springframework.stereotype.Component;
-
-import com.gdiot.SpMeterDataApplication;
-import com.gdiot.mqtt.MqttTask;
 
 /**
  * @author ZhouHR
  */ //@Component
 public class SmokeMqttServerThread extends Thread {
-    private static Logger log = LoggerFactory.getLogger(SpMeterDataApplication.class);
+    private static final Logger log = LoggerFactory.getLogger(SpMeterDataApplication.class);
 
     public SmokeMqttServerThread() {
 

@@ -1,12 +1,13 @@
 package com.gdiot.model;
 
+import lombok.Data;
+
 import java.io.Serializable;
 import java.util.Date;
-import lombok.Data;
 
 /**
  * em_data_qd
- * @author 
+ * @author  ZhouHR
  */
 @Data
 public class QDEMDataPo implements Serializable {

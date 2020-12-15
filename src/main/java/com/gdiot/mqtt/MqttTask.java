@@ -15,8 +15,6 @@ import org.slf4j.LoggerFactory;
 import com.alibaba.fastjson.JSONObject;
 import com.gdiot.SpMeterDataApplication;
 import com.gdiot.service.AsyncService;
-import com.gdiot.task.DataSenderTask;
-import com.gdiot.util.SpringContextUtils;
 
 /**
  * @author ZhouHR
@@ -26,11 +24,11 @@ public class MqttTask implements Runnable, MqttCallback, MqttCallbackExtended {
     //	private InitUtil mInitUtil = new InitUtil();
     private MqttClient mqttClient = null;
 
-    private String mqttUrl;
-    private String mqttClientid;
-    private String mqttUsername;
-    private String mqttPassword;
-    private String mqttTopic;
+    private final String mqttUrl;
+    private final String mqttClientid;
+    private final String mqttUsername;
+    private final String mqttPassword;
+    private final String mqttTopic;
 
     private AsyncService asyncService;
 //	private RedisUtil redisUtil;
@@ -100,9 +98,6 @@ public class MqttTask implements Runnable, MqttCallback, MqttCallbackExtended {
                 mqttClient.publish(topic, message);
                 LOGGER.info(String.format("pubMessage,topic:%s,message:%s", topic, content));
                 return true;
-            } catch (MqttPersistenceException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
             } catch (MqttException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
@@ -120,9 +115,6 @@ public class MqttTask implements Runnable, MqttCallback, MqttCallbackExtended {
                 mqttClient.publish(topic, message);
                 LOGGER.info(String.format("pubMessage,topic:%s,message:%s", topic, message));
                 return true;
-            } catch (MqttPersistenceException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
             } catch (MqttException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
@@ -181,7 +173,7 @@ public class MqttTask implements Runnable, MqttCallback, MqttCallbackExtended {
 //		DataSenderTask  task = new DataSenderTask(topic,message.toString());
 //		asyncService.executeAsync(task);
         SpMeterDataApplication mSpMeterDataApplication = new SpMeterDataApplication();
-        if ((MqttConfig.clientid).equals(this.mqttClientid)) {
+        if ((MqttConfig.CLIENTID).equals(this.mqttClientid)) {
             mSpMeterDataApplication.MqttHanderMessage(message.toString());
         } else if ((MqttConfig.SMOKE_clientid).equals(this.mqttClientid)) {
             mSpMeterDataApplication.MqttHanderSmokeMessage(message.toString());

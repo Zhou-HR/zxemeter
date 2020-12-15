@@ -1,25 +1,21 @@
 package com.gdiot.task;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import com.gdiot.model.*;
-import com.gdiot.service.*;
-import com.gdiot.util.*;
-import org.json.JSONException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import com.alibaba.fastjson.JSONObject;
-
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.gdiot.lora.LoraClientFactory;
 import com.gdiot.lora.LoraSendCmds;
 import com.gdiot.lora.LoraSendCmdsUtils;
+import com.gdiot.model.*;
 import com.gdiot.mqtt.MqttConfig;
 import com.gdiot.mqtt.MqttSendCmdsUtil;
-
+import com.gdiot.service.*;
+import com.gdiot.util.*;
 import lombok.extern.slf4j.Slf4j;
+import org.json.JSONException;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author ZhouHR
@@ -378,6 +374,8 @@ public class DataSenderTask implements Runnable {
                             mYDEMNBReadPo.setReadValue(result_read.get("read_value") != null ? result_read.get("read_value") : "");
                             mINBYDEMReadService.addOne(mYDEMNBReadPo);
                             log.info("task: c0 insert into SQL end!");
+                            break;
+                        default:
                             break;
                     }
                 } else if ("90".equals(startbyte) && "16".equals(endbyte)) {
@@ -1560,7 +1558,7 @@ public class DataSenderTask implements Runnable {
 
                         String dataValue = orig_code.substring(6, orig_code.length() - 4);
                         log.info("task: akr read dataValue=" + dataValue);
-                        if (dataValue == null || dataValue.equals("")) {
+                        if (dataValue == null || "".equals(dataValue)) {
                             return;//过滤心跳数据
                         }
                         Map<String, Object> d_result90 = EMDataAnalysisUtil.getAKRReadValue(dataValue);//回传数据

@@ -1,23 +1,21 @@
 package com.gdiot.lora;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.http.util.TextUtils;
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.gdiot.model.WMDataPo;
 import com.gdiot.service.IWMDataService;
 import com.gdiot.util.CRC16;
 import com.gdiot.util.LoraConfig;
 import com.gdiot.util.SpringContextUtils;
 import com.gdiot.util.Utilty;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author ZhouHR
@@ -37,7 +35,7 @@ public class LoraSendCmdsUtils {
         String e_num2 = e_num;//"190300000064";//表号
         String fac_id = e_fac;//厂商标识
         String dih_lon = "7006";//FF03103141 请求数据类型 长度 数据  类型包含
-        String CRC = "";
+        String CRC;
         String end = "16";
 
         //time
@@ -83,7 +81,7 @@ public class LoraSendCmdsUtils {
         String e_num2 = "000000000000";//"190300000064";//表号
         String fac_id = "00";//厂商标识
         String dih_lon = "7006";//FF03103141 请求数据类型 长度 数据  类型包含
-        String CRC = "";
+        String CRC;
         String end = "16";
 
         //time
@@ -119,7 +117,7 @@ public class LoraSendCmdsUtils {
     }
 
     public Map<String, String> getEMInfoByDeveui(String dev_eui) {
-        Map<String, String> map = new HashMap<String, String>();
+        Map<String, String> map = new HashMap<>();
         if (mIWMDataService == null) {
             mIWMDataService = SpringContextUtils.getBean(IWMDataService.class);
         }
@@ -153,7 +151,7 @@ public class LoraSendCmdsUtils {
         String prm = "10";//仪表类型
         String e_num2 = meter_no;//表号
         String dih_lon = "";//FF03103141 请求数据类型 长度 数据  类型包含
-        String CRC = "";
+        String CRC;
         String end = "16";
         switch (data_type) {
             case "wm_switch"://强制开关阀

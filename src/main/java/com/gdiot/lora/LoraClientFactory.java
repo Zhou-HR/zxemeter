@@ -7,8 +7,8 @@ import org.slf4j.LoggerFactory;
  * @author ZhouHR
  */
 public class LoraClientFactory {
-    private static Logger LOGGER = LoggerFactory.getLogger(LoraClientFactory.class);
-    private LoraTask client;
+    private static final Logger LOGGER = LoggerFactory.getLogger(LoraClientFactory.class);
+    private final LoraTask client;
 
     private static volatile LoraClientFactory mLoraClientFactory = null;
 

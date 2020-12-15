@@ -30,7 +30,7 @@ public class YDQDDateReceiver {
     @Autowired
     private AsyncService asyncService;
 
-    private static Logger logger = LoggerFactory.getLogger(YDZXXBDateReceiver.class);
+    private static final Logger logger = LoggerFactory.getLogger(YDZXXBDateReceiver.class);
 
     /**
      * 功能描述：第三方平台数据接收。<p>
@@ -47,11 +47,11 @@ public class YDQDDateReceiver {
     public String receive(@RequestBody String body) throws NoSuchPaddingException, InvalidKeyException, NoSuchAlgorithmException, IllegalBlockSizeException, BadPaddingException, InvalidAlgorithmParameterException {
 
         logger.info("data receive:  body String --- " + body);
-        /************************************************
+        /*
          *  解析数据推送请求，非加密模式。
          *  如果是明文模式使用以下代码
-         **************************************************/
-        /*************明文模式  start****************/
+         */
+        /*明文模式  start*/
         YDUtil.BodyObj obj = YDUtil.resolveBody(body, false);
 //        logger.info("data receive:  body Object --- " +obj);
         //body Object --- { "msg":{"dev_id":518766092,"imei":"866971030431923","value":"123456789","at":1552029366942,"ds_id":"3200_0_5750","type":1}，"nonce":h9(2&z&z，"signature":sq56j/8xiIRMqJwYv7gt1w==}
@@ -74,15 +74,15 @@ public class YDQDDateReceiver {
         } else {
             logger.info("data receive: body empty error");
         }
-        /*************明文模式  end****************/
+        /*明文模式  end*/
 
 
-        /********************************************************
+        /*
          *  解析数据推送请求，加密模式
          *
          *  如果是加密模式使用以下代码
-         ********************************************************/
-        /*************加密模式  start****************/
+         */
+        /*加密模式  start*/
 //        Util.BodyObj obj1 = Util.resolveBody(body, true);
 //        logger.info("data receive:  body Object--- " +obj1);
 //        if (obj1 != null){
@@ -96,7 +96,7 @@ public class YDQDDateReceiver {
 //        }else {
 //            logger.info("data receive: body empty error" );
 //        }
-        /*************加密模式  end****************/
+        /*加密模式  end*/
         return "ok";
     }
 

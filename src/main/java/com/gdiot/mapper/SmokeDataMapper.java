@@ -15,14 +15,36 @@ import java.util.List;
 @Mapper
 @Component
 public interface SmokeDataMapper {
-
+    /**
+     * @param mSmokeDataPo
+     * @return
+     */
     int insertOne(SmokeDataPo mSmokeDataPo);
 
+    /**
+     * @param dev_id
+     * @return
+     */
     int countbyDevId(@Param("dev_id") String dev_id);
 
+    /**
+     * @param dev_id
+     * @param limit
+     * @param offset
+     * @return
+     */
     List<SmokeDataPo> selectbyDevId(@Param("dev_id") String dev_id, @Param("limit") int limit, @Param("offset") int offset);
 
+    /**
+     * @param deviceId
+     * @param deviceType
+     * @return
+     */
     List<SmokeDevicePo> selectAlarmList(@Param("deviceId") String deviceId, @Param("deviceType") String deviceType);
 
+    /**
+     * @param mSmokeDownPo
+     * @return
+     */
     int insertAlarmDown(SmokeDownPo mSmokeDownPo);
 }

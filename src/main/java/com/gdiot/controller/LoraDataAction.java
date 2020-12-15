@@ -1,16 +1,5 @@
 package com.gdiot.controller;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.gdiot.lora.LoraSendCmds;
 import com.gdiot.lora.LoraSendCmdsUtils;
 import com.gdiot.model.WMDataPo;
@@ -18,7 +7,14 @@ import com.gdiot.service.AsyncService;
 import com.gdiot.service.IWMDataService;
 import com.gdiot.util.LoraConfig;
 import com.gdiot.util.SpringContextUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author ZhouHR
@@ -58,7 +54,7 @@ public class LoraDataAction {
                 operate_type = params.get("operate_type");
             }
         }
-        Map<String, Object> result = new HashMap<String, Object>();
+        Map<String, Object> result = new HashMap<>();
         String regex_dev = "^[A-Fa-f0-9]+$";//16 dev_eui
         String regex_imei = "^\\d{15}$";//imei 15
         String regex_yd_dev_id = "^\\d{9}$";//yd_dev_id 9
@@ -67,7 +63,7 @@ public class LoraDataAction {
                 || dev_id.matches(regex_yd_dev_id)) {
 
             String request_id = dev_id + "_" + System.currentTimeMillis();
-            Map<String, String> map = new HashMap<String, String>();
+            Map<String, String> map = new HashMap<>();
             map.put("module_type", module_type);
             map.put("dev_id", dev_id);
             map.put("type", type);
@@ -112,7 +108,7 @@ public class LoraDataAction {
                 value = params.get("value");
             }
         }
-        Map<String, Object> result = new HashMap<String, Object>();
+        Map<String, Object> result = new HashMap<>();
         String regex_dev = "^[A-Fa-f0-9]+$";//16 dev_eui
         String regex_imei = "^\\d{15}$";//imei 15
         String regex_yd_dev_id = "^\\d{9}$";//yd_dev_id 9
@@ -133,7 +129,7 @@ public class LoraDataAction {
     @RequestMapping("/get_wm_list")
     public Map<String, Object> get_wm_list(@RequestBody Map<String, String> params) {
         System.out.print("send_cmd---------------------------");
-        Map<String, Object> result = new HashMap<String, Object>();
+        Map<String, Object> result = new HashMap<>();
         String dev_id = null;
         int pageNo = 1;
         int pageSize = 20;
@@ -143,10 +139,10 @@ public class LoraDataAction {
             }
             try {
                 if (params.containsKey("pageNo")) {
-                    pageNo = Integer.valueOf(params.get("pageNo"));
+                    pageNo = Integer.parseInt(params.get("pageNo"));
                 }
                 if (params.containsKey("pageSize")) {
-                    pageSize = Integer.valueOf(params.get("pageSize"));
+                    pageSize = Integer.parseInt(params.get("pageSize"));
                 }
             } catch (Exception e) {
                 e.printStackTrace();

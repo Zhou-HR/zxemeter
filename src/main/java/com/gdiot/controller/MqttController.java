@@ -14,7 +14,7 @@ import java.util.Map;
 @RestController
 @RequestMapping(value = "/mqtt_2g")
 public class MqttController {
-    private org.slf4j.Logger LOGGER = LoggerFactory.getLogger(MqttController.class);
+    private final org.slf4j.Logger logger = LoggerFactory.getLogger(MqttController.class);
 
 
     @PostMapping(value = "/pub_data")
@@ -27,7 +27,7 @@ public class MqttController {
             }
         }
         String topic = MqttConfig.TOPIC_SERVER;
-        LOGGER.info(String.format("sendData,topic:%s,message:%s", topic, content));
+        logger.info(String.format("sendData,topic:%s,message:%s", topic, content));
         MqttSendCmdsUtil mMqttSendCmdsUtil = new MqttSendCmdsUtil();
         JSONObject errJson = mMqttSendCmdsUtil.MqttSendCmds(topic, content);
         return errJson.toJSONString();
@@ -60,11 +60,11 @@ public class MqttController {
         msg.put("type", type);
 
         String topic = MqttConfig.TOPIC_SERVER + "/" + imei;
-        LOGGER.info(String.format("sendData,topic:%s,message:%s", topic, msg));
+        logger.info(String.format("sendData,topic:%s,message:%s", topic, msg));
 
         MqttSendCmdsUtil mMqttSendCmdsUtil = new MqttSendCmdsUtil();
         JSONObject errJson = mMqttSendCmdsUtil.MqttSendCmds(topic, msg);
-        LOGGER.info("mqtt下行  result=" + errJson);
+        logger.info("mqtt下行  result=" + errJson);
 
         return errJson;
     }

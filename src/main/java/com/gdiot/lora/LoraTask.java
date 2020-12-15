@@ -1,16 +1,11 @@
 package com.gdiot.lora;
 
+import lombok.extern.slf4j.Slf4j;
+import org.java_websocket.drafts.Draft_17;
+
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
-
-import org.java_websocket.drafts.Draft_17;
-
-import com.gdiot.service.AsyncService;
-import com.gdiot.task.DataSenderTask;
-import com.gdiot.util.SpringContextUtils;
-
-import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author ZhouHR
@@ -18,9 +13,9 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class LoraTask implements Runnable {
     public WebSocketUtil mWebSocketUtil;
-    private String url;
-    private String msgtype;
-    private ArrayList<String> downDataList = new ArrayList<String>();
+    private final String url;
+    private final String msgtype;
+    private final ArrayList<String> downDataList = new ArrayList<>();
 
     public LoraTask(String meter_type, String urlstr) {
         this.msgtype = meter_type;

@@ -16,7 +16,7 @@ import com.gdiot.SpMeterDataApplication;
  */
 public class WebSocketUtil extends WebSocketClient {
 
-    private Logger log = LoggerFactory.getLogger(WebSocketUtil.class);
+    private final Logger log = LoggerFactory.getLogger(WebSocketUtil.class);
     private String msgtype;
 
 //	private InitUtil initUtil= new InitUtil();

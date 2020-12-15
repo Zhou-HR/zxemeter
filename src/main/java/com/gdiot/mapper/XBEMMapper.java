@@ -15,12 +15,30 @@ import java.util.List;
 @Mapper
 @Component
 public interface XBEMMapper {
-
+    /**
+     * @return
+     */
     List<EMMeterPo> selectAllEmeter();
 
+    /**
+     * @param dev_id
+     * @param beginTime
+     * @param endTime
+     * @return
+     */
     List<XBEMDataPo> selcetStartValue(@Param("e_num") String dev_id, @Param("beginTime") Long beginTime, @Param("endTime") Long endTime);
 
+    /**
+     * @param dev_id
+     * @param beginTime
+     * @param endTime
+     * @return
+     */
     List<XBEMDataPo> selcetEndValue(@Param("e_num") String dev_id, @Param("beginTime") Long beginTime, @Param("endTime") Long endTime);
 
+    /**
+     * @param xEMDayReportPo
+     * @return
+     */
     int SaveOne(EMDayReportPo xEMDayReportPo);
 }

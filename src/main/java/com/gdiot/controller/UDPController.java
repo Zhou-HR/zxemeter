@@ -8,7 +8,10 @@ import com.gdiot.service.IWMDataService;
 import com.gdiot.util.WMUdpSendCmdsUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
 import java.util.List;
@@ -55,26 +58,22 @@ public class UDPController {
         }
         String content = WMUdpSendCmdsUtils.getCmdContent(wm_num, type, operate_type, value);
         String typeStr = "";
-        switch (type) {
-            case "wm_switch"://强制开关阀
-                if ("O".equals(operate_type)) {//执行，操作
-                    if ("on".equals(value)) {
-                        typeStr = "强制开阀";//强制开阀
-                    } else if ("off".equals(value)) {
-                        typeStr = "强制关阀";//强制关阀
-                    } else if ("back".equals(value)) {
-                        typeStr = "强制撤消";//强制撤消
-                    } else if ("free_on".equals(value)) {
-                        typeStr = "自由开阀";//自由开阀
-                    } else if ("free_off".equals(value)) {
-                        typeStr = "自由关阀";//自由关阀
-                    }
-                } else if ("R".equals(operate_type)) {
-                    typeStr = "读阀控状态";//读阀控状态
+        if ("wm_switch".equals(type)) {//强制开关阀
+            if ("O".equals(operate_type)) {//执行，操作
+                if ("on".equals(value)) {
+                    typeStr = "强制开阀";//强制开阀
+                } else if ("off".equals(value)) {
+                    typeStr = "强制关阀";//强制关阀
+                } else if ("back".equals(value)) {
+                    typeStr = "强制撤消";//强制撤消
+                } else if ("free_on".equals(value)) {
+                    typeStr = "自由开阀";//自由开阀
+                } else if ("free_off".equals(value)) {
+                    typeStr = "自由关阀";//自由关阀
                 }
-                break;
-            default:
-                break;
+            } else if ("R".equals(operate_type)) {
+                typeStr = "读阀控状态";//读阀控状态
+            }
         }
         WMCmdDataPo mWMCmdDataPo = new WMCmdDataPo();
         mWMCmdDataPo.setWmNum(wm_num);
@@ -83,7 +82,7 @@ public class UDPController {
         mWMCmdDataPo.setType(typeStr);
         mIWMDataService.insertCmdData(mWMCmdDataPo);
 
-        Map<String, Object> map = new HashMap<String, Object>();
+        Map<String, Object> map = new HashMap<>();
         map.put("errno", 0);
         map.put("result", "已经放在待发送列表中，等待下一次上报后立即下发！");
         return map;
@@ -99,14 +98,14 @@ public class UDPController {
                 wm_num = params.get("wm_num");
             }
             if (params.containsKey("pageNo")) {
-                pageNo = Integer.valueOf(params.get("pageNo"));
+                pageNo = Integer.parseInt(params.get("pageNo"));
             }
             if (params.containsKey("pageSize")) {
-                pageSize = Integer.valueOf(params.get("pageSize"));
+                pageSize = Integer.parseInt(params.get("pageSize"));
             }
         }
         List<WMDataPo> list = mIWMDataService.selectbyDevId(wm_num, pageNo, pageSize);
-        Map<String, Object> map = new HashMap<String, Object>();
+        Map<String, Object> map = new HashMap<>();
         map.put("count", pageSize);
         map.put("list", list);
         return map;
@@ -122,14 +121,14 @@ public class UDPController {
                 wm_num = params.get("wm_num");
             }
             if (params.containsKey("pageNo")) {
-                pageNo = Integer.valueOf(params.get("pageNo"));
+                pageNo = Integer.parseInt(params.get("pageNo"));
             }
             if (params.containsKey("pageSize")) {
-                pageSize = Integer.valueOf(params.get("pageSize"));
+                pageSize = Integer.parseInt(params.get("pageSize"));
             }
         }
         List<WMReadDataPo> list = mIWMDataService.selectReadData(null, null);
-        Map<String, Object> map = new HashMap<String, Object>();
+        Map<String, Object> map = new HashMap<>();
         map.put("count", pageSize);
         map.put("list", list);
         return map;

@@ -26,7 +26,7 @@ public class KTDateReceiver {
     @Autowired
     private AsyncService asyncService;
 
-    private static Logger logger = LoggerFactory.getLogger(YDAKRDateReceiver.class);
+    private static final Logger logger = LoggerFactory.getLogger(YDAKRDateReceiver.class);
 
     @PostMapping(value = "/receiveData")
     public void receive(@RequestBody String body) throws NoSuchPaddingException, InvalidKeyException, NoSuchAlgorithmException, IllegalBlockSizeException, BadPaddingException, InvalidAlgorithmParameterException {

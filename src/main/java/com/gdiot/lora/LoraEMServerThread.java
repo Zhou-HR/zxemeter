@@ -17,6 +17,7 @@ public class LoraEMServerThread extends Thread {
 
     }
 
+    @Override
     public void run() {
         // TODO Auto-generated method stub
         log.info("LoraEMServerThread run--------");

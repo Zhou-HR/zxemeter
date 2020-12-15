@@ -43,12 +43,12 @@ public class TestAction {
     public void test() {
         log.info("test===========@@@@@@@@@@@@@");
         log.info("测试页面");
-        System.out.printf("测试页面");
+        System.out.print("测试页面");
     }
 
     @PostMapping(value = "/getXBEMDataList")
     public Map<String, Object> get_em_data_list(@RequestBody Map<String, String> params) {
-        Map<String, Object> result = new HashMap<String, Object>();
+        Map<String, Object> result = new HashMap<>();
         String dev_id = null;
         String eNum = null;
         Long beginTime = null;
@@ -74,10 +74,10 @@ public class TestAction {
                     endTime = Long.valueOf(params.get("endTime"));
                 }
                 if (params.containsKey("pageNo")) {
-                    pageNo = Integer.valueOf(params.get("pageNo"));
+                    pageNo = Integer.parseInt(params.get("pageNo"));
                 }
                 if (params.containsKey("pageSize")) {
-                    pageSize = Integer.valueOf(params.get("pageSize"));
+                    pageSize = Integer.parseInt(params.get("pageSize"));
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -94,7 +94,7 @@ public class TestAction {
 
     @PostMapping(value = "/getAKREMDataList")
     public Map<String, Object> get_akr_em_data_list(@RequestBody Map<String, String> params) {
-        Map<String, Object> result = new HashMap<String, Object>();
+        Map<String, Object> result = new HashMap<>();
         String dev_id = null;
         String eNum = null;
         Long beginTime = null;
@@ -120,10 +120,10 @@ public class TestAction {
                     endTime = Long.valueOf(params.get("endTime"));
                 }
                 if (params.containsKey("pageNo")) {
-                    pageNo = Integer.valueOf(params.get("pageNo"));
+                    pageNo = Integer.parseInt(params.get("pageNo"));
                 }
                 if (params.containsKey("pageSize")) {
-                    pageSize = Integer.valueOf(params.get("pageSize"));
+                    pageSize = Integer.parseInt(params.get("pageSize"));
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -148,14 +148,14 @@ public class TestAction {
                 wm_num = params.get("wm_num");
             }
             if (params.containsKey("pageNo")) {
-                pageNo = Integer.valueOf(params.get("pageNo"));
+                pageNo = Integer.parseInt(params.get("pageNo"));
             }
             if (params.containsKey("pageSize")) {
-                pageSize = Integer.valueOf(params.get("pageSize"));
+                pageSize = Integer.parseInt(params.get("pageSize"));
             }
         }
         List<WMDataPo> list = mIWMDataService.selectbyDevId(wm_num, pageNo, pageSize);
-        Map<String, Object> map = new HashMap<String, Object>();
+        Map<String, Object> map = new HashMap<>();
         map.put("count", pageSize);
         map.put("list", list);
         return map;
@@ -163,7 +163,7 @@ public class TestAction {
 
     @PostMapping(value = "/getSmokeDataList")
     public Map<String, Object> get_smoke_data_list(@RequestBody Map<String, String> params) {
-        Map<String, Object> result = new HashMap<String, Object>();
+        Map<String, Object> result = new HashMap<>();
         String dev_id = null;
         int pageNo = 1;
         int pageSize = 10;
@@ -173,10 +173,10 @@ public class TestAction {
             }
             try {
                 if (params.containsKey("pageNo")) {
-                    pageNo = Integer.valueOf(params.get("pageNo"));
+                    pageNo = Integer.parseInt(params.get("pageNo"));
                 }
                 if (params.containsKey("pageSize")) {
-                    pageSize = Integer.valueOf(params.get("pageSize"));
+                    pageSize = Integer.parseInt(params.get("pageSize"));
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -193,7 +193,7 @@ public class TestAction {
 
     @PostMapping(value = "/getXBEventDataList")
     public Map<String, Object> get_xb_event_data_list(@RequestBody Map<String, String> params) {
-        Map<String, Object> result = new HashMap<String, Object>();
+        Map<String, Object> result = new HashMap<>();
         String dev_id = null;
         String eNum = null;
         Long beginTime = null;
@@ -219,10 +219,10 @@ public class TestAction {
                     endTime = Long.valueOf(params.get("endTime"));
                 }
                 if (params.containsKey("pageNo")) {
-                    pageNo = Integer.valueOf(params.get("pageNo"));
+                    pageNo = Integer.parseInt(params.get("pageNo"));
                 }
                 if (params.containsKey("pageSize")) {
-                    pageSize = Integer.valueOf(params.get("pageSize"));
+                    pageSize = Integer.parseInt(params.get("pageSize"));
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -239,7 +239,7 @@ public class TestAction {
 
     @PostMapping(value = "/getNBStatusList")
     public Map<String, Object> get_nb_status_list(@RequestBody Map<String, String> params) {
-        Map<String, Object> result = new HashMap<String, Object>();
+        Map<String, Object> result = new HashMap<>();
         String dev_id = null;
         String status = null;
         int pageNo = 1;
@@ -253,10 +253,10 @@ public class TestAction {
             }
             try {
                 if (params.containsKey("pageNo")) {
-                    pageNo = Integer.valueOf(params.get("pageNo"));
+                    pageNo = Integer.parseInt(params.get("pageNo"));
                 }
                 if (params.containsKey("pageSize")) {
-                    pageSize = Integer.valueOf(params.get("pageSize"));
+                    pageSize = Integer.parseInt(params.get("pageSize"));
                 }
             } catch (Exception e) {
                 e.printStackTrace();

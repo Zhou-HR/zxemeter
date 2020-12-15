@@ -1,25 +1,15 @@
 package com.gdiot.tcp;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.PrintWriter;
+import com.gdiot.service.AsyncService;
+import com.gdiot.task.DataSenderTask;
+import com.gdiot.util.SpringContextUtils;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import com.gdiot.service.AsyncService;
-import com.gdiot.task.DataSenderTask;
-import com.gdiot.util.DateUtil;
-import com.gdiot.util.SpringContextUtils;
-
-import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author ZhouHR
@@ -32,14 +22,14 @@ public class TcpTask implements Runnable {
     private AsyncService asyncService;
 
     public TcpServerThread mTcpServer;
-    private ArrayList<String> downDataList = new ArrayList<String>();
+    private final ArrayList<String> downDataList = new ArrayList<>();
 
     /*监听端口*/
     int port;
     ServerSocket serverSocket = null;
     //调用服务器套接字对象中的方法accept()获取客户端套接字对象
     Socket socket = null;
-    private String msgtype;
+    private final String msgtype;
 
     public TcpTask(String meter_type, int p) {
         this.msgtype = meter_type;
@@ -83,7 +73,7 @@ public class TcpTask implements Runnable {
         int count = 0;
 
         // 处理socket请求
-        Socket socket = null;
+        Socket socket;
         while (true) {
 
             socket = serverSocket.accept();
@@ -116,7 +106,7 @@ public class TcpTask implements Runnable {
     }
 
     public class TcpServerThread extends Thread {
-        private Socket socket;
+        private final Socket socket;
 
         public TcpServerThread(Socket socket) {
             this.socket = socket;

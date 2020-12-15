@@ -28,6 +28,14 @@ public class Utilty {
         return sb.toString();
     }
 
+    /**
+     * 645协议解析
+     *
+     * @param array
+     * @param begin
+     * @param end
+     * @return
+     */
     public static String convertByteToString2(byte[] array, int begin, int end) {
         StringBuffer sb = new StringBuffer();
         for (int i = end; i > begin - 1; i--) {

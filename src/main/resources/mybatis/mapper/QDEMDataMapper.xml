@@ -30,8 +30,9 @@
   </sql>
     <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.gdiot.model.QDEMDataPo"
             useGeneratedKeys="true">
-        insert into em_data_qd (<include refid="Base_Column_Sql"></include>)
-        values (#{devId,jdbcType=VARCHAR}, #{origValue,jdbcType=VARCHAR},
+        insert into em_data_qd (
+        <include refid="Base_Column_Sql"></include>
+        )values (#{devId,jdbcType=VARCHAR}, #{origValue,jdbcType=VARCHAR},
         #{time,jdbcType=BIGINT},#{source,jdbcType=VARCHAR}, #{eNum,jdbcType=VARCHAR},#{eKwh,jdbcType=VARCHAR},
         #{eKwAll,jdbcType=VARCHAR}, #{eVoltageA,jdbcType=VARCHAR},#{eVoltageB,jdbcType=VARCHAR},
         #{eVoltageC,jdbcType=VARCHAR}, #{eCurrentA,jdbcType=VARCHAR},#{eCurrentB,jdbcType=VARCHAR},

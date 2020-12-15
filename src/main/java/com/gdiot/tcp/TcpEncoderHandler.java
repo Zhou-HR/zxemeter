@@ -1,5 +1,6 @@
 package com.gdiot.tcp;
 
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -18,7 +19,7 @@ public class TcpEncoderHandler extends MessageToMessageEncoder<Object> {
 
     @Override
     protected void encode(ChannelHandlerContext ctx, Object o, List<Object> list) throws Exception {
-        byte[] data = o.toString().getBytes("utf-8");
+        byte[] data = o.toString().getBytes(StandardCharsets.UTF_8);
         ByteBuf buf = ctx.alloc().buffer(data.length);
         buf.writeBytes(data);
         list.add(buf);

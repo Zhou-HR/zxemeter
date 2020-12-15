@@ -1,13 +1,9 @@
 package com.gdiot.udp;
 
-import java.net.DatagramSocket;
-
-import org.springframework.beans.factory.annotation.Autowired;
-
-import com.gdiot.service.AsyncService;
 import com.gdiot.util.UdpConfig;
-
 import lombok.extern.slf4j.Slf4j;
+
+import java.net.DatagramSocket;
 
 /**
  * @author ZhouHR
@@ -16,6 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 public class UdpServerThread extends Thread {
     private DatagramSocket datagramSocket;
 
+    @Override
     public void run() {
         try {
             datagramSocket = new DatagramSocket(UdpConfig.PORT);

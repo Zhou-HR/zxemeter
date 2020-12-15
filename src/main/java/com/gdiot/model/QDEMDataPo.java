@@ -6,7 +6,7 @@ import lombok.Data;
 
 /**
  * em_data_qd
- * @author ZhouHR
+ * @author 
  */
 @Data
 public class QDEMDataPo implements Serializable {
@@ -98,6 +98,16 @@ public class QDEMDataPo implements Serializable {
      * 温度
      */
     private String eTemperature;
+
+    /**
+     * 消息序号
+     */
+    private Integer eSeq;
+
+    /**
+     * 信号强度
+     */
+    private String eSignal;
 
     private static final long serialVersionUID = 1L;
 }

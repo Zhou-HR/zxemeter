@@ -1,25 +1,5 @@
 package com.gdiot;
 
-import java.time.Duration;
-
-import org.mybatis.spring.annotation.MapperScan;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.scheduling.annotation.EnableScheduling;
-
-import com.gdiot.lora.LoraEMServerThread;
-import com.gdiot.lora.LoraSmokeAlertServerThread;
-import com.gdiot.lora.LoraSmokeServerThread;
-import com.gdiot.lora.LoraWMServerThread;
-import com.gdiot.mqtt.MqttServerThread;
-import com.gdiot.mqtt.SmokeMqttServerThread;
 import com.gdiot.service.AsyncService;
 import com.gdiot.task.DataSenderTask;
 import com.gdiot.tcp.TcpDecoderHandler;
@@ -28,16 +8,23 @@ import com.gdiot.tcp.TcpHandler;
 import com.gdiot.udp.UdpDecoderHandler;
 import com.gdiot.udp.UdpEncoderHandler;
 import com.gdiot.udp.UdpHandler;
-import com.gdiot.udp.UdpServerThread;
 import com.gdiot.util.SpringContextUtils;
 import com.gdiot.util.TcpConfig;
 import com.gdiot.util.UdpConfig;
-
+import lombok.extern.slf4j.Slf4j;
+import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.Bean;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import reactor.core.publisher.Flux;
 import reactor.netty.tcp.TcpServer;
 import reactor.netty.udp.UdpServer;
 
-import lombok.extern.slf4j.Slf4j;
+import java.time.Duration;
 
 /**
  * @author ZhouHR
@@ -141,7 +128,7 @@ public class SpMeterDataApplication {
     /**
      * 创建UDP Server
      *
-     * @param udpDecoderHanlder： 解析UDP Client上报数据handler
+     * @param ： 解析UDP Client上报数据handler
      */
     private void createUdpServer() {
         UdpServer.create()
@@ -163,7 +150,7 @@ public class SpMeterDataApplication {
     /**
      * 创建TCP Server
      *
-     * @param tcpDecoderHanlder： 解析TCP Client上报数据的handler
+     * @param ： 解析TCP Client上报数据的handler
      */
     private void createTcpServer() {
         log.info("application: createTcpServer");

@@ -35,6 +35,7 @@ public class UdpReceiveTask implements Runnable {
     /**
      * 监听数据，接收数据
      */
+    @Override
     public void run() {
         try {
             while (true) {
@@ -71,7 +72,7 @@ public class UdpReceiveTask implements Runnable {
 
         // 发送方的IP地址:/223.104.255.74
         // 发送方的端口号:40596
-        Map<String, Object> map = new HashMap<String, Object>();
+        Map<String, Object> map = new HashMap<>();
         map.put("IP", ip.toString());
         map.put("port", port);
         map.put("data", dataStr);

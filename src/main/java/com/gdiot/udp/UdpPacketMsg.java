@@ -2,8 +2,6 @@ package com.gdiot.udp;
 
 import java.net.InetSocketAddress;
 
-import io.netty.channel.ChannelHandlerContext;
-
 /**
  * @author ZhouHR
  */

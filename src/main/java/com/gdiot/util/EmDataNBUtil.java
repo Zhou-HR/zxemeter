@@ -13,8 +13,8 @@ import java.util.Map;
  **/
 
 public class EmDataNBUtil {
-    private final static String hex = "hex";
-    private final static String binary = "binary";
+    private final static String HEX = "hex";
+    private final static String BINARY = "binary";
 
     public static Map<String, String> getDataValue(String orig_data) {
         Map map = new HashMap();
@@ -23,48 +23,48 @@ public class EmDataNBUtil {
         // 截取数据标识
         String dataIdent = newString.substring(0, 8);
         if (dataIdent != null) {
-            String hexDataIdent = getHexBinary(dataIdent, hex);
+            String hexDataIdent = getHexBinary(dataIdent, HEX);
             map.put("dataIdent", hexDataIdent);
         }
         // 截取组合有功总电
         String combinationPower = newString.substring(8, 16);
         if (combinationPower != null) {
-            String hexCombinationPower = getHexBinary(combinationPower, hex);
+            String hexCombinationPower = getHexBinary(combinationPower, HEX);
             BigDecimal comPowerBigDecimal = new BigDecimal(new DecimalFormat("#0.00").format(Double.valueOf(hexCombinationPower) / 100));
             map.put("combinationPower", comPowerBigDecimal.toString());
         }
         // 截取正向有功总电
         String forwardPower = newString.substring(16, 24);
         if (forwardPower != null) {
-            String hexForwardPower = getHexBinary(forwardPower, hex);
+            String hexForwardPower = getHexBinary(forwardPower, HEX);
             BigDecimal forwardPowerBigDecimal = new BigDecimal(new DecimalFormat("#0.00").format(Double.valueOf(hexForwardPower) / 100));
             map.put("forwardPower", forwardPowerBigDecimal.toString());
         }
         // 截取反向有功总电
         String reversePower = newString.substring(24, 32);
         if (reversePower != null) {
-            String hexReversePower = getHexBinary(reversePower, hex);
+            String hexReversePower = getHexBinary(reversePower, HEX);
             BigDecimal freversePowerBigDecimal = new BigDecimal(new DecimalFormat("#0.00").format(Double.valueOf(hexReversePower) / 100));
             map.put("reversePower", freversePowerBigDecimal.toString());
         }
         // 截取电压
         String voltage = newString.substring(32, 36);
         if (voltage != null) {
-            String hexVoltage = getHexBinary(voltage, hex);
+            String hexVoltage = getHexBinary(voltage, HEX);
             BigDecimal mBigDecimal = new BigDecimal(new DecimalFormat("#0.00").format(Double.valueOf(hexVoltage) / 10));
             map.put("voltage", mBigDecimal.toString());
         }
         // 截取电流
         String current = newString.substring(36, 42);
         if (current != null) {
-            String hexCurrent = getHexBinary(current, hex);
+            String hexCurrent = getHexBinary(current, HEX);
             BigDecimal currentBigDecimal = new BigDecimal(new DecimalFormat("#0.00").format(Double.valueOf(hexCurrent) / 1000));
             map.put("current", currentBigDecimal.toString());
         }
         // 截取有功功率
         String activePower = newString.substring(42, 48);
         if (activePower != null) {
-            String hexActivePower = getHexBinary(activePower, hex);
+            String hexActivePower = getHexBinary(activePower, HEX);
             BigDecimal activePowerBigDecimal = new BigDecimal(new DecimalFormat("#0.00").format(Double.valueOf(hexActivePower) / 100));
             map.put("activePower", activePowerBigDecimal.toString());
         }
@@ -73,7 +73,7 @@ public class EmDataNBUtil {
         // 截取功率因数
         String powerFactor = newString.substring(52, 56);
         if (powerFactor != null) {
-            String hexaPowerFactor = getHexBinary(powerFactor, hex);
+            String hexaPowerFactor = getHexBinary(powerFactor, HEX);
             BigDecimal activePowerBigDecimal = new BigDecimal(new DecimalFormat("#0.00").format(Double.valueOf(hexaPowerFactor) / 100));
             map.put("powerFactor", activePowerBigDecimal.toString());
         }
@@ -85,7 +85,7 @@ public class EmDataNBUtil {
         String status = newString.substring(56, 58);
         if (status != null) {
             // 二进制字符串
-            String binaryStatus = getHexBinary(status, binary);
+            String binaryStatus = getHexBinary(status, BINARY);
             map.put("status", status);
             // 继电器状态
             String bit4 = binaryStatus.substring(3, 4);
@@ -96,11 +96,11 @@ public class EmDataNBUtil {
             // 预跳闸报警状态
             String bit7 = binaryStatus.substring(0, 1);
             // 断电
-            if (bit4.equals("1") && bit6.equals("1")) {
+            if ("1".equals(bit4) && "1".equals(bit6)) {
                 map.put("switch", "1");
             }
             // 通电
-            if (bit4.equals("0") && bit6.equals("0")) {
+            if ("0".equals(bit4) && "0".equals(bit6)) {
                 map.put("switch", "0");
             }
         }

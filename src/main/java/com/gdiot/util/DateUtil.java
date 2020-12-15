@@ -18,7 +18,7 @@ public class DateUtil {
      * @return
      */
     public static String timeStamp2Date(String seconds, String format) {
-        if (seconds == null || seconds.isEmpty() || seconds.equals("null")) {
+        if (seconds == null || seconds.isEmpty() || "null".equals(seconds)) {
             return "";
         }
         if (format == null || format.isEmpty()) {

@@ -16,7 +16,7 @@ import java.util.HashMap;
 public class UdpHandler extends ChannelInboundHandlerAdapter {
     private static final Logger log = LoggerFactory.getLogger(UdpHandler.class);
 
-    private HashMap<String, UdpPacketMsg> clientMap = new HashMap<String, UdpPacketMsg>();
+    private final HashMap<String, UdpPacketMsg> clientMap = new HashMap<>();
     private ChannelHandlerContext conetxt;
 
     @Override

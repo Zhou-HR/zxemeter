@@ -6,10 +6,10 @@ package com.gdiot.util;
 public class JvmMemoryUtil {
 
     public static void memory() {
-        long vmFree = 0;
-        long vmUse = 0;
-        long vmTotal = 0;
-        long vmMax = 0;
+        long vmFree;
+        long vmUse;
+        long vmTotal;
+        long vmMax;
         int byteToMb = 1024 * 1024;
         Runtime rt = Runtime.getRuntime();
         vmTotal = rt.totalMemory() / byteToMb;

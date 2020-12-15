@@ -15,10 +15,12 @@ public class PropertiesUtil {
 
     private static final PropertiesUtil PROPERTIES_UTIL = new PropertiesUtil();
 
-    private static final Properties properties = null;
+    private static final Properties PROPERTIES = null;
 
     private static synchronized Properties getProperties() {
-        if (properties != null) return properties;
+        if (PROPERTIES != null) {
+            return PROPERTIES;
+        }
         PropertiesUtil util = PropertiesUtil.getInstance();
         Properties properties = util.loadProperties("application.properties");
         return properties;

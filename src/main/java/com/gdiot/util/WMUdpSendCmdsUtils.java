@@ -1,23 +1,8 @@
 package com.gdiot.util;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.http.util.TextUtils;
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.gdiot.service.IWMDataService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import com.gdiot.model.WMDataPo;
-import com.gdiot.service.IWMDataService;
-import com.gdiot.util.CRC16;
-import com.gdiot.util.LoraConfig;
-import com.gdiot.util.SpringContextUtils;
-import com.gdiot.util.Utilty;
 
 /**
  * @author ZhouHR

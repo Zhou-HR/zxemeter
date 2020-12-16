@@ -2415,15 +2415,15 @@ public class DataSenderTask implements Runnable {
             String ds_id = (data.getString("ds_id").equals("")) ? "" : data.getString("ds_id");
             String imei = data.getString("imei");
             long time = data.getLong("at");
-            log.info("task: data receive: ori_value:" + ori_value);
+            log.info("data receive: ori_value:" + ori_value);
             String regex = "^[A-Fa-f0-9]+$";//是16进制数
             if (ori_value.matches(regex)) {
                 int len = ori_value.length();
                 String orig_code = ori_value.substring(0, len).trim().replaceAll(" ", "");
                 String e_seq = orig_code.substring(8, 12);
-
+                log.info("data receive: e_seq:" + ori_value);
                 String e_signal = String.valueOf((Long.valueOf(orig_code.substring(14, 22), 16).intValue() + 113) / 2);
-
+                log.info("data receive: e_signal:" + ori_value);
                 orig_code = ori_value.substring(148, len - 8).trim().replaceAll(" ", "");
 
                 //orig_code:277000080720 01 5955FF02 2B
@@ -2432,7 +2432,7 @@ public class DataSenderTask implements Runnable {
                 len = binaryData.length;
                 String e_num = Utilty.convertByteToString(binaryData, 1, 6);
                 //e_num:200708007027
-                log.info("task: 80 analysis: e_num:" + e_num);
+                log.info("data receive: e_num:" + e_num);
 
                 String regex_eNum = "^\\d{12}$";//e_num 12
                 if (!e_num.matches(regex_eNum)) {//验证表号是否合法
@@ -2441,7 +2441,7 @@ public class DataSenderTask implements Runnable {
                 }
 
                 byte dataLen = binaryData[11];
-                log.info("task: 80 analysis: data Length=" + dataLen);
+                log.info("data receive: data Length=" + dataLen);
                 //数据域
                 String valueD = orig_code.substring(24, 24 + dataLen * 2);
                 //valueD:33333333333333355532323232333333323232323232333333333333345934444745536335333333333333
@@ -2476,7 +2476,6 @@ public class DataSenderTask implements Runnable {
         }
         if (map != null && map.size() > 0 && valueD != null) {
             Map<String, String> d_result = EMDataAnalysisUtil.getQDDataValue(valueD);
-
             if (d_result.size() > 0) {
                 QDEMDataPo dataPo = new QDEMDataPo();
                 dataPo.setDevId(map.get("dev_id"));
@@ -2497,8 +2496,9 @@ public class DataSenderTask implements Runnable {
                 dataPo.setETime(d_result.get("e_time") != null ? d_result.get("e_time") : "");
                 dataPo.setETemperature(d_result.get("e_temperature") != null ? d_result.get("e_temperature") : "");
 
-                System.out.println(dataPo.toString());
-                //mIQDEMDataService.addOne(dataPo);
+                //System.out.println(dataPo.toString());
+
+                mIQDEMDataService.addOne(dataPo);
 //		        LOGGER.info("task: lora fefefefe 80 insert into SQL end!");
             }
         }

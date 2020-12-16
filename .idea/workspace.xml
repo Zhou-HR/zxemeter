@@ -8,29 +8,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="42f621c1-6d1a-48ab-86ff-6c08db9a1b26" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2020_12_11_15_32__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2020_12_11_15_32__Default_Changelist_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/controller/KTDateReceiver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/controller/KTDateReceiver.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/controller/LoraDataAction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/controller/LoraDataAction.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/controller/MqttController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/controller/MqttController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/controller/TestAction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/controller/TestAction.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/controller/UDPController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/controller/UDPController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/controller/YDAKRDateReceiver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/controller/YDAKRDateReceiver.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/controller/YDZXXBDateReceiver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/controller/YDZXXBDateReceiver.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/lora/LoraClientFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/lora/LoraClientFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/lora/LoraEMServerThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/lora/LoraEMServerThread.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/lora/LoraSendCmds.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/lora/LoraSendCmds.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/lora/LoraSendCmdsUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/lora/LoraSendCmdsUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/lora/LoraTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/lora/LoraTask.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/lora/WebSocketUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/lora/WebSocketUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/mapper/AKREMDataMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/mapper/AKREMDataMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/mapper/KTNBEMDataMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/mapper/KTNBEMDataMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/mapper/NBEMEventMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/mapper/NBEMEventMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/mapper/NBEMReadMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/mapper/NBEMReadMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/mapper/NBYDEMStatusMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/mapper/NBYDEMStatusMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/mapper/SmokeDataMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/mapper/SmokeDataMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/mapper/WMDataMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/mapper/WMDataMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/mapper/XBEMDataMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/mapper/XBEMDataMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/mapper/XBEMMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/mapper/XBEMMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/task/DataSenderTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/task/DataSenderTask.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,7 +28,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="master" />
+        <entry key="$PROJECT_DIR$" value="zx_interface_mysql" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -128,6 +108,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="SpEMInterfaceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="zx_interface" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.gdiot.SpEMInterfaceApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="SpMeterDataApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
       <module name="zx_data" />
       <extension name="coverage">
@@ -170,6 +157,7 @@
       <workItem from="1607907495757" duration="11447000" />
       <workItem from="1607920604215" duration="20717000" />
       <workItem from="1607945455608" duration="1321000" />
+      <workItem from="1608089428195" duration="1320000" />
     </task>
     <task id="LOCAL-00001" summary="ZhouHR">
       <created>1607498076478</created>
@@ -248,7 +236,14 @@
       <option name="project" value="LOCAL" />
       <updated>1608014453513</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="ZhouHR">
+      <created>1608088369960</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1608088369960</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -275,10 +270,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="736" y="387" width="447" height="273" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1920.1040@0.0.1920.1040" timestamp="1607928218770" />
-    <state x="474" y="94" key="CommitChangelistDialog2" timestamp="1608014452008">
+    <state x="474" y="94" key="CommitChangelistDialog2" timestamp="1608088368377">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="474" y="94" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1608014452008" />
+    <state x="474" y="94" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1608088368377" />
     <state x="740" y="261" key="FileChooserDialogImpl" timestamp="1607915894809">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -335,10 +330,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="220" height="477" key="HiddenNamespacesPopup/0.0.1920.1040@0.0.1920.1040" timestamp="1608012899654" />
-    <state x="540" y="254" key="IDE.errors.dialog" timestamp="1607933934355">
+    <state x="540" y="254" key="IDE.errors.dialog" timestamp="1608088349276">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="540" y="254" key="IDE.errors.dialog/0.0.1920.1040@0.0.1920.1040" timestamp="1607933934355" />
+    <state x="540" y="254" key="IDE.errors.dialog/0.0.1920.1040@0.0.1920.1040" timestamp="1608088349276" />
     <state x="490" y="175" key="Maven.ArtifactSearchDialog" timestamp="1607479849124">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -347,14 +342,14 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="788" y="221" key="RollbackChangesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1607926489783" />
-    <state x="461" y="164" key="SettingsEditor" timestamp="1607916032001">
+    <state x="461" y="164" key="SettingsEditor" timestamp="1608088173303">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="461" y="164" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1607916032001" />
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1608014470998">
+    <state x="461" y="164" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1608088173303" />
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1608088371613">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1608014470998" />
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1608088371613" />
     <state x="720" y="232" key="git4idea.branch.GitSmartOperationDialog" timestamp="1608012671155">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

@@ -1,104 +1,105 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.gdiot.mapper.NBEMReadMapper">
-	<resultMap type="com.gdiot.model.YDEMNBReadPo" id="BaseResultMap">
-		<id property="id" column="id" jdbcType="INTEGER"/>
-		<result property="dev_id" column="dev_id" jdbcType="VARCHAR"/>
-		<result property="imei" column="imei" jdbcType="VARCHAR"/>
-		<result property="orig_value" column="orig_value" jdbcType="VARCHAR"/>
-		<result property="time" column="time" jdbcType="BIGINT"/>
-		<result property="e_num" column="e_num" jdbcType="VARCHAR"/>
-		<result property="e_fac" column="e_fac" jdbcType="VARCHAR"/>
-		<result property="read_type" column="read_type" jdbcType="VARCHAR"/>
-		<result property="read_value" column="read_value" jdbcType="VARCHAR"/>
-		<result property="data_seq" column="data_seq" jdbcType="VARCHAR"/>
-		<result property="source" column="source" jdbcType="VARCHAR"/>
-	</resultMap>
-	
-	<sql id="Base_Column_Sql">
+    <resultMap type="com.gdiot.model.YDEMNBReadPo" id="BaseResultMap">
+        <id property="id" column="id" jdbcType="INTEGER"/>
+        <result property="dev_id" column="dev_id" jdbcType="VARCHAR"/>
+        <result property="imei" column="imei" jdbcType="VARCHAR"/>
+        <result property="orig_value" column="orig_value" jdbcType="VARCHAR"/>
+        <result property="time" column="time" jdbcType="BIGINT"/>
+        <result property="e_num" column="e_num" jdbcType="VARCHAR"/>
+        <result property="e_fac" column="e_fac" jdbcType="VARCHAR"/>
+        <result property="read_type" column="read_type" jdbcType="VARCHAR"/>
+        <result property="read_value" column="read_value" jdbcType="VARCHAR"/>
+        <result property="data_seq" column="data_seq" jdbcType="VARCHAR"/>
+        <result property="source" column="source" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_Sql">
 		id,dev_id,imei,orig_value,time,e_num,e_fac,read_type,read_value,data_seq,source
 	</sql>
-	
-	<insert id="insertOne" parameterType="com.gdiot.model.YDEMNBReadPo">
-		insert into em_read_xb (
-			<include refid="Base_Column_Sql"></include>
-		) values (default,#{dev_id},#{imei},#{orig_value},#{time},#{e_num},#{e_fac},#{read_type},#{read_value},#{data_seq},#{source})
-	</insert>
-	
-	<select id="selectList" resultMap="BaseResultMap">
-		select * 
-		from(select r.* ,ROWNUM  rn
-				from(
-				select * from em_read_xb
-				where 1 = 1		
-				<if test="dev_id != null">
-					and dev_id = #{dev_id}
-				</if>
-				<if test="e_num != null">
-					and e_num = #{e_num}
-				</if>
-				<if test="imei != null">
-					and imei = #{imei}
-				</if>
-				<if test="beginTime != null">
-					and time &gt; #{beginTime}
-				</if>
-				<if test="endTime != null">
-					and time &lt;= #{endTime}
-				</if>
-				<if test="source != null">
-					and source = #{source}
-				</if>		
-				order by time desc
-			) r
-			 where ROWNUM &lt;= #{offset} + #{limit}
-		) table_alias
-		where table_alias.rn &gt; #{offset}
-	</select>
-	
-	<select id="countByCondition" resultType="java.lang.Integer">
-		select count(*) from em_read_xb
-		where 1 = 1
-		<if test="dev_id != null">
-			and dev_id = #{dev_id}
-		</if>
-		<if test="e_num != null">
-			and e_num = #{e_num}
-		</if>
-		<if test="imei != null">
-			and imei = #{imei}
-		</if>
-		<if test="beginTime != null">
-			and time &gt; #{beginTime}
-		</if>
-		<if test="endTime != null">
-			and time &lt;= #{endTime}
-		</if>
-		<if test="source != null">
-			and source = #{source}
-		</if>
-	</select>
-	
-	<select id="selectListByseq" resultMap="BaseResultMap">
-		select * from em_read_xb
-				where 1 = 1	
-				<if test="imei != null">
-					and imei = #{imei}
-				</if>
-				<if test="data_seq != null">
-					and data_seq = #{data_seq}
-				</if>
-				<if test="type != null">
-					and read_type = #{type}
-				</if>		
-				order by id desc
-	</select>
-	<select id="selectAllList" resultMap="BaseResultMap">
-		select * from em_read_xb
-				where 1 = 1	
-				<if test="imei != null">
-					and imei = #{imei}
-				</if>		
-				order by id desc
-	</select>
+
+    <insert id="insertOne" parameterType="com.gdiot.model.YDEMNBReadPo">
+        insert into em_read_xb (
+        <include refid="Base_Column_Sql"></include>
+        ) values
+        (default,#{dev_id},#{imei},#{orig_value},#{time},#{e_num},#{e_fac},#{read_type},#{read_value},#{data_seq},#{source})
+    </insert>
+
+    <select id="selectList" resultMap="BaseResultMap">
+        select *
+        from(select r.* ,ROWNUM rn
+        from(
+        select * from em_read_xb
+        where 1 = 1
+        <if test="dev_id != null">
+            and dev_id = #{dev_id}
+        </if>
+        <if test="e_num != null">
+            and e_num = #{e_num}
+        </if>
+        <if test="imei != null">
+            and imei = #{imei}
+        </if>
+        <if test="beginTime != null">
+            and time &gt; #{beginTime}
+        </if>
+        <if test="endTime != null">
+            and time &lt;= #{endTime}
+        </if>
+        <if test="source != null">
+            and source = #{source}
+        </if>
+        order by time desc
+        ) r
+        where ROWNUM &lt;= #{offset} + #{limit}
+        ) table_alias
+        where table_alias.rn &gt; #{offset}
+    </select>
+
+    <select id="countByCondition" resultType="java.lang.Integer">
+        select count(*) from em_read_xb
+        where 1 = 1
+        <if test="dev_id != null">
+            and dev_id = #{dev_id}
+        </if>
+        <if test="e_num != null">
+            and e_num = #{e_num}
+        </if>
+        <if test="imei != null">
+            and imei = #{imei}
+        </if>
+        <if test="beginTime != null">
+            and time &gt; #{beginTime}
+        </if>
+        <if test="endTime != null">
+            and time &lt;= #{endTime}
+        </if>
+        <if test="source != null">
+            and source = #{source}
+        </if>
+    </select>
+
+    <select id="selectListByseq" resultMap="BaseResultMap">
+        select * from em_read_xb
+        where 1 = 1
+        <if test="imei != null">
+            and imei = #{imei}
+        </if>
+        <if test="data_seq != null">
+            and data_seq = #{data_seq}
+        </if>
+        <if test="type != null">
+            and read_type = #{type}
+        </if>
+        order by id desc
+    </select>
+    <select id="selectAllList" resultMap="BaseResultMap">
+        select * from em_read_xb
+        where 1 = 1
+        <if test="imei != null">
+            and imei = #{imei}
+        </if>
+        order by id desc
+    </select>
 </mapper>

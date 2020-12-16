@@ -1,41 +1,33 @@
 package com.gdiot.controller;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-
-import com.alibaba.fastjson.JSONObject;
-import com.gdiot.model.EMCmdsSEQPo;
 import com.gdiot.service.AsyncService;
 import com.gdiot.service.INBYDEMCmdsService;
 import com.gdiot.service.INBYDEMReadService;
 import com.gdiot.ssm.redis.RedisUtil;
 import com.gdiot.ssm.task.DataSenderTask;
-import com.gdiot.ssm.util.ResultObject;
-import com.gdiot.ssm.util.SpringContextUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author ZhouHR
  */
-@Controller
+@RestController
 @RequestMapping("/cmd")
 public class CMDAction {
     private static final Logger LOGGER = LoggerFactory.getLogger(CMDAction.class);
 
-    @Autowired()
+    @Autowired
     private AsyncService asyncService;
-    @Autowired()
+    @Autowired
     private INBYDEMReadService mINBYDEMReadService;
-    @Autowired()
+    @Autowired
     private INBYDEMCmdsService mINBYDEMCmdsService;
 
     @Autowired
@@ -43,7 +35,6 @@ public class CMDAction {
 
 
     @RequestMapping("/send_cmd")
-    @ResponseBody
     public Map<String, Object> send_cmd(@RequestBody Map<String, String> params) {
         LOGGER.info("send_cmd---------------------------");
         String module_type = null;
@@ -72,7 +63,7 @@ public class CMDAction {
                 operate_type = params.get("operate_type");
             }
         }
-        Map<String, Object> result = new HashMap<String, Object>();
+        Map<String, Object> result = new HashMap<>();
         String regex_dev = "^[A-Fa-f0-9]+$";//16 dev_eui
         String regex_imei = "^\\d{15}$";//imei 15
         String regex_yd_dev_id = "^\\d{9}$";//yd_dev_id 9
@@ -80,7 +71,7 @@ public class CMDAction {
                 || imei.matches(regex_imei)
                 || imei.matches(regex_yd_dev_id)) {
             String request_id = imei + "_" + System.currentTimeMillis();
-            Map<String, String> map = new HashMap<String, String>();
+            Map<String, String> map = new HashMap<>();
             map.put("module_type", module_type);
             map.put("imei", imei);
             map.put("eNum", eNum);

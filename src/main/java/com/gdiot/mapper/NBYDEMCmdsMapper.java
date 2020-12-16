@@ -13,10 +13,21 @@ import java.util.List;
 @Mapper
 @Component
 public interface NBYDEMCmdsMapper {
-
+    /**
+     * @param mNBYDEMCmdsPo
+     * @return
+     */
     int insertcmdseq(EMCmdsSEQPo mNBYDEMCmdsPo);
 
+    /**
+     * @param mNBYDEMCmdsPo
+     * @return
+     */
     int updatecmdseq(EMCmdsSEQPo mNBYDEMCmdsPo);
 
+    /**
+     * @param imei
+     * @return
+     */
     List<EMCmdsSEQPo> selectcmdseq(@Param("imei") String imei);
 }

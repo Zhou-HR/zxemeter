@@ -387,7 +387,9 @@ public class HttpClientUtil {
      * @return
      */
     private static String getCharset(String charset) {
-        if (StringUtils.isEmpty(charset)) return DEFAULT_CHARSET;
+        if (StringUtils.isEmpty(charset)) {
+            return DEFAULT_CHARSET;
+        }
         return charset;
     }
 

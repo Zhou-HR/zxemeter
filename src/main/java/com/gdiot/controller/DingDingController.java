@@ -1,19 +1,6 @@
 package com.gdiot.controller;
 
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.dingtalk.api.response.OapiMessageCorpconversationAsyncsendV2Response;
@@ -23,13 +10,21 @@ import com.dingtalk.api.response.OapiProcessinstanceGetResponse.OperationRecords
 import com.dingtalk.api.response.OapiProcessinstanceGetResponse.ProcessInstanceTopVo;
 import com.dingtalk.api.response.OapiProcessinstanceGetResponse.TaskTopVo;
 import com.dingtalk.api.response.OapiProcessinstanceListidsResponse;
-import com.taobao.api.ApiException;
 import com.gdiot.ssm.util.DingUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author ZhouHR
  */
-@Controller
+@RestController
 @RequestMapping("/dd")
 public class DingDingController {
     private static final Logger LOGGER = LoggerFactory.getLogger(DingDingController.class);
@@ -37,10 +32,10 @@ public class DingDingController {
     /**
      * 发送工作通知消息
      *
+     * @param params
      * @return
      */
     @RequestMapping("/sendNotifyByCode")
-    @ResponseBody
     public String sendMessage(@RequestBody Map<String, String> params) {
         String userID = null;
         String msg = null;
@@ -70,10 +65,10 @@ public class DingDingController {
     /**
      * 发送工作通知消息
      *
+     * @param params
      * @return
      */
     @RequestMapping("/sendNotify")
-    @ResponseBody
     public String sendMessageToUser(@RequestBody Map<String, String> params) {
         String userID = null;
         String msg = null;
@@ -103,10 +98,10 @@ public class DingDingController {
     /**
      * 查询钉钉用户个数
      *
+     * @param params
      * @return
      */
     @RequestMapping("/getUserCount")
-    @ResponseBody
     public String getUserCount(@RequestBody Map<String, String> params) {
         Long userCount = DingUtils.getUserCount();
         LOGGER.info("usercount=" + userCount);
@@ -116,10 +111,10 @@ public class DingDingController {
     /**
      * 测试用接口：获取审批实例列表
      *
+     * @param params
      * @return
      */
     @RequestMapping("/getProcessListId")
-    @ResponseBody
     public Map<String, Object> getProcessListId(@RequestBody Map<String, String> params) {
         String userId = null;
         long startTime = 0;
@@ -160,10 +155,10 @@ public class DingDingController {
     /**
      * 测试用接口：获取审批实例
      *
+     * @param params
      * @return
      */
     @RequestMapping("/getPorcessInstance")
-    @ResponseBody
     public JSONArray getPorcessInstance(@RequestBody Map<String, String> params) {
         String processId = null;
         if (params != null) {

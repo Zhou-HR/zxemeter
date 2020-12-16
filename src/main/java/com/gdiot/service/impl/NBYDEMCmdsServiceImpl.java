@@ -36,8 +36,7 @@ public class NBYDEMCmdsServiceImpl implements INBYDEMCmdsService {
 
     @Override
     public List<EMCmdsSEQPo> selectcmdseq(String imei) {
-        List<EMCmdsSEQPo> list = mNBYDEMCmdsMapper.selectcmdseq(imei);
-        return list;
+        return mNBYDEMCmdsMapper.selectcmdseq(imei);
     }
 
 }

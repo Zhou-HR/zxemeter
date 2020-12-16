@@ -27,14 +27,13 @@ public class NBYDEMReadServiceImpl implements INBYDEMReadService {
     @Override
     public List<YDEMNBReadPo> listNBEMRead(String imei, String type, String data_seq) {
 //		Map<String, Object> result = new HashMap<String, Object>();
-        List<YDEMNBReadPo> list = mNBEMReadMapper.selectListByseq(imei, type, data_seq);
-//		result.put("list", list);
-        return list;
+        //		result.put("list", list);
+        return mNBEMReadMapper.selectListByseq(imei, type, data_seq);
     }
 
     @Override
     public Map<String, Object> listGetAllRead(String imei) {
-        Map<String, Object> result = new HashMap<String, Object>();
+        Map<String, Object> result = new HashMap<>();
         List<YDEMNBReadPo> list = mNBEMReadMapper.selectAllList(imei);
         result.put("list", list);
         return result;

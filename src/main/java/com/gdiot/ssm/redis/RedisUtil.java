@@ -24,7 +24,7 @@ import redis.clients.jedis.SortingParams;
  */
 @Component
 public class RedisUtil {
-    private Logger LOGGER = LoggerFactory.getLogger(RedisUtil.class);
+    private final Logger LOGGER = LoggerFactory.getLogger(RedisUtil.class);
     @Autowired
     private JedisPool jedisPool;
 

@@ -34,7 +34,7 @@ public class AKREMDataServiceImpl implements IAKREMDataService {
     public Map<String, Object> selectList(String dev_id, String eNum, Long beginTime, Long endTime, String source,
                                           int pageNo, int pageSize) {
         log.info("begin akr em data selectList");
-        Map<String, Object> result = new HashMap<String, Object>();
+        Map<String, Object> result = new HashMap<>();
         int count = mAKREMDataMapper.countByCondition(dev_id, eNum, beginTime, endTime, source);
         log.info("selectList count=" + count);
 
@@ -64,8 +64,7 @@ public class AKREMDataServiceImpl implements IAKREMDataService {
     @Override
     public List<AKREMDataPo> selectOne(String dev_id) {
         log.info("begin akr em data selectOne");
-        List<AKREMDataPo> list = mAKREMDataMapper.selectOne(dev_id);
-        return list;
+        return mAKREMDataMapper.selectOne(dev_id);
     }
 
     @Override
@@ -77,7 +76,6 @@ public class AKREMDataServiceImpl implements IAKREMDataService {
     @Override
     public List<AKREMReadPo> selectRead(String imei, String e_num, String type) {
         log.info("begin akr em read data selectOne");
-        List<AKREMReadPo> list = mAKREMDataMapper.selectRead(imei, e_num, type);
-        return list;
+        return mAKREMDataMapper.selectRead(imei, e_num, type);
     }
 }

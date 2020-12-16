@@ -29,7 +29,7 @@ public class DateUtil {
      * @return
      */
     public static String timeStamp2Date(String seconds, String format) {
-        if (seconds == null || seconds.isEmpty() || seconds.equals("null")) {
+        if (seconds == null || seconds.isEmpty() || "null".equals(seconds)) {
             return "";
         }
         if (format == null || format.isEmpty()) {
@@ -47,7 +47,7 @@ public class DateUtil {
      * @return
      */
     public static String milliSecond2Date(String millisecond, String format) {
-        if (millisecond == null || millisecond.isEmpty() || millisecond.equals("null")) {
+        if (millisecond == null || millisecond.isEmpty() || "null".equals(millisecond)) {
             return "";
         }
         if (format == null || format.isEmpty()) {

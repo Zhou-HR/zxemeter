@@ -63,11 +63,14 @@ public class BasicHttpMethod implements RequestInfo {
             Set<Entry<String, Object>> entrys = params.entrySet();
             int size = entrys.size();
             int index = 0;
+            StringBuilder urlBuilder = new StringBuilder(url);
             for (Entry<String, Object> entry : entrys) {
-                url += entry.getKey() + "=" + entry.getValue();
-                if (++index < size)
-                    url += "&";
+                urlBuilder.append(entry.getKey()).append("=").append(entry.getValue());
+                if (++index < size) {
+                    urlBuilder.append("&");
+                }
             }
+            url = urlBuilder.toString();
         }
         try {
             httpRequestBase.setURI(new URI(url));
@@ -108,8 +111,9 @@ public class BasicHttpMethod implements RequestInfo {
     public void setHeader(Map<String, Object> params) {
         if (params != null) {
             Set<Entry<String, Object>> entrys = params.entrySet();
-            for (Entry<String, Object> entry : entrys)
+            for (Entry<String, Object> entry : entrys) {
                 httpRequestBase.setHeader(entry.getKey(), (String) entry.getValue());
+            }
         }
 
     }

@@ -1,19 +1,16 @@
 package com.gdiot.ssm.cmds;
 
-import java.text.DecimalFormat;
-import java.util.HashMap;
-import java.util.Map;
-
 import com.alibaba.fastjson.JSONObject;
-import com.gdiot.service.INBYDEMCmdsService;
-import com.gdiot.service.IXBEMDataService;
 import com.gdiot.ssm.http.yd.BasicResponse;
 import com.gdiot.ssm.http.yd.CmdsResponse;
 import com.gdiot.ssm.util.CRC16;
 import com.gdiot.ssm.util.Utilty;
 import com.gdiot.ssm.util.YDConfig;
-
 import lombok.extern.slf4j.Slf4j;
+
+import java.text.DecimalFormat;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author ZhouHR
@@ -53,7 +50,7 @@ public class AKRSendCmdsUtils {
         String e_num = msgMap.get("e_num");
         String fac_id = msgMap.get("fac_id");
         String time = msgMap.get("time");
-        Map<String, Object> map = new HashMap<String, Object>();
+        Map<String, Object> map = new HashMap<>();
 
 //			logger.info("--------------getCmdContent start----------");
 //			logger.info("--------------getCmdContent start----------module_type="+module_type);

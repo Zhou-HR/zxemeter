@@ -1,44 +1,34 @@
 package com.gdiot.controller;
 
-import java.util.HashMap;
-import java.util.Map;
-
+import com.gdiot.service.IXBEMDataService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
-import com.alibaba.fastjson.JSONObject;
-import com.gdiot.service.IXBEMDataService;
-import com.gdiot.ssm.util.ResultObject;
-
-import lombok.extern.slf4j.Slf4j;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author ZhouHR
  */
 @Slf4j
-@Controller
+@RestController
 @RequestMapping("/test")
 public class TestAction {
 
-    @Autowired()
+    @Autowired
     @Qualifier("XBEMDataService")
     private IXBEMDataService mXBEMDataService;
 
-    @RequestMapping(value = "/test", method = RequestMethod.GET)
-    @ResponseBody
+    @GetMapping(value = "/test")
     public void test() {
         log.info("test===========@@@@@@@@@@@@@");
         log.info("测试页面");
         System.out.printf("测试页面");
     }
 
-    @RequestMapping(value = "/getXBEMDataList", method = RequestMethod.POST)
-    @ResponseBody
+    @PostMapping(value = "/getXBEMDataList")
     public Map<String, Object> get_em_data_list(@RequestBody Map<String, String> params) {
         Map<String, Object> result = new HashMap<String, Object>();
         String dev_id = null;

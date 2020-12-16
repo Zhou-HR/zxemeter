@@ -33,7 +33,7 @@ public class XBEMDataServiceImpl implements IXBEMDataService {
     public Map<String, Object> selectList(String dev_id, String eNum, Long beginTime, Long endTime, String source,
                                           int pageNo, int pageSize) {
         log.info("begin xb em data selectList");
-        Map<String, Object> result = new HashMap<String, Object>();
+        Map<String, Object> result = new HashMap<>();
         int count = mXBEMDataMapper.countByCondition(dev_id, eNum, beginTime, endTime, source);
         log.info("selectList count=" + count);
 
@@ -63,8 +63,7 @@ public class XBEMDataServiceImpl implements IXBEMDataService {
     @Override
     public List<XBEMDataPo> selectOne(String dev_id, long e_seq, String source_type) {
         log.info("begin xb em data selectOne");
-        List<XBEMDataPo> list = mXBEMDataMapper.selectOne(dev_id, e_seq, source_type);
-        return list;
+        return mXBEMDataMapper.selectOne(dev_id, e_seq, source_type);
     }
 
     @Override

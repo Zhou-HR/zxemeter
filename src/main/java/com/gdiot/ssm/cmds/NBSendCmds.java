@@ -32,13 +32,13 @@ public class NBSendCmds extends AbstractAPI {
         time = Long.parseLong(time_s);
         //head参数
         this.method = Method.POST;
-        Map<String, Object> headmap = new HashMap<String, Object>();
+        Map<String, Object> headmap = new HashMap<>();
         httpMethod = new HttpPostMethod(method);
         headmap.put("api-key", api_key);
         httpMethod.setHeader(headmap);
 
         // body参数
-        Map<String, Object> bodymap = new HashMap<String, Object>();
+        Map<String, Object> bodymap = new HashMap<>();
         if (contents != "") {
             bodymap.put("args", contents);
             String json = null;

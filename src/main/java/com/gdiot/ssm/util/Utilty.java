@@ -86,7 +86,7 @@ public class Utilty {
     }
 
     public static byte[] hexStringToBytes(String hexString) {
-        if (hexString == null || hexString.equals("")) {
+        if (hexString == null || "".equals(hexString)) {
             return null;
         }
         hexString = hexString.toUpperCase();
@@ -123,7 +123,7 @@ public class Utilty {
      * @return
      */
     public static String hexStringToString(String s) {
-        if (s == null || s.equals("")) {
+        if (s == null || "".equals(s)) {
             return null;
         }
         s = s.replace(" ", "");

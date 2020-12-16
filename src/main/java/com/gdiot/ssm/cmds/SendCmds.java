@@ -1,22 +1,13 @@
 package com.gdiot.ssm.cmds;
 
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
-import java.security.cert.CertificateException;
-import java.security.cert.X509Certificate;
-import java.util.Base64;
-import java.util.HashMap;
-import java.util.Map;
-
-import javax.crypto.Mac;
-import javax.crypto.SecretKey;
-import javax.crypto.spec.SecretKeySpec;
-import javax.net.ssl.SSLContext;
-import javax.net.ssl.TrustManager;
-import javax.net.ssl.X509TrustManager;
-
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import com.gdiot.ssm.http.yd.BasicResponse;
+import com.gdiot.ssm.http.yd.CmdsResponse;
+import com.gdiot.ssm.util.DateUtil;
+import com.gdiot.ssm.util.HttpClientUtil;
+import com.gdiot.ssm.util.LoraConfig;
+import com.gdiot.ssm.util.YDConfig;
 import org.apache.http.Consts;
 import org.apache.http.HttpResponse;
 import org.apache.http.ParseException;
@@ -34,14 +25,21 @@ import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
-import com.gdiot.ssm.http.yd.BasicResponse;
-import com.gdiot.ssm.http.yd.CmdsResponse;
-import com.gdiot.ssm.util.DateUtil;
-import com.gdiot.ssm.util.HttpClientUtil;
-import com.gdiot.ssm.util.LoraConfig;
-import com.gdiot.ssm.util.YDConfig;
+import javax.crypto.Mac;
+import javax.crypto.SecretKey;
+import javax.crypto.spec.SecretKeySpec;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
+import java.security.cert.CertificateException;
+import java.security.cert.X509Certificate;
+import java.util.Base64;
+import java.util.HashMap;
+import java.util.Map;
 
 
 /**
@@ -108,11 +106,11 @@ public class SendCmds {
     }
 
     public JSONObject SendMsgGprs(String url, String imei, String msg, String time) {//url,imei,content,time
-        Map<String, String> headers = new HashMap<String, String>();
+        Map<String, String> headers = new HashMap<>();
         //最后在header中的格式(中间是英文空格)为Authorization:APPCODE 83359fd73fe94948385f570e3c139105
         headers.put("Content-Type", "application/json");
 
-        Map<String, String> bodys = new HashMap<String, String>();
+        Map<String, String> bodys = new HashMap<>();
         bodys.put("imei", imei);
         bodys.put("content", msg);
         bodys.put("time", time);
@@ -137,11 +135,11 @@ public class SendCmds {
         if (map == null || map.isEmpty()) {
             return responseBody;
         }
-        Map<String, String> headers = new HashMap<String, String>();
+        Map<String, String> headers = new HashMap<>();
         //最后在header中的格式(中间是英文空格)为Authorization:APPCODE 83359fd73fe94948385f570e3c139105
         headers.put("Content-Type", "application/json");
 
-        Map<String, String> bodys = new HashMap<String, String>();
+        Map<String, String> bodys = new HashMap<>();
         bodys.put("dev_id", map.get("imei"));
         bodys.put("operate_type", map.get("operate_type"));
         bodys.put("data_type", map.get("type"));

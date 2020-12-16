@@ -30,7 +30,7 @@ public class SendCmdsUtils {
     }
 
     public Map<String, String> getEMInfoByImei(String module_type, String imei) {
-        Map<String, String> map = new HashMap<String, String>();
+        Map<String, String> map = new HashMap<>();
         String regex_dev = "^[A-Fa-f0-9]+$";//16 dev_eui
         String regex_imei = "^\\d{15}$";//imei 15
         if (mIXBEMDataService == null) {
@@ -70,7 +70,7 @@ public class SendCmdsUtils {
 
 //		logger.info("--------------getCmdsInfo---imei=="+imei);
 
-        Map<String, Object> map = new HashMap<String, Object>();
+        Map<String, Object> map = new HashMap<>();
         String new_seq_hex = getNewCmdSeq(module_type, e_num, imei);
 //		logger.info("--------------getCmdsInfo---new_seq_hex=="+ new_seq_hex);
         if (new_seq_hex != "") {

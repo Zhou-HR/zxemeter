@@ -61,13 +61,13 @@ public class DeviceList {
          **/
         @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
         @JsonProperty("last_login")
-        private Date lastLogin;
+        private final Date lastLogin;
 
         /***
          * rtmp协议设备下通道数量
          **/
         @JsonProperty("channel_count")
-        private Integer channelCount;
+        private final Integer channelCount;
 
         @JsonProperty("other")
         private Map<String, Object> other;

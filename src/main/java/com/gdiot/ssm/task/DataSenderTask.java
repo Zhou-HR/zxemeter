@@ -56,6 +56,7 @@ public class DataSenderTask implements Runnable {
         this.type = type;
     }
 
+    @Override
     public void run() {
         LOGGER.info("task: DataSenderTask run-data :" + data);
         LOGGER.info("task: DataSenderTask run-type :" + type);

@@ -8,8 +8,41 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="42f621c1-6d1a-48ab-86ff-6c08db9a1b26" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/SpEMInterfaceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/SpEMInterfaceApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/controller/CMDAction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/controller/CMDAction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/controller/DingDingController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/controller/DingDingController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/controller/TestAction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/controller/TestAction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/mapper/AKREMDataMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/mapper/AKREMDataMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/mapper/NBEMEventMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/mapper/NBEMEventMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/mapper/NBEMReadMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/mapper/NBEMReadMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/mapper/NBYDEMCmdsMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/mapper/NBYDEMCmdsMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/mapper/XBEMDataMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/mapper/XBEMDataMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/service/AsyncService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/service/AsyncService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/service/IAKREMDataService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/service/IAKREMDataService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/service/INBYDEMCmdsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/service/INBYDEMCmdsService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/service/INBYDEMEventService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/service/INBYDEMEventService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/service/INBYDEMReadService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/service/INBYDEMReadService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/service/IXBEMDataService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/service/IXBEMDataService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/service/impl/AKREMDataServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/service/impl/AKREMDataServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/service/impl/NBYDEMCmdsServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/service/impl/NBYDEMCmdsServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/service/impl/NBYDEMEventServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/service/impl/NBYDEMEventServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/service/impl/NBYDEMReadServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/service/impl/NBYDEMReadServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/service/impl/XBEMDataServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/service/impl/XBEMDataServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/ssm/cmds/AKRSendCmdsUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/ssm/cmds/AKRSendCmdsUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/ssm/cmds/LoraSendCmds.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/ssm/cmds/LoraSendCmdsUtils.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/ssm/cmds/NBSendCmds.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/ssm/cmds/NBSendCmds.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/ssm/cmds/SendCmds.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/ssm/cmds/SendCmds.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/ssm/cmds/SendCmdsUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/ssm/cmds/SendCmdsUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/ssm/http/yd/BasicHttpMethod.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/ssm/http/yd/BasicHttpMethod.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/ssm/http/yd/DeviceList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/ssm/http/yd/DeviceList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/ssm/redis/RedisConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/ssm/redis/RedisConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/ssm/redis/RedisUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/ssm/redis/RedisUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/ssm/task/DataSenderTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/ssm/task/DataSenderTask.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/ssm/util/CRC16.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/ssm/util/CRC16.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gdiot/ssm/util/YDUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gdiot/ssm/util/YDUtil.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,7 +69,7 @@
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
-        <option name="mavenHome" value="D:/apache-maven-3.6.3" />
+        <option name="mavenHome" value="D:\apache-maven-3.6.3" />
         <option name="userSettingsFile" value="D:\settings\settings.xml" />
       </MavenGeneralSettings>
     </option>
@@ -96,15 +129,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -158,6 +189,7 @@
       <workItem from="1607907495757" duration="11447000" />
       <workItem from="1607920604215" duration="20717000" />
       <workItem from="1607945455608" duration="1321000" />
+      <workItem from="1608089428195" duration="1320000" />
     </task>
     <task id="LOCAL-00001" summary="ZhouHR">
       <created>1607498076478</created>
@@ -236,7 +268,14 @@
       <option name="project" value="LOCAL" />
       <updated>1608014453513</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="ZhouHR">
+      <created>1608088369960</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1608088369960</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -263,10 +302,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="736" y="387" width="447" height="273" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1920.1040@0.0.1920.1040" timestamp="1607928218770" />
-    <state x="474" y="94" key="CommitChangelistDialog2" timestamp="1608014452008">
+    <state x="474" y="94" key="CommitChangelistDialog2" timestamp="1608088368377">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="474" y="94" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1608014452008" />
+    <state x="474" y="94" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1608088368377" />
     <state x="740" y="261" key="FileChooserDialogImpl" timestamp="1607915894809">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -323,10 +362,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="220" height="477" key="HiddenNamespacesPopup/0.0.1920.1040@0.0.1920.1040" timestamp="1608012899654" />
-    <state x="540" y="254" key="IDE.errors.dialog" timestamp="1607933934355">
+    <state x="540" y="254" key="IDE.errors.dialog" timestamp="1608088349276">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="540" y="254" key="IDE.errors.dialog/0.0.1920.1040@0.0.1920.1040" timestamp="1607933934355" />
+    <state x="540" y="254" key="IDE.errors.dialog/0.0.1920.1040@0.0.1920.1040" timestamp="1608088349276" />
     <state x="490" y="175" key="Maven.ArtifactSearchDialog" timestamp="1607479849124">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -339,10 +378,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="461" y="164" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1608088173303" />
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1608014470998">
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1608088371613">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1608014470998" />
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1608088371613" />
     <state x="720" y="232" key="git4idea.branch.GitSmartOperationDialog" timestamp="1608012671155">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

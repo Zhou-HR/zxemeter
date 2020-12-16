@@ -1,10 +1,6 @@
 package com.gdiot.ssm.redis;
 
-import java.io.Serializable;
-import java.lang.reflect.Method;
-import java.util.Arrays;
-import java.util.stream.Collectors;
-
+import com.alibaba.fastjson.JSON;
 import org.apache.catalina.connector.RequestFacade;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,12 +9,13 @@ import org.springframework.cache.interceptor.KeyGenerator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
-
-import com.alibaba.fastjson.JSON;
-import com.gdiot.ssm.util.PropertiesUtil;
-
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
+
+import java.io.Serializable;
+import java.lang.reflect.Method;
+import java.util.Arrays;
+import java.util.stream.Collectors;
 
 /**
  * @author ZhouHR

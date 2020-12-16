@@ -47,7 +47,9 @@ public class CRC16 {
         int Num = Data.length;
         int i;
         int CRC = 0x00;
-        for (i = 0; i < Num; i++) CRC += Data[i];
+        for (i = 0; i < Num; i++) {
+            CRC += Data[i];
+        }
         CRC = ~CRC;
         CRC += 0x33;
         CRC = (CRC & 0xFF);
@@ -68,7 +70,9 @@ public class CRC16 {
         int Num = Data.length;
         int i;
         int CRC = 0x00;
-        for (i = 0; i < Num; i++) CRC += Data[i];
+        for (i = 0; i < Num; i++) {
+            CRC += Data[i];
+        }
         CRC = ~CRC;
         CRC += 0x33;
         //CRC = (CRC & 0xFF);

@@ -1,28 +1,28 @@
 spring:
-  datasource:
-    #driverClassName: oracle.jdbc.driver.OracleDriver
-    #url: jdbc:oracle:thin:@localhost:1521:orcl
-    #username: zxmeter
-    #password: guodong123
-    driverClassName: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/zx_meter?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC&rewriteBatchedStatements=true
-    #url: jdbc:mysql://localhost:3306/jbq_meter?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC&rewriteBatchedStatements=true
-    username: root
-    password: password
+    datasource:
+        #driverClassName: oracle.jdbc.driver.OracleDriver
+        #url: jdbc:oracle:thin:@localhost:1521:orcl
+        #username: zxmeter
+        #password: guodong123
+        driverClassName: com.mysql.jdbc.Driver
+        url: jdbc:mysql://localhost:3306/zx_meter?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC&rewriteBatchedStatements=true
+        #url: jdbc:mysql://localhost:3306/jbq_meter?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC&rewriteBatchedStatements=true
+        username: root
+        password: password
 
-  redis:
-    host: 127.0.0.1
-    port: 6379
+    redis:
+        host: 127.0.0.1
+        port: 6379
 
 mybatis:
-  type-aliases-package: com.gdiot.model
-  config-locations: classpath:mybatis/mybatis-config.xml
-  mapper-locations: classpath:mybatis/mapper/*.xml
+    type-aliases-package: com.gdiot.model
+    config-locations: classpath:mybatis/mybatis-config.xml
+    mapper-locations: classpath:mybatis/mapper/*.xml
 
-  configuration:
-    map-underscore-to-camel-case: true
+    configuration:
+        map-underscore-to-camel-case: true
 
 server:
-  port: 9081  #中性平台下行接口
+    port: 9081  #中性平台下行接口
     #port: 9082 #警备区下行接口
     

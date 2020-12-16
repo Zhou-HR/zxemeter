@@ -31,8 +31,12 @@ public class SendCmdsUtils {
 
     public Map<String, String> getEMInfoByImei(String module_type, String imei) {
         Map<String, String> map = new HashMap<>();
-        String regex_dev = "^[A-Fa-f0-9]+$";//16 dev_eui
-        String regex_imei = "^\\d{15}$";//imei 15
+
+        //16 dev_eui
+        String regex_dev = "^[A-Fa-f0-9]+$";
+
+        //imei 15
+        String regex_imei = "^\\d{15}$";
         if (mIXBEMDataService == null) {
             mIXBEMDataService = SpringContextUtils.getBean(IXBEMDataService.class);
         }
@@ -110,35 +114,56 @@ public class SendCmdsUtils {
     private String getCmdContent(String module_type, String ser_id, String eNum, String fac, String data_type, String operate_type, String seq) {
 //		logger.info("--------------getCmdContent start-----002-----");
         String lora_start = "FEFEFEFE";
-        String id = ser_id;//服务序号
-        String prm = "01";//启动方向    01抄表，02设置，03 拉合闸
-        String e_num2 = eNum;//"190300000064";//表号
-        String fac_id = fac;//厂商标识
-        String dih_lon = "";//FF03103141 请求数据类型 长度 数据  类型包含
-        String CRC = "";
+
+        //服务序号
+        String id = ser_id;
+
+        //启动方向    01抄表，02设置，03 拉合闸
+        String prm = "01";
+
+        //"190300000064";//表号
+        String e_num2 = eNum;
+
+        //厂商标识
+        String fac_id = fac;
+
+        //FF03103141 请求数据类型 长度 数据  类型包含
+        String dih_lon = "";
+        String CRC;
         String end = "16";
-        if ("R".equals(operate_type)) {//读
+        if ("R".equals(operate_type)) {
+            //读
             prm = "01";
-        } else if ("W".equals(operate_type)) {//写
+        } else if ("W".equals(operate_type)) {
+            //写
             prm = "02";
-        } else if ("O".equals(operate_type)) {//执行，操作
+        } else if ("O".equals(operate_type)) {
+            //执行，操作
             prm = "03";
-        } else if ("D".equals(operate_type)) {//读冻结数据
+        } else if ("D".equals(operate_type)) {
+            //读冻结数据
             prm = "0D";
-        } else if ("E".equals(operate_type)) {//写多项
+        } else if ("E".equals(operate_type)) {
+            //写多项
             prm = "0E";
-        } else if ("F".equals(operate_type)) {//写多项
+        } else if ("F".equals(operate_type)) {
+            //写多项
             prm = "0F";
         }
         switch (data_type) {
             //抄表
-            case "10"://有功总电能 //C0014700000003190010050000000000F916
-            case "15"://无功总电能
-                if ("W".equals(operate_type)) {//写//seq>=360 && seq<86400
+            case "10":
+                //有功总电能 //C0014700000003190010050000000000F916
+
+            case "15":
+                //无功总电能
+                if ("W".equals(operate_type)) {
+                    //写//seq>=360 && seq<86400
                     if ((Double.parseDouble(seq) >= 0)) {
                         dih_lon = data_type + "04" + getKWHHex(seq, 4);
                     }
-                } else if ("R".equals(operate_type)) {//读上报时间
+                } else if ("R".equals(operate_type)) {
+                    //读上报时间
                     dih_lon = data_type + "00";
                 }
                 break;

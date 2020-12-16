@@ -1,8 +1,6 @@
 package com.gdiot.controller;
 
 import com.gdiot.service.AsyncService;
-import com.gdiot.service.INBYDEMCmdsService;
-import com.gdiot.service.INBYDEMReadService;
 import com.gdiot.ssm.redis.RedisUtil;
 import com.gdiot.ssm.task.DataSenderTask;
 import org.slf4j.Logger;
@@ -25,10 +23,6 @@ public class CMDAction {
 
     @Autowired
     private AsyncService asyncService;
-    @Autowired
-    private INBYDEMReadService mINBYDEMReadService;
-    @Autowired
-    private INBYDEMCmdsService mINBYDEMCmdsService;
 
     @Autowired
     private RedisUtil redisUtil;
@@ -64,12 +58,17 @@ public class CMDAction {
             }
         }
         Map<String, Object> result = new HashMap<>();
-        String regex_dev = "^[A-Fa-f0-9]+$";//16 dev_eui
-        String regex_imei = "^\\d{15}$";//imei 15
-        String regex_yd_dev_id = "^\\d{9}$";//yd_dev_id 9
-        if ((imei.matches(regex_dev) && imei.length() == 16)
-                || imei.matches(regex_imei)
-                || imei.matches(regex_yd_dev_id)) {
+
+        //16 dev_eui
+        String regex_dev = "^[A-Fa-f0-9]+$";
+
+        //imei 15
+        String regex_imei = "^\\d{15}$";
+
+        //yd_dev_id 9
+        String regex_yd_dev_id = "^\\d{9}$";
+
+        if ((imei.matches(regex_dev) && imei.length() == 16) || imei.matches(regex_imei) || imei.matches(regex_yd_dev_id)) {
             String request_id = imei + "_" + System.currentTimeMillis();
             Map<String, String> map = new HashMap<>();
             map.put("module_type", module_type);
@@ -92,21 +91,16 @@ public class CMDAction {
             }
             String resultdata = null;
             int count = 0;
-            while (resultdata == null && count < 60) {//循环查询
+
+            //循环查询
+            while (resultdata == null && count < 60) {
                 try {
                     Thread.sleep(500);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
                 resultdata = redisUtil.get(request_id, 0);
-//				LOGGER.info("send_cmd--------task---result="+resultdata);
                 if (resultdata != null) {
-                    //mqtt_2g  下行返回结果result={"errno":0,"error":"succ"}
-
-                    //lora_em   下行返回结果result={"result":{"task_id":"1564041498.863_yMFVEd0NwZpnv7RH8VQOCOUHONKQDLHv",
-                    //"request_id":"0000000000009276_1564041498647"},"error":0}
-
-                    //nb  下行返回结果result={"errno":0,"error":"succ"}
 
                     LOGGER.info("send_cmd--------task---result=" + resultdata);
                     result.put("data", resultdata);

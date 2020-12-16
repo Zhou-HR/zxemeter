@@ -25,12 +25,12 @@ public class TestAction {
     public void test() {
         log.info("test===========@@@@@@@@@@@@@");
         log.info("测试页面");
-        System.out.printf("测试页面");
+        System.out.print("测试页面");
     }
 
     @PostMapping(value = "/getXBEMDataList")
     public Map<String, Object> get_em_data_list(@RequestBody Map<String, String> params) {
-        Map<String, Object> result = new HashMap<String, Object>();
+        Map<String, Object> result = new HashMap<>();
         String dev_id = null;
         String eNum = null;
         Long beginTime = null;
@@ -56,10 +56,10 @@ public class TestAction {
                     endTime = Long.valueOf(params.get("endTime"));
                 }
                 if (params.containsKey("pageNo")) {
-                    pageNo = Integer.valueOf(params.get("pageNo"));
+                    pageNo = Integer.parseInt(params.get("pageNo"));
                 }
                 if (params.containsKey("pageSize")) {
-                    pageSize = Integer.valueOf(params.get("pageSize"));
+                    pageSize = Integer.parseInt(params.get("pageSize"));
                 }
             } catch (Exception e) {
                 e.printStackTrace();

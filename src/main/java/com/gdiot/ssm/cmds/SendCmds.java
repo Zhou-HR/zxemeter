@@ -62,13 +62,13 @@ public class SendCmds {
             result = SendMsgGDYD2G(url, map);
             logger.info("gdyd_2g-----result=" + result.toJSONString());
         } else {
-            String content = map.get("content").toString();
-            String imei = map.get("imei").toString();
+            String content = map.get("content");
+            String imei = map.get("imei");
             if (content != null && content != "" && content.length() > 0) {
                 if ("nb".equals(module_type)) {
                     String time = map.get("time") != null ? map.get("time") : String.valueOf(System.currentTimeMillis());
-                    String url = YDConfig.YD_EXECUTE_URL + "imei=" + imei + "&obj_id=" + YDConfig.obj_id
-                            + "&obj_inst_id=" + YDConfig.obj_inst_id + "&res_id=" + YDConfig.res_id;
+                    String url = YDConfig.YD_EXECUTE_URL + "imei=" + imei + "&obj_id=" + YDConfig.OBJ_ID
+                            + "&obj_inst_id=" + YDConfig.OBJ_INST_ID + "&res_id=" + YDConfig.RES_ID;
                     //				logger.info("--------------getCmdsInfo---url=="+ url);
                     String api_key = YDConfig.ZX_XB_EM_API_KEY;
                     result = SendMsgNB(url, content, time, api_key);
@@ -97,7 +97,7 @@ public class SendCmds {
         NBSendCmds mSendCmds = new NBSendCmds(url, content, time, api_key);
         BasicResponse<CmdsResponse> response = mSendCmds.executeApi();
 
-        JSONObject jo = JSONObject.parseObject(response.getJson().toString());
+        JSONObject jo = JSONObject.parseObject(response.getJson());
         String errno = String.valueOf(jo.get("errno"));
         String error = String.valueOf(jo.get("error"));
         logger.info("send_cmd--errno=" + errno + ",error=" + error + ",data:" + jo.get("data"));

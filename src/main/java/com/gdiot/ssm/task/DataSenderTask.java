@@ -69,7 +69,9 @@ public class DataSenderTask implements Runnable {
             case "gdyd_2g":
                 LOGGER.info("================start down cmd gdyd_2g =====================");
                 String module_type = msgMap.get("module_type");
-                String dev_id = msgMap.get("imei");//dev_id
+
+                //dev_id
+                String dev_id = msgMap.get("imei");
                 String data_type = msgMap.get("type");
 //			String value = msgMap.get("value");
                 String operate_type = msgMap.get("operate_type");
@@ -121,13 +123,17 @@ public class DataSenderTask implements Runnable {
             case "nb":
             case "zx_xb_nb_em":
             case "lora_em":
-            case "mqtt_2g"://2g下行
+
+                //2g下行
+            case "mqtt_2g":
             case "zx_jbq_nb_em":
                 LOGGER.info("================start down cmd=====================");
                 String module_type0 = msgMap.get("module_type");
                 String imei0 = msgMap.get("imei");
                 String e_num = msgMap.get("eNum");
-                String fac_id = "01";//芯北电表固定值
+
+                //芯北电表固定值
+                String fac_id = "01";
                 String data_type0 = msgMap.get("type");
                 String value = msgMap.get("value");
                 String operate_type0 = msgMap.get("operate_type");
@@ -192,7 +198,9 @@ public class DataSenderTask implements Runnable {
                                 err_no = (int) result0.get("error");
                             }
                             LOGGER.info("更新seq--------new_data_seq_hex=" + new_data_seq_hex);
-                            if (err_no == 0) {//发送成功
+
+                            //发送成功
+                            if (err_no == 0) {
 //							LOGGER.info("更新seq--------------");
                                 //发送成功，更新seq
                                 EMCmdsSEQPo mNBYDEMCmdsPo = new EMCmdsSEQPo();
@@ -237,8 +245,8 @@ public class DataSenderTask implements Runnable {
             case "2g_poweroff":
 //			Tcp2gAnalysis();
                 break;
-
-            case "akr_nb_em"://安科瑞NB电表 下行
+            //安科瑞NB电表 下行
+            case "akr_nb_em":
                 LOGGER.info("================start down cmd=====================");
                 String module_type_akr = msgMap.get("module_type");
                 String e_num_akr = msgMap.get("eNum");

@@ -23,9 +23,9 @@ public class NBSendCmds extends AbstractAPI {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     private HttpPostMethod httpMethod;
-    private long time = 0;
+    private final long time;
     public ObjectMapper mapper = new ObjectMapper();
-    private Method method;
+    private final Method method;
 
     public NBSendCmds(String url, String contents, String time_s, String api_key) {
         logger.info("--------------NBSendCmds---url=" + url);
@@ -39,9 +39,9 @@ public class NBSendCmds extends AbstractAPI {
 
         // body参数
         Map<String, Object> bodymap = new HashMap<>();
-        if (contents != "") {
+        if (!"".equals(contents)) {
             bodymap.put("args", contents);
-            String json = null;
+            String json;
             ObjectMapper remapper = new ObjectMapper();
             try {
                 json = remapper.writeValueAsString(bodymap);
@@ -61,20 +61,20 @@ public class NBSendCmds extends AbstractAPI {
         BasicResponse response = null;
         try {
             if (httpMethod != null) {
-                if (DateUtil.ifCurrentTimeFree(time)) {//此处判断时间是否在30分钟上报时间内，超出30分钟的发下行成功率不高，此处目前无效（表号传入后不查数据库了，时间用来当前时间）
+                //此处判断时间是否在30分钟上报时间内，超出30分钟的发下行成功率不高，此处目前无效（表号传入后不查数据库了，时间用来当前时间）
+                if (DateUtil.ifCurrentTimeFree(time)) {
                     HttpResponse httpResponse = httpMethod.execute();
                     response = mapper.readValue(httpResponse.getEntity().getContent(), BasicResponse.class);
                     response.setJson(mapper.writeValueAsString(response));
                     Object newData = mapper.readValue(mapper.writeValueAsString(response.getDataInternal()), CmdsResponse.class);
                     response.setData(newData);
-                    return response;
                 } else {
                     httpMethod = new HttpPostMethod(method);
                     response.setErrno(100);
                     response.setError("The device is busy ,please try again later! ");
                     response.setJson("{\"error\":\"The device is busy ,please try again later!\"}");
-                    return response;
                 }
+                return response;
             } else {
                 httpMethod = new HttpPostMethod(method);
                 response.setErrno(100);

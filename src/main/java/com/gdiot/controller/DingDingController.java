@@ -147,7 +147,7 @@ public class DingDingController {
         LOGGER.info("  getResult=" + listId.getResult().toString());
 
         JSONObject resultJson = JSONObject.parseObject(listId.getBody());
-        Map<String, Object> result = new HashMap<String, Object>();
+        Map<String, Object> result = new HashMap<>();
         result.put("result", listId.getBody());
         return resultJson;
     }
@@ -182,10 +182,12 @@ public class DingDingController {
         LOGGER.info("  toString=" + response.toString());
 
         JSONArray jsonArray = new JSONArray();
-        JSONObject resultJson = JSONObject.parseObject(response.getBody());//返回含页面所有内容
+
+        //返回含页面所有内容
+        JSONObject resultJson = JSONObject.parseObject(response.getBody());
         jsonArray.add(resultJson);
 
-        Map<String, Object> result = new HashMap<String, Object>();
+        Map<String, Object> result = new HashMap<>();
 //		result.put("result", response.getBody());
 
         ProcessInstanceTopVo process = response.getProcessInstance();
@@ -213,11 +215,12 @@ public class DingDingController {
                 LOGGER.info("  getId=" + formVo.getId());
                 LOGGER.info("  getExtValue=" + formVo.getExtValue());
                 LOGGER.info("  getName=" + formVo.getName());
-                LOGGER.info("  getValue=" + formVo.getValue());//返回出差申请相关的具体内容
+
+                //返回出差申请相关的具体内容
+                LOGGER.info("  getValue=" + formVo.getValue());
                 String formId = formVo.getId();
                 if (formId.contains("DDBizSuite")) {
-                    JSONArray jsonArrayvalue = JSONArray.parseArray(formVo.getValue());
-                    return jsonArrayvalue;
+                    return JSONArray.parseArray(formVo.getValue());
                 }
             }
         }
@@ -225,7 +228,9 @@ public class DingDingController {
             for (OperationRecordsVo recordsVo : recordslist) {
                 LOGGER.info("  getOperationResult=" + recordsVo.getOperationResult());
                 LOGGER.info("  getOperationType=" + recordsVo.getOperationType());
-                LOGGER.info("  getRemark=" + recordsVo.getRemark());//返回出差申请审批结果
+
+                //返回出差申请审批结果
+                LOGGER.info("  getRemark=" + recordsVo.getRemark());
                 LOGGER.info("  getUserid=" + recordsVo.getUserid());
                 LOGGER.info("  getDate=" + recordsVo.getDate());
             }
@@ -236,8 +241,12 @@ public class DingDingController {
                 LOGGER.info("  getTaskResult=" + taskVo.getTaskResult());
                 LOGGER.info("  getTaskStatus=" + taskVo.getTaskStatus());
                 LOGGER.info("  getUserid=" + taskVo.getUserid());
-                LOGGER.info("  getCreateTime=" + taskVo.getCreateTime());//返回发出出差申请的开始时间
-                LOGGER.info("  getFinishTime=" + taskVo.getFinishTime());//返回发出出差申请的结束时间
+
+                //返回发出出差申请的开始时间
+                LOGGER.info("  getCreateTime=" + taskVo.getCreateTime());
+
+                //返回发出出差申请的结束时间
+                LOGGER.info("  getFinishTime=" + taskVo.getFinishTime());
             }
         }
 

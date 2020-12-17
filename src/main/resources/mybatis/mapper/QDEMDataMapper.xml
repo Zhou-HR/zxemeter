@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gdiot.mapper.QDEMDataMapper">
+    <resultMap id="BaseResultMap" type="com.gdiot.model.QDEMDataPo">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="dev_id" jdbcType="VARCHAR" property="devId"/>
+        <result column="orig_value" jdbcType="VARCHAR" property="origValue"/>
+        <result column="time" jdbcType="BIGINT" property="time"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="source" jdbcType="VARCHAR" property="source"/>
+        <result column="e_num" jdbcType="VARCHAR" property="eNum"/>
+        <result column="e_kwh" jdbcType="VARCHAR" property="eKwh"/>
+        <result column="e_kw_all" jdbcType="VARCHAR" property="eKwAll"/>
+        <result column="e_voltage_a" jdbcType="VARCHAR" property="eVoltageA"/>
+        <result column="e_voltage_b" jdbcType="VARCHAR" property="eVoltageB"/>
+        <result column="e_voltage_c" jdbcType="VARCHAR" property="eVoltageC"/>
+        <result column="e_current_a" jdbcType="VARCHAR" property="eCurrentA"/>
+        <result column="e_current_b" jdbcType="VARCHAR" property="eCurrentB"/>
+        <result column="e_current_c" jdbcType="VARCHAR" property="eCurrentC"/>
+        <result column="e_switch1" jdbcType="VARCHAR" property="eSwitch1"/>
+        <result column="e_switch2" jdbcType="VARCHAR" property="eSwitch2"/>
+        <result column="e_time" jdbcType="VARCHAR" property="eTime"/>
+        <result column="e_temperature" jdbcType="VARCHAR" property="eTemperature"/>
+        <result column="e_seq" jdbcType="INTEGER" property="eSeq"/>
+        <result column="e_signal" jdbcType="VARCHAR" property="eSignal"/>
+    </resultMap>
+    <sql id="Base_Column_Sql">
+    id, dev_id, orig_value, time, source, e_num, e_kwh, e_kw_all, e_voltage_a,e_voltage_b, e_voltage_c,
+    e_current_a, e_current_b, e_current_c, e_switch1, e_switch2, e_time, e_temperature, e_seq, e_signal
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_Sql"/>
+        from em_data_qd
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from em_data_qd
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.gdiot.model.QDEMDataPo"
+            useGeneratedKeys="true">
+        insert into em_data_qd (
+        <include refid="Base_Column_Sql"></include>
+        )values (#{devId,jdbcType=VARCHAR}, #{origValue,jdbcType=VARCHAR},
+        #{time,jdbcType=BIGINT},#{source,jdbcType=VARCHAR}, #{eNum,jdbcType=VARCHAR},#{eKwh,jdbcType=VARCHAR},
+        #{eKwAll,jdbcType=VARCHAR}, #{eVoltageA,jdbcType=VARCHAR},#{eVoltageB,jdbcType=VARCHAR},
+        #{eVoltageC,jdbcType=VARCHAR}, #{eCurrentA,jdbcType=VARCHAR},#{eCurrentB,jdbcType=VARCHAR},
+        #{eCurrentC,jdbcType=VARCHAR}, #{eSwitch1,jdbcType=VARCHAR}, #{eSwitch2,jdbcType=VARCHAR},
+        #{eTime,jdbcType=VARCHAR}, #{eTemperature,jdbcType=VARCHAR},#{eSeq,jdbcType=INTEGER},
+        #{eSignal,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.gdiot.model.QDEMDataPo"
+            useGeneratedKeys="true">
+        insert into em_data_qd
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="devId != null">
+                dev_id,
+            </if>
+            <if test="origValue != null">
+                orig_value,
+            </if>
+            <if test="time != null">
+                `time`,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="source != null">
+                `source`,
+            </if>
+            <if test="eNum != null">
+                e_num,
+            </if>
+            <if test="eKwh != null">
+                e_kwh,
+            </if>
+            <if test="eKwAll != null">
+                e_kw_all,
+            </if>
+            <if test="eVoltageA != null">
+                e_voltage_a,
+            </if>
+            <if test="eVoltageB != null">
+                e_voltage_b,
+            </if>
+            <if test="eVoltageC != null">
+                e_voltage_c,
+            </if>
+            <if test="eCurrentA != null">
+                e_current_a,
+            </if>
+            <if test="eCurrentB != null">
+                e_current_b,
+            </if>
+            <if test="eCurrentC != null">
+                e_current_c,
+            </if>
+            <if test="eSwitch1 != null">
+                e_switch1,
+            </if>
+            <if test="eSwitch2 != null">
+                e_switch2,
+            </if>
+            <if test="eTime != null">
+                e_time,
+            </if>
+            <if test="eTemperature != null">
+                e_temperature,
+            </if>
+            <if test="eSeq != null">
+                e_seq,
+            </if>
+            <if test="eSignal != null">
+                e_signal,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="devId != null">
+                #{devId,jdbcType=VARCHAR},
+            </if>
+            <if test="origValue != null">
+                #{origValue,jdbcType=VARCHAR},
+            </if>
+            <if test="time != null">
+                #{time,jdbcType=BIGINT},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="source != null">
+                #{source,jdbcType=VARCHAR},
+            </if>
+            <if test="eNum != null">
+                #{eNum,jdbcType=VARCHAR},
+            </if>
+            <if test="eKwh != null">
+                #{eKwh,jdbcType=VARCHAR},
+            </if>
+            <if test="eKwAll != null">
+                #{eKwAll,jdbcType=VARCHAR},
+            </if>
+            <if test="eVoltageA != null">
+                #{eVoltageA,jdbcType=VARCHAR},
+            </if>
+            <if test="eVoltageB != null">
+                #{eVoltageB,jdbcType=VARCHAR},
+            </if>
+            <if test="eVoltageC != null">
+                #{eVoltageC,jdbcType=VARCHAR},
+            </if>
+            <if test="eCurrentA != null">
+                #{eCurrentA,jdbcType=VARCHAR},
+            </if>
+            <if test="eCurrentB != null">
+                #{eCurrentB,jdbcType=VARCHAR},
+            </if>
+            <if test="eCurrentC != null">
+                #{eCurrentC,jdbcType=VARCHAR},
+            </if>
+            <if test="eSwitch1 != null">
+                #{eSwitch1,jdbcType=VARCHAR},
+            </if>
+            <if test="eSwitch2 != null">
+                #{eSwitch2,jdbcType=VARCHAR},
+            </if>
+            <if test="eTime != null">
+                #{eTime,jdbcType=VARCHAR},
+            </if>
+            <if test="eTemperature != null">
+                #{eTemperature,jdbcType=VARCHAR},
+            </if>
+            <if test="eSeq != null">
+                #{eSeq,jdbcType=INTEGER},
+            </if>
+            <if test="eSignal != null">
+                #{eSignal,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.gdiot.model.QDEMDataPo">
+        update em_data_qd
+        <set>
+            <if test="devId != null">
+                dev_id = #{devId,jdbcType=VARCHAR},
+            </if>
+            <if test="origValue != null">
+                orig_value = #{origValue,jdbcType=VARCHAR},
+            </if>
+            <if test="time != null">
+                `time` = #{time,jdbcType=BIGINT},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="source != null">
+                `source` = #{source,jdbcType=VARCHAR},
+            </if>
+            <if test="eNum != null">
+                e_num = #{eNum,jdbcType=VARCHAR},
+            </if>
+            <if test="eKwh != null">
+                e_kwh = #{eKwh,jdbcType=VARCHAR},
+            </if>
+            <if test="eKwAll != null">
+                e_kw_all = #{eKwAll,jdbcType=VARCHAR},
+            </if>
+            <if test="eVoltageA != null">
+                e_voltage_a = #{eVoltageA,jdbcType=VARCHAR},
+            </if>
+            <if test="eVoltageB != null">
+                e_voltage_b = #{eVoltageB,jdbcType=VARCHAR},
+            </if>
+            <if test="eVoltageC != null">
+                e_voltage_c = #{eVoltageC,jdbcType=VARCHAR},
+            </if>
+            <if test="eCurrentA != null">
+                e_current_a = #{eCurrentA,jdbcType=VARCHAR},
+            </if>
+            <if test="eCurrentB != null">
+                e_current_b = #{eCurrentB,jdbcType=VARCHAR},
+            </if>
+            <if test="eCurrentC != null">
+                e_current_c = #{eCurrentC,jdbcType=VARCHAR},
+            </if>
+            <if test="eSwitch1 != null">
+                e_switch1 = #{eSwitch1,jdbcType=VARCHAR},
+            </if>
+            <if test="eSwitch2 != null">
+                e_switch2 = #{eSwitch2,jdbcType=VARCHAR},
+            </if>
+            <if test="eTime != null">
+                e_time = #{eTime,jdbcType=VARCHAR},
+            </if>
+            <if test="eTemperature != null">
+                e_temperature = #{eTemperature,jdbcType=VARCHAR},
+            </if>
+            <if test="eSeq != null">
+                e_seq = #{eSeq,jdbcType=INTEGER},
+            </if>
+            <if test="eSignal != null">
+                e_signal = #{eSignal,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.gdiot.model.QDEMDataPo">
+    update em_data_qd
+    set dev_id = #{devId,jdbcType=VARCHAR},
+      orig_value = #{origValue,jdbcType=VARCHAR},
+      `time` = #{time,jdbcType=BIGINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      `source` = #{source,jdbcType=VARCHAR},
+      e_num = #{eNum,jdbcType=VARCHAR},
+      e_kwh = #{eKwh,jdbcType=VARCHAR},
+      e_kw_all = #{eKwAll,jdbcType=VARCHAR},
+      e_voltage_a = #{eVoltageA,jdbcType=VARCHAR},
+      e_voltage_b = #{eVoltageB,jdbcType=VARCHAR},
+      e_voltage_c = #{eVoltageC,jdbcType=VARCHAR},
+      e_current_a = #{eCurrentA,jdbcType=VARCHAR},
+      e_current_b = #{eCurrentB,jdbcType=VARCHAR},
+      e_current_c = #{eCurrentC,jdbcType=VARCHAR},
+      e_switch1 = #{eSwitch1,jdbcType=VARCHAR},
+      e_switch2 = #{eSwitch2,jdbcType=VARCHAR},
+      e_time = #{eTime,jdbcType=VARCHAR},
+      e_temperature = #{eTemperature,jdbcType=VARCHAR},
+      e_seq = #{eSeq,jdbcType=INTEGER},
+      e_signal = #{eSignal,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+    <insert id="insertReadData" parameterType="com.gdiot.model.QDEMReadPo">
+		insert into em_read_qd (
+			dev_id,imei,orig_value,time,e_num,read_type,read_value,data_seq,source
+		) values (#{devId,jdbcType=VARCHAR},#{imei,jdbcType=VARCHAR},#{origValue,jdbcType=VARCHAR},
+		#{time,jdbcType=BIGINT},#{eNum,jdbcType=VARCHAR},#{readType,jdbcType=VARCHAR},
+		#{readValue,jdbcType=VARCHAR},#{dataSeq,jdbcType=VARCHAR},#{source,jdbcType=VARCHAR})
+	</insert>
+</mapper>

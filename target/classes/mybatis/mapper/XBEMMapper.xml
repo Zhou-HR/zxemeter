@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gdiot.mapper.XBEMMapper">
+
+    <select id="selectAllEmeter" resultType="com.gdiot.model.EMMeterPo">
+		select * from em_meter order by id desc
+	</select>
+
+    <!-- select * from em_data_xb where 1 = 1 and e_num = '190300000053' and time > 1574906403596 and time <= 1574992803596 order by id desc  -->
+    <select id="selcetStartValue" resultType="com.gdiot.model.XBEMDataPo">
+        select * from em_data_xb
+        where 1 = 1
+        <if test="e_num != null">
+            and e_num = #{e_num}
+        </if>
+        <if test="beginTime != null">
+            and time &gt; #{beginTime}
+        </if>
+        <if test="endTime != null">
+            and time &lt;= #{endTime}
+        </if>
+        order by id asc
+    </select>
+    <select id="selcetEndValue" resultType="com.gdiot.model.XBEMDataPo">
+        select * from em_data_xb
+        where 1 = 1
+        <if test="e_num != null">
+            and e_num = #{e_num}
+        </if>
+        <if test="beginTime != null">
+            and time &gt; #{beginTime}
+        </if>
+        <if test="endTime != null">
+            and time &lt;= #{endTime}
+        </if>
+        order by id desc
+    </select>
+
+    <!-- com.gdiot.entity.EMDayReport -->
+    <insert id="SaveOne" parameterType="java.util.Map">
+		insert into em_day_report
+		 (id,meter_no,year,month,e_value1,company_id,e_seq1,e_value2,e_seq2,e_value,
+		 yearmonth,day,tb_meter_id_new,new_meter_value,old_meter_value,tb_meter_id_old)
+		 values (
+		 default,#{meterNo},#{year},#{month},#{evalue1},#{companyId},#{eseq1},#{evalue2},#{eseq2},#{evalue},
+		#{yearmonth},#{day},#{tbMeterIdNew},#{newMeterValue},#{oldMeterValue},#{tbMeterIdOld})
+	</insert>
+
+</mapper>

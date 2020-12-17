@@ -29,10 +29,10 @@ public class YDConfig {
     public static final String AKR_TOKEN = "gdiot8087akr";
 
     //电表 千丁电表
-    public static final String QD_API_KEY = "OqYhT9JtljPdMBZo4roqd34IC8mRad1OOpPZntCg7qk=";
+    public static final String QD_API_KEY = "w83aMYZyr==K46EarAEbS=LmHW0==";
     public static final String QD_PRODUCT_ID = "391509";
     public static final String QD_PROTOCOL = "LWM2M";
-    public static final String QD_TOKEN = "gdiot8087QD";
+    public static final String QD_TOKEN = "gdiot8087qianding";
 
     //东华能源 钢瓶
     public static final String DH_API_KEY = "d2YGGNXHNnMUm=iyy4tXGYn4UJQ=";

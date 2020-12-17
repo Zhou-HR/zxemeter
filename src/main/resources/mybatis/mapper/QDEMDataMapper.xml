@@ -25,8 +25,8 @@
         <result column="e_signal" jdbcType="VARCHAR" property="eSignal"/>
     </resultMap>
     <sql id="Base_Column_Sql">
-    id, dev_id, orig_value,time, source, e_num, e_kwh, e_kw_all, e_voltage_a,e_voltage_b, e_voltage_c,
-    e_current_a, e_current_b, e_current_c, e_switch1, e_switch2, e_time, e_temperature, e_seq, e_signal
+     dev_id, orig_value,time, source, e_num, e_kwh, e_kw_all, e_voltage_a,e_voltage_b, e_voltage_c, e_current_a,
+     e_current_b, e_current_c, e_switch1, e_switch2, e_time, e_temperature, e_seq, e_signal
   </sql>
     <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.gdiot.model.QDEMDataPo"
             useGeneratedKeys="true">

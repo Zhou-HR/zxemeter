@@ -1,31 +1,21 @@
 package com.gdiot.ssm.task;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.gdiot.model.AKREMDataPo;
-import com.gdiot.model.AKREMReadPo;
-import com.gdiot.model.EMCmdsSEQPo;
-import com.gdiot.model.XBEMDataPo;
-import com.gdiot.model.YDEMNBReadPo;
-import com.gdiot.model.YDEMeterEventPo;
-import com.gdiot.service.AsyncService;
-import com.gdiot.service.IAKREMDataService;
-import com.gdiot.service.INBYDEMCmdsService;
-import com.gdiot.service.INBYDEMEventService;
-import com.gdiot.service.INBYDEMReadService;
-import com.gdiot.service.IXBEMDataService;
+import com.gdiot.model.*;
+import com.gdiot.service.*;
 import com.gdiot.ssm.cmds.AKRSendCmdsUtils;
+import com.gdiot.ssm.cmds.QDSendCmdsUtils;
 import com.gdiot.ssm.cmds.SendCmds;
 import com.gdiot.ssm.cmds.SendCmdsUtils;
 import com.gdiot.ssm.redis.RedisUtil;
 import com.gdiot.ssm.util.SpringContextUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author ZhouHR
@@ -33,7 +23,7 @@ import com.gdiot.ssm.util.SpringContextUtils;
 public class DataSenderTask implements Runnable {
     private static final Logger LOGGER = LoggerFactory.getLogger(DataSenderTask.class);
     private String data;
-    private String type;
+    private final String type;
     private Map<String, String> msgMap;
 
     private AsyncService asyncService;
@@ -43,6 +33,7 @@ public class DataSenderTask implements Runnable {
     private INBYDEMReadService mINBYDEMReadService;
     private INBYDEMEventService mINBYDEMEventService;
     private IAKREMDataService mIAKREMDataService;
+    private IQDEMDataService mIQDEMDataService;
 
     public DataSenderTask(String data, String type) {
         super();
@@ -98,9 +89,10 @@ public class DataSenderTask implements Runnable {
                         LOGGER.info("------gdyd_2g---------error=" + error);
                         if (errno == 0) {
                             //获取下行后上报的数据
-                            String resultData = "";//getTcpResultData(module_type,dev_id,data_type,System.currentTimeMillis());
+                            String resultData = "";
+                            //getTcpResultData(module_type,dev_id,data_type,System.currentTimeMillis());
                             LOGGER.info("------gdyd_2g---------resultData=" + resultData);
-                            if (resultData != null && operate_type.equals("R")) {
+                            if (resultData != null && "R".equals(operate_type)) {
                                 redisUtil.set(request_id, resultData, 0);
                                 redisUtil.expire(request_id, 1800, 0);
                             } else {
@@ -120,6 +112,7 @@ public class DataSenderTask implements Runnable {
                     redisUtil.expire(request_id, 1800, 0);
                 }
                 break;
+
             case "nb":
             case "zx_xb_nb_em":
             case "lora_em":
@@ -211,7 +204,7 @@ public class DataSenderTask implements Runnable {
                                 mNBYDEMCmdsPo.setCreate_time(new Date(System.currentTimeMillis()));
                                 updateDBCmdsSeq(mNBYDEMCmdsPo);
 
-                                if (operate_type0.equals("R") || operate_type0.equals("D")) {
+                                if ("R".equals(operate_type0) || "D".equals(operate_type0)) {
                                     LOGGER.info("-------获取返回值------start------------");
                                     //获取下行后上报的数据
                                     String resultData = getNBResultData(msgMap);
@@ -245,6 +238,7 @@ public class DataSenderTask implements Runnable {
             case "2g_poweroff":
 //			Tcp2gAnalysis();
                 break;
+
             //安科瑞NB电表 下行
             case "akr_nb_em":
                 LOGGER.info("================start down cmd=====================");
@@ -295,8 +289,8 @@ public class DataSenderTask implements Runnable {
                         if (result_akr != null && (int) result_akr.get("errno") == 0) {
 //						redisUtil.set(request_id_akr, result_akr.toString(),0);
 //						redisUtil.expire(request_id_akr, 1800, 0);
-                            if ("R".equals(operate_type_akr)
-                                    && ("003E".equals(data_type_akr) || "01C2".equals(data_type_akr) || "1001".equals(data_type_akr))) {
+                            Boolean res = "R".equals(operate_type_akr) && ("003E".equals(data_type_akr) || "01C2".equals(data_type_akr) || "1001".equals(data_type_akr));
+                            if (res) {
                                 //获取下行后上报的数据
                                 String resultData = getNBResultData(msgMap);
                                 LOGGER.info("-------获取到的返回值------resultData=" + resultData);
@@ -319,6 +313,83 @@ public class DataSenderTask implements Runnable {
 
                     } else {
                         redisUtil.expire(request_id_akr, 180, 0);
+                    }
+                }
+                break;
+
+            //千丁电表下行
+            case "qd_nb_em":
+                LOGGER.info("================start down cmd=====================");
+                String module_type_qd = msgMap.get("module_type");
+                String e_num_qd = msgMap.get("eNum");
+                String imei_qd = msgMap.get("imei");
+                String data_type_qd = msgMap.get("type");
+                String value_qd = msgMap.get("value");
+                String operate_type_qd = msgMap.get("operate_type");
+                String request_id_qd = msgMap.get("request_id");
+
+                if (!imei_qd.matches(regex_imei) && !imei_qd.matches(regex_dev)) {
+                    LOGGER.error("imei error");
+                    break;
+                }
+                if (mIQDEMDataService == null) {
+                    mIQDEMDataService = SpringContextUtils.getBean(IQDEMDataService.class);
+                }
+                QDSendCmdsUtils mQDSendCmdsUtils = new QDSendCmdsUtils();
+                Map<String, Object> cmdsInfo = mQDSendCmdsUtils.getCmdsInfo(msgMap);
+
+                if (cmdsInfo != null && cmdsInfo.size() > 0) {
+                    String content = cmdsInfo.get("content").toString();
+                    LOGGER.info("content===" + content);
+                    if (content != null && !"".equals(content)) {
+                        msgMap.put("content", content);
+
+                        String time_qd = String.valueOf(System.currentTimeMillis());
+                        JSONObject result_qd = mQDSendCmdsUtils.SendMsgNB(imei_qd, content, time_qd);
+
+                        QDEMReadPo mQDEMReadPo = new QDEMReadPo();
+                        mQDEMReadPo.setDevId(imei_qd);
+                        mQDEMReadPo.setImei(imei_qd);
+                        mQDEMReadPo.setOrigValue(content);
+                        mQDEMReadPo.setSource(type);
+                        mQDEMReadPo.setTime(System.currentTimeMillis());
+                        mQDEMReadPo.setENum(e_num_qd);
+//    		        mAKREMReadPo.setE_fac("");
+                        mQDEMReadPo.setDataSeq("");
+                        mQDEMReadPo.setReadType(data_type_qd);
+                        mQDEMReadPo.setReadValue(result_qd.toJSONString());
+
+                        mIQDEMDataService.insertReadData(mQDEMReadPo);
+                        LOGGER.info("task: qd read insert into SQL end!");
+
+                        LOGGER.info("nb----------result=" + result_qd.toString());
+                        LOGGER.info("task: read insert into SQL start------------");
+
+                        if (result_qd != null && (int) result_qd.get("errno") == 0) {
+                            Boolean res = "R".equals(operate_type_qd) && ("003E".equals(data_type_qd) || "01C2".equals(data_type_qd) || "1001".equals(data_type_qd));
+                            if (res) {
+                                //获取下行后上报的数据
+                                String resultData = getNBResultData(msgMap);
+                                LOGGER.info("-------获取到的返回值------resultData=" + resultData);
+                                if (resultData != null) {
+                                    redisUtil.set(request_id_qd, resultData, 0);
+                                    redisUtil.expire(request_id_qd, 1800, 0);
+                                } else {
+                                    redisUtil.set(request_id_qd, result_qd.toString(), 0);
+                                    redisUtil.expire(request_id_qd, 1800, 0);
+                                }
+                            } else {
+                                redisUtil.set(request_id_qd, result_qd.toString(), 0);
+                                redisUtil.expire(request_id_qd, 1800, 0);
+                            }
+                        } else {
+                            redisUtil.set(request_id_qd, result_qd.toString(), 0);
+                            redisUtil.expire(request_id_qd, 1800, 0);
+                        }
+
+
+                    } else {
+                        redisUtil.expire(request_id_qd, 180, 0);
                     }
                 }
                 break;
@@ -357,7 +428,8 @@ public class DataSenderTask implements Runnable {
         String resultData = null;
         int count = 0;
 
-        while (resultData == null && count <= 30) {//循环查询
+        //循环查询
+        while (resultData == null && count <= 30) {
             try {
                 Thread.sleep(5000);
             } catch (InterruptedException e) {
@@ -395,7 +467,9 @@ public class DataSenderTask implements Runnable {
                 LOGGER.info("------getAKRReadData---------readValue=" + readValue);
                 long time = mAKREMReadPo.getTime();
                 long currentTime = System.currentTimeMillis();
-                if ((currentTime - time) < 10 * 1000) {//小于10分钟的内容返回，如果与当前时间间隔太久，说明是老数据，不返回
+
+                //小于10分钟的内容返回，如果与当前时间间隔太久，说明是老数据，不返回
+                if ((currentTime - time) < 10 * 1000) {
                     return readValue;
                 } else {
                     readValue = null;
@@ -408,7 +482,8 @@ public class DataSenderTask implements Runnable {
             if (mIXBEMDataService == null) {
                 mIXBEMDataService = SpringContextUtils.getBean(IXBEMDataService.class);
             }
-            if ("A1".equals(type) || "A3".equals(type) || "A5".equals(type)) {//冻结数据
+            if ("A1".equals(type) || "A3".equals(type) || "A5".equals(type)) {
+                //冻结数据
                 int flag_reload = 1;
                 int seq_value = Integer.parseInt(value);
                 //data_type : nb,lora_em, mqtt_2g
@@ -418,8 +493,8 @@ public class DataSenderTask implements Runnable {
                     readValue = mXBEMDataPo.getOrig_value();
                     LOGGER.info("------getNBReadData---------readValue=" + readValue);
                 }
-            } else if ("B1".equals(type) || "B3".equals(type) || "B5".equals(type)
-                    || "B7".equals(type) || "B9".equals(type) || "BB".equals(type) || "BD".equals(type)) {//事件记录
+            } else if ("B1".equals(type) || "B3".equals(type) || "B5".equals(type) || "B7".equals(type) || "B9".equals(type) || "BB".equals(type) || "BD".equals(type)) {
+                //事件记录
                 if (mINBYDEMEventService == null) {
                     mINBYDEMEventService = SpringContextUtils.getBean(INBYDEMEventService.class);
                 }
@@ -442,7 +517,8 @@ public class DataSenderTask implements Runnable {
                     long time = mYDEMNBReadPo.getTime();
                     LOGGER.info("------getNBReadData---------readValue=" + readValue);
                     long currentTime = System.currentTimeMillis();
-                    if ((currentTime - time) < 1 * 60 * 60 * 1000) {//小于1小时的内容返回，如果与当前时间间隔太久，说明是老数据，不返回
+                    if ((currentTime - time) < 1 * 60 * 60 * 1000) {
+                        //小于1小时的内容返回，如果与当前时间间隔太久，说明是老数据，不返回
                         return readValue;
                     } else {
                         readValue = null;

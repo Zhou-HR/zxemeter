@@ -68,7 +68,8 @@ public class CMDAction {
         //yd_dev_id 9
         String regex_yd_dev_id = "^\\d{9}$";
 
-        if ((imei.matches(regex_dev) && imei.length() == 16) || imei.matches(regex_imei) || imei.matches(regex_yd_dev_id)) {
+        Boolean isMatch = (imei.matches(regex_dev) && imei.length() == 16) || imei.matches(regex_imei) || imei.matches(regex_yd_dev_id);
+        if (isMatch) {
             String request_id = imei + "_" + System.currentTimeMillis();
             Map<String, String> map = new HashMap<>();
             map.put("module_type", module_type);

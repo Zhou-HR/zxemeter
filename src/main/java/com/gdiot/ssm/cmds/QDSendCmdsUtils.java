@@ -23,12 +23,12 @@ public class QDSendCmdsUtils {
     }
 
     public JSONObject SendMsgNB(String imei_akr, String content, String time) {
-        String url = YDConfig.YD_EXECUTE_URL + "imei=" + imei_akr + "&obj_id=" + YDConfig.AKR_OBJ_ID
-                + "&obj_inst_id=" + YDConfig.AKR_OBJ_INST_ID + "&res_id=" + YDConfig.AKR_RES_ID;
+        String url = YDConfig.YD_EXECUTE_URL + "imei=" + imei_akr + "&obj_id=" + YDConfig.QD_OBJ_ID
+                + "&obj_inst_id=" + YDConfig.QD_OBJ_INST_ID + "&res_id=" + YDConfig.QD_RES_ID;
 //				logger.info("--------------getCmdsInfo---url=="+ url);
 
         //api_key akr
-        String api_key = YDConfig.AKR_API_KEY;
+        String api_key = YDConfig.QD_API_KEY;
 
         NBSendCmds mSendCmds = new NBSendCmds(url, content, time, api_key);
         BasicResponse<CmdsResponse> response = mSendCmds.executeApi();
@@ -54,15 +54,8 @@ public class QDSendCmdsUtils {
         String time = msgMap.get("time");
         Map<String, Object> map = new HashMap<>();
 
-//			logger.info("--------------getCmdContent start----------");
-//			logger.info("--------------getCmdContent start----------module_type="+module_type);
-//			logger.info("--------------getCmdContent start----------new_seq_hex="+new_seq_hex);
-//			logger.info("--------------getCmdContent start----------e_num="+e_num);
-//			logger.info("--------------getCmdContent start----------fac_id="+fac_id);
-//			logger.info("--------------getCmdContent start----------type="+type);
-//			logger.info("--------------getCmdContent start----------operate_type="+operate_type);
         try {
-            String content = getAKRNBCmdMsg(type, operate_type, value);
+            String content = getQDNBCmdMsg(type, operate_type, value);
             log.info("--------------getCmdsInfo---content==" + content);
             map.put("content", content);
             return map;
@@ -72,7 +65,9 @@ public class QDSendCmdsUtils {
         return map;
     }
 
-    public static String getAKRNBCmdMsg(String data_type, String operate_type, String value) {
+    public static String getQDNBCmdMsg(String data_type, String operate_type, String value) {
+        //01F2002C 5EA0190026140023FA071304FA0111111111111100131C0068111111111111681C1035DFF1FFAB8967454F32 CCCCCCCCCCCC8F16 DCFAFF 44
+
         //起始符
         String start = "7B7B";
         //设备编码

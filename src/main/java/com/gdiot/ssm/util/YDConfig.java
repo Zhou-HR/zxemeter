@@ -40,6 +40,10 @@ public class YDConfig {
     public static final String AKR_PROTOCOL = "LWM2M";
     public static final String AKR_TOKEN = "gdiot8087akr";
 
+    public static final int AKR_OBJ_ID = 3300;
+    public static final int AKR_OBJ_INST_ID = 0;
+    public static final int AKR_RES_ID = 5750;
+
     //千丁电表
 
     public static final String QD_API_KEY = "w83aMYZyr==K46EarAEbS=LmHW0=";
@@ -47,10 +51,9 @@ public class YDConfig {
     public static final String QD_PROTOCOL = "LWM2M";
     public static final String QD_TOKEN = "gdiot8087QD";
 
-    public static final int AKR_OBJ_ID = 3300;
-    public static final int AKR_OBJ_INST_ID = 0;
-    public static final int AKR_RES_ID = 5750;
-
+    public static final int QD_OBJ_ID = 3300;
+    public static final int QD_OBJ_INST_ID = 0;
+    public static final int QD_RES_ID = 5750;
 
     //智能电表  集团正式
 

@@ -5,7 +5,7 @@ import com.gdiot.model.QDEMReadPo;
 /**
  * @author ZhouHR
  */
-public interface IQDEMDataService {
+public interface IQDEMReadService {
     /**
      * @param mQDEMReadPo
      * @return

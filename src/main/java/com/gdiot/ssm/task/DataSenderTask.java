@@ -33,7 +33,7 @@ public class DataSenderTask implements Runnable {
     private INBYDEMReadService mINBYDEMReadService;
     private INBYDEMEventService mINBYDEMEventService;
     private IAKREMDataService mIAKREMDataService;
-    private IQDEMDataService mIQDEMDataService;
+    private IQDEMReadService mIQDEMReadService;
 
     public DataSenderTask(String data, String type) {
         super();
@@ -332,8 +332,8 @@ public class DataSenderTask implements Runnable {
                     LOGGER.error("imei error");
                     break;
                 }
-                if (mIQDEMDataService == null) {
-                    mIQDEMDataService = SpringContextUtils.getBean(IQDEMDataService.class);
+                if (mIQDEMReadService == null) {
+                    mIQDEMReadService = SpringContextUtils.getBean(IQDEMReadService.class);
                 }
                 QDSendCmdsUtils mQDSendCmdsUtils = new QDSendCmdsUtils();
                 Map<String, Object> cmdsInfo = mQDSendCmdsUtils.getCmdsInfo(msgMap);
@@ -354,12 +354,11 @@ public class DataSenderTask implements Runnable {
                         mQDEMReadPo.setSource(type);
                         mQDEMReadPo.setTime(System.currentTimeMillis());
                         mQDEMReadPo.setENum(e_num_qd);
-//    		        mAKREMReadPo.setE_fac("");
                         mQDEMReadPo.setDataSeq("");
                         mQDEMReadPo.setReadType(data_type_qd);
                         mQDEMReadPo.setReadValue(result_qd.toJSONString());
 
-                        mIQDEMDataService.insertReadData(mQDEMReadPo);
+                        mIQDEMReadService.insertReadData(mQDEMReadPo);
                         LOGGER.info("task: qd read insert into SQL end!");
 
                         LOGGER.info("nb----------result=" + result_qd.toString());
@@ -386,7 +385,6 @@ public class DataSenderTask implements Runnable {
                             redisUtil.set(request_id_qd, result_qd.toString(), 0);
                             redisUtil.expire(request_id_qd, 1800, 0);
                         }
-
 
                     } else {
                         redisUtil.expire(request_id_qd, 180, 0);

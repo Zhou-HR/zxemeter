@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gdiot.mapper.QDEMReadMapper">
+    <resultMap id="BaseResultMap" type="com.gdiot.model.QDEMReadPo">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="dev_id" jdbcType="VARCHAR" property="devId"/>
+        <result column="imei" jdbcType="VARCHAR" property="imei"/>
+        <result column="orig_value" jdbcType="VARCHAR" property="origValue"/>
+        <result column="time" jdbcType="BIGINT" property="time"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="e_num" jdbcType="VARCHAR" property="eNum"/>
+        <result column="read_type" jdbcType="VARCHAR" property="readType"/>
+        <result column="read_value" jdbcType="VARCHAR" property="readValue"/>
+        <result column="data_seq" jdbcType="VARCHAR" property="dataSeq"/>
+        <result column="source" jdbcType="VARCHAR" property="source"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+   id, dev_id, imei, orig_value, time, create_time, e_num, read_type, read_value, data_seq, source
+  </sql>
+    <insert id="insertReadData" parameterType="com.gdiot.model.QDEMReadPo">
+        insert into em_read_qd (
+        <include refid="Base_Column_List"></include>
+        ) values (#{devId,jdbcType=VARCHAR},#{imei,jdbcType=VARCHAR},#{origValue,jdbcType=VARCHAR},
+        #{time,jdbcType=BIGINT},#{eNum,jdbcType=VARCHAR},#{readType,jdbcType=VARCHAR},
+        #{readValue,jdbcType=VARCHAR},#{dataSeq,jdbcType=VARCHAR},#{source,jdbcType=VARCHAR})
+    </insert>
+
+</mapper>

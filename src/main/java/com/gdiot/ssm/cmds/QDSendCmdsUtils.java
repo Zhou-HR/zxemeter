@@ -78,7 +78,7 @@ public class QDSendCmdsUtils {
     //NB帧
     public static String getCmdNB(String type, String operate_type, String value, String e_num) {
         //FA071304 FA01 277000080720 0013 1C00 68277000080720681C10CCBEAC02AB8967454D32CCCCCCCCCCCC2116 60FAFF
-        //68 277000080720 68 1C10 CCBEAC02 AB896745 4D 32 CCCCCCCCCCCC 21 16
+        //68 277000080720 68 1C10 02ACBECC AB896745 4D 32 CCCCCCCCCCCC 21 16
         //起始符 68
         String start = "FA071304FA01";
         //通信地址：277000080720
@@ -103,14 +103,14 @@ public class QDSendCmdsUtils {
 
     //透传数据组帧
     public static String getCmdContent(String type, String operate_type, String value, String e_num) {
-        //68 277000080720 68 1C10 CCBEAC02 AB896745 4D 32 CCCCCCCCCCCC 21 16
+        //68 277000080720 68 1C10 35DFF1FF AB896745 4D 32 CCCCCCCCCCCC 21 16
         //起始符 68
         String start = "68";
         //通信地址：277000080720
         String dev_code = Utilty.convertByteToString(Utilty.hexStringToBytes(e_num), 1, Utilty.hexStringToBytes(e_num).length);
 
         //固定帧
-        String code1 = "681C10CCBEAC02AB896745";
+        String code1 = "681C1035DFF1FFAB896745";
         //控制命令类型 4D
         String function_code = Utilty.convertByteToString2(Utilty.hexStringToBytes(type), 1, Utilty.hexStringToBytes(type).length);
         //固定帧

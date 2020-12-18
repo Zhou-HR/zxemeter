@@ -45,7 +45,7 @@ public class QDSendCmdsUtils {
         String value = msgMap.get("value");
         String operate_type = msgMap.get("operate_type");
         String request_id = msgMap.get("request_id");
-        String e_num = msgMap.get("e_num");
+        String e_num = msgMap.get("eNum");
         String time = msgMap.get("time");
         Map<String, Object> map = new HashMap<>();
         try {
@@ -60,8 +60,7 @@ public class QDSendCmdsUtils {
     }
 
     public static String getQDNBCmdMsg(String type, String operate_type, String value, String e_num) {
-        log.info("第一层 start");
-        //01F2002C5EA0190026140023 FA071304 FA01 277000080720 0013 1C00 68277000080720681C10CCBEAC02AB8967454D32CCCCCCCCCCCC2116 60FAFF 4C
+        //01F2002C5EA0190026140023 FA071304 FA01 277000080720 0013 1C00 68277000080720681C10CCBEAC02AB8967454D 32CCCCCCCCCCCC2116 60FAFF 4C
         //起始符
         String start = "01F2002C5EA0190026140023";
         //设备编码
@@ -73,20 +72,17 @@ public class QDSendCmdsUtils {
         content = start + data;
         CRC = CRC16.getCRC8(content);
         content = content + CRC;
-        log.info("第一层");
         return content;
     }
 
     //NB帧
     public static String getCmdNB(String type, String operate_type, String value, String e_num) {
-        log.info("第二层 start");
         //FA071304 FA01 277000080720 0013 1C00 68277000080720681C10CCBEAC02AB8967454D32CCCCCCCCCCCC2116 60FAFF
         //68 277000080720 68 1C10 CCBEAC02 AB896745 4D 32 CCCCCCCCCCCC 21 16
         //起始符 68
         String start = "FA071304FA01";
         //通信地址：277000080720
         String dev_code = Utilty.convertByteToString(Utilty.hexStringToBytes(e_num), 1, Utilty.hexStringToBytes(e_num).length);
-
         //固定帧
         String code1 = "00131C00";
 
@@ -102,13 +98,11 @@ public class QDSendCmdsUtils {
 
         CRC = CRC16.getCRC8(content);
         content = content + CRC + end;
-        log.info("第二层");
         return content;
     }
 
     //透传数据组帧
     public static String getCmdContent(String type, String operate_type, String value, String e_num) {
-        log.info("第三层 start");
         //68 277000080720 68 1C10 CCBEAC02 AB896745 4D 32 CCCCCCCCCCCC 21 16
         //起始符 68
         String start = "68";
@@ -131,7 +125,6 @@ public class QDSendCmdsUtils {
 
         CRC = CRC16.getCRC8(content);
         content = content + CRC + end;
-        log.info("第三层 end");
         return content;
     }
 

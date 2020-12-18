@@ -327,7 +327,6 @@ public class DataSenderTask implements Runnable {
                 String value_qd = msgMap.get("value");
                 String operate_type_qd = msgMap.get("operate_type");
                 String request_id_qd = msgMap.get("request_id");
-
                 if (!imei_qd.matches(regex_imei) && !imei_qd.matches(regex_dev)) {
                     LOGGER.error("imei error");
                     break;
@@ -337,6 +336,7 @@ public class DataSenderTask implements Runnable {
                 }
                 QDSendCmdsUtils mQDSendCmdsUtils = new QDSendCmdsUtils();
                 Map<String, Object> cmdsInfo = mQDSendCmdsUtils.getCmdsInfo(msgMap);
+                LOGGER.info("数据帧：" + cmdsInfo);
 
                 if (cmdsInfo != null && cmdsInfo.size() > 0) {
                     String content = cmdsInfo.get("content").toString();

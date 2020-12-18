@@ -26,6 +26,23 @@ public class Utilty {
         return sb.toString();
     }
 
+    /**
+     * 645协议解析
+     *
+     * @param array
+     * @param begin
+     * @param end
+     * @return
+     */
+    public static String convertByteToString2(byte[] array, int begin, int end) {
+        StringBuffer sb = new StringBuffer();
+        for (int i = end; i > begin - 1; i--) {
+            int v = Integer.parseInt(parseByte2HexStr(array[i - 1]), 16) + Integer.parseInt("33", 16);
+            sb.append(Integer.toHexString(v));
+        }
+        return sb.toString();
+    }
+
     public static byte getCheckChar(byte[] datas, int len) {
         byte cnt = (byte) 0x00;
         for (int i = 0; i < len; i++) {

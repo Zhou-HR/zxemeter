@@ -8,7 +8,6 @@ import com.gdiot.ssm.util.Utilty;
 import com.gdiot.ssm.util.YDConfig;
 import lombok.extern.slf4j.Slf4j;
 
-import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -22,12 +21,9 @@ public class QDSendCmdsUtils {
 
     }
 
-    public JSONObject SendMsgNB(String imei_akr, String content, String time) {
-        String url = YDConfig.YD_EXECUTE_URL + "imei=" + imei_akr + "&obj_id=" + YDConfig.QD_OBJ_ID
+    public JSONObject SendMsgNB(String imei_qd, String content, String time) {
+        String url = YDConfig.YD_EXECUTE_URL + "imei=" + imei_qd + "&obj_id=" + YDConfig.QD_OBJ_ID
                 + "&obj_inst_id=" + YDConfig.QD_OBJ_INST_ID + "&res_id=" + YDConfig.QD_RES_ID;
-//				logger.info("--------------getCmdsInfo---url=="+ url);
-
-        //api_key akr
         String api_key = YDConfig.QD_API_KEY;
 
         NBSendCmds mSendCmds = new NBSendCmds(url, content, time, api_key);
@@ -41,8 +37,8 @@ public class QDSendCmdsUtils {
         return jo;
     }
 
-
     public Map<String, Object> getCmdsInfo(Map<String, String> msgMap) {
+
         String module_type = msgMap.get("module_type");
         String imei = msgMap.get("imei");
         String type = msgMap.get("type");
@@ -50,12 +46,10 @@ public class QDSendCmdsUtils {
         String operate_type = msgMap.get("operate_type");
         String request_id = msgMap.get("request_id");
         String e_num = msgMap.get("e_num");
-        String fac_id = msgMap.get("fac_id");
         String time = msgMap.get("time");
         Map<String, Object> map = new HashMap<>();
-
         try {
-            String content = getQDNBCmdMsg(type, operate_type, value);
+            String content = getQDNBCmdMsg(type, operate_type, value, e_num);
             log.info("--------------getCmdsInfo---content==" + content);
             map.put("content", content);
             return map;
@@ -65,194 +59,74 @@ public class QDSendCmdsUtils {
         return map;
     }
 
-    public static String getQDNBCmdMsg(String data_type, String operate_type, String value) {
-        //01F2002C 5EA0190026140023FA071304FA0111111111111100131C0068111111111111681C1035DFF1FFAB8967454F32 CCCCCCCCCCCC8F16 DCFAFF 44
-
+    public static String getQDNBCmdMsg(String type, String operate_type, String value, String e_num) {
+        //01F2002C5EA0190026140023 FA071304 FA01 277000080720 0013 1C00 68277000080720681C10CCBEAC02AB8967454D32CCCCCCCCCCCC2116 60FAFF 4C
         //起始符
-        String start = "7B7B";
+        String start = "01F2002C5EA0190026140023";
         //设备编码
-//		String dev_code = "AAAAAAAAAAAA";
-        //功能码：90 透传
-        String function_code = "90";
-        //数据域：完整的modbus帧（若发送645帧，改成645帧就行）
-        String modbus_data;
+        String data = getCmdNB(type, operate_type, value, e_num);
         //CRC
         String CRC;
-        //结束符
-        String end = "7D7D";
 
-        String content = null;
-        int name_type_len = data_type.length();
-        //透传  寄存器查询
-        if (name_type_len == 4) {
-            modbus_data = getModbusCmdMsg(data_type, operate_type, value);
-            CRC = CRC16.getCRC16(function_code + modbus_data);
-            content = start + function_code + modbus_data + CRC + end;
-            System.out.printf("----------content==" + content + "\n");
-        }
-        return content;
-    }
-
-    public static String getModbusCmdMsg(String name_type, String operate_type, String value) {
-        //起始符
-        String start = "01";
-        //功能码：写多个寄存器
-        String function_code;
-        //寄存器起始地址
-        String register_addr;
-        //要操作的寄存器个数
-        String register_count;
-        //  数据字节数 （占1字节）
-        String data_byte_count;
-        //数据内容(A822寄存器)
-        String data = "";
-        //CRC16校验
-        String CRC;
-
-        String content = null;
-        register_addr = name_type;
-        switch (name_type) {
-//		case "":
-
-            //	组合有功总电能	RO	4字节 2位小数   读电量：01 03 00 3E 00 02 A5 C7
-            case "003C":
-
-                //正向有功电能	RO	4字节  2位小数
-            case "003E":
-                register_count = "0002";
-                if ("R".equals(operate_type)) {
-                    function_code = "03";
-                    content = start + function_code + register_addr + register_count;
-                }
-                break;
-            //解析时暂时无法区分，此处不单独下行查询
-//		case "0014"://A相电压	  2 1位小数  读电压电流：01 03 00 3E 00 02 A5 C7
-//		case "0015"://B相电压	  2 1位小数
-//		case "0016"://C相电压	  2 1位小数
-//		case "001A"://A相电流	  2 2位小数
-//		case "001B"://B相电流	  2 2位小数
-//		case "001C"://C相电流	  2 2位小数
-//			register_count = "0001";
-//			if("R".equals(operate_type)) {
-//				function_code = "03";
-//				content = start + function_code + register_addr + register_count ;
-//			}
-//			break;
-            //A相有功功率
-            case "001E":
-                //B相有功功率
-            case "0020":
-                //C相有功功率
-            case "0022":
-                //总有功功率  	RO	4字节  2位小数
-            case "0024":
-                register_count = "0002";
-                if ("R".equals(operate_type)) {
-                    function_code = "03";
-                    content = start + function_code + register_addr + register_count;
-                }
-                break;
-            case "01C2"://操作拉合闸控制	DO1 2字节   //01 10 01 C2 00 01 02 00 01 67 B2
-//		case "01C3"://操作拉合闸控制	DO2 2字节
-                if ("O".equals(operate_type)) {
-                    function_code = "10";
-                    register_count = "0001";
-                    //  数据字节数 （占1字节）
-                    data_byte_count = "02";
-
-                    if (value != "" && "on".equals(value)) {
-                        //合闸
-                        data = "0001";
-                    } else if ("off".equals(value)) {
-                        //开闸
-                        data = "0000";
-                    }
-                    content = start + function_code + register_addr + register_count + data_byte_count + data;
-                } else if ("R".equals(operate_type)) {
-                    function_code = "03";
-                    register_count = "0001";
-                    content = start + function_code + register_addr + register_count;
-                }
-                break;
-            //写上传间隔：01 10 1002 0001 02 0003 B6 83
-            case "1001":
-                if ("W".equals(operate_type)) {
-                    function_code = "10";
-                    register_count = "0001";
-                    //  数据字节数 （占1字节）
-                    data_byte_count = "02";
-//				data = "0003";//3分钟
-                    if (value != "" && value != null) {
-                        int times = Integer.valueOf(value);
-                        if (times >= 1 && times <= 1440) {
-                            data = getHexTime(times);
-                        }
-                    } else {
-                        //10分钟
-                        data = "0A00";
-                    }
-                    content = start + function_code + register_addr + register_count + data_byte_count + data;
-                } else if ("R".equals(operate_type)) {
-                    function_code = "03";
-                    register_count = "0001";
-                    content = start + function_code + register_addr + register_count;
-                }
-                break;
-            default:
-                break;
-        }
-        CRC = CRC16.getCRC16(content);
+        String content;
+        content = start + data;
+        CRC = CRC16.getCRC8(content);
         content = content + CRC;
         return content;
     }
 
-    public static String getHexDataLength(String data) {
-        int len = data.length() / 2;
-        String.valueOf(data.length() / 2);
+    //NB帧
+    public static String getCmdNB(String type, String operate_type, String value, String e_num) {
+        //FA071304 FA01 277000080720 0013 1C00 68277000080720681C10CCBEAC02AB8967454D32CCCCCCCCCCCC2116 60FAFF
+        //68 277000080720 68 1C10 CCBEAC02 AB896745 4D 32 CCCCCCCCCCCC 21 16
+        //起始符 68
+        String start = "FA071304FA01";
+        //通信地址：277000080720
+        String dev_code = Utilty.convertByteToString(Utilty.hexStringToBytes(e_num), 1, Utilty.hexStringToBytes(e_num).length);
 
-        return "";
+        //固定帧
+        String code1 = "00131C00";
+
+        //透传数据 68277000080720681C10CCBEAC02AB8967454D32CCCCCCCCCCCC2116
+        String data = getCmdContent(type, operate_type, value, e_num);
+        //CRC8校验
+        String CRC;
+        //结束符 16
+        String end = "FAFF";
+
+        String content;
+        content = start + dev_code + code1 + data;
+
+        CRC = CRC16.getCRC8(content);
+        content = content + CRC + end;
+        return content;
     }
 
-    /**
-     * //十进制   ----》 十六进制-----》4位 ，高位补0--------》time
-     *
-     * @return
-     */
-    public static String getHexTime(int time) {
-        String hexTime = Utilty.DecToHexString(time);
-        int hexLen = hexTime.length();
-        if (hexLen == 1) {
-            hexTime = "000" + hexTime;
-        } else if (hexLen == 2) {
-            hexTime = "00" + hexTime;
-        } else if (hexLen == 3) {
-            hexTime = "0" + hexTime;
-        }
-//		return hexTime;//高低位不互换
-        //高低位互换
-        byte[] e = Utilty.hexStringToBytes(hexTime);
-        String new_hex_time = Utilty.convertByteToString(e, 1, e.length);
-        return new_hex_time;
+    //透传数据组帧
+    public static String getCmdContent(String type, String operate_type, String value, String e_num) {
+        //68 277000080720 68 1C10 CCBEAC02 AB896745 4D 32 CCCCCCCCCCCC 21 16
+        //起始符 68
+        String start = "68";
+        //通信地址：277000080720
+        String dev_code = Utilty.convertByteToString(Utilty.hexStringToBytes(e_num), 1, Utilty.hexStringToBytes(e_num).length);
+
+        //固定帧
+        String code1 = "681C10CCBEAC02AB896745";
+        //控制命令类型 4D
+        String function_code = Utilty.convertByteToString2(Utilty.hexStringToBytes(type), 1, Utilty.hexStringToBytes(type).length);
+        //固定帧
+        String code2 = "32CCCCCCCCCCCC";
+        //CRC8校验
+        String CRC;
+        //结束符 16
+        String end = "16";
+
+        String content;
+        content = start + dev_code + code1 + function_code + code2;
+
+        CRC = CRC16.getCRC8(content);
+        content = content + CRC + end;
+        return content;
     }
 
-    private String getTimesHex(String times, int len) {
-//	if((Long.parseLong(seq) >= 360) && (Long.parseLong(seq) < 86400)) {
-//		dih_lon = "7203"+getTimesHex(seq,3);
-//	}		
-
-        //序列号高位补0
-        DecimalFormat df = null;
-        if (len == 2) {
-            df = new DecimalFormat("0000");
-        } else if (len == 3) {
-            df = new DecimalFormat("000000");
-        }
-        String seq_s = df.format(Integer.parseInt(times));
-//		System.out.println(seq_s);
-        //将序列号高低位互换
-        byte[] seq_b = Utilty.hexStringToBytes(seq_s);
-        String seq16 = Utilty.convertByteToString(seq_b, 1, seq_b.length);
-        System.out.println("seq16=" + seq16);
-        return seq16;
-    }
 }

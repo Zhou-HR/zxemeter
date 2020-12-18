@@ -365,25 +365,15 @@ public class DataSenderTask implements Runnable {
                         LOGGER.info("task: read insert into SQL start------------");
 
                         if (result_qd != null && (int) result_qd.get("errno") == 0) {
-                            Boolean res = "R".equals(operate_type_qd) && ("003E".equals(data_type_qd) || "01C2".equals(data_type_qd) || "1001".equals(data_type_qd));
-                            if (res) {
-                                //获取下行后上报的数据
-                                String resultData = getNBResultData(msgMap);
-                                LOGGER.info("-------获取到的返回值------resultData=" + resultData);
-                                if (resultData != null) {
-                                    redisUtil.set(request_id_qd, resultData, 0);
-                                    redisUtil.expire(request_id_qd, 1800, 0);
-                                } else {
-                                    redisUtil.set(request_id_qd, result_qd.toString(), 0);
-                                    redisUtil.expire(request_id_qd, 1800, 0);
-                                }
-                            } else {
-                                redisUtil.set(request_id_qd, result_qd.toString(), 0);
-                                redisUtil.expire(request_id_qd, 1800, 0);
-                            }
-                        } else {
+
                             redisUtil.set(request_id_qd, result_qd.toString(), 0);
                             redisUtil.expire(request_id_qd, 1800, 0);
+
+                        } else {
+
+                            redisUtil.set(request_id_qd, result_qd.toString(), 0);
+                            redisUtil.expire(request_id_qd, 1800, 0);
+
                         }
 
                     } else {

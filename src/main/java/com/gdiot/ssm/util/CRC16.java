@@ -94,10 +94,11 @@ public class CRC16 {
 //            System.out.printf("-------para[i]="+para[i] + "\n");
         }
         String sHex = getCS8(para);
-        System.out.printf("-------sHex=" + sHex + "\n");
+        //System.out.printf("-------sHex=" + sHex + "\n");
         if (sHex.length() == 1) {//长度为1位时，高位补0
             return "0" + sHex;
         }
+        sHex = sHex.toUpperCase();
         return sHex;
     }
 
@@ -110,7 +111,7 @@ public class CRC16 {
         }
         CRC = (CRC & 0xFF);
         String strHex = Integer.toHexString(CRC);
-        System.out.println("校验和：" + CRC + " [十进制]---->[十六进制] " + strHex);
+        //System.out.println("校验和：" + CRC + " [十进制]---->[十六进制] " + strHex);
         return strHex;
     }
 

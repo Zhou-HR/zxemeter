@@ -1,14 +1,22 @@
 package com.gdiot.ssm.cmds;
 
 import com.alibaba.fastjson.JSONObject;
+import com.gdiot.model.EMCmdsSEQPo;
+import com.gdiot.service.INBYDEMCmdsService;
+import com.gdiot.service.IXBEMDataService;
 import com.gdiot.ssm.http.yd.BasicResponse;
 import com.gdiot.ssm.http.yd.CmdsResponse;
 import com.gdiot.ssm.util.CRC16;
+import com.gdiot.ssm.util.SpringContextUtils;
 import com.gdiot.ssm.util.Utilty;
 import com.gdiot.ssm.util.YDConfig;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -16,6 +24,9 @@ import java.util.Map;
  */
 @Slf4j
 public class QDSendCmdsUtils {
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    private INBYDEMCmdsService mINBYDEMCmdsService;
+    private IXBEMDataService mIXBEMDataService;
 
     public QDSendCmdsUtils() {
 
@@ -32,8 +43,8 @@ public class QDSendCmdsUtils {
         JSONObject jo = JSONObject.parseObject(response.getJson());
         String errno = String.valueOf(jo.get("errno"));
         String error = String.valueOf(jo.get("error"));
-        log.info("send_cmd--errno=" + errno + ",error=" + error + ",data:" + jo.get("data"));
-        log.info("result=" + jo.toString());
+        logger.info("send_cmd--errno=" + errno + ",error=" + error + ",data:" + jo.get("data"));
+        logger.info("result=" + jo.toString());
         return jo;
     }
 
@@ -48,21 +59,26 @@ public class QDSendCmdsUtils {
         String e_num = msgMap.get("eNum");
         String time = msgMap.get("time");
         Map<String, Object> map = new HashMap<>();
-        try {
-            String content = getQDNBCmdMsg(type, operate_type, value, e_num);
-            log.info("--------------getCmdsInfo---content==" + content);
-            map.put("content", content);
-            return map;
-        } catch (Exception e) {
-            log.error("e=" + e);
+        String new_seq_hex = getNewCmdSeq(e_num, imei);
+        if (new_seq_hex != "") {
+            try {
+                String content = getQDNBCmdMsg(type, operate_type, value, e_num, new_seq_hex);
+                logger.info("--------------getCmdsInfo---content==" + content);
+                map.put("content", content);
+                map.put("new_seq_hex", new_seq_hex);
+                map.put("new_data_seq_hex", new_seq_hex);
+                return map;
+            } catch (Exception e) {
+                logger.error("e=" + e);
+            }
         }
         return map;
     }
 
-    public static String getQDNBCmdMsg(String type, String operate_type, String value, String e_num) {
-        //01F2002C5EA0190026140023 FA071304 FA01 277000080720 0013 1C00 68277000080720681C10CCBEAC02AB8967454D 32CCCCCCCCCCCC2116 60FAFF 4C
+    public static String getQDNBCmdMsg(String type, String operate_type, String value, String e_num, String new_seq_hex) {
+        //01F2 002C 5EA0 190026140023 FA071304 FA01 277000080720 0013 1C00 68277000080720681C10CCBEAC02AB8967454D 32CCCCCCCCCCCC2116 60FAFF 4C
         //起始符
-        String start = "01F2002C5EA0190026140023";
+        String start = "01F2002C" + new_seq_hex + "190026140023";
         //设备编码
         String data = getCmdNB(type, operate_type, value, e_num);
         //CRC
@@ -126,6 +142,55 @@ public class QDSendCmdsUtils {
         CRC = CRC16.getCRC8(content);
         content = content + CRC + end;
         return content;
+    }
+
+    private String getCmdsSeqByEnum(String e_num, String imei) {
+        if (mINBYDEMCmdsService == null) {
+            mINBYDEMCmdsService = SpringContextUtils.getBean(INBYDEMCmdsService.class);
+        }
+        List<EMCmdsSEQPo> list = mINBYDEMCmdsService.selectcmdseq(imei);
+        if (list.size() > 0) {
+            //数据库中存在,读出数据
+            String cmd_seq = list.get(0).getCmd_seq();
+            return cmd_seq;
+        } else {
+            //数据库中没有，就插入，从40开始
+            EMCmdsSEQPo mNBYDEMCmdsPo = new EMCmdsSEQPo();
+            mNBYDEMCmdsPo.setE_num(e_num);
+            mNBYDEMCmdsPo.setImei(imei);
+            mNBYDEMCmdsPo.setCmd_seq("0000");
+            mNBYDEMCmdsPo.setData_seq("0000");
+            mNBYDEMCmdsPo.setCreate_time(new Date(System.currentTimeMillis()));
+            int intodb = mINBYDEMCmdsService.insertcmdseq(mNBYDEMCmdsPo);
+            logger.info("new imei insert int em_cmds_seq-----intodb=" + intodb);
+            return "0000";
+        }
+    }
+
+    public String getNewCmdSeq(String e_num, String imei) {
+        String seq_hex = getCmdsSeqByEnum(e_num, imei);
+        if (seq_hex.isEmpty()) {
+            return "";
+        }
+        //服务序号
+        String seq_hex_new = "";
+
+        //是16进制数
+        String regex = "^[A-Fa-f0-9]+$";
+
+        if (seq_hex.matches(regex)) {
+            int seq_dec = Integer.parseInt(seq_hex, 16);
+            int max = 65535;
+            if (seq_dec == max) {
+                seq_dec = 0;
+            } else if (seq_dec >= 0 && seq_dec < max) {
+                seq_dec++;
+            }
+
+            seq_hex_new = String.format("%04x", seq_dec).toUpperCase();
+            logger.info("计算好的新的下行序列号-----------seq_hex_new=" + seq_hex_new);
+        }
+        return seq_hex_new;
     }
 
 }

@@ -27,9 +27,9 @@ public class NBSendCmds extends AbstractAPI {
     public ObjectMapper mapper = new ObjectMapper();
     private final Method method;
 
-    public NBSendCmds(String url, String contents, String time_s, String api_key) {
+    public NBSendCmds(String url, String contents, String time, String api_key) {
         logger.info("--------------NBSendCmds---url=" + url);
-        time = Long.parseLong(time_s);
+        this.time = Long.parseLong(time);
         //head参数
         this.method = Method.POST;
         Map<String, Object> headmap = new HashMap<>();

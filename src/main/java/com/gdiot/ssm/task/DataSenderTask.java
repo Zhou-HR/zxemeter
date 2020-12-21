@@ -136,8 +136,8 @@ public class DataSenderTask implements Runnable {
                     break;
                 }
                 SendCmdsUtils mSendCmdsUtils = new SendCmdsUtils();
-//			Map<String ,String> emInfo = mSendCmdsUtils.getEMInfoByImei(module_type0,imei0);
-//			if(emInfo != null && emInfo.size() >0) {
+//			    Map<String ,String> emInfo = mSendCmdsUtils.getEMInfoByImei(module_type0,imei0);
+//			    if(emInfo != null && emInfo.size() >0) {
                 if (e_num != null) {
 //				String e_num = emInfo.get("e_num") != null ? emInfo.get("e_num") : "";
 //				String fac_id = emInfo.get("e_fac") != null ? emInfo.get("e_fac") : "01";
@@ -340,9 +340,13 @@ public class DataSenderTask implements Runnable {
 
                 if (cmdsInfo != null && cmdsInfo.size() > 0) {
                     String content = cmdsInfo.get("content").toString();
+                    String new_seq_hex = cmdsInfo.get("new_seq_hex").toString();
+                    String new_data_seq_hex = cmdsInfo.get("new_data_seq_hex").toString();
                     LOGGER.info("content===" + content);
                     if (content != null && !"".equals(content)) {
                         msgMap.put("content", content);
+                        msgMap.put("new_seq_hex", new_seq_hex);
+                        msgMap.put("new_data_seq_hex", new_data_seq_hex);
 
                         String time_qd = String.valueOf(System.currentTimeMillis());
                         JSONObject result_qd = mQDSendCmdsUtils.SendMsgNB(imei_qd, content, time_qd);
@@ -354,7 +358,7 @@ public class DataSenderTask implements Runnable {
                         mQDEMReadPo.setSource(type);
                         mQDEMReadPo.setTime(System.currentTimeMillis());
                         mQDEMReadPo.setENum(e_num_qd);
-                        mQDEMReadPo.setDataSeq("");
+                        mQDEMReadPo.setDataSeq(new_seq_hex);
                         mQDEMReadPo.setReadType(data_type_qd);
                         mQDEMReadPo.setReadValue(result_qd.toJSONString());
 
@@ -364,18 +368,24 @@ public class DataSenderTask implements Runnable {
                         LOGGER.info("nb----------result=" + result_qd.toString());
                         LOGGER.info("task: read insert into SQL start------------");
 
+                        LOGGER.info("更新seq--------new_data_seq_hex=" + new_data_seq_hex);
+
+                        //发送成功
+
+//							LOGGER.info("更新seq--------------");
+                        //发送成功，更新seq
+
                         if (result_qd != null && (int) result_qd.get("errno") == 0) {
-
-                            redisUtil.set(request_id_qd, result_qd.toString(), 0);
-                            redisUtil.expire(request_id_qd, 1800, 0);
-
-                        } else {
-
-                            redisUtil.set(request_id_qd, result_qd.toString(), 0);
-                            redisUtil.expire(request_id_qd, 1800, 0);
-
+                            EMCmdsSEQPo mNBYDEMCmdsPo = new EMCmdsSEQPo();
+                            mNBYDEMCmdsPo.setE_num(e_num_qd);
+                            mNBYDEMCmdsPo.setImei(imei_qd);
+                            mNBYDEMCmdsPo.setCmd_seq(new_seq_hex);
+                            mNBYDEMCmdsPo.setData_seq(new_data_seq_hex);
+                            mNBYDEMCmdsPo.setCreate_time(new Date(System.currentTimeMillis()));
+                            updateDBCmdsSeq(mNBYDEMCmdsPo);
                         }
-
+                        redisUtil.set(request_id_qd, result_qd.toString(), 0);
+                        redisUtil.expire(request_id_qd, 1800, 0);
                     } else {
                         redisUtil.expire(request_id_qd, 180, 0);
                     }
@@ -384,6 +394,7 @@ public class DataSenderTask implements Runnable {
             default:
                 break;
         }
+
     }
 
     public AsyncService getAsyncService() {
@@ -403,7 +414,6 @@ public class DataSenderTask implements Runnable {
     }
 
     private int updateDBCmdsSeq(EMCmdsSEQPo mNBYDEMCmdsPo) {
-//		logger.info("从更新数据库序列号-------------------");
         if (mINBYDEMCmdsService == null) {
             mINBYDEMCmdsService = SpringContextUtils.getBean(INBYDEMCmdsService.class);
         }

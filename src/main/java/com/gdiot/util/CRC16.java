@@ -37,7 +37,8 @@ public class CRC16 {
             para[i] = (byte) value;
         }
         String sHex = getCS(para);
-        if (sHex.length() == 1) {//长度为1位时，高位补0
+        if (sHex.length() == 1) {
+            //长度为1位时，高位补0
             return "0" + sHex;
         }
         return sHex;
@@ -53,9 +54,7 @@ public class CRC16 {
         CRC = ~CRC;
         CRC += 0x33;
         CRC = (CRC & 0xFF);
-        String strHex = Integer.toHexString(CRC);
-//		System.out.println(CRC + " [十进制]---->[十六进制] " + strHex);
-        return strHex;
+        return Integer.toHexString(CRC);
     }
 
 
@@ -80,7 +79,6 @@ public class CRC16 {
     }
 
     public static String getCRC8(String data) {
-//    	System.out.printf("-------data="+data + "\n");
         data = data.replace(" ", "");
         int len = data.length();
         if (!(len % 2 == 0)) {
@@ -91,11 +89,11 @@ public class CRC16 {
         for (int i = 0; i < num; i++) {
             int value = Integer.valueOf(data.substring(i * 2, 2 * (i + 1)), 16);
             para[i] = (byte) value;
-//            System.out.printf("-------para[i]="+para[i] + "\n");
         }
         String sHex = getCS8(para);
-        System.out.printf("-------sHex=" + sHex + "\n");
-        if (sHex.length() == 1) {//长度为1位时，高位补0
+        System.out.print("-------sHex=" + sHex + "\n");
+        if (sHex.length() == 1) {
+            //长度为1位时，高位补0
             return "0" + sHex;
         }
         return sHex;

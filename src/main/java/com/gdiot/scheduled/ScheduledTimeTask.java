@@ -26,7 +26,7 @@ public class ScheduledTimeTask implements ApplicationRunner {
     private XBEMMapper mXBEMMapper;
 
     @Override
-    public void run(ApplicationArguments args) throws Exception {
+    public void run(ApplicationArguments args) {
         // 1，查出所有电表表号
         // 2，循环，进入线程池。
         // 3,根据表号，当前日期，查前24小时内最早的一条记录和最晚的一条记录，两者相减，得出一天的用电量,保存

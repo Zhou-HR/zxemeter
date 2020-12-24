@@ -17,7 +17,6 @@ public class MQTTClientFactory {
         if (null == mqttPushClient) {
             synchronized (MQTTClientFactory.class) {
                 if (null == mqttPushClient) {
-                    //LOGGER.info("MQTTClientFactory new");
                     mqttPushClient = new MQTTClientFactory(t);
                 }
             }
@@ -27,7 +26,6 @@ public class MQTTClientFactory {
 
     private MQTTClientFactory(MqttTask t) {
         client = t;
-        //LOGGER.info("MQTTClientFactory new---client="+client);
     }
 
     public MqttTask getClient() {

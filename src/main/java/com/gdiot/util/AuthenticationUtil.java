@@ -15,7 +15,7 @@ public class AuthenticationUtil {
     public static String getAccessToken() {
         NorthApiClient northApiClient = AuthUtil.initApiClient();
         Authentication authentication = new Authentication(northApiClient);
-        AuthOutDTO authOutDTO = null;
+        AuthOutDTO authOutDTO;
         String accessToken = null;
         try {
             authOutDTO = authentication.getAuthToken();

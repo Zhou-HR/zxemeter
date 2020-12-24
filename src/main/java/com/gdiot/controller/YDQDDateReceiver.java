@@ -9,13 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.crypto.BadPaddingException;
-import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.NoSuchPaddingException;
 import java.io.UnsupportedEncodingException;
-import java.security.InvalidAlgorithmParameterException;
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
 
 /**
  * 数据接收程序接口类 千丁电表
@@ -44,7 +38,7 @@ public class YDQDDateReceiver {
      * @return 任意字符串。OneNet平台接收到http 200的响应，才会认为数据推送成功，否则会重发。
      */
     @PostMapping(value = "/receive")
-    public String receive(@RequestBody String body) throws NoSuchPaddingException, InvalidKeyException, NoSuchAlgorithmException, IllegalBlockSizeException, BadPaddingException, InvalidAlgorithmParameterException {
+    public String receive(@RequestBody String body) {
 
         logger.info("data receive:  body String --- " + body);
         /*
@@ -54,7 +48,6 @@ public class YDQDDateReceiver {
         /*明文模式  start*/
         YDUtil.BodyObj obj = YDUtil.resolveBody(body, false);
         if (obj != null) {
-            //boolean dataRight = true;
             boolean dataRight = YDUtil.checkSignature(obj, YDConfig.QD_TOKEN);
             if (dataRight) {
 

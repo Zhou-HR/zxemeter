@@ -16,8 +16,6 @@ import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import javax.crypto.Mac;
 import javax.crypto.SecretKey;
@@ -27,6 +25,7 @@ import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.security.cert.CertificateException;
@@ -38,7 +37,6 @@ import java.util.Base64;
  * @author ZhouHR
  */
 public class LoraSendCmds {
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     public LoraSendCmds() {
 
@@ -46,7 +44,7 @@ public class LoraSendCmds {
 
     public String sendMsg(String deviceType, String msg, String deveui, String request_id) {
         String result = "error";
-        if (msg != null && msg != "" && msg.length() > 0) {
+        if (msg != null && !"".equals(msg) && msg.length() > 0) {
             result = sendMsgToGDIOT(deviceType, msg, deveui, request_id);
         }
         return result;
@@ -54,12 +52,9 @@ public class LoraSendCmds {
 
     public String sendMsgToGDIOT(String deviceType, String content, String deveui, String request_id) {
         String strResult = "error!";
-//		if(msg != null){
-//			msg = msg.replaceAll("\r\n", "");
-//		}
-        if (content != "") {
-            String apiUrl = "";
-            if (deveui != null && deveui != "" && deveui.length() > 0) {
+        if (!"".equals(content)) {
+            String apiUrl;
+            if (deveui != null && !"".equals(deveui) && deveui.length() > 0) {
                 apiUrl = LoraConfig.baseUrl_http_node;
             } else {
                 apiUrl = LoraConfig.baseUrl_http_cast;
@@ -82,7 +77,7 @@ public class LoraSendCmds {
 
             JSONObject data = new JSONObject();
             JSONObject param = new JSONObject();
-            if (deveui != null && deveui != "" && deveui.length() > 0) {
+            if (deveui != null && !"".equals(deveui) && deveui.length() > 0) {
                 data.put("devEUI", deveui);
                 data.put("data", "\\x" + content);
                 //不同用户的账号，userSec区分
@@ -96,8 +91,8 @@ public class LoraSendCmds {
                 data.put("type", LoraConfig.lora_send_type);
                 data.put("request_id", request_id);
                 param.put("params", data);
-            } else {//群组发送，此处暂时没有用到，需在平台加入组播，生成组播ID
-//				data.put("groupId", LoraConfig.groupid);
+            } else {
+                //群组发送，此处暂时没有用到，需在平台加入组播，生成组播ID
                 data.put("data", "\\x" + content);
                 param.put("params", data);
             }
@@ -122,7 +117,7 @@ public class LoraSendCmds {
                 Mac mac = Mac.getInstance("HmacSHA1");
                 mac.init(secretKey);
 
-                byte[] text = bodyString.getBytes("US-ASCII");
+                byte[] text = bodyString.getBytes(StandardCharsets.US_ASCII);
                 byte[] finalText = mac.doFinal(text);
                 token = Base64.getEncoder().encodeToString(finalText);
                 post.setHeader("token", token);
@@ -130,8 +125,6 @@ public class LoraSendCmds {
                 HttpClient httpClient = getHttpClient(apiUrl);
 
                 HttpResponse httpResponse = httpClient.execute(post);
-
-                int statusCode = httpResponse.getStatusLine().getStatusCode();
 
                 //if (statusCode == 200) {
                 strResult = EntityUtils.toString(httpResponse.getEntity());

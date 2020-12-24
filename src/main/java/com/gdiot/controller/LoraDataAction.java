@@ -3,7 +3,6 @@ package com.gdiot.controller;
 import com.gdiot.lora.LoraSendCmds;
 import com.gdiot.lora.LoraSendCmdsUtils;
 import com.gdiot.model.WMDataPo;
-import com.gdiot.service.AsyncService;
 import com.gdiot.service.IWMDataService;
 import com.gdiot.util.LoraConfig;
 import com.gdiot.util.SpringContextUtils;
@@ -24,9 +23,6 @@ import java.util.Map;
 public class LoraDataAction {
 
     @Autowired
-    private AsyncService asyncService;
-
-    @Autowired
     private IWMDataService mIWMDataService;
 
     @RequestMapping("/send_cmd")
@@ -44,7 +40,8 @@ public class LoraDataAction {
             if (params.containsKey("dev_id")) {
                 dev_id = params.get("dev_id");
             }
-            if (params.containsKey("type")) {//wm_switch
+            if (params.containsKey("type")) {
+                //wm_switch
                 type = params.get("type");
             }
             if (params.containsKey("value")) {
@@ -55,12 +52,16 @@ public class LoraDataAction {
             }
         }
         Map<String, Object> result = new HashMap<>();
-        String regex_dev = "^[A-Fa-f0-9]+$";//16 dev_eui
-        String regex_imei = "^\\d{15}$";//imei 15
-        String regex_yd_dev_id = "^\\d{9}$";//yd_dev_id 9
-        if ((dev_id.matches(regex_dev) && dev_id.length() == 16)
-                || dev_id.matches(regex_imei)
-                || dev_id.matches(regex_yd_dev_id)) {
+
+        //16 dev_eui
+        String regex_dev = "^[A-Fa-f0-9]+$";
+
+        //imei 15
+        String regex_imei = "^\\d{15}$";
+
+        //yd_dev_id 9
+        String regex_yd_dev_id = "^\\d{9}$";
+        if ((dev_id.matches(regex_dev) && dev_id.length() == 16) || dev_id.matches(regex_imei) || dev_id.matches(regex_yd_dev_id)) {
 
             String request_id = dev_id + "_" + System.currentTimeMillis();
             Map<String, String> map = new HashMap<>();
@@ -70,9 +71,6 @@ public class LoraDataAction {
             map.put("value", value);
             map.put("operate_type", operate_type);
             map.put("request_id", request_id);
-//			DataSenderTask task = new DataSenderTask(map,module_type);
-//			task.setAsyncService(asyncService);
-//			asyncService.executeAsync(task);
             LoraSendCmdsUtils mLoraSendCmdsUtils = new LoraSendCmdsUtils();
             Map<String, String> wmInfo = mLoraSendCmdsUtils.getEMInfoByDeveui(dev_id);
             String wm_num = wmInfo.get("wm_num");
@@ -112,9 +110,7 @@ public class LoraDataAction {
         String regex_dev = "^[A-Fa-f0-9]+$";//16 dev_eui
         String regex_imei = "^\\d{15}$";//imei 15
         String regex_yd_dev_id = "^\\d{9}$";//yd_dev_id 9
-        if ((dev_id.matches(regex_dev) && dev_id.length() == 16)
-                || dev_id.matches(regex_imei)
-                || dev_id.matches(regex_yd_dev_id)) {
+        if ((dev_id.matches(regex_dev) && dev_id.length() == 16) || dev_id.matches(regex_imei) || dev_id.matches(regex_yd_dev_id)) {
 
             String request_id = dev_id + "_" + System.currentTimeMillis();
             LoraSendCmds mLoraSendCmds = new LoraSendCmds();
@@ -151,7 +147,7 @@ public class LoraDataAction {
         }
         String regex_dev = "^[A-Fa-f0-9]+$";//16 dev_eui
         String regex_imei = "^\\d{15}$";//imei 15
-        if (dev_id != null && dev_id != "") {
+        if (dev_id != null && !dev_id.equals("")) {
             if ((dev_id.matches(regex_dev) && dev_id.length() == 16)
                     || dev_id.matches(regex_imei)) {
                 if (mIWMDataService == null) {

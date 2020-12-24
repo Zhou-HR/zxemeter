@@ -1,20 +1,12 @@
 package com.gdiot.mqtt;
 
-import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
-import org.eclipse.paho.client.mqttv3.MqttCallback;
-import org.eclipse.paho.client.mqttv3.MqttCallbackExtended;
-import org.eclipse.paho.client.mqttv3.MqttClient;
-import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
-import org.eclipse.paho.client.mqttv3.MqttException;
-import org.eclipse.paho.client.mqttv3.MqttMessage;
-import org.eclipse.paho.client.mqttv3.MqttPersistenceException;
-import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.alibaba.fastjson.JSONObject;
 import com.gdiot.SpMeterDataApplication;
 import com.gdiot.service.AsyncService;
+import org.eclipse.paho.client.mqttv3.*;
+import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author ZhouHR
@@ -31,8 +23,6 @@ public class MqttTask implements Runnable, MqttCallback, MqttCallbackExtended {
     private final String mqttTopic;
 
     private AsyncService asyncService;
-//	private RedisUtil redisUtil;
-
     public MqttTask(String mqttUrl, String mqttClientid, String mqttUsername, String mqttPassword, String mqttTopic) {
         super();
         this.mqttUrl = mqttUrl;
@@ -53,8 +43,6 @@ public class MqttTask implements Runnable, MqttCallback, MqttCallbackExtended {
         connOpts.setConnectionTimeout(10);
         connOpts.setKeepAliveInterval(20);
         connOpts.setAutomaticReconnect(true);
-        //connOpts.setServerURIs(uris);
-        //connOpts.setWill(topic, "close".getBytes(), 2, true);
         try {
             mqttClient = new MqttClient(mqttUrl, mqttClientid, persistence);
         } catch (MqttException e) {
@@ -168,10 +156,8 @@ public class MqttTask implements Runnable, MqttCallback, MqttCallbackExtended {
 
 
     @Override
-    public void messageArrived(String topic, MqttMessage message) throws Exception {
+    public void messageArrived(String topic, MqttMessage message) {
         LOGGER.info(String.format("messageArrived,topic:%s,message:%s", topic, message.toString()));
-//		DataSenderTask  task = new DataSenderTask(topic,message.toString());
-//		asyncService.executeAsync(task);
         SpMeterDataApplication mSpMeterDataApplication = new SpMeterDataApplication();
         if ((MqttConfig.CLIENTID).equals(this.mqttClientid)) {
             mSpMeterDataApplication.MqttHanderMessage(message.toString());

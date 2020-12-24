@@ -27,12 +27,11 @@ public class StringUtil {
     }
 
     public static String getTimeCodeStr() {
-        StringBuffer sb = new StringBuffer("0241");
         Date now = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("ssmmHH");
-        sb.append(sdf.format(now));
-        sb.append("00");
-        return sb.toString();
+        String sb = "0241" + sdf.format(now) +
+                "00";
+        return sb;
     }
 
 }

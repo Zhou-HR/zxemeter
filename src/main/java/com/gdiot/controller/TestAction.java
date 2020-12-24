@@ -28,8 +28,7 @@ public class TestAction {
 
     @Autowired
     private INBYDEMEventService mINBYDEMEventService;
-    @Autowired
-    private INBYDEMReadService mINBYDEMReadService;
+
     @Autowired
     private INBYDEMStatusService mINBYDEMStatusService;
 

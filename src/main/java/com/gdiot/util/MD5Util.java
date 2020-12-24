@@ -17,7 +17,7 @@ public class MD5Util {
             // 接下来，我们要对加密后的结果，进行优化，按照mysql的优化思路走
             // mysql的优化思路：
             // 第一步，将数据全部转换成正数：
-            String hexString = "";
+            StringBuilder hexString = new StringBuilder();
             for (byte b : bs) {
                 // 第一步，将数据全部转换成正数：
                 // 解释：为什么采用b&255
@@ -34,12 +34,12 @@ public class MD5Util {
                 // 因此，需要对temp进行判断
                 if (temp < 16 && temp >= 0) {
                     // 手动补上一个“0”
-                    hexString = hexString + "0" + Integer.toHexString(temp);
+                    hexString.append("0").append(Integer.toHexString(temp));
                 } else {
-                    hexString = hexString + Integer.toHexString(temp);
+                    hexString.append(Integer.toHexString(temp));
                 }
             }
-            return hexString;
+            return hexString.toString();
         } catch (NoSuchAlgorithmException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();

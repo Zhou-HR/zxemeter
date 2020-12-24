@@ -3,7 +3,6 @@ package com.gdiot.controller;
 import com.gdiot.model.WMCmdDataPo;
 import com.gdiot.model.WMDataPo;
 import com.gdiot.model.WMReadDataPo;
-import com.gdiot.service.AsyncService;
 import com.gdiot.service.IWMDataService;
 import com.gdiot.util.WMUdpSendCmdsUtils;
 import lombok.extern.slf4j.Slf4j;
@@ -24,9 +23,6 @@ import java.util.Map;
 @RestController
 @RequestMapping("/udp")
 public class UDPController {
-
-    @Autowired
-    private AsyncService asyncService;
 
     @Autowired
     private IWMDataService mIWMDataService;

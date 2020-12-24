@@ -1,6 +1,7 @@
 package com.gdiot.util;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -8,7 +9,7 @@ import java.util.List;
  */
 public class Utilty {
 
-    private static Utilty instance = new Utilty();
+    private static final Utilty instance = new Utilty();
 
     public static Utilty getInstance() {
         return instance;
@@ -19,7 +20,7 @@ public class Utilty {
     public static final int MAX_MID_VALUE = 65535;
 
     public static String convertByteToString(byte[] array, int begin, int end) {
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         for (int i = end; i > begin - 1; i--) {
 
             sb.append(parseByte2HexStr(array[i - 1]));
@@ -37,7 +38,7 @@ public class Utilty {
      * @return
      */
     public static String convertByteToString2(byte[] array, int begin, int end) {
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         for (int i = end; i > begin - 1; i--) {
             int v = Integer.parseInt(parseByte2HexStr(array[i - 1]), 16) - Integer.parseInt("33", 16);
             sb.append(Integer.toHexString(v));
@@ -75,10 +76,7 @@ public class Utilty {
     }
 
     public boolean isValidofMid(int mId) {
-        if (mId < MIN_MID_VALUE || mId > MAX_MID_VALUE) {
-            return false;
-        }
-        return true;
+        return mId >= MIN_MID_VALUE && mId <= MAX_MID_VALUE;
     }
 
     public static String parseByte2HexStr(byte buf) {
@@ -93,7 +91,7 @@ public class Utilty {
         if (null == buf) {
             return null;
         }
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         for (int i = 0; i < buf.length; i++) {
             String hex = Integer.toHexString(buf[i] & 0xFF);
             if (hex.length() == 1) {
@@ -105,7 +103,7 @@ public class Utilty {
     }
 
     public static byte[] hexStringToBytes(String hexString) {
-        if (hexString == null || hexString.equals("")) {
+        if (hexString == null || "".equals(hexString)) {
             return null;
         }
         hexString = hexString.toUpperCase();
@@ -142,7 +140,7 @@ public class Utilty {
      * @return
      */
     public static String hexStringToString(String s) {
-        if (s == null || s.equals("")) {
+        if (s == null || "".equals(s)) {
             return null;
         }
         s = s.replace(" ", "");
@@ -182,11 +180,8 @@ public class Utilty {
      */
     public static List SplitString(String d_str) {
         String[] s = d_str.split("_");
-        List list = new ArrayList();
-        for (int i = 0; i < s.length; i++) {
-//			System.out.println("s"+i+"=" + s[i]);
-            list.add(s[i]);
-        }
+        //			System.out.println("s"+i+"=" + s[i]);
+        List list = new ArrayList(Arrays.asList(s));
         return list;
     }
 

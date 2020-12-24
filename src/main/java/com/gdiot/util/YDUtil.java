@@ -21,7 +21,7 @@ import java.security.*;
  */
 public class YDUtil {
 
-    private static Logger logger = LoggerFactory.getLogger(YDUtil.class);
+    private static final Logger logger = LoggerFactory.getLogger(YDUtil.class);
 
     private static MessageDigest mdInst;
 
@@ -115,9 +115,7 @@ public class YDUtil {
      * @return 生成的<code>BodyObj</code>消息对象
      */
     public static BodyObj resolveBody(String body, boolean encrypted) {
-//    	logger.info("Util: body "+body);
         JSONObject jsonMsg = new JSONObject(body);
-//        logger.info("Util: jsonMsg "+jsonMsg);
         BodyObj obj = new BodyObj();
         obj.setNonce(jsonMsg.getString("nonce"));
         obj.setMsgSignature(jsonMsg.getString("msg_signature"));
@@ -131,9 +129,7 @@ public class YDUtil {
             if (!jsonMsg.has("msg")) {
                 return null;
             }
-//            logger.info("Util: msg1 toString "+jsonMsg.get("msg").toString());
             obj.setMsg(jsonMsg.get("msg"));
-//            logger.info("Util: msg2 "+obj.getMsg().toString());
         }
         return obj;
     }

@@ -117,15 +117,16 @@ public class EmDataNBUtil {
         byte[] data_byte = Utilty.hexStringToBytes(hexData);
         String dataValue = Utilty.convertByteToString(data_byte, 1, data_byte.length);
         // 返回十六进制
+        int i1 = Integer.valueOf(dataValue, 16) - Integer.valueOf(stringBuffer.toString(), 16);
         if ("hex".equals(flag)) {
-            String hex = Integer.toHexString(Integer.valueOf(dataValue, 16) - Integer.valueOf(stringBuffer.toString(), 16));
+            String hex = Integer.toHexString(i1);
             return hex;
         }
         // 返回二进制
         if ("binary".equals(flag)) {
-            String statusBinary = Integer.toBinaryString(Integer.valueOf(dataValue, 16) - Integer.valueOf(stringBuffer.toString(), 16));
+            String statusBinary = Integer.toBinaryString(i1);
             int binaryLen = statusBinary.length();
-            StringBuffer binaryString = new StringBuffer();
+            StringBuilder binaryString = new StringBuilder();
             binaryString.append(statusBinary);
             //最高位不够八位自动补0
             for (int i = 1; i <= 8 - binaryLen; i++) {
@@ -177,7 +178,6 @@ public class EmDataNBUtil {
 
     private static String highLowSwap(String eNum) {
         byte[] data_byte = Utilty.hexStringToBytes(eNum);
-        String eNumHex = Utilty.convertByteToString(data_byte, 1, data_byte.length);
-        return eNumHex;
+        return Utilty.convertByteToString(data_byte, 1, data_byte.length);
     }
 }

@@ -27,20 +27,13 @@ public class EMDataAnalysisUtil {
     public static Map<String, String> getDataValue(String data3) {
         Map<String, String> map = new HashMap<>();
         for (int i = 0, j = data3.length(); i < j; ) {
-//			System.out.print("---------i_str="+i);
             String typeStr = data3.substring(i, i + 2);
             String lenStr = data3.substring(i + 2, i + 4);
-//			LOGGER.info("---------typeStr="+typeStr);
-//			LOGGER.info("---------lenStr="+lenStr);
             int length = Integer.valueOf(lenStr, 16);
             String dataStr = data3.substring(i + 4, i + 4 + length * 2);
-//			LOGGER.info("---------length="+length);
-//			LOGGER.info("---------dataStr="+dataStr);
 
             byte[] data_byte = Utilty.hexStringToBytes(dataStr);
             String data = Utilty.convertByteToString(data_byte, 1, data_byte.length);
-//			System.out.print("---------data_byte="+data_byte);
-//			LOGGER.info("---------data="+data);
             switch (typeStr) {
                 case "A0"://序列号 //整点冻结次数
                 case "A2"://日冻结次数
@@ -55,7 +48,7 @@ public class EMDataAnalysisUtil {
                 case "70"://time
                     if (Utilty.isNumeric(data)) {
                         log.info("data receive: 时间:" + data);
-                        map.put("e_time", String.valueOf(data));
+                        map.put("e_time", data);
                     }
                     break;
                 case "F8"://信号值
@@ -73,42 +66,42 @@ public class EMDataAnalysisUtil {
                     break;
                 case "10"://有功总电量
                     if (Utilty.isNumeric(data)) {
-                        BigDecimal mBigDecimal = new BigDecimal(new DecimalFormat("#0.00").format(Double.valueOf(data) / 100));
+                        BigDecimal mBigDecimal = new BigDecimal(new DecimalFormat("#0.00").format(Double.parseDouble(data) / 100));
                         log.info("data receive: 有功总电量:" + mBigDecimal);
                         map.put("e_kwh1", mBigDecimal.toString());
                     }
                     break;
                 case "20"://有功总功率
                     if (Utilty.isNumeric(data)) {
-                        BigDecimal mBigDecimal = new BigDecimal(new DecimalFormat("#0.0000").format(Double.valueOf(data) / 10000));
+                        BigDecimal mBigDecimal = new BigDecimal(new DecimalFormat("#0.0000").format(Double.parseDouble(data) / 10000));
                         log.info("data receive: 总有功功率:" + mBigDecimal);
                         map.put("e_kw1_all", mBigDecimal.toString());
                     }
                     break;
                 case "24"://无功总功率
                     if (Utilty.isNumeric(data)) {
-                        BigDecimal mBigDecimal = new BigDecimal(new DecimalFormat("#0.0000").format(Double.valueOf(data) / 10000));
+                        BigDecimal mBigDecimal = new BigDecimal(new DecimalFormat("#0.0000").format(Double.parseDouble(data) / 10000));
                         log.info("data receive: 总无功功率:" + mBigDecimal);
                         map.put("e_kw2_all", mBigDecimal.toString());
                     }
                     break;
                 case "31"://电压
                     if (Utilty.isNumeric(data)) {
-                        BigDecimal mBigDecimal = new BigDecimal(new DecimalFormat("#00.0").format(Double.valueOf(data) / 10));
+                        BigDecimal mBigDecimal = new BigDecimal(new DecimalFormat("#00.0").format(Double.parseDouble(data) / 10));
                         log.info("data receive: 电压:" + mBigDecimal);
                         map.put("e_voltage_a", mBigDecimal.toString());
                     }
                     break;
                 case "41"://电流
                     if (Utilty.isNumeric(data)) {
-                        BigDecimal mBigDecimal = new BigDecimal(new DecimalFormat("#0.000").format(Double.valueOf(data) / 1000));
+                        BigDecimal mBigDecimal = new BigDecimal(new DecimalFormat("#0.000").format(Double.parseDouble(data) / 1000));
                         log.info("data receive: 电流:" + mBigDecimal);
                         map.put("e_current_a", mBigDecimal.toString());
                     }
                     break;
                 case "50"://总功率因数
                     if (Utilty.isNumeric(data)) {
-                        BigDecimal mBigDecimal = new BigDecimal(new DecimalFormat("0.000").format(Double.valueOf(data) / 1000));
+                        BigDecimal mBigDecimal = new BigDecimal(new DecimalFormat("0.000").format(Double.parseDouble(data) / 1000));
                         log.info("data receive: 总功率因数:" + mBigDecimal);
                         map.put("e_factor_all", mBigDecimal.toString());
                     }
@@ -129,10 +122,10 @@ public class EMDataAnalysisUtil {
                 case "1F"://电能
                     if (Utilty.isNumeric(data)) {//前后顺序已变更
                         String kwh2_str = data.substring(0, 8);
-                        String kwh1_str = data.substring(8, data.length());
-                        BigDecimal mBigDecimal_kwh1 = new BigDecimal(new DecimalFormat("#0.00").format(Double.valueOf(kwh1_str) / 100));
+                        String kwh1_str = data.substring(8);
+                        BigDecimal mBigDecimal_kwh1 = new BigDecimal(new DecimalFormat("#0.00").format(Double.parseDouble(kwh1_str) / 100));
                         log.info("data receive: 有功总电量:" + mBigDecimal_kwh1);
-                        BigDecimal mBigDecimal_kwh2 = new BigDecimal(new DecimalFormat("#0.00").format(Double.valueOf(kwh2_str) / 100));
+                        BigDecimal mBigDecimal_kwh2 = new BigDecimal(new DecimalFormat("#0.00").format(Double.parseDouble(kwh2_str) / 100));
                         log.info("data receive: 无功总电量:" + mBigDecimal_kwh2);
 
                         map.put("e_kwh1", mBigDecimal_kwh1.toString());//有功电能
@@ -151,14 +144,14 @@ public class EMDataAnalysisUtil {
                         String kw1_a = data.substring(36, 42);
                         String kw1_all = data.substring(42, 48);
 
-                        BigDecimal mbd_kw1_all = new BigDecimal(new DecimalFormat("#0.0000").format(Double.valueOf(kw1_all) / 10000));
-                        BigDecimal mbd_kw1_a = new BigDecimal(new DecimalFormat("#0.0000").format(Double.valueOf(kw1_a) / 10000));
-                        BigDecimal mbd_kw1_b = new BigDecimal(new DecimalFormat("#0.0000").format(Double.valueOf(kw1_b) / 10000));
-                        BigDecimal mbd_kw1_c = new BigDecimal(new DecimalFormat("#0.0000").format(Double.valueOf(kw1_c) / 10000));
-                        BigDecimal mbd_kw2_all = new BigDecimal(new DecimalFormat("#0.0000").format(Double.valueOf(kw2_all) / 10000));
-                        BigDecimal mbd_kw2_a = new BigDecimal(new DecimalFormat("#0.0000").format(Double.valueOf(kw2_a) / 10000));
-                        BigDecimal mbd_kw2_b = new BigDecimal(new DecimalFormat("#0.0000").format(Double.valueOf(kw2_b) / 10000));
-                        BigDecimal mbd_kw2_c = new BigDecimal(new DecimalFormat("#0.0000").format(Double.valueOf(kw2_c) / 10000));
+                        BigDecimal mbd_kw1_all = new BigDecimal(new DecimalFormat("#0.0000").format(Double.parseDouble(kw1_all) / 10000));
+                        BigDecimal mbd_kw1_a = new BigDecimal(new DecimalFormat("#0.0000").format(Double.parseDouble(kw1_a) / 10000));
+                        BigDecimal mbd_kw1_b = new BigDecimal(new DecimalFormat("#0.0000").format(Double.parseDouble(kw1_b) / 10000));
+                        BigDecimal mbd_kw1_c = new BigDecimal(new DecimalFormat("#0.0000").format(Double.parseDouble(kw1_c) / 10000));
+                        BigDecimal mbd_kw2_all = new BigDecimal(new DecimalFormat("#0.0000").format(Double.parseDouble(kw2_all) / 10000));
+                        BigDecimal mbd_kw2_a = new BigDecimal(new DecimalFormat("#0.0000").format(Double.parseDouble(kw2_a) / 10000));
+                        BigDecimal mbd_kw2_b = new BigDecimal(new DecimalFormat("#0.0000").format(Double.parseDouble(kw2_b) / 10000));
+                        BigDecimal mbd_kw2_c = new BigDecimal(new DecimalFormat("#0.0000").format(Double.parseDouble(kw2_c) / 10000));
                         log.info("data receive: 总有功功率:" + mbd_kw1_all.toString());
                         log.info("data receive: 有功功率a:" + mbd_kw1_a.toString());
                         log.info("data receive: 有功功率b:" + mbd_kw1_b.toString());
@@ -184,9 +177,9 @@ public class EMDataAnalysisUtil {
                         String v_b = data.substring(4, 8);
                         String v_a = data.substring(8, 12);
 
-                        BigDecimal mbd_v_a = new BigDecimal(new DecimalFormat("#00.0").format(Double.valueOf(v_a) / 10));
-                        BigDecimal mbd_v_b = new BigDecimal(new DecimalFormat("#00.0").format(Double.valueOf(v_b) / 10));
-                        BigDecimal mbd_v_c = new BigDecimal(new DecimalFormat("#00.0").format(Double.valueOf(v_c) / 10));
+                        BigDecimal mbd_v_a = new BigDecimal(new DecimalFormat("#00.0").format(Double.parseDouble(v_a) / 10));
+                        BigDecimal mbd_v_b = new BigDecimal(new DecimalFormat("#00.0").format(Double.parseDouble(v_b) / 10));
+                        BigDecimal mbd_v_c = new BigDecimal(new DecimalFormat("#00.0").format(Double.parseDouble(v_c) / 10));
                         log.info("data receive: A电压:" + mbd_v_a.toString());
                         log.info("data receive: B电压:" + mbd_v_b.toString());
                         log.info("data receive: C电压:" + mbd_v_c.toString());
@@ -202,9 +195,9 @@ public class EMDataAnalysisUtil {
                         String c_b = data.substring(6, 12);
                         String c_a = data.substring(12, 18);
 
-                        BigDecimal mbd_c_a = new BigDecimal(new DecimalFormat("#0.000").format(Double.valueOf(c_a) / 1000));
-                        BigDecimal mbd_c_b = new BigDecimal(new DecimalFormat("#0.000").format(Double.valueOf(c_b) / 1000));
-                        BigDecimal mbd_c_c = new BigDecimal(new DecimalFormat("#0.000").format(Double.valueOf(c_c) / 1000));
+                        BigDecimal mbd_c_a = new BigDecimal(new DecimalFormat("#0.000").format(Double.parseDouble(c_a) / 1000));
+                        BigDecimal mbd_c_b = new BigDecimal(new DecimalFormat("#0.000").format(Double.parseDouble(c_b) / 1000));
+                        BigDecimal mbd_c_c = new BigDecimal(new DecimalFormat("#0.000").format(Double.parseDouble(c_c) / 1000));
                         log.info("data receive: A电流:" + mbd_c_a);
                         log.info("data receive: B电流:" + mbd_c_b);
                         log.info("data receive: C电流:" + mbd_c_c);
@@ -220,10 +213,10 @@ public class EMDataAnalysisUtil {
                         String factor_a = data.substring(8, 12);
                         String factor_all = data.substring(12, 16);
 
-                        BigDecimal mbd_f_all = new BigDecimal(new DecimalFormat("#0.000").format(Double.valueOf(factor_all) / 1000));
-                        BigDecimal mbd_f_a = new BigDecimal(new DecimalFormat("#0.000").format(Double.valueOf(factor_a) / 1000));
-                        BigDecimal mbd_f_b = new BigDecimal(new DecimalFormat("#0.000").format(Double.valueOf(factor_b) / 1000));
-                        BigDecimal mbd_f_c = new BigDecimal(new DecimalFormat("#0.000").format(Double.valueOf(factor_c) / 1000));
+                        BigDecimal mbd_f_all = new BigDecimal(new DecimalFormat("#0.000").format(Double.parseDouble(factor_all) / 1000));
+                        BigDecimal mbd_f_a = new BigDecimal(new DecimalFormat("#0.000").format(Double.parseDouble(factor_a) / 1000));
+                        BigDecimal mbd_f_b = new BigDecimal(new DecimalFormat("#0.000").format(Double.parseDouble(factor_b) / 1000));
+                        BigDecimal mbd_f_c = new BigDecimal(new DecimalFormat("#0.000").format(Double.parseDouble(factor_c) / 1000));
                         log.info("data receive: 总功率因数:" + mbd_f_all);
                         log.info("data receive: A功率因数:" + mbd_f_a);
                         log.info("data receive: B功率因数:" + mbd_f_b);
@@ -287,8 +280,6 @@ public class EMDataAnalysisUtil {
                     break;
             }
             i = i + 4 + length * 2;
-//			System.out.print("---------i_end="+i);
-//			System.out.print("\n");
         }
         return map;
     }
@@ -300,7 +291,7 @@ public class EMDataAnalysisUtil {
      * @return
      */
     public static Map<String, String> getEventDataValue(String data3) {
-        Map<String, String> map = new HashMap<String, String>();
+        Map<String, String> map = new HashMap<>();
         int seq_count = 1;
         int time_count = 1;
         int kwh_count = 1;
@@ -311,36 +302,20 @@ public class EMDataAnalysisUtil {
         int relay_count = 1;
         int module_count = 1;
         for (int i = 0, j = data3.length(); i < j; ) {
-//			System.out.print("--i_str="+i);
             String typeStr = data3.substring(i, i + 2);
             String lenStr = data3.substring(i + 2, i + 4);
-//			System.out.print("---------typeStr="+typeStr);
-//			System.out.print("---------lenStr="+lenStr);
             int length = Integer.valueOf(lenStr, 16);
             String dataStr = data3.substring(i + 4, i + 4 + length * 2);
-//			System.out.print("---------length="+length);
-//			System.out.print("---------dataStr="+dataStr);
 
             byte[] data_byte = Utilty.hexStringToBytes(dataStr);
             String data = "0";
             if (data_byte != null) {
                 data = Utilty.convertByteToString(data_byte, 1, data_byte.length);
             }
-//			System.out.print("---------data_byte="+data_byte);
-//			LOGGER.info("---------data="+data);
-//			map.put("event_type", typeStr);
             switch (typeStr) {
                 case "00"://继电器开合，后半段为0的值，直接返回
                     //B40205007006191118250819410315350610048369000081020180000000000000000000000000000000000000000000000000000000BD16
                     //B2024000700633041029051910040000000080021800810200808201AA00000000000000000000000000000000000000000000000000000000004316
-//				map.put("end_time", "");
-//				map.put("end_kwh", "");
-//				map.put("start_voltage", "");
-//				map.put("end_current", "");
-//				map.put("end_status1", "");
-//				map.put("end_status2", "");
-//				map.put("end_switch", "");
-//				map.put("end_module", "");
                     return map;
                 case "B0"://停电
                 case "B2"://拉合闸
@@ -375,12 +350,12 @@ public class EMDataAnalysisUtil {
                 case "10"://有功总电量
                     if (Utilty.isNumeric(data)) {
                         if (kwh_count == 1) {
-                            BigDecimal mBigDecimal = new BigDecimal(new DecimalFormat("#0.00").format(Double.valueOf(data) / 100));
+                            BigDecimal mBigDecimal = new BigDecimal(new DecimalFormat("#0.00").format(Double.parseDouble(data) / 100));
                             map.put("start_kwh1", mBigDecimal.toString());
                             log.info("--data receive: start 有功总电量:" + mBigDecimal);
                             kwh_count++;
                         } else if (kwh_count == 2) {
-                            BigDecimal mBigDecimal = new BigDecimal(new DecimalFormat("#0.00").format(Double.valueOf(data) / 100));
+                            BigDecimal mBigDecimal = new BigDecimal(new DecimalFormat("#0.00").format(Double.parseDouble(data) / 100));
                             map.put("end_kwh1", mBigDecimal.toString());
                             log.info("--data receive: end 有功总电量:" + mBigDecimal);
                         }
@@ -389,12 +364,12 @@ public class EMDataAnalysisUtil {
                 case "31"://电压
                     if (Utilty.isNumeric(data)) {
                         if (voltage_count == 1) {
-                            BigDecimal mBigDecimal = new BigDecimal(new DecimalFormat("#00.0").format(Double.valueOf(data) / 10));
+                            BigDecimal mBigDecimal = new BigDecimal(new DecimalFormat("#00.0").format(Double.parseDouble(data) / 10));
                             log.info("--data receive: start 电压:" + mBigDecimal);
                             map.put("start_voltage_a", mBigDecimal.toString());
                             voltage_count++;
                         } else if (voltage_count == 2) {
-                            BigDecimal mBigDecimal = new BigDecimal(new DecimalFormat("#00.0").format(Double.valueOf(data) / 10));
+                            BigDecimal mBigDecimal = new BigDecimal(new DecimalFormat("#00.0").format(Double.parseDouble(data) / 10));
                             log.info("--data receive: start 电压:" + mBigDecimal);
                             map.put("end_voltage_a", mBigDecimal.toString());
                         }
@@ -403,12 +378,12 @@ public class EMDataAnalysisUtil {
                 case "41"://电流
                     if (Utilty.isNumeric(data)) {
                         if (current_count == 1) {
-                            BigDecimal mBigDecimal = new BigDecimal(new DecimalFormat("#0.000").format(Double.valueOf(data) / 1000));
+                            BigDecimal mBigDecimal = new BigDecimal(new DecimalFormat("#0.000").format(Double.parseDouble(data) / 1000));
                             log.info("--data receive: start 电流:" + mBigDecimal);
                             map.put("start_current_a", mBigDecimal.toString());
                             current_count++;
                         } else if (current_count == 2) {
-                            BigDecimal mBigDecimal = new BigDecimal(new DecimalFormat("#0.000").format(Double.valueOf(data) / 1000));
+                            BigDecimal mBigDecimal = new BigDecimal(new DecimalFormat("#0.000").format(Double.parseDouble(data) / 1000));
                             log.info("--data receive: end 电流:" + mBigDecimal);
                             map.put("end_current_a", mBigDecimal.toString());
                             current_count++;
@@ -465,10 +440,10 @@ public class EMDataAnalysisUtil {
                     if (Utilty.isNumeric(data)) {
                         if (kwh_count == 1) {
                             String kwh2_str = data.substring(0, 8);
-                            String kwh1_str = data.substring(8, data.length());
-                            BigDecimal mBigDecimal_kwh1 = new BigDecimal(new DecimalFormat("#0.00").format(Double.valueOf(kwh1_str) / 100));
+                            String kwh1_str = data.substring(8);
+                            BigDecimal mBigDecimal_kwh1 = new BigDecimal(new DecimalFormat("#0.00").format(Double.parseDouble(kwh1_str) / 100));
                             log.info("data receive: 有功总电量:" + mBigDecimal_kwh1);
-                            BigDecimal mBigDecimal_kwh2 = new BigDecimal(new DecimalFormat("#0.00").format(Double.valueOf(kwh2_str) / 100));
+                            BigDecimal mBigDecimal_kwh2 = new BigDecimal(new DecimalFormat("#0.00").format(Double.parseDouble(kwh2_str) / 100));
                             log.info("data receive: 无功总电量:" + mBigDecimal_kwh2);
                             map.put("start_kwh1", mBigDecimal_kwh1.toString());//有功电能
                             map.put("start_kwh2", mBigDecimal_kwh2.toString());//无功电能
@@ -476,10 +451,10 @@ public class EMDataAnalysisUtil {
                             kwh_count++;
                         } else if (kwh_count == 2) {
                             String kwh2_str = data.substring(0, 8);
-                            String kwh1_str = data.substring(8, data.length());
-                            BigDecimal mBigDecimal_kwh1 = new BigDecimal(new DecimalFormat("#0.00").format(Double.valueOf(kwh1_str) / 100));
+                            String kwh1_str = data.substring(8);
+                            BigDecimal mBigDecimal_kwh1 = new BigDecimal(new DecimalFormat("#0.00").format(Double.parseDouble(kwh1_str) / 100));
                             log.info("data receive: 有功总电量:" + mBigDecimal_kwh1);
-                            BigDecimal mBigDecimal_kwh2 = new BigDecimal(new DecimalFormat("#0.00").format(Double.valueOf(kwh2_str) / 100));
+                            BigDecimal mBigDecimal_kwh2 = new BigDecimal(new DecimalFormat("#0.00").format(Double.parseDouble(kwh2_str) / 100));
                             log.info("data receive: 无功总电量:" + mBigDecimal_kwh2);
 
                             map.put("end_kwh1", mBigDecimal_kwh1.toString());//有功电能
@@ -495,9 +470,9 @@ public class EMDataAnalysisUtil {
                             String v_b = data.substring(4, 8);
                             String v_a = data.substring(8, 12);
 
-                            BigDecimal mbd_v_a = new BigDecimal(new DecimalFormat("#00.0").format(Double.valueOf(v_a) / 10));
-                            BigDecimal mbd_v_b = new BigDecimal(new DecimalFormat("#00.0").format(Double.valueOf(v_b) / 10));
-                            BigDecimal mbd_v_c = new BigDecimal(new DecimalFormat("#00.0").format(Double.valueOf(v_c) / 10));
+                            BigDecimal mbd_v_a = new BigDecimal(new DecimalFormat("#00.0").format(Double.parseDouble(v_a) / 10));
+                            BigDecimal mbd_v_b = new BigDecimal(new DecimalFormat("#00.0").format(Double.parseDouble(v_b) / 10));
+                            BigDecimal mbd_v_c = new BigDecimal(new DecimalFormat("#00.0").format(Double.parseDouble(v_c) / 10));
                             log.info("data receive: A电压:" + mbd_v_a.toString());
                             log.info("data receive: B电压:" + mbd_v_b.toString());
                             log.info("data receive: C电压:" + mbd_v_c.toString());
@@ -512,9 +487,9 @@ public class EMDataAnalysisUtil {
                             String v_b = data.substring(4, 8);
                             String v_a = data.substring(8, 12);
 
-                            BigDecimal mbd_v_a = new BigDecimal(new DecimalFormat("#00.0").format(Double.valueOf(v_a) / 10));
-                            BigDecimal mbd_v_b = new BigDecimal(new DecimalFormat("#00.0").format(Double.valueOf(v_b) / 10));
-                            BigDecimal mbd_v_c = new BigDecimal(new DecimalFormat("#00.0").format(Double.valueOf(v_c) / 10));
+                            BigDecimal mbd_v_a = new BigDecimal(new DecimalFormat("#00.0").format(Double.parseDouble(v_a) / 10));
+                            BigDecimal mbd_v_b = new BigDecimal(new DecimalFormat("#00.0").format(Double.parseDouble(v_b) / 10));
+                            BigDecimal mbd_v_c = new BigDecimal(new DecimalFormat("#00.0").format(Double.parseDouble(v_c) / 10));
                             log.info("data receive: A电压:" + mbd_v_a.toString());
                             log.info("data receive: B电压:" + mbd_v_b.toString());
                             log.info("data receive: C电压:" + mbd_v_c.toString());
@@ -533,9 +508,9 @@ public class EMDataAnalysisUtil {
                             String c_b = data.substring(6, 12);
                             String c_a = data.substring(12, 18);
 
-                            BigDecimal mbd_c_a = new BigDecimal(new DecimalFormat("#0.000").format(Double.valueOf(c_a) / 1000));
-                            BigDecimal mbd_c_b = new BigDecimal(new DecimalFormat("#0.000").format(Double.valueOf(c_b) / 1000));
-                            BigDecimal mbd_c_c = new BigDecimal(new DecimalFormat("#0.000").format(Double.valueOf(c_c) / 1000));
+                            BigDecimal mbd_c_a = new BigDecimal(new DecimalFormat("#0.000").format(Double.parseDouble(c_a) / 1000));
+                            BigDecimal mbd_c_b = new BigDecimal(new DecimalFormat("#0.000").format(Double.parseDouble(c_b) / 1000));
+                            BigDecimal mbd_c_c = new BigDecimal(new DecimalFormat("#0.000").format(Double.parseDouble(c_c) / 1000));
                             log.info("data receive: A电流:" + mbd_c_a);
                             log.info("data receive: B电流:" + mbd_c_b);
                             log.info("data receive: C电流:" + mbd_c_c);
@@ -549,9 +524,9 @@ public class EMDataAnalysisUtil {
                             String c_b = data.substring(6, 12);
                             String c_a = data.substring(12, 18);
 
-                            BigDecimal mbd_c_a = new BigDecimal(new DecimalFormat("#0.000").format(Double.valueOf(c_a) / 1000));
-                            BigDecimal mbd_c_b = new BigDecimal(new DecimalFormat("#0.000").format(Double.valueOf(c_b) / 1000));
-                            BigDecimal mbd_c_c = new BigDecimal(new DecimalFormat("#0.000").format(Double.valueOf(c_c) / 1000));
+                            BigDecimal mbd_c_a = new BigDecimal(new DecimalFormat("#0.000").format(Double.parseDouble(c_a) / 1000));
+                            BigDecimal mbd_c_b = new BigDecimal(new DecimalFormat("#0.000").format(Double.parseDouble(c_b) / 1000));
+                            BigDecimal mbd_c_c = new BigDecimal(new DecimalFormat("#0.000").format(Double.parseDouble(c_c) / 1000));
                             log.info("data receive: A电流:" + mbd_c_a);
                             log.info("data receive: B电流:" + mbd_c_b);
                             log.info("data receive: C电流:" + mbd_c_c);
@@ -567,8 +542,6 @@ public class EMDataAnalysisUtil {
                     break;
             }
             i = i + 4 + length * 2;
-//			System.out.print("---------i_end="+i);
-//			System.out.print("\n");
         }
         return map;
     }
@@ -581,11 +554,10 @@ public class EMDataAnalysisUtil {
      * @return
      */
     public static Map<String, String> getReadValue(String typeStr, String data3) {//读取单条数据
-        String dataStr = data3;
-        byte[] data_byte = Utilty.hexStringToBytes(dataStr);
+        byte[] data_byte = Utilty.hexStringToBytes(data3);
         String data = Utilty.convertByteToString(data_byte, 1, data_byte.length);
 
-        Map<String, String> map = new HashMap<String, String>();
+        Map<String, String> map = new HashMap<>();
         map.put("read_type", typeStr);
         switch (typeStr) {
             case "10"://有功总电量
@@ -594,7 +566,7 @@ public class EMDataAnalysisUtil {
 //		case "13":
             case "15":
                 if (Utilty.isNumeric(data)) {
-                    BigDecimal mBigDecimal = new BigDecimal(new DecimalFormat("#0.00").format(Double.valueOf(data) / 100));
+                    BigDecimal mBigDecimal = new BigDecimal(new DecimalFormat("#0.00").format(Double.parseDouble(data) / 100));
                     log.info("data receive: 有功总电量:" + mBigDecimal);
 //					map.put("e_readings",mBigDecimal.toString());
                     map.put("read_value", mBigDecimal.toString());
@@ -613,7 +585,7 @@ public class EMDataAnalysisUtil {
             case "26":
             case "27":
                 if (Utilty.isNumeric(data)) {
-                    BigDecimal mBigDecimal = new BigDecimal(new DecimalFormat("#0.0000").format(Double.valueOf(data) / 10000));
+                    BigDecimal mBigDecimal = new BigDecimal(new DecimalFormat("#0.0000").format(Double.parseDouble(data) / 10000));
                     log.info("data receive: 有功总功率:" + mBigDecimal);
 //					map.put("e_rate", mBigDecimal.toString());
                     map.put("read_value", mBigDecimal.toString());
@@ -623,7 +595,7 @@ public class EMDataAnalysisUtil {
             case "32":
             case "33":
                 if (Utilty.isNumeric(data)) {
-                    BigDecimal mBigDecimal = new BigDecimal(new DecimalFormat("#00.0").format(Double.valueOf(data) / 10));
+                    BigDecimal mBigDecimal = new BigDecimal(new DecimalFormat("#00.0").format(Double.parseDouble(data) / 10));
                     log.info("data receive: 电压:" + mBigDecimal);
 //					map.put("e_voltage", mBigDecimal.toString());
                     map.put("read_value", mBigDecimal.toString());
@@ -633,7 +605,7 @@ public class EMDataAnalysisUtil {
             case "42":
             case "43":
                 if (Utilty.isNumeric(data)) {
-                    BigDecimal mBigDecimal = new BigDecimal(new DecimalFormat("#0.000").format(Double.valueOf(data) / 1000));
+                    BigDecimal mBigDecimal = new BigDecimal(new DecimalFormat("#0.000").format(Double.parseDouble(data) / 1000));
                     log.info("data receive: 电流:" + mBigDecimal);
 //					map.put("e_current", mBigDecimal.toString());
                     map.put("read_value", mBigDecimal.toString());
@@ -644,14 +616,14 @@ public class EMDataAnalysisUtil {
             case "52":
             case "53":
                 if (Utilty.isNumeric(data)) {
-                    BigDecimal mBigDecimal = new BigDecimal(new DecimalFormat("#0.000").format(Double.valueOf(data) / 1000));
+                    BigDecimal mBigDecimal = new BigDecimal(new DecimalFormat("#0.000").format(Double.parseDouble(data) / 1000));
                     log.info("data receive: 功率因数:" + mBigDecimal);
                     map.put("read_value", mBigDecimal.toString());
                 }
                 break;
             case "60"://频率
                 if (Utilty.isNumeric(data)) {
-                    BigDecimal mBigDecimal = new BigDecimal(new DecimalFormat("#0.00").format(Double.valueOf(data) / 100));
+                    BigDecimal mBigDecimal = new BigDecimal(new DecimalFormat("#0.00").format(Double.parseDouble(data) / 100));
                     log.info("data receive: 频率:" + mBigDecimal);
 //					map.put("e_readings",mBigDecimal.toString());
                     map.put("read_value", mBigDecimal.toString());
@@ -667,8 +639,7 @@ public class EMDataAnalysisUtil {
             case "70"://time
                 if (Utilty.isNumeric(data)) {
                     log.info("data receive: 时间:" + data);
-//					map.put("e_time", String.valueOf(data));
-                    map.put("read_value", String.valueOf(data));
+                    map.put("read_value", data);
                 }
                 break;
             case "71"://注册标识
@@ -686,7 +657,7 @@ public class EMDataAnalysisUtil {
             case "91"://硬件版本号 01031920
             case "92"://软件版本号 07051920
             case "93"://协议版本号  18010319
-                map.put("read_value", dataStr);
+                map.put("read_value", data3);
                 break;
             case "80"://状态字1
             case "81"://状态字2
@@ -738,7 +709,7 @@ public class EMDataAnalysisUtil {
             case "F6"://IMEI  ASCII //C00147000000031900F60F383636393731303330333839333337F016
             case "F7"://ICCID ASCII //C00147000000031900F7143839383630343335313031383930303532393830ED16
                 if (Utilty.isNumeric(data)) {
-                    String i_ascii = Utilty.hexStringToString(dataStr);
+                    String i_ascii = Utilty.hexStringToString(data3);
                     log.info("data receive: ASCII value:" + i_ascii);
                     map.put("read_value", i_ascii);
                 }
@@ -752,7 +723,7 @@ public class EMDataAnalysisUtil {
 //						map.put("e_signal", mBigDecimal.toString());
                         map.put("read_value", mBigDecimal.toString());
                     } else if (length == 4) {//F8 02 32 32
-                        String signal = Utilty.hexStringToString(dataStr);
+                        String signal = Utilty.hexStringToString(data3);
                         log.info("data receive: 信号值:" + signal);
 //						map.put("e_signal", signal);
                         map.put("read_value", signal);
@@ -805,15 +776,15 @@ public class EMDataAnalysisUtil {
             if (dataLen > 0) {
                 // 有功总电量
                 BigDecimal mBigDecimal = new BigDecimal(new DecimalFormat("#0.00")
-                        .format(Double.valueOf(Utilty.convertByteToString(binaryData, 15, 20)) / 100));
+                        .format(Double.parseDouble(Utilty.convertByteToString(binaryData, 15, 20)) / 100));
                 System.out.println("nb dx data 电量:" + mBigDecimal);
 
                 BigDecimal voltage = new BigDecimal(new DecimalFormat("#0.00")
-                        .format(Double.valueOf(Utilty.convertByteToString(binaryData, 21, 24)) / 10));
+                        .format(Double.parseDouble(Utilty.convertByteToString(binaryData, 21, 24)) / 10));
                 System.out.println("nb dx data:电压：" + voltage);
 
                 BigDecimal electricity = new BigDecimal(new DecimalFormat("#0.00")
-                        .format(Double.valueOf(Utilty.convertByteToString(binaryData, 25, 28)) / 1000));
+                        .format(Double.parseDouble(Utilty.convertByteToString(binaryData, 25, 28)) / 1000));
                 System.out.println("nb dx data 电流:" + electricity);
 
                 String time = Utilty.convertByteToString(binaryData, 49, 54);
@@ -844,7 +815,7 @@ public class EMDataAnalysisUtil {
      * @return
      */
     public static Map<String, String> getWMDataValue(String data) {
-        Map<String, String> map = new HashMap<String, String>();
+        Map<String, String> map = new HashMap<>();
         //901F012C000000002C0000000035000000004120141612192040210002
         String data_flag1 = data.substring(0, 2);
         String data_flag2 = data.substring(2, 4);
@@ -858,17 +829,17 @@ public class EMDataAnalysisUtil {
 
         byte[] wm_flow_binary = Utilty.hexStringToBytes(wm_flow);
         BigDecimal wm_flow_b = new BigDecimal(new DecimalFormat("#0.000")
-                .format(Double.valueOf(Utilty.convertByteToString(wm_flow_binary, 2, wm_flow_binary.length)) / 1000));
+                .format(Double.parseDouble(Utilty.convertByteToString(wm_flow_binary, 2, wm_flow_binary.length)) / 1000));
         log.info("累计流量：" + wm_flow_b + "M3");
 
         byte[] wm_reverse_flow_binary = Utilty.hexStringToBytes(wm_reverse_flow);
         BigDecimal wm_reverse_flow_b = new BigDecimal(new DecimalFormat("#0.000")
-                .format(Double.valueOf(Utilty.convertByteToString(wm_reverse_flow_binary, 2, wm_reverse_flow_binary.length)) / 1000));
+                .format(Double.parseDouble(Utilty.convertByteToString(wm_reverse_flow_binary, 2, wm_reverse_flow_binary.length)) / 1000));
         log.info("反向累计流量：" + wm_reverse_flow_b + "M3");
 
         byte[] wm_flow_rate_binary = Utilty.hexStringToBytes(wm_flow_rate);
         BigDecimal wm_flow_rate_b = new BigDecimal(new DecimalFormat("#0.0000")
-                .format(Double.valueOf(Utilty.convertByteToString(wm_flow_rate_binary, 2, wm_flow_rate_binary.length)) / 10000));
+                .format(Double.parseDouble(Utilty.convertByteToString(wm_flow_rate_binary, 2, wm_flow_rate_binary.length)) / 10000));
         log.info("流速量：" + wm_flow_rate_b + "M3/h");
 
         byte[] wm_time_binary = Utilty.hexStringToBytes(wm_time);
@@ -905,7 +876,7 @@ public class EMDataAnalysisUtil {
      * @return
      */
     public static Map<String, String> getUdpWMDataValue(String data) {
-        Map<String, String> map = new HashMap<String, String>();
+        Map<String, String> map = new HashMap<>();
         //901F012C000000002C0000000035000000004120141612192040210002
         //921F012C560100003500000000A0052C560100002C560100002C56010000FFFF00000028411519052020
         //4021A005A0 053CA00517 061606F405 F205010B00 27976490191069048689 34535647108866080000 2A030B000100FFFF2E18
@@ -945,18 +916,17 @@ public class EMDataAnalysisUtil {
         String wm_pressure = data.substring(60, 64);
         String wm_time = data.substring(70, 84);
         String wm_statu1 = data.substring(84, 88);
-//		String wm_statu2=data.substring(54, 58);
         String iccid = data.substring(124, 144);
         String imei = data.substring(144, 164);
 
         byte[] wm_flow_binary = Utilty.hexStringToBytes(wm_flow);
         BigDecimal wm_flow_b = new BigDecimal(new DecimalFormat("#0.000")
-                .format(Double.valueOf(Utilty.convertByteToString(wm_flow_binary, 2, wm_flow_binary.length)) / 1000));
+                .format(Double.parseDouble(Utilty.convertByteToString(wm_flow_binary, 2, wm_flow_binary.length)) / 1000));
         log.info("累计流量：" + wm_flow_b + "M3");
 
         byte[] wm_flow_rate_binary = Utilty.hexStringToBytes(wm_flow_rate);
         BigDecimal wm_flow_rate_b = new BigDecimal(new DecimalFormat("#0.0000")
-                .format(Double.valueOf(Utilty.convertByteToString(wm_flow_rate_binary, 2, wm_flow_rate_binary.length)) / 10000));
+                .format(Double.parseDouble(Utilty.convertByteToString(wm_flow_rate_binary, 2, wm_flow_rate_binary.length)) / 10000));
         log.info("瞬时流量：" + wm_flow_rate_b + "M3/h");
 
         byte[] wm_pressure_binary = Utilty.hexStringToBytes(wm_pressure);
@@ -978,7 +948,7 @@ public class EMDataAnalysisUtil {
 
         byte[] imei_binary = Utilty.hexStringToBytes(imei);
         String imei_b = Utilty.convertByteToString(imei_binary, 1, imei_binary.length);
-        String imei_b_n = imei_b.substring(5, imei_b.length());
+        String imei_b_n = imei_b.substring(5);
         System.out.println("imei：" + imei_b_n);
 
         map.put("data_flag1", data_flag1);
@@ -1001,7 +971,7 @@ public class EMDataAnalysisUtil {
      * @return
      */
     public static Map<String, String> getUdpWMReadDataValue(String data) {
-        Map<String, String> map = new HashMap<String, String>();
+        Map<String, String> map = new HashMap<>();
         //A0170140225516
         //A0170140421C
         String DI0 = data.substring(0, 2);
@@ -1110,13 +1080,7 @@ public class EMDataAnalysisUtil {
             BigDecimal mbd_kw2_b = new BigDecimal(new DecimalFormat("#0.000").format((double) (Long.parseLong(kw2_b, 16)) / 1000));
             BigDecimal mbd_kw2_c = new BigDecimal(new DecimalFormat("#0.000").format((double) (Long.parseLong(kw2_c, 16)) / 1000));
             log.info("data receive: 总有功功率:" + mbd_kw1_all.toString());
-//			System.out.print("data receive: 有功功率a:"+mbd_kw1_a.toString());
-//			System.out.print("data receive: 有功功率b:"+mbd_kw1_b.toString());
-//			System.out.print("data receive: 有功功率c:"+mbd_kw1_c.toString());
             log.info("data receive: 总无功功率:" + mbd_kw2_all.toString());
-//			System.out.print("data receive: 无功功率a:"+mbd_kw2_a.toString());
-//			System.out.print("data receive: 无功功率b:"+mbd_kw2_b.toString());
-//			System.out.print("data receive: 无功功率c:"+mbd_kw2_c.toString() +"\n");
             map.put("e_kw1_all", mbd_kw1_all.toString());//有功功率
             map.put("e_kw1_a", mbd_kw1_a.toString());
             map.put("e_kw1_b", mbd_kw1_b.toString());
@@ -1183,7 +1147,7 @@ public class EMDataAnalysisUtil {
     }
 
     public static Map<String, Object> getAKRReadValue(String dataValue) {
-        Map<String, Object> map = new HashMap<String, Object>();
+        Map<String, Object> map = new HashMap<>();
         if (dataValue.length() == 8) {
             String dataStr_v = dataValue.substring(0, 8);
             BigDecimal mbd_v_c = new BigDecimal(new DecimalFormat("#0.00").format((double) (Long.parseLong(dataStr_v, 16)) / 100));
@@ -1350,7 +1314,7 @@ public class EMDataAnalysisUtil {
     }
 
     public static Map<String, Object> getAKRSingleReadValue(String dataValue) {
-        Map<String, Object> map = new HashMap<String, Object>();
+        Map<String, Object> map = new HashMap<>();
         if (dataValue.length() == 4) {
             Integer cycle = Integer.valueOf(dataValue, 16);
             map.put("value", cycle.toString());
@@ -1400,7 +1364,7 @@ public class EMDataAnalysisUtil {
             // String dataString10=dataValue_alt.substring(34,36); // 分合闸状态
             String reserve = dataValue_alt.substring(36, 64); // 预留位
             String checkBit = dataValue_alt.substring(64, 68);// 状态位
-            String statusWord = dataValue_alt.substring(68, dataValue_alt.length());
+            String statusWord = dataValue_alt.substring(68);
 
             // 过压阈值时间
             BigDecimal bigdec_over_v_threshold = new BigDecimal(new DecimalFormat("#0.00").format((double) (Long.parseLong(dataStr_vlo_time, 16)) / 100));
@@ -1424,7 +1388,7 @@ public class EMDataAnalysisUtil {
             map.put("war_a_value", bigdec_war_a_value.toString());
 
             String elStatus = Integer.toBinaryString(Integer.valueOf(dataString, 16));
-            StringBuffer binaryString = new StringBuffer();
+            StringBuilder binaryString = new StringBuilder();
             if (elStatus.length() < 4) {
 
                 binaryString.append(elStatus);

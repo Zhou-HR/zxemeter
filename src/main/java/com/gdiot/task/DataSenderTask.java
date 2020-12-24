@@ -24,7 +24,7 @@ import java.util.Map;
 public class DataSenderTask implements Runnable {
     //	private static final Logger log =  LoggerFactory.getLogger(DataSenderTask.class);
     private String data;
-    private String data_type;
+    private final String data_type;
     private Map<String, Object> mapData;
     private AsyncService asyncService;
 
@@ -85,9 +85,6 @@ public class DataSenderTask implements Runnable {
                 LoraSmokeAnalysis();
                 break;
             case "lora_wm_send_cmd":
-//			String request_id = dev_id + "_" +System.currentTimeMillis();
-//			LoraSendCmds mLoraSendCmds = new LoraSendCmds();
-//    		String resultData = mLoraSendCmds.sendMsgToWM(value, dev_id,request_id);
                 break;
             case "udp_wm":
                 String ip = (String) mapData.get("IP");
@@ -142,6 +139,7 @@ public class DataSenderTask implements Runnable {
      */
     private void NBAnalysis() throws JSONException {
         YDUtil.BodyObj obj = YDUtil.resolveBody(data, false);
+        assert obj != null;
         org.json.JSONObject data = (org.json.JSONObject) obj.getMsg();
 //		LOGGER.info("task: data receive: dev_id:"+data.getLong("dev_id"));
         int type = data.getInt("type");
@@ -153,7 +151,7 @@ public class DataSenderTask implements Runnable {
             log.info("task: data receive: imei:" + data.getString("imei"));
             String ori_value = data.getString("value");
             String dev_id = data.getLong("dev_id") + "";
-            String ds_id = (data.getString("ds_id").equals("")) ? "" : data.getString("ds_id");
+            String ds_id = ("".equals(data.getString("ds_id"))) ? "" : data.getString("ds_id");
             String imei = data.getString("imei");
             long time = data.getLong("at");
 
@@ -170,74 +168,7 @@ public class DataSenderTask implements Runnable {
                 String endbyte = Integer.toHexString(binaryData[len - 1] & 0xFF);
                 log.info("analysis: startbyte:" + startbyte);
                 log.info("analysis: endbyte:" + endbyte);
-                if ("80".equals(startbyte) && "16".equals(endbyte)) {//电表启动发出的是8X，电表响应后台的是CX
-//        			System.out.println("AnalysisData15: 80----------------");
-                    //表号
-                    String e_num = Utilty.convertByteToString(binaryData, 3, 8);
-                    log.info("task: 80 analysis: e_num:" + e_num);
-                    String regex_eNum = "^\\d{12}$";//e_num 12
-                    if (!e_num.matches(regex_eNum)) {//验证表号是否合法
-                        log.error("e_num error");
-                        return;
-                    }
-
-                    String e_fac = orig_code.substring(16, 18);
-                    log.info("task: 80 analysis: e_fac=" + e_fac);
-
-                    String dataType = orig_code.substring(18, 20);
-                    log.info("task: 80 analysis: dataType=" + dataType);
-
-                    byte dataLen = binaryData[10];
-                    log.info("task: 80 analysis: data Length=" + dataLen);
-                    //数据域
-                    String valueD = orig_code.substring(22, 22 + dataLen * 2);
-                    //700633081201031910051602000000200375090031024223410315953450021D968002000081020000820100
-//        			LOGGER.info("AnalysisData15: valueD:"+ valueD);
-                    switch (dataType) {
-                        case "A1"://定时上报数据
-                        case "FF"://定时上报数据
-                            Map<String, String> emMap = new HashMap<String, String>();
-                            emMap.put("imei", imei);
-                            emMap.put("dev_id", imei);
-                            emMap.put("ds_id", ds_id);
-                            emMap.put("time", String.valueOf(time));
-                            emMap.put("type", String.valueOf(type));
-                            emMap.put("ori_value", ori_value);
-                            emMap.put("source", data_type);
-                            emMap.put("e_num", e_num);
-                            emMap.put("e_fac", e_fac);
-                            emMap.put("dataType", dataType);
-                            emMap.put("flag_reload", "0");
-                            SaveXBEMDataToDB(emMap, valueD);//20190618
-                            log.info("task: 80 insert into SQL end!");
-
-                            break;
-                        case "B1"://停电事件  返回 C90148000000031900B1005316
-                        case "B3"://拉合闸事件  返回 C90147000000031900B3005216
-                        case "B5"://过流事件	CA0148000000031900B5004E16
-                        case "B7"://过压事件
-                        case "B9"://欠压事件
-                        case "BB"://重启记录最近十次  E80D48000000031900BB22BA0281177006313315240419FA030503FFBA0281177006213515240419FA0304FFFFFF16
-                        case "BD"://编程记录最近十次	CC0148000000031900BD004416
-                            Map<String, String> eventMap = new HashMap<String, String>();
-                            eventMap.put("dev_id", imei);
-                            eventMap.put("imei", imei);
-                            eventMap.put("e_fac", e_fac);
-                            eventMap.put("e_num", e_num);
-                            eventMap.put("time", String.valueOf(time));
-                            eventMap.put("ori_value", ori_value);
-                            eventMap.put("source", data_type);
-                            eventMap.put("flag_reload", "0");//上报
-                            eventMap.put("data_type", dataType);
-                            eventMap.put("deal_flag", "0");
-                            SaveEventDataToDB(eventMap, valueD);//zjq 20190719
-                            log.info("task: insert nb event into SQL end!");
-
-                            break;
-                        default:
-                            break;
-                    }
-                } else if (!"80".equals(endbyte) /*&& ifUpDateSeq(startbyte)*/ && "16".equals(endbyte)) {//电表响应后台的是CX  "C0".equals(startbyte)
+                if (!"80".equals(endbyte) && "16".equals(endbyte)) {//电表响应后台的是CX  "C0".equals(startbyte)
                     //C00100000000000000F801205816
 //        			byte[] binaryData = Utilty.hexStringToBytes(data);
 
@@ -266,7 +197,7 @@ public class DataSenderTask implements Runnable {
                             //C00D47000000031900A134A003340200700627421811041910050000000000F8012420030000003102762241030700005002000080020000810200808201551516
                             //加flag
 
-                            Map<String, String> emMap = new HashMap<String, String>();
+                            Map<String, String> emMap = new HashMap<>();
                             emMap.put("imei", imei);
                             emMap.put("dev_id", imei);
                             emMap.put("ds_id", ds_id);
@@ -291,7 +222,7 @@ public class DataSenderTask implements Runnable {
                         case "BB"://重启记录最近十次
                         case "BD"://编程记录最近十次
 
-                            Map<String, String> eventMap = new HashMap<String, String>();
+                            Map<String, String> eventMap = new HashMap<>();
                             eventMap.put("dev_id", imei);
                             eventMap.put("imei", imei);
                             eventMap.put("e_fac", e_fac);
@@ -395,25 +326,21 @@ public class DataSenderTask implements Runnable {
                     //数据域
                     String valueD = orig_code.substring(22, 22 + dataLen * 2);
 
-                    switch (dataType) {
-                        //定时上报数据 冻结数据
-                        case "A1"://读取丢帧项
-                            Map<String, String> emMap9 = new HashMap<String, String>();
-                            emMap9.put("imei", imei);
-                            emMap9.put("dev_id", imei);
-                            emMap9.put("ds_id", ds_id);
-                            emMap9.put("time", String.valueOf(time));
-                            emMap9.put("type", String.valueOf(type));
-                            emMap9.put("ori_value", ori_value);
-                            emMap9.put("source", data_type);
-                            emMap9.put("e_num", e_num);
-                            emMap9.put("e_fac", e_fac);
-                            emMap9.put("flag_reload", "0");
-                            SaveXBEMDataToDB(emMap9, valueD);//20190618
-                            log.info("task: 90 insert into SQL end!");
-                            break;
-                        default:
-                            break;
+                    //定时上报数据 冻结数据
+                    if ("A1".equals(dataType)) {//读取丢帧项
+                        Map<String, String> emMap9 = new HashMap<>();
+                        emMap9.put("imei", imei);
+                        emMap9.put("dev_id", imei);
+                        emMap9.put("ds_id", ds_id);
+                        emMap9.put("time", String.valueOf(time));
+                        emMap9.put("type", String.valueOf(type));
+                        emMap9.put("ori_value", ori_value);
+                        emMap9.put("source", data_type);
+                        emMap9.put("e_num", e_num);
+                        emMap9.put("e_fac", e_fac);
+                        emMap9.put("flag_reload", "0");
+                        SaveXBEMDataToDB(emMap9, valueD);//20190618
+                        log.info("task: 90 insert into SQL end!");
                     }
                 }
             }
@@ -512,7 +439,7 @@ public class DataSenderTask implements Runnable {
                                     case "FF"://定时上报数据
                                     case "A3"://第几次日冻结数据
                                     case "A5"://第几次月冻结数据
-                                        Map<String, String> emMap9 = new HashMap<String, String>();
+                                        Map<String, String> emMap9 = new HashMap<>();
                                         emMap9.put("dev_id", dev_eui);
                                         emMap9.put("time", String.valueOf(time));
                                         emMap9.put("ori_value", orig_data);
@@ -533,7 +460,7 @@ public class DataSenderTask implements Runnable {
                                     case "BB"://重启记录最近十次  E80D48000000031900BB22BA0281177006313315240419FA030503FFBA0281177006213515240419FA0304FFFFFF16
                                     case "BD"://编程记录最近十次	CC0148000000031900BD004416
 
-                                        Map<String, String> eventMap = new HashMap<String, String>();
+                                        Map<String, String> eventMap = new HashMap<>();
                                         eventMap.put("dev_id", dev_eui);
                                         eventMap.put("imei", dev_eui);
                                         eventMap.put("e_fac", e_fac);
@@ -578,7 +505,7 @@ public class DataSenderTask implements Runnable {
                                     //C00D47000000031900A134A003340200700627421811041910050000000000F8012420030000003102762241030700005002000080020000810200808201551516
                                     //加flag
 
-                                    Map<String, String> emMap9 = new HashMap<String, String>();
+                                    Map<String, String> emMap9 = new HashMap<>();
                                     emMap9.put("dev_id", dev_eui);
                                     emMap9.put("time", String.valueOf(time));
                                     emMap9.put("ori_value", orig_data);
@@ -600,7 +527,7 @@ public class DataSenderTask implements Runnable {
                                 case "BB"://重启记录最近十次
                                 case "BD"://编程记录最近十次
 
-                                    Map<String, String> eventMap = new HashMap<String, String>();
+                                    Map<String, String> eventMap = new HashMap<>();
                                     eventMap.put("dev_id", dev_eui);
                                     eventMap.put("imei", dev_eui);
                                     eventMap.put("e_fac", e_fac);
@@ -683,6 +610,8 @@ public class DataSenderTask implements Runnable {
                                     mYDEMNBReadPo.setReadValue(result_read.get("read_value") != null ? result_read.get("read_value") : "");
                                     mINBYDEMReadService.addOne(mYDEMNBReadPo);
                                     log.info("task: c0 insert into SQL end!");
+                                    break;
+                                default:
                                     break;
                             }
                         }
@@ -853,7 +782,7 @@ public class DataSenderTask implements Runnable {
                             break;
                         case "A1"://定时上报数据
                         case "FF"://定时上报数据
-                            Map<String, String> emMap = new HashMap<String, String>();
+                            Map<String, String> emMap = new HashMap<>();
                             emMap.put("dev_id", imei);
                             emMap.put("time", String.valueOf(time));
                             emMap.put("ori_value", ori_value);
@@ -873,7 +802,7 @@ public class DataSenderTask implements Runnable {
                         case "B9"://欠压事件
                         case "BB"://重启记录最近十次  E80D48000000031900BB22BA0281177006313315240419FA030503FFBA0281177006213515240419FA0304FFFFFF16
                         case "BD"://编程记录最近十次	CC0148000000031900BD004416
-                            Map<String, String> eventMap = new HashMap<String, String>();
+                            Map<String, String> eventMap = new HashMap<>();
                             eventMap.put("dev_id", imei);
                             eventMap.put("imei", imei);
                             eventMap.put("e_fac", e_fac);
@@ -909,7 +838,7 @@ public class DataSenderTask implements Runnable {
                         case "FF"://读取多项数据
                         case "A3"://第几次日冻结数据
                         case "A5"://第几次月冻结数据
-                            Map<String, String> emMap = new HashMap<String, String>();
+                            Map<String, String> emMap = new HashMap<>();
                             emMap.put("dev_id", imei);
                             emMap.put("time", String.valueOf(time));
                             emMap.put("ori_value", ori_value);
@@ -930,7 +859,7 @@ public class DataSenderTask implements Runnable {
                         case "B9"://欠压事件
                         case "BB"://重启记录最近十次
                         case "BD"://编程记录最近十次
-                            Map<String, String> eventMap = new HashMap<String, String>();
+                            Map<String, String> eventMap = new HashMap<>();
                             eventMap.put("dev_id", imei);
                             eventMap.put("imei", imei);
                             eventMap.put("e_fac", e_fac);
@@ -1033,6 +962,8 @@ public class DataSenderTask implements Runnable {
                             mYDEMNBReadPo.setReadValue(result_read.get("read_value") != null ? result_read.get("read_value") : "");
                             mINBYDEMReadService.addOne(mYDEMNBReadPo);
                             log.info("task: c0 gprs insert into SQL end!");
+                            break;
+                        default:
                             break;
                     }
                 }
@@ -1177,7 +1108,7 @@ public class DataSenderTask implements Runnable {
                                 wmDataPo.setWmTime(result_read.get("wm_time"));
                                 wmDataPo.setWmStatu1(result_read.get("wm_statu1"));
                                 wmDataPo.setWmStatu2("");
-                                wmDataPo.setSendIp(ip.substring(1, ip.length()));
+                                wmDataPo.setSendIp(ip.substring(1));
                                 wmDataPo.setSendPort(port);
                                 mIWMDataService.addOne(wmDataPo);
                                 System.out.println("task: udp wm insert into SQL end!");
@@ -1195,7 +1126,7 @@ public class DataSenderTask implements Runnable {
                     //010000000017FEFEFE685554512020000000A407A0170140429916361600000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
                     //010000000016FEFEFE685554512020000000A406A0170140421CA2160000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
                     //010000000017FEFEFE685554512020000000A407A0170140225516D216
-                    orig_code = orig_data.substring(18, orig_data.length());
+                    orig_code = orig_data.substring(18);
 //		    		System.out.println("task: data receive: orig_code:"+orig_code);
                     byte[] binaryData = Utilty.hexStringToBytes(orig_code);
                     len = binaryData.length;
@@ -1220,24 +1151,20 @@ public class DataSenderTask implements Runnable {
                         //数据域
                         String valueD = orig_code.substring(22, 22 + dataLen * 2);//A0170140225516
                         System.out.println("task: lora fefefe 68 valueD=" + valueD);
-                        switch (control_code) {
-                            case "A4"://读计量数据2
-                                Map<String, String> result_read = EMDataAnalysisUtil.getUdpWMReadDataValue(valueD);
-                                if (mIWMDataService == null) {
-                                    mIWMDataService = SpringContextUtils.getBean(IWMDataService.class);
-                                }
-                                WMReadDataPo mWMReadDataPo = new WMReadDataPo();
-                                mWMReadDataPo.setOrigValue(orig_data);
-                                mWMReadDataPo.setSource(data_type);
-                                mWMReadDataPo.setTime(String.valueOf(time));
-                                mWMReadDataPo.setType(result_read.get("type"));
-                                mWMReadDataPo.setWmNum(w_num);
-                                mWMReadDataPo.setValue(result_read.get("switch_status"));
-                                mIWMDataService.insertReadData(mWMReadDataPo);
-                                System.out.println("task: udp wm read insert into SQL end!");
-                                break;
-                            default:
-                                break;
+                        if ("A4".equals(control_code)) {//读计量数据2
+                            Map<String, String> result_read = EMDataAnalysisUtil.getUdpWMReadDataValue(valueD);
+                            if (mIWMDataService == null) {
+                                mIWMDataService = SpringContextUtils.getBean(IWMDataService.class);
+                            }
+                            WMReadDataPo mWMReadDataPo = new WMReadDataPo();
+                            mWMReadDataPo.setOrigValue(orig_data);
+                            mWMReadDataPo.setSource(data_type);
+                            mWMReadDataPo.setTime(String.valueOf(time));
+                            mWMReadDataPo.setType(result_read.get("type"));
+                            mWMReadDataPo.setWmNum(w_num);
+                            mWMReadDataPo.setValue(result_read.get("switch_status"));
+                            mIWMDataService.insertReadData(mWMReadDataPo);
+                            System.out.println("task: udp wm read insert into SQL end!");
                         }
                     }
                 } else if (orig_data.length() > 0) {
@@ -1353,37 +1280,37 @@ public class DataSenderTask implements Runnable {
                 mYDEMeterEventPo.setEventType(map.get("data_type"));
                 mYDEMeterEventPo.setDealFlag(Integer.parseInt(map.get("deal_flag")));
 
-                mYDEMeterEventPo.setESeq(Long.parseLong(result.containsKey("e_seq") ? result.get("e_seq") : "0"));
-                mYDEMeterEventPo.setEStartTime(result.containsKey("start_time") ? result.get("start_time") : "");
-                mYDEMeterEventPo.setEEndTime(result.containsKey("end_time") ? result.get("end_time") : "");
+                mYDEMeterEventPo.setESeq(Long.parseLong(result.getOrDefault("e_seq", "0")));
+                mYDEMeterEventPo.setEStartTime(result.getOrDefault("start_time", ""));
+                mYDEMeterEventPo.setEEndTime(result.getOrDefault("end_time", ""));
 
-                mYDEMeterEventPo.setEStartKwh(result.containsKey("start_kwh1") ? result.get("start_kwh1") : "");
-                mYDEMeterEventPo.setEStartKwh2(result.containsKey("start_kwh2") ? result.get("start_kwh2") : "");
-                mYDEMeterEventPo.setEEndKwh(result.containsKey("end_kwh1") ? result.get("end_kwh1") : "");
-                mYDEMeterEventPo.setEEndKwh2(result.containsKey("end_kwh2") ? result.get("end_kwh2") : "");
+                mYDEMeterEventPo.setEStartKwh(result.getOrDefault("start_kwh1", ""));
+                mYDEMeterEventPo.setEStartKwh2(result.getOrDefault("start_kwh2", ""));
+                mYDEMeterEventPo.setEEndKwh(result.getOrDefault("end_kwh1", ""));
+                mYDEMeterEventPo.setEEndKwh2(result.getOrDefault("end_kwh2", ""));
 
-                mYDEMeterEventPo.setEStartVoltageA(result.containsKey("start_voltage_a") ? result.get("start_voltage_a") : "");
-                mYDEMeterEventPo.setEStartVoltageB(result.containsKey("start_voltage_b") ? result.get("start_voltage_b") : "");
-                mYDEMeterEventPo.setEStartVoltageC(result.containsKey("start_voltage_c") ? result.get("start_voltage_c") : "");
-                mYDEMeterEventPo.setEEndVoltageA(result.containsKey("end_voltage_a") ? result.get("end_voltage_a") : "");
-                mYDEMeterEventPo.setEEndVoltageB(result.containsKey("end_voltage_b") ? result.get("end_voltage_b") : "");
-                mYDEMeterEventPo.setEEndVoltageC(result.containsKey("end_voltage_c") ? result.get("end_voltage_c") : "");
+                mYDEMeterEventPo.setEStartVoltageA(result.getOrDefault("start_voltage_a", ""));
+                mYDEMeterEventPo.setEStartVoltageB(result.getOrDefault("start_voltage_b", ""));
+                mYDEMeterEventPo.setEStartVoltageC(result.getOrDefault("start_voltage_c", ""));
+                mYDEMeterEventPo.setEEndVoltageA(result.getOrDefault("end_voltage_a", ""));
+                mYDEMeterEventPo.setEEndVoltageB(result.getOrDefault("end_voltage_b", ""));
+                mYDEMeterEventPo.setEEndVoltageC(result.getOrDefault("end_voltage_c", ""));
 
-                mYDEMeterEventPo.setEStartCurrentA(result.containsKey("start_current_a") ? result.get("start_current_a") : "");
-                mYDEMeterEventPo.setEStartCurrentB(result.containsKey("start_current_b") ? result.get("start_current_b") : "");
-                mYDEMeterEventPo.setEStartCurrentC(result.containsKey("start_current_c") ? result.get("start_current_c") : "");
-                mYDEMeterEventPo.setEEndCurrentA(result.containsKey("end_current_a") ? result.get("end_current_a") : "");
-                mYDEMeterEventPo.setEEndCurrentB(result.containsKey("end_current_b") ? result.get("end_current_b") : "");
-                mYDEMeterEventPo.setEEndCurrentC(result.containsKey("end_current_c") ? result.get("end_current_c") : "");
+                mYDEMeterEventPo.setEStartCurrentA(result.getOrDefault("start_current_a", ""));
+                mYDEMeterEventPo.setEStartCurrentB(result.getOrDefault("start_current_b", ""));
+                mYDEMeterEventPo.setEStartCurrentC(result.getOrDefault("start_current_c", ""));
+                mYDEMeterEventPo.setEEndCurrentA(result.getOrDefault("end_current_a", ""));
+                mYDEMeterEventPo.setEEndCurrentB(result.getOrDefault("end_current_b", ""));
+                mYDEMeterEventPo.setEEndCurrentC(result.getOrDefault("end_current_c", ""));
 
-                mYDEMeterEventPo.setEStartStatus1(result.containsKey("start_status1") ? result.get("start_status1") : "");
-                mYDEMeterEventPo.setEEndStatus1(result.containsKey("end_status1") ? result.get("end_status1") : "");
-                mYDEMeterEventPo.setEStartStatus2(result.containsKey("start_status2") ? result.get("start_status2") : "");
-                mYDEMeterEventPo.setEEndStatus2(result.containsKey("end_status2") ? result.get("end_status2") : "");
-                mYDEMeterEventPo.setEStartSwitch(result.containsKey("start_switch") ? result.get("start_switch") : "");
-                mYDEMeterEventPo.setEEndSwitch(result.containsKey("end_switch") ? result.get("end_switch") : "");
-                mYDEMeterEventPo.setEEndModule(result.containsKey("start_module") ? result.get("start_module") : "");
-                mYDEMeterEventPo.setEStartModule(result.containsKey("end_module") ? result.get("end_module") : "");
+                mYDEMeterEventPo.setEStartStatus1(result.getOrDefault("start_status1", ""));
+                mYDEMeterEventPo.setEEndStatus1(result.getOrDefault("end_status1", ""));
+                mYDEMeterEventPo.setEStartStatus2(result.getOrDefault("start_status2", ""));
+                mYDEMeterEventPo.setEEndStatus2(result.getOrDefault("end_status2", ""));
+                mYDEMeterEventPo.setEStartSwitch(result.getOrDefault("start_switch", ""));
+                mYDEMeterEventPo.setEEndSwitch(result.getOrDefault("end_switch", ""));
+                mYDEMeterEventPo.setEEndModule(result.getOrDefault("start_module", ""));
+                mYDEMeterEventPo.setEStartModule(result.getOrDefault("end_module", ""));
                 mINBYDEMEventService.addOne(mYDEMeterEventPo);
 //			LOGGER.info("task: insert event into SQL end!");
 
@@ -1481,6 +1408,7 @@ public class DataSenderTask implements Runnable {
 
     private void AKRNBEMeterAnalysis() throws JSONException {
         YDUtil.BodyObj obj = YDUtil.resolveBody(data, false);
+        assert obj != null;
         org.json.JSONObject data = (org.json.JSONObject) obj.getMsg();
 //		LOGGER.info("task: data receive: dev_id:"+data.getLong("dev_id"));
         int type = data.getInt("type");
@@ -1525,7 +1453,7 @@ public class DataSenderTask implements Runnable {
                     case "91"://数据上传
                         String[] origArr = orig_code.split("29295d5d");// 根据))]]分割
 //			        System.out.println("length="+origArr.length  + "\n"); 
-                        Map<String, Object> d_result = new HashMap<String, Object>();
+                        Map<String, Object> d_result = new HashMap<>();
                         for (int i = 0; i < origArr.length; ++i) {
                             String dataStr = origArr[i];
 //			        	System.out.println("str="+ dataStr + "\n");
@@ -1588,7 +1516,7 @@ public class DataSenderTask implements Runnable {
                         //01 03 54 800F 0A5A 006407A800640258006400320064000000000000000000000000000000000000000000000000000000000000000000000000000200000000000000000000000000000000000000000000000000000000DB86
                         //29295D5D ))]]
                         //894E7D7D (HEX)
-                        Map<String, Object> d_result_alt = new HashMap<String, Object>();
+                        Map<String, Object> d_result_alt = new HashMap<>();
                         String[] origArr_alt = orig_code.split("29295d5d");// 根据))]]分割
 //			        System.out.println("length="+origArr.length  + "\n"); 
                         for (int i = 0; i < origArr_alt.length; ++i) {
@@ -1622,7 +1550,7 @@ public class DataSenderTask implements Runnable {
                     case "87":
                     case "88":
                     case "82":
-                        Map<String, Object> d_result2 = new HashMap<String, Object>();
+                        Map<String, Object> d_result2 = new HashMap<>();
                         d_result2.put("imei", imei);
                         d_result2.put("dev_id", imei);
                         d_result2.put("time", time);
@@ -1639,7 +1567,7 @@ public class DataSenderTask implements Runnable {
                         break;
                 }
             } else {//异常，保存
-                Map<String, Object> d_result = new HashMap<String, Object>();
+                Map<String, Object> d_result = new HashMap<>();
                 d_result.put("imei", imei);
                 d_result.put("dev_id", imei);
                 d_result.put("time", time);
@@ -1669,7 +1597,7 @@ public class DataSenderTask implements Runnable {
             log.info("task: : nbYDEMStatusService : login_type=" + login_type);
             log.info("task: : nbYDEMStatusService : time=" + time);
 
-            Map<String, Object> d_result = new HashMap<String, Object>();
+            Map<String, Object> d_result = new HashMap<>();
             d_result.put("imei", imei);
             d_result.put("dev_id", dev_id);
             d_result.put("time", time);
@@ -1692,13 +1620,6 @@ public class DataSenderTask implements Runnable {
         log.info("task: akr 2g data receive: ori_value:" + ori_value);
         String startbyte = ori_value.substring(0, 4);
         String endbyte = ori_value.substring(len - 4, len);
-//	    		LOGGER.info("analysis: startbyte:"+ startbyte );
-//	    		LOGGER.info("analysis: endbyte:"+ endbyte);
-//    		if ("7b7b".equals(startbyte) && "7d7d".equals(endbyte)) {
-//	    			String imei = ori_value.substring(4,19);
-//	    			String status = ori_value.substring(19,20);
-//	    			log.info("analysis:power off alert imei:"+ imei );
-//	    			log.info("analysis:power off alert status:"+ status);
         AKREMDataPo mAKREMDataPo = new AKREMDataPo();
         mAKREMDataPo.setDevId("");
         mAKREMDataPo.setOrigValue(ori_value);
@@ -1709,10 +1630,6 @@ public class DataSenderTask implements Runnable {
         }
         mIAKREMDataService.addOne(mAKREMDataPo);
         log.info("task: akr 2g data insert into db !");
-//    		}
-//	        String regex="^[A-Fa-f0-9]+$";
-//	    	if(ori_value.matches(regex) ){
-//	    	}
     }
 
     /**
@@ -1758,14 +1675,10 @@ public class DataSenderTask implements Runnable {
             dataPo.setOrigValue((String) d_result.get("ori_value"));
             dataPo.setTime((long) d_result.get("time"));
             dataPo.setSource((String) d_result.get("source"));
-//			dataPo.setE_fac(d_result.get("e_fac"));
             dataPo.setENum(d_result.containsKey("e_num") ? (String) d_result.get("e_num") : "");
-//			dataPo.setFlag_reload(Integer.parseInt(d_result.get("flag_reload")));
             dataPo.setDataType((String) d_result.get("dataType"));
 
-//			dataPo.setSeq_type(d_result.get("seq_type") !=null ? d_result.get("seq_type"):"FF");
             dataPo.setESeq(d_result.containsKey("e_seq") ? (long) d_result.get("e_seq") : 0);
-//			dataPo.setE_time(d_result.get("e_time") !=null ? d_result.get("e_time"):"");
             dataPo.setESignal(d_result.containsKey("e_signal") ? (String) d_result.get("e_signal") : "");
 
             dataPo.setEKwh1(d_result.containsKey("e_kwh1") ? (String) d_result.get("e_kwh1") : "");//有功总电能
@@ -1897,7 +1810,7 @@ public class DataSenderTask implements Runnable {
                         }
 
                         log.info("task: lora smoke sensor dataStatus_type=" + dataStatus_type);
-                        Map<String, String> dataMap = new HashMap<String, String>();
+                        Map<String, String> dataMap = new HashMap<>();
                         dataMap.put("dev_id", dev_eui);
                         dataMap.put("time", String.valueOf(time));
                         dataMap.put("ori_value", ori_value);
@@ -2066,7 +1979,7 @@ public class DataSenderTask implements Runnable {
                         }
 
                         log.info("task: lora smoke sensor dataStatus_type=" + dataStatus_type);
-                        Map<String, String> dataMap = new HashMap<String, String>();
+                        Map<String, String> dataMap = new HashMap<>();
                         dataMap.put("dev_id", dev_eui);
                         dataMap.put("time", String.valueOf(time));
                         dataMap.put("ori_value", ori_value);
@@ -2163,10 +2076,6 @@ public class DataSenderTask implements Runnable {
             KTREMReadPo ktremReadPo = new KTREMReadPo();
             ktremReadPo.setDevId(deviceId);
             ktremReadPo.setTime(System.currentTimeMillis());
-           /* ktremReadPo.seteOrigValue(orig_data);
-            ktremReadPo.seteNum(resultMap.get("eNum") != null ? resultMap.get("eNum") : "");
-            ktremReadPo.seteReadValue(resultMap.get("status") != null ? resultMap.get("status") : "");
-            ktremReadPo.seteSource("kt_nb_em");*/
             // 保存数据
             if (ktDataService == null) {
                 ktDataService = SpringContextUtils.getBean(KTDataService.class);
@@ -2211,7 +2120,7 @@ public class DataSenderTask implements Runnable {
                     case "91":// 数据上传
                         // 根据))]]分割
                         String[] origArr = orig_code.split("29295d5d");
-                        Map<String, Object> d_result = new HashMap<String, Object>();
+                        Map<String, Object> d_result = new HashMap<>();
                         for (int i = 0; i < origArr.length; ++i) {
                             String dataStr = origArr[i];
                             // 截取[[1-1((
@@ -2267,7 +2176,7 @@ public class DataSenderTask implements Runnable {
                         break;
                     case "A1":
                     case "a1"://告警
-                        Map<String, Object> resultwarning = new HashMap<String, Object>();
+                        Map<String, Object> resultwarning = new HashMap<>();
                         String[] resultwarns = orig_code.split("29295d5d");// 根据))]]分割
                         for (int i = 0; i < resultwarns.length; ++i) {
                             String dataStr = resultwarns[i];
@@ -2368,7 +2277,7 @@ public class DataSenderTask implements Runnable {
                     if (payload.length() == 92) {
                         String endbyte = Integer.toHexString(binaryData[len - 2] & 0xFF);
                         if ("68".equals(startbyte) && "16".equals(endbyte)) {
-                            Map<String, String> map = new HashMap<String, String>();
+                            Map<String, String> map = new HashMap<>();
                             map.put("deviceId", deviceId);
                             SaveJbqataToDB(orig_data, deviceId, rssi);
                         }
@@ -2407,12 +2316,13 @@ public class DataSenderTask implements Runnable {
         // 277000080720015955FF022B33333333333333355532323232333333323232323232333333333333345934444745536335333333333333
         // 6CFAFF34
         YDUtil.BodyObj obj = YDUtil.resolveBody(data, false);
+        assert obj != null;
         org.json.JSONObject data = (org.json.JSONObject) obj.getMsg();
         int type = data.getInt("type");
         if (type == 1) {//value 数据点消息
             String ori_value = data.getString("value");
             String dev_id = data.getLong("dev_id") + "";
-            String ds_id = (data.getString("ds_id").equals("")) ? "" : data.getString("ds_id");
+            String ds_id = ("".equals(data.getString("ds_id"))) ? "" : data.getString("ds_id");
             String imei = data.getString("imei");
             long time = data.getLong("at");
             log.info("data receive: ori_value:" + ori_value);
@@ -2445,7 +2355,7 @@ public class DataSenderTask implements Runnable {
                 //数据域
                 String valueD = orig_code.substring(24, 24 + dataLen * 2);
                 //valueD:33333333333333355532323232333333323232323232333333333333345934444745536335333333333333
-                Map<String, String> emMap = new HashMap<String, String>();
+                Map<String, String> emMap = new HashMap<>();
                 emMap.put("imei", imei);
                 emMap.put("dev_id", imei);
                 emMap.put("ds_id", ds_id);
